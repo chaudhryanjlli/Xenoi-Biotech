@@ -5,4 +5,5 @@ WhatsApp*
 *.log
 .DS_Store
 xenoi-loader-files/
+xenoi-phone-tablet-frames/
 test-mobile-qa.js

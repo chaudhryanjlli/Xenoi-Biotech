@@ -11,24 +11,52 @@
     context.imageSmoothingEnabled = true;
     context.imageSmoothingQuality = 'medium';
 
-    // Auto-detect mobile device for optimized bandwidth and memory footprint
-    const isMobile = Math.min(screen.width, screen.height) < 900;
+    // Detection: compact devices (phones & tablets) vs desktop
+    const isCompact = Math.min(screen.width, screen.height) < 1100 || matchMedia('(pointer: coarse)').matches;
+    const isPortrait = window.innerHeight > window.innerWidth;
     const frameBase = (document.querySelector('meta[name="frame-base"]') || {}).content || '';
-    const setName = isMobile ? 'mobile-1280/' : 'desktop-1920/';
 
-    // Frame configuration with FRAME_STRIDE = 2
-    const FRAME_STRIDE = 2;
-    const rawFrameCount = 298;
+    let setName, rawFrameCount, FRAME_STRIDE;
+    if (isCompact) {
+        if (isPortrait) {
+            setName = 'frames_phone/';
+            rawFrameCount = 50;
+            FRAME_STRIDE = 1;
+        } else {
+            setName = 'frames_tablet/';
+            rawFrameCount = 75;
+            FRAME_STRIDE = 1;
+        }
+    } else {
+        setName = 'frames/desktop-1920/';
+        rawFrameCount = 298;
+        FRAME_STRIDE = 2;
+    }
+
+    // Reload page once if orientation changes on compact devices
+    if (isCompact) {
+        const orientationMql = window.matchMedia('(orientation: portrait)');
+        const handleOrientChange = () => {
+            window.location.reload();
+        };
+        if (orientationMql.addEventListener) {
+            orientationMql.addEventListener('change', handleOrientChange);
+        } else if (orientationMql.addListener) {
+            orientationMql.addListener(handleOrientChange);
+        }
+    }
+
+    // Frame configuration
     const effectiveFrames = [];
     for (let i = 1; i <= rawFrameCount; i += FRAME_STRIDE) {
         effectiveFrames.push(i);
     }
-    const effectiveFrameCount = effectiveFrames.length; // 149 frames (1, 3, ..., 297)
+    const effectiveFrameCount = effectiveFrames.length;
 
     const config = Object.assign(
         {
             frameCount: effectiveFrameCount,
-            framePath: frameBase + 'frames/' + setName,
+            framePath: frameBase + setName,
             extension: 'avif'
         },
         window.ANIMATION_CONFIG || {}
@@ -38,6 +66,13 @@
         const rawIdx = effectiveFrames[effectiveIdx - 1];
         return `${config.framePath}frame_${String(rawIdx).padStart(4, '0')}.${config.extension}`;
     };
+
+    // Static fallback check (save-data, slow connection, or prefers-reduced-motion on compact)
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSaveData = conn && conn.saveData === true;
+    const isSlowConn = conn && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isStaticFallback = isCompact && (isSaveData || isSlowConn || prefersReducedMotion);
 
     // Array of decoded Image elements
     const frames = new Array(effectiveFrameCount);
@@ -51,8 +86,8 @@
     coarseSet.add(effectiveFrameCount);
     const coarseCount = coarseSet.size;
 
-    // Loader threshold calculation (Requirement 12)
-    const threshold = Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
+    // Loader threshold calculation (coarse pass + 25% of frames on compact, max on desktop)
+    const threshold = isCompact ? (coarseCount + Math.ceil(effectiveFrameCount * 0.25)) : Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
 
     // Loader progress hook from script-hook.js.txt
     function reportLoaderProgress(loaded, thresh, coarseDone) {
@@ -211,6 +246,12 @@
 
     // Worker pool queue: exactly 6 downloads/decodes in flight at all times
     async function preloadFrames() {
+        if (isStaticFallback) {
+            await loadFrame(1);
+            window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: 1 } }));
+            return;
+        }
+
         // Step 1: Immediately load target initial frame (and frame 1)
         const firstFrame = Math.max(1, Math.min(effectiveFrameCount, Math.round(targetFrame)));
         coarseSet.delete(firstFrame);
@@ -239,9 +280,10 @@
         }
     }
 
-    // High-DPI Canvas Resizing capped at 1.5 dpr
+    // High-DPI Canvas Resizing capped at 1.25 dpr when isCompact, 1.5 otherwise
     function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        const maxDpr = isCompact ? 1.25 : 1.5;
+        const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
         const w = Math.round(window.innerWidth * dpr);
         const h = Math.round(window.innerHeight * dpr);
         if (canvas.width !== w || canvas.height !== h) {

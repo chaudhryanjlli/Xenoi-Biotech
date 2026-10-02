@@ -14,6 +14,8 @@
   var S = 300;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var MAX_WAIT_MS = 8000;
+  var MIN_SHOW_MS = 700;
+  var startTime = performance.now();
 
   var target = 0, shown = 0, finished = false, lastDrawn = -1;
   var ctx = canvas.getContext('2d');
@@ -82,11 +84,18 @@
     finished = true;
     labelEl.textContent = 'Ready';
     try { sessionStorage.setItem('xb-loaded', '1'); } catch (e) {}
+
+    var elapsed = performance.now() - startTime;
+    var remaining = Math.max(0, MIN_SHOW_MS - elapsed);
+
     setTimeout(function () {
+      root.style.pointerEvents = 'none';
       root.classList.add('xb-hide');
       h.classList.remove('xb-loading');
-      setTimeout(function () { root.remove(); }, reduce ? 0 : 450);
-    }, reduce ? 0 : 250);
+      setTimeout(function () {
+        if (root && root.parentNode) root.remove();
+      }, reduce ? 0 : 450);
+    }, remaining);
   }
 
   function tick() {
