@@ -4,9 +4,9 @@
     if (!canvas) return;
     const context = canvas.getContext('2d', { alpha: false });
 
-    // Enable high quality image smoothing
+    // Enable medium quality image smoothing for optimal performance
     context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = 'high';
+    context.imageSmoothingQuality = 'medium';
 
     // Auto-detect mobile device for optimized bandwidth and memory footprint
     const isMobile = Math.min(screen.width, screen.height) < 900;
@@ -40,12 +40,44 @@
         `${config.framePath}frame_${String(index).padStart(4, '0')}.${config.extension}`
     );
 
-    // Array of decoded ImageBitmaps or HTMLImageElements
+    // Array of decoded Image elements
     const frames = new Array(frameCount);
-    const loadingSet = new Set();
+    const inFlightSet = new Set();
+    const coarseSet = new Set();
+    for (let i = 1; i <= frameCount; i += 10) coarseSet.add(i);
+    coarseSet.add(frameCount);
+
     let loadedCount = 0;
     let initialDrawDone = false;
     let lastDrawnFrame = -1;
+    let scrollDirection = 1; // 1 = forward/down, -1 = backward/up
+    let lastScrollY = window.scrollY;
+
+    // Session Frame Persistence across page transitions (isolated per frame sequence)
+    const storageKey = 'savedFrame_' + config.framePath.replace(/[^a-zA-Z0-9]/g, '_');
+    const savedFrame = sessionStorage.getItem(storageKey);
+    let currFrame = (window.scrollY === 0) ? 1 : (savedFrame ? parseFloat(savedFrame) : 1);
+    if (isNaN(currFrame) || currFrame < 1 || currFrame > frameCount) {
+        currFrame = 1;
+    }
+    let targetFrame = currFrame;
+
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem(storageKey, currFrame.toFixed(2));
+    });
+
+    // Performance & Debug tracking
+    let lastDrawTime = 0;
+    let timeBetweenDraws = 0;
+    const isDebug = new URLSearchParams(window.location.search).get('debug') === '1';
+
+    if (isDebug) {
+        setInterval(() => {
+            console.log(
+                `Loaded frames: ${loadedCount}/${frameCount} | In-flight: ${inFlightSet.size} | Current frame: ${currFrame.toFixed(2)} | Time between draws: ${timeBetweenDraws.toFixed(2)}ms`
+            );
+        }, 1000);
+    }
 
     // Helper: Find nearest ready frame so canvas is NEVER blank or glitchy
     function getRenderableFrame(targetIdx) {
@@ -67,11 +99,71 @@
         return null;
     }
 
-    // High performance progressive decoding using Image() and decode()
+    // Dynamic frame picker: coarse pass first, then closest to currFrame preferring scroll direction
+    function getNextFrame() {
+        const c = Math.max(1, Math.min(frameCount, Math.round(currFrame)));
+        const dir = scrollDirection;
+
+        function getScore(idx) {
+            const dist = Math.abs(idx - c);
+            const isAhead = (dir >= 0) ? (idx >= c) : (idx <= c);
+            return isAhead ? dist : dist + 1000;
+        }
+
+        // 1. Coarse pass first (every 10th frame)
+        if (coarseSet.size > 0) {
+            let bestIdx = null;
+            let bestScore = Infinity;
+
+            for (const idx of coarseSet) {
+                if (frames[idx - 1] || inFlightSet.has(idx)) {
+                    coarseSet.delete(idx);
+                    continue;
+                }
+                const score = getScore(idx);
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestIdx = idx;
+                }
+            }
+
+            if (bestIdx !== null) {
+                coarseSet.delete(bestIdx);
+                inFlightSet.add(bestIdx);
+                return bestIdx;
+            }
+        }
+
+        // 2. Fine pass - dynamically select nearest unassigned frame
+        let bestIdx = null;
+        let bestScore = Infinity;
+
+        for (let idx = 1; idx <= frameCount; idx++) {
+            if (!frames[idx - 1] && !inFlightSet.has(idx)) {
+                const score = getScore(idx);
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestIdx = idx;
+                }
+            }
+        }
+
+        if (bestIdx !== null) {
+            inFlightSet.add(bestIdx);
+            return bestIdx;
+        }
+
+        return null;
+    }
+
+    // High performance decoding using Image() and decode()
     async function loadFrame(index) {
         const arrayIdx = index - 1;
-        if (frames[arrayIdx] || loadingSet.has(index)) return;
-        loadingSet.add(index);
+        if (frames[arrayIdx]) {
+            inFlightSet.delete(index);
+            return;
+        }
+        inFlightSet.add(index);
 
         const src = currentFrameSrc(index);
         const img = new Image();
@@ -98,58 +190,43 @@
         } catch (err) {
             console.warn(`Failed loading frame ${index}:`, err);
         } finally {
-            loadingSet.delete(index);
+            inFlightSet.delete(index);
         }
     }
 
-    // Progressive loader:
-    // 1. Immediate first frame
-    // 2. Coarse pass (every 10th frame) in batches of 8
-    // 3. Fine pass (filling gaps) in batches of 8
+    // Worker pool queue: exactly 6 downloads/decodes in flight at all times
     async function preloadFrames() {
-        // Step 1: Immediately load target initial frame (or frame 1)
+        // Step 1: Immediately load target initial frame (and frame 1)
         const firstFrame = Math.max(1, Math.min(frameCount, Math.round(targetFrame)));
+        coarseSet.delete(firstFrame);
         await loadFrame(firstFrame);
-        if (firstFrame !== 1) {
+        if (firstFrame !== 1 && !frames[0]) {
+            coarseSet.delete(1);
             await loadFrame(1);
         }
 
-        // Step 2: Coarse pass - every 10th frame across the entire sequence
-        const coarseIndices = [];
-        for (let i = 1; i <= frameCount; i += 10) {
-            if (!frames[i - 1] && !loadingSet.has(i)) {
-                coarseIndices.push(i);
-            }
-        }
-        if (!frames[frameCount - 1] && !loadingSet.has(frameCount)) {
-            coarseIndices.push(frameCount);
-        }
-
-        for (let i = 0; i < coarseIndices.length; i += 8) {
-            const batch = coarseIndices.slice(i, i + 8);
-            await Promise.all(batch.map(idx => loadFrame(idx)));
-        }
-
-        // Step 3: Populate remaining frames in batches of 8
-        const remaining = [];
-        for (let i = 1; i <= frameCount; i++) {
-            if (!frames[i - 1] && !loadingSet.has(i)) {
-                remaining.push(i);
+        // Step 2: Maintain 6 workers picking dynamically
+        const WORKER_COUNT = 6;
+        async function worker() {
+            while (loadedCount < frameCount) {
+                const nextIdx = getNextFrame();
+                if (!nextIdx) {
+                    if (loadedCount >= frameCount || inFlightSet.size === 0) break;
+                    await new Promise(r => setTimeout(r, 20));
+                    continue;
+                }
+                await loadFrame(nextIdx);
             }
         }
 
-        // Prioritize frames closest to current view position
-        remaining.sort((a, b) => Math.abs(a - targetFrame) - Math.abs(b - targetFrame));
-
-        for (let i = 0; i < remaining.length; i += 8) {
-            const batch = remaining.slice(i, i + 8);
-            await Promise.all(batch.map(idx => loadFrame(idx)));
+        for (let i = 0; i < WORKER_COUNT; i++) {
+            worker();
         }
     }
 
-    // High-DPI Canvas Resizing
+    // High-DPI Canvas Resizing capped at 1.5 dpr
     function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const w = Math.round(window.innerWidth * dpr);
         const h = Math.round(window.innerHeight * dpr);
         if (canvas.width !== w || canvas.height !== h) {
@@ -160,24 +237,19 @@
     }
     window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    // Session Frame Persistence across page transitions (isolated per frame sequence)
-    const storageKey = 'savedFrame_' + config.framePath.replace(/[^a-zA-Z0-9]/g, '_');
-    const savedFrame = sessionStorage.getItem(storageKey);
-    let currFrame = (window.scrollY === 0) ? 1 : (savedFrame ? parseFloat(savedFrame) : 1);
-    if (isNaN(currFrame) || currFrame < 1 || currFrame > frameCount) {
-        currFrame = 1;
-    }
-    let targetFrame = currFrame;
-
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem(storageKey, currFrame.toFixed(2));
-    });
-
     // Scroll mapping
     function updateScrollTarget() {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY) {
+            scrollDirection = 1;
+        } else if (currentScrollY < lastScrollY) {
+            scrollDirection = -1;
+        }
+        lastScrollY = currentScrollY;
+
         const html = document.documentElement;
         const maxScroll = Math.max(1, html.scrollHeight - window.innerHeight);
-        const scrollFraction = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const scrollFraction = Math.min(1, Math.max(0, currentScrollY / maxScroll));
         targetFrame = 1 + scrollFraction * (frameCount - 1);
 
         // Navigation bar transition
@@ -270,6 +342,14 @@
     window.addEventListener('scroll', updateHeaderDiminish, { passive: true });
     window.addEventListener('resize', updateHeaderDiminish, { passive: true });
 
+    function recordDraw() {
+        const now = performance.now();
+        if (lastDrawTime > 0) {
+            timeBetweenDraws = now - lastDrawTime;
+        }
+        lastDrawTime = now;
+    }
+
     // Direct cover draw - NO clearRect to completely prevent white/black flashes
     function drawImageCover(img) {
         if (!img || !img.complete || img.naturalWidth <= 0) return;
@@ -294,6 +374,7 @@
         const frame = getRenderableFrame(frameIdx);
         if (frame) {
             drawImageCover(frame);
+            recordDraw();
             lastDrawnFrame = frameIdx;
         }
     }
@@ -315,6 +396,7 @@
             const frame = getRenderableFrame(frameIdx);
             if (frame) {
                 drawImageCover(frame);
+                recordDraw();
                 lastDrawnFrame = frameIdx;
             }
         }
