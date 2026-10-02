@@ -2,12 +2,12 @@
 <html lang="en-IN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Bioinformatics &amp; Genomics Research | Xenoi Biotech</title>
     <meta name="description" content="Research-focused bioinformatics analysis and hands-on learning, turning next-generation sequencing data into clear insights for researchers.">
     <link rel="canonical" href="https://www.xenoibiotech.com/">
     <meta name="robots" content="index,follow,max-image-preview:large">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#03100e">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
 
@@ -82,16 +82,38 @@
     <a href="#main" class="skip-to-content">Skip to content</a>
     <canvas id="animation-canvas"></canvas>
 
-    <header class="header">
-        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
-            <img src="xenoi-logo.png" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img">
-        </a>
-        <a href="quote.html" class="btn btn-light" style="text-decoration: none;">
-            Start a conversation
-            <span class="btn-icon">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-        </a>
+    <header class="header" id="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo header-logo" style="text-decoration: none; color: inherit;">
+                <img src="xenoi-logo.png" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html#" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="career-navigator.html">Programmes</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="team.html">About</a></li>
+                    <li><a href="quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="quote.html" class="btn btn-light header-cta" style="text-decoration: none;">
+                    Start a conversation
+                    <span class="btn-icon">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
     </header>
 
     <div class="floating-nav-container" id="main-nav">

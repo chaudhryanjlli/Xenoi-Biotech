@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     corners.forEach(pos => {
         const corner = document.createElement('div');
+        corner.className = 'dashboard-corner';
         corner.style.position = 'fixed';
         corner.style.width = '20px';
         corner.style.height = '20px';
