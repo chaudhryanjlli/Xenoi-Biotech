@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
             access_key: accessKey,
             from_name: fromName,
             subject: subject,
+            replyto: cleanEmail,
             email: cleanEmail,
             name: rawName.trim(),
+
             organization: rawOrg.trim(),
             service: selectedServiceText || (serviceInput ? serviceInput.value : ''),
             message: rawDetails.trim(),
