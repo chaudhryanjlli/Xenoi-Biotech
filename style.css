@@ -139,9 +139,8 @@ body::before {
     filter: brightness(0.95) contrast(1.10) saturate(1.18) hue-rotate(-12deg); /* Shifted 20% toward emerald */
 }
 
-/* Header Banner - Visually invisible banner container with active working boundary */
-.header,
-.site-header {
+/* Header Banner - Visually invisible banner container with active working boundary (Home Page Only) */
+.header {
     position: fixed;
     top: 0;
     left: 0;
@@ -1555,21 +1554,88 @@ body::before {
     display: none !important;
 }
 
-/* ===== Xenoi loader (append to style.css) ===== */
-#xb-loader{
-  position:fixed;inset:0;z-index:99999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
-  background:radial-gradient(45% 42% at 50% 44%,rgba(22,167,130,.22),rgba(3,16,14,0) 72%),var(--bg-color,#03100e);
-  opacity:1;transition:opacity .4s ease;
+/* ===== Xenoi loader ===== */
+#xb-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 46%, #0b2a27 0%, #04161a 38%, #020b0d 75%);
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    pointer-events: auto;
 }
-#xb-loader.xb-hide{opacity:0;pointer-events:none}
-#xb-spiral{width:min(300px,68vw);height:auto;aspect-ratio:1;display:block;filter:drop-shadow(0 0 9px rgba(50,229,166,.55))}
-#xb-wordmark{width:min(210px,52vw);height:auto;display:block;opacity:.25}
-.xb-text{display:flex;gap:12px;align-items:baseline;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,253,251,.6)}
-#xb-pct{color:var(--accent-color,#32e5a6);font-weight:500;font-variant-numeric:tabular-nums;min-width:3.4ch;text-align:right}
-html.xb-skip #xb-loader{display:none}
-html.xb-loading,html.xb-loading body{overflow:hidden}
-@media (prefers-reduced-motion:reduce){#xb-loader{transition:none}}
+
+#xb-loader.xb-hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.xb-loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.xb-loader-logo {
+    height: 112px;
+    width: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+.xb-loader-bar-track {
+    width: 260px;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.10);
+    margin-top: 34px;
+    overflow: hidden;
+    position: relative;
+}
+
+.xb-loader-bar-fill {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #1fb98a, #32e5a6, #b0fcdb);
+    box-shadow: 0 0 12px rgba(50, 229, 166, 0.7);
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
+}
+
+.xb-loader-text {
+    margin-top: 14px;
+    font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: #7fd9bb;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    white-space: pre;
+}
+
+html.xb-skip #xb-loader {
+    display: none !important;
+}
+
+html.xb-loading,
+html.xb-loading body {
+    overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #xb-loader {
+        transition: none;
+    }
+}
 
 /* ===== Xenoi Mobile Side Drawer & Backdrop ===== */
 .drawer-backdrop {
@@ -1808,6 +1874,87 @@ html.is-compact body::before {
         background-image: linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%), url('bg/home-tablet.webp');
     }
 }
+
+/* ===== Layout & Spacing Tightening for Compact Devices (Phones & Tablets) ===== */
+html.is-compact .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: auto;
+}
+
+html.is-compact .page {
+    min-height: 0 !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0 var(--site-gutter) !important;
+    box-sizing: border-box;
+}
+
+html.is-compact .page-1.hero {
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-top: calc(var(--bar-h, 56px) + 1.25rem + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem) !important;
+    padding-left: var(--site-gutter) !important;
+    padding-right: var(--site-gutter) !important;
+    margin: 0 !important;
+}
+
+html.is-compact .hero-container {
+    margin-top: auto;
+    margin-bottom: auto;
+    max-width: 100%;
+}
+
+html.is-compact .hero-bottom {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+
+html.is-compact .page:not(.page-1) {
+    margin-top: clamp(40px, 6.5vw, 68px) !important;
+    margin-bottom: 0 !important;
+}
+
+html.is-compact .page:not(.page-1) .text-block {
+    max-width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+html.is-compact .section-title {
+    margin-bottom: 0.85rem;
+}
+
+html.is-compact .text-block p {
+    margin-bottom: 0;
+}
+
+html.is-compact .text-block .btn.mt-4 {
+    margin-top: 1.25rem;
+}
+
+html.is-compact .cta-card {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: clamp(1.75rem, 4.5vw, 2.75rem) clamp(1.25rem, 3.5vw, 2.25rem) !important;
+    max-width: 100% !important;
+}
+
+html.is-compact .site-footer {
+    margin-top: clamp(48px, 8vw, 76px) !important;
+    padding-top: clamp(36px, 6vw, 48px) !important;
+}
+
 
 
 

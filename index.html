@@ -38,6 +38,7 @@
     <noscript><style>#xb-loader{display:none!important}</style></noscript>
     <link rel="preload" as="image" href="bg/home-phone.webp" media="(orientation: portrait)">
     <link rel="preload" as="image" href="bg/home-tablet.webp" media="(orientation: landscape)">
+    <link rel="preload" as="image" href="xenoi-logo-hq.png">
 
     <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="style.css">
@@ -77,9 +78,13 @@
 </head>
 <body>
     <div id="xb-loader" role="status" aria-live="polite">
-      <canvas id="xb-spiral" width="300" height="300" aria-hidden="true"></canvas>
-      <img id="xb-wordmark" src="wordmark.png" alt="Xenoi Biotech" width="462" height="207">
-      <div class="xb-text"><span id="xb-label">Loading</span><span id="xb-pct">0%</span></div>
+      <div class="xb-loader-content">
+        <img class="xb-loader-logo" src="xenoi-logo-hq.png" alt="Xenoi Biotech" width="257" height="112" decoding="sync">
+        <div class="xb-loader-bar-track">
+          <div class="xb-loader-bar-fill" id="xb-bar-fill"></div>
+        </div>
+        <div class="xb-loader-text" id="xb-loader-text">LOADING  0%</div>
+      </div>
     </div>
     <a href="#main" class="skip-to-content">Skip to content</a>
     <canvas id="animation-canvas"></canvas>
@@ -135,7 +140,7 @@
                 <span class="hero-badge">BIOINFORMATICS &middot; RESEARCH &middot; EDUCATION</span>
                 <h1 class="hero-heading">Decode complexity<br>Discover possibility</h1>
                 <p class="hero-desc">
-                    Research-focused bioinformatics analysis and hands-on learning&mdash;from next-generation sequencing data to the skills that move your research forward.
+                    Research-focused bioinformatics analysis and hands-on learning, from next-generation sequencing data to the skills that move your research forward.
                 </p>
             </div>
             <div class="hero-bottom text-block visible">

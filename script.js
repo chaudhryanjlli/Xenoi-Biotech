@@ -161,10 +161,30 @@
 
     const threshold = Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
 
-    function reportLoaderProgress(loaded, thresh, coarseDone) {
-        let p = Math.min(1, loaded / thresh);
-        if (!coarseDone) p = Math.min(p, 0.98);
-        window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: p } }));
+    function reportLoaderProgress() {
+        const progress = Math.min(1, loadedCount / effectiveFrameCount);
+        let isReady = progress >= 0.90;
+        if (!isReady && coarseSet.size === 0) {
+            const center = Math.max(1, Math.min(effectiveFrameCount, Math.round(currFrame)));
+            const winMin = Math.max(1, center - 30);
+            const winMax = Math.min(effectiveFrameCount, center + 30);
+            let winLoaded = 0;
+            for (let k = winMin; k <= winMax; k++) {
+                if (frames[k - 1]) winLoaded++;
+            }
+            const winTotal = winMax - winMin + 1;
+            if (winTotal > 0 && (winLoaded / winTotal) >= 0.90) {
+                isReady = true;
+            }
+        }
+        window.dispatchEvent(new CustomEvent('xb:frames', {
+            detail: {
+                progress: progress,
+                ready: isReady,
+                loaded: loadedCount,
+                total: effectiveFrameCount
+            }
+        }));
     }
 
     let loadedCount = 0;
@@ -283,7 +303,7 @@
             if (img.complete && img.naturalWidth > 0) {
                 frames[arrayIdx] = img;
                 loadedCount++;
-                reportLoaderProgress(loadedCount, threshold, coarseSet.size === 0);
+                reportLoaderProgress();
                 if (!initialDrawDone) {
                     initialDrawDone = true;
                     resizeCanvas();

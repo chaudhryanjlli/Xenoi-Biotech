@@ -1,118 +1,118 @@
 /* loader.js: Xenoi Biotech full-screen loader (loaded with defer on index.html only).
    script.js reports progress with:
-     window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: 0..1 } }));
-   progress = 1 means "enough frames are ready, open the site". */
+     window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: 0..1, ready: boolean } }));
+*/
 (function () {
   var root = document.getElementById('xb-loader');
   var h = document.documentElement;
-  if (!root || h.classList.contains('xb-skip') || h.classList.contains('is-compact')) { if (root) root.remove(); return; }
+  if (!root || h.classList.contains('xb-skip') || h.classList.contains('is-compact')) {
+    if (root && root.parentNode) root.remove();
+    h.classList.remove('xb-loading');
+    return;
+  }
 
-  var canvas = document.getElementById('xb-spiral');
-  var wordmark = document.getElementById('xb-wordmark');
-  var pctEl = document.getElementById('xb-pct');
-  var labelEl = document.getElementById('xb-label');
-  var S = 300;
+  var barFill = document.getElementById('xb-bar-fill');
+  var textEl = document.getElementById('xb-loader-text');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MAX_WAIT_MS = 8000;
+  var MAX_WAIT_MS = 20000;
   var MIN_SHOW_MS = 700;
   var startTime = performance.now();
 
-  var target = 0, shown = 0, finished = false, lastDrawn = -1;
-  var ctx = canvas.getContext('2d');
-  canvas.width = S; canvas.height = S;
+  var targetProgress = 0;
+  var displayProgress = 0;
+  var isReady = false;
+  var finished = false;
+  var safetyTimer = null;
 
-  var base = null, U = null, useFallback = false;
-  var img = new Image();
-  img.onload = function () {
-    try {
-      var o = document.createElement('canvas'); o.width = S; o.height = S;
-      var oc = o.getContext('2d'); oc.drawImage(img, 0, 0, S, S);
-      base = oc.getImageData(0, 0, S, S);
-      U = new Float32Array(S * S);
-      var c = S / 2;
-      for (var y = 0; y < S; y++) {
-        for (var x = 0; x < S; x++) {
-          var dx = x - c, dy = y - c;
-          var r = Math.min(1, Math.sqrt(dx * dx + dy * dy) / c);
-          var a = Math.atan2(dy, dx) + Math.PI / 2;
-          if (a < 0) a += 2 * Math.PI;
-          a /= 2 * Math.PI;
-          U[y * S + x] = 0.5 * r + 0.5 * a;
-        }
-      }
-    } catch (e) { useFallback = true; }
-    draw(shown, true);
-  };
-  img.onerror = function () { useFallback = true; };
-  img.src = 'xenoi-icon.png';
-
-  function draw(p, force) {
-    var q = Math.round(p * 200);
-    if (!force && q === lastDrawn) return;
-    lastDrawn = q;
-    if (useFallback || !base) {
-      ctx.clearRect(0, 0, S, S);
-      ctx.globalAlpha = 0.10 + 0.90 * p;
-      if (img.complete) ctx.drawImage(img, 0, 0, S, S);
-      ctx.globalAlpha = 1;
-      return;
+  function updateVisuals(p) {
+    if (barFill) {
+      barFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
-    var out = ctx.createImageData(S, S), w = 0.14, d = base.data, o = out.data;
-    for (var i = 0; i < S * S; i++) {
-      var j = i * 4, al = d[j + 3];
-      if (!al) continue;
-      var f = (p * (1 + w) - U[i]) / w;
-      f = f < 0 ? 0 : f > 1 ? 1 : f;
-      var edge = p >= 1 ? 0 : Math.sin(Math.PI * f) * 0.6;
-      o[j]     = d[j]     + (176 - d[j])     * edge;
-      o[j + 1] = d[j + 1] + (252 - d[j + 1]) * edge;
-      o[j + 2] = d[j + 2] + (219 - d[j + 2]) * edge;
-      o[j + 3] = al * (0.10 + 0.90 * f);
+    if (textEl) {
+      var pct = Math.min(100, Math.max(0, Math.round(p * 100)));
+      textEl.textContent = 'LOADING  ' + pct + '%';
     }
-    ctx.putImageData(out, 0, 0);
   }
 
-  function paint() {
-    draw(shown);
-    var pct = Math.round(shown * 100);
-    pctEl.textContent = pct + '%';
-    wordmark.style.opacity = (0.25 + 0.75 * Math.min(1, shown / 0.87)).toFixed(3);
+  function unlockScroll() {
+    h.classList.remove('xb-loading');
   }
 
   function finish() {
     if (finished) return;
     finished = true;
-    labelEl.textContent = 'Ready';
+    if (safetyTimer) { clearTimeout(safetyTimer); safetyTimer = null; }
     try { sessionStorage.setItem('xb-loaded', '1'); } catch (e) {}
 
     var elapsed = performance.now() - startTime;
     var remaining = Math.max(0, MIN_SHOW_MS - elapsed);
 
     setTimeout(function () {
-      root.style.pointerEvents = 'none';
-      root.classList.add('xb-hide');
-      h.classList.remove('xb-loading');
+      if (root) {
+        root.style.pointerEvents = 'none';
+        root.classList.add('xb-hide');
+      }
+      unlockScroll();
       setTimeout(function () {
         if (root && root.parentNode) root.remove();
       }, reduce ? 0 : 450);
     }, remaining);
   }
 
+  function forceFinish() {
+    if (finished) return;
+    targetProgress = 1;
+    displayProgress = 1;
+    updateVisuals(1);
+    finish();
+  }
+
   function tick() {
     if (finished) return;
-    var step = reduce ? 1 : 0.06;
-    shown += (target - shown) * step;
-    if (Math.abs(target - shown) < 0.002) shown = target;
-    paint();
-    if (shown >= 1) { finish(); return; }
+
+    if (reduce) {
+      displayProgress = isReady ? 1 : targetProgress;
+    } else {
+      var target = isReady ? 1 : targetProgress;
+      var diff = target - displayProgress;
+      if (diff > 0.0005) {
+        displayProgress += diff * 0.12;
+      } else if (isReady) {
+        displayProgress = 1;
+      }
+    }
+
+    // Never go backwards
+    displayProgress = Math.min(1, Math.max(0, displayProgress));
+    updateVisuals(displayProgress);
+
+    if (isReady && displayProgress >= 0.999) {
+      updateVisuals(1);
+      finish();
+      return;
+    }
+
     requestAnimationFrame(tick);
   }
 
   window.addEventListener('xb:frames', function (e) {
-    var p = e && e.detail && typeof e.detail.progress === 'number' ? e.detail.progress : 0;
-    if (p > target) target = Math.min(1, p);
+    if (!e || !e.detail) return;
+    var p = typeof e.detail.progress === 'number' ? e.detail.progress : 0;
+    if (p > targetProgress) {
+      targetProgress = Math.min(1, p);
+    }
+    if (e.detail.ready || targetProgress >= 0.90) {
+      isReady = true;
+    }
   });
 
-  setTimeout(function () { target = 1; }, MAX_WAIT_MS); // never block the site for long
+  safetyTimer = setTimeout(forceFinish, MAX_WAIT_MS);
+
+  // Safeguard: if any unhandled error occurs, ensure scroll unlock
+  window.addEventListener('error', function () {
+    setTimeout(unlockScroll, 1000);
+  });
+
+  updateVisuals(0);
   requestAnimationFrame(tick);
 })();

@@ -8,6 +8,7 @@
     --bar-h: 92px;
     --logo-h: 80px;
     --site-max-w: 1180px;
+    --topbar-bg: rgba(3, 10, 12, 0.82);
     --accent-color: #32e5a6;
     --accent-cyan: #20e6cb;
     --accent-teal: #14b8a6;
@@ -108,18 +109,35 @@ body.inner .site-header {
     left: 0;
     right: 0;
     width: 100%;
-    height: var(--bar-h);
-    background: rgba(3, 10, 12, 0.82);
-    backdrop-filter: blur(20px) saturate(120%);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    height: var(--bar-h, 92px);
+    background: var(--topbar-bg, rgba(3, 10, 12, 0.82)) !important;
+    backdrop-filter: blur(20px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000;
     box-sizing: border-box;
     overflow: visible;
     padding-top: env(safe-area-inset-top, 0px);
     padding-left: env(safe-area-inset-left, 0px);
     padding-right: env(safe-area-inset-right, 0px);
+    pointer-events: none !important;
+}
+
+body.inner .site-header a,
+body.inner .site-header button,
+body.inner .site-header .top-nav,
+body.inner .site-header .top-nav a,
+body.inner .site-header .nav-links,
+body.inner .site-header .nav-links a,
+body.inner .site-header .header-actions,
+body.inner .site-header .header-actions *,
+body.inner .site-header .logo,
+body.inner .site-header .header-logo,
+body.inner .site-header .mobile-menu-btn,
+body.inner .site-header .header-cta,
+body.inner .site-header .dropdown-item {
+    pointer-events: auto !important;
 }
 
 body.inner .header-inner {
@@ -743,62 +761,165 @@ body.inner .notice-bar .notice-icon {
 }
 
 /* 8. Segmented Control Component (Career Navigator / Internships / Collaboration) */
-body.inner .segmented-control-container {
+@media (min-width: 1025px) {
+    html:not(.is-compact) body.inner .segmented-control-container {
+        position: static;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        margin: 0 0 28px 0;
+        width: fit-content;
+        max-width: min(580px, calc(50vw - 24px));
+        z-index: 10;
+    }
+
+    html:not(.is-compact) body.inner .segmented-control {
+        display: inline-grid !important;
+        grid-auto-flow: column !important;
+        grid-auto-columns: 1fr !important;
+        width: fit-content;
+        max-width: min(580px, calc(50vw - 24px));
+        height: 57.6px;
+        min-height: 57.6px;
+        align-items: stretch;
+        background: rgba(3, 18, 18, 0.92) !important;
+        border: 1px solid rgba(50, 229, 166, 0.3) !important;
+        border-radius: 999px !important;
+        padding: 4.8px;
+        gap: 4.8px;
+        box-sizing: border-box;
+        box-shadow: 0 0 16px rgba(50, 229, 166, 0.15) !important;
+    }
+
+    html:not(.is-compact) body.inner .segmented-tab {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        min-width: 0;
+        height: 48px;
+        min-height: 48px;
+        padding: 0 clamp(16px, 1.4vw, 24px) !important;
+        border-radius: 999px !important;
+        font-size: clamp(13.5px, 1.1vw, 15.5px) !important;
+        line-height: 1 !important;
+        font-weight: 600 !important;
+        color: rgba(244, 253, 251, 0.85);
+        text-decoration: none !important;
+        transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+
+    html:not(.is-compact) body.inner .segmented-tab:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    html:not(.is-compact) body.inner .segmented-tab.active {
+        background: var(--accent-color, #32e5a6) !important;
+        color: #03100e !important;
+        font-weight: 600 !important;
+        border-radius: 999px !important;
+        box-shadow: 0 0 14px rgba(50, 229, 166, 0.35) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    body.inner .segmented-control-container {
+        position: sticky;
+        top: var(--bar-h);
+        z-index: 800;
+        background: rgba(3, 16, 14, 0.95) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        padding: 6px 0 10px !important;
+        margin-bottom: 24px;
+        border-bottom: 1px solid rgba(50, 229, 166, 0.12) !important;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.inner .segmented-control {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 44px;
+        align-items: stretch;
+        background: rgba(4, 24, 20, 0.85) !important;
+        border: 1px solid rgba(50, 229, 166, 0.2) !important;
+        border-radius: 10px !important;
+        padding: 3px;
+        gap: 4px;
+        box-shadow: none !important;
+    }
+
+    body.inner .segmented-tab {
+        border-radius: 7px !important;
+        min-height: 44px;
+        padding: 4px 6px;
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 500;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    body.inner .segmented-tab.active {
+        border-radius: 7px !important;
+    }
+}
+
+html.is-compact body.inner .segmented-control-container {
     position: sticky;
     top: var(--bar-h);
     z-index: 800;
-    background: rgba(3, 16, 14, 0.95);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 6px 0 10px;
+    background: rgba(3, 16, 14, 0.95) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    padding: 6px 0 10px !important;
     margin-bottom: 24px;
-    border-bottom: 1px solid rgba(50, 229, 166, 0.12);
+    border-bottom: 1px solid rgba(50, 229, 166, 0.12) !important;
     width: 100%;
+    max-width: 100%;
 }
 
-body.inner .segmented-control {
+html.is-compact body.inner .segmented-control {
     display: flex;
     width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 44px;
     align-items: stretch;
-    background: rgba(4, 24, 20, 0.85);
-    border: 1px solid rgba(50, 229, 166, 0.2);
-    border-radius: 10px;
+    background: rgba(4, 24, 20, 0.85) !important;
+    border: 1px solid rgba(50, 229, 166, 0.2) !important;
+    border-radius: 10px !important;
     padding: 3px;
     gap: 4px;
-    box-sizing: border-box;
+    box-shadow: none !important;
 }
 
-body.inner .segmented-tab {
-    flex: 1 1 0;
-    min-width: 0;
+html.is-compact body.inner .segmented-tab {
+    border-radius: 7px !important;
     min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     padding: 4px 6px;
-    border-radius: 7px;
     font-size: 13px;
     line-height: 1.2;
     font-weight: 500;
-    color: rgba(244, 253, 251, 0.85);
-    text-decoration: none !important;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     white-space: normal;
     word-break: normal;
     overflow-wrap: break-word;
 }
 
-body.inner .segmented-tab:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-body.inner .segmented-tab.active {
-    background: var(--accent-color, #32e5a6);
-    color: #03100e;
-    font-weight: 600;
-    box-shadow: 0 0 14px rgba(50, 229, 166, 0.35);
+html.is-compact body.inner .segmented-tab.active {
+    border-radius: 7px !important;
 }
 
 /* 9. Cards & Grid System */
