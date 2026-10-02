@@ -4,7 +4,8 @@
   var h = document.documentElement;
   var isCompact = false;
   try {
-    isCompact = Math.min(screen.width, screen.height) < 1100 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    isCompact = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+                Math.min(screen.width, screen.height) < 600;
   } catch (e) {}
 
   if (isCompact) {

@@ -3,9 +3,7 @@
     // Inner pages use static background and have zero animation/frame requests
     if (document.body.classList.contains('inner')) return;
 
-    const isCompact = document.documentElement.classList.contains('is-compact') ||
-                      Math.min(screen.width, screen.height) < 1100 ||
-                      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    const isCompact = document.documentElement.classList.contains('is-compact');
 
     // Setup intersection observer for text animations (runs on both desktop and compact)
     const observerOptions = {

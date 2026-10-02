@@ -169,13 +169,35 @@ body::before {
     pointer-events: none !important;
 }
 
-.header .logo,
+.header a,
+.header button,
+.header .top-nav,
+.header .top-nav a,
 .header .header-actions,
 .header .header-actions *,
+.header .logo,
 .header .mobile-menu-btn,
 .header .header-cta,
-.header .top-nav a,
-.header .nav-links a {
+.site-header a,
+.site-header button,
+.site-header .top-nav,
+.site-header .top-nav a,
+.site-header .nav-links,
+.site-header .nav-links a,
+.site-header .header-actions,
+.site-header .header-actions *,
+.site-header .logo,
+.site-header .header-logo,
+.site-header .mobile-menu-btn,
+.site-header .header-cta,
+.site-header .dropdown-item,
+.mobile-drawer,
+.mobile-drawer *,
+.drawer-backdrop.open,
+.drawer-close-btn,
+.drawer-link,
+.drawer-sublink,
+.drawer-cta {
     pointer-events: auto !important;
 }
 
