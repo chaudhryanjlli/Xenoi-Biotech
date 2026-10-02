@@ -34,6 +34,9 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 
+    <script src="loader-init.js"></script>
+    <noscript><style>#xb-loader{display:none!important}</style></noscript>
+
     <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="style.css">
 
@@ -71,6 +74,11 @@
     </script>
 </head>
 <body>
+    <div id="xb-loader" role="status" aria-live="polite">
+      <canvas id="xb-spiral" width="300" height="300" aria-hidden="true"></canvas>
+      <img id="xb-wordmark" src="wordmark.png" alt="Xenoi Biotech" width="462" height="207">
+      <div class="xb-text"><span id="xb-label">Loading</span><span id="xb-pct">0%</span></div>
+    </div>
     <a href="#main" class="skip-to-content">Skip to content</a>
     <canvas id="animation-canvas"></canvas>
 
@@ -200,6 +208,7 @@
         </div>
     </footer>
 
+    <script src="loader.js" defer></script>
     <script src="script.js"></script>
     <script src="ui.js"></script>
 </body>

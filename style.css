@@ -1350,4 +1350,21 @@ body::before {
     display: none !important;
 }
 
+/* ===== Xenoi loader (append to style.css) ===== */
+#xb-loader{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  background:radial-gradient(45% 42% at 50% 44%,rgba(22,167,130,.22),rgba(3,16,14,0) 72%),var(--bg-color,#03100e);
+  opacity:1;transition:opacity .4s ease;
+}
+#xb-loader.xb-hide{opacity:0;pointer-events:none}
+#xb-spiral{width:min(300px,68vw);height:auto;aspect-ratio:1;display:block;filter:drop-shadow(0 0 9px rgba(50,229,166,.55))}
+#xb-wordmark{width:min(210px,52vw);height:auto;display:block;opacity:.25}
+.xb-text{display:flex;gap:12px;align-items:baseline;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,253,251,.6)}
+#xb-pct{color:var(--accent-color,#32e5a6);font-weight:500;font-variant-numeric:tabular-nums;min-width:3.4ch;text-align:right}
+html.xb-skip #xb-loader{display:none}
+html.xb-loading,html.xb-loading body{overflow:hidden}
+@media (prefers-reduced-motion:reduce){#xb-loader{transition:none}}
+
+
 

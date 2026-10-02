@@ -54,7 +54,7 @@ body.inner .btn-ghost {
     text-decoration: none !important;
 }
 
-/* 2. Readability Scrim (Full-screen background gradient behind content) */
+/* 2. Static Background & Readability Scrim (Full-screen fixed background behind content) */
 body.inner {
     background-color: #020b0d;
     color: #ffffff;
@@ -69,19 +69,41 @@ body.inner {
 body.inner::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%);
-    z-index: 0;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: 
+        linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%),
+        -webkit-image-set(
+            url('bg/inner-desktop.avif') type('image/avif'),
+            url('bg/inner-desktop.webp') type('image/webp')
+        );
+    background-image: 
+        linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%),
+        image-set(
+            url('bg/inner-desktop.avif') type('image/avif'),
+            url('bg/inner-desktop.webp') type('image/webp')
+        );
     pointer-events: none;
 }
 
-body.inner #animation-canvas {
-    z-index: -1;
+@media (max-width: 900px) {
+    body.inner::before {
+        background-image: 
+            linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%),
+            -webkit-image-set(
+                url('bg/inner-mobile.avif') type('image/avif'),
+                url('bg/inner-mobile.webp') type('image/webp')
+            );
+        background-image: 
+            linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%),
+            image-set(
+                url('bg/inner-mobile.avif') type('image/avif'),
+                url('bg/inner-mobile.webp') type('image/webp')
+            );
+    }
 }
 
 body.inner .site-header,

@@ -37,6 +37,8 @@
     <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="pages.css">
+    <link rel="preload" as="image" href="bg/inner-desktop.avif" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="bg/inner-mobile.avif" media="(max-width: 900px)">
 
     <!-- Structured Data: Breadcrumbs -->
     <script type="application/ld+json">
@@ -62,7 +64,6 @@
 </head>
 <body class="inner">
     <a href="#main" class="skip-to-content">Skip to content</a>
-    <canvas id="animation-canvas"></canvas>
     
     <header class="site-header" id="site-header">
         <div class="header-inner">
