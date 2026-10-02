@@ -49,91 +49,88 @@
 
     // Helper: Find nearest ready frame so canvas is NEVER blank or glitchy
     function getRenderableFrame(targetIdx) {
-        if (frames[targetIdx]) return frames[targetIdx];
-        // Search backwards (most natural for forward/backward scrolling)
+        if (frames[targetIdx] && frames[targetIdx].complete && frames[targetIdx].naturalWidth > 0) {
+            return frames[targetIdx];
+        }
+        // Search backwards (closest loaded earlier frame)
         for (let i = targetIdx - 1; i >= 0; i--) {
-            if (frames[i]) return frames[i];
+            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+                return frames[i];
+            }
         }
         // Search forwards if no earlier frame is loaded yet
         for (let i = targetIdx + 1; i < frameCount; i++) {
-            if (frames[i]) return frames[i];
+            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+                return frames[i];
+            }
         }
         return null;
     }
 
-    // High performance off-thread decoding with createImageBitmap
+    // High performance progressive decoding using Image() and decode()
     async function loadFrame(index) {
         const arrayIdx = index - 1;
         if (frames[arrayIdx] || loadingSet.has(index)) return;
         loadingSet.add(index);
 
         const src = currentFrameSrc(index);
+        const img = new Image();
+        img.src = src;
+
         try {
-            const res = await fetch(src);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const blob = await res.blob();
-            if ('createImageBitmap' in window) {
-                frames[arrayIdx] = await createImageBitmap(blob);
-            } else {
-                const img = new Image();
-                img.src = URL.createObjectURL(blob);
+            if ('decode' in img) {
                 await img.decode();
+            } else {
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            }
+            if (img.complete && img.naturalWidth > 0) {
                 frames[arrayIdx] = img;
+                loadedCount++;
+                if (!initialDrawDone) {
+                    initialDrawDone = true;
+                    resizeCanvas();
+                    forceRedraw();
+                }
             }
         } catch (err) {
-            // Fallback: standard Image object
-            try {
-                const img = new Image();
-                img.src = src;
-                if ('decode' in img) {
-                    await img.decode();
-                } else {
-                    await new Promise((resolve, reject) => {
-                        img.onload = resolve;
-                        img.onerror = reject;
-                    });
-                }
-                frames[arrayIdx] = img;
-            } catch (fallbackErr) {
-                console.warn(`Failed loading frame ${index}:`, fallbackErr);
-            }
+            console.warn(`Failed loading frame ${index}:`, err);
         } finally {
             loadingSet.delete(index);
-            loadedCount++;
-            if (!initialDrawDone && frames[arrayIdx]) {
-                initialDrawDone = true;
-                resizeCanvas();
-                forceRedraw();
-            }
         }
     }
 
-    // Smart progressive loader: keyframe-first then parallel workers
+    // Progressive loader:
+    // 1. Immediate first frame
+    // 2. Coarse pass (every 10th frame) in batches of 8
+    // 3. Fine pass (filling gaps) in batches of 8
     async function preloadFrames() {
-        // Step 1: Immediately load target frame (or frame 1)
+        // Step 1: Immediately load target initial frame (or frame 1)
         const firstFrame = Math.max(1, Math.min(frameCount, Math.round(targetFrame)));
         await loadFrame(firstFrame);
         if (firstFrame !== 1) {
             await loadFrame(1);
         }
 
-        // Step 2: Quickly load sparse keyframes (every 8 frames) across the entire sequence
-        // This ensures within ~500ms, the entire page has instant close frame coverage
-        const keyframeIndices = [];
-        for (let i = 1; i <= frameCount; i += 8) {
-            if (i !== firstFrame && i !== 1) {
-                keyframeIndices.push(i);
+        // Step 2: Coarse pass - every 10th frame across the entire sequence
+        const coarseIndices = [];
+        for (let i = 1; i <= frameCount; i += 10) {
+            if (!frames[i - 1] && !loadingSet.has(i)) {
+                coarseIndices.push(i);
             }
         }
-        const keyWorker = async () => {
-            while (keyframeIndices.length) {
-                const idx = keyframeIndices.shift();
-                await loadFrame(idx);
-            }
-        };
-        await Promise.all(Array.from({ length: 4 }, keyWorker));
+        if (!frames[frameCount - 1] && !loadingSet.has(frameCount)) {
+            coarseIndices.push(frameCount);
+        }
 
-        // Step 3: Populate remaining frames using 6 concurrent background workers
+        for (let i = 0; i < coarseIndices.length; i += 8) {
+            const batch = coarseIndices.slice(i, i + 8);
+            await Promise.all(batch.map(idx => loadFrame(idx)));
+        }
+
+        // Step 3: Populate remaining frames in batches of 8
         const remaining = [];
         for (let i = 1; i <= frameCount; i++) {
             if (!frames[i - 1] && !loadingSet.has(i)) {
@@ -144,13 +141,10 @@
         // Prioritize frames closest to current view position
         remaining.sort((a, b) => Math.abs(a - targetFrame) - Math.abs(b - targetFrame));
 
-        const worker = async () => {
-            while (remaining.length) {
-                const idx = remaining.shift();
-                await loadFrame(idx);
-            }
-        };
-        await Promise.all(Array.from({ length: 6 }, worker));
+        for (let i = 0; i < remaining.length; i += 8) {
+            const batch = remaining.slice(i, i + 8);
+            await Promise.all(batch.map(idx => loadFrame(idx)));
+        }
     }
 
     // High-DPI Canvas Resizing
@@ -278,11 +272,11 @@
 
     // Direct cover draw - NO clearRect to completely prevent white/black flashes
     function drawImageCover(img) {
-        if (!img) return;
+        if (!img || !img.complete || img.naturalWidth <= 0) return;
         const cw = canvas.width;
         const ch = canvas.height;
-        const imgW = img.width || img.naturalWidth;
-        const imgH = img.height || img.naturalHeight;
+        const imgW = img.naturalWidth || img.width;
+        const imgH = img.naturalHeight || img.height;
         if (!imgW || !imgH) return;
 
         // "Cover" math
