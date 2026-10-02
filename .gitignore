@@ -1,0 +1,6 @@
+node_modules/
+qa-screenshots/
+Screenshot*.png
+WhatsApp*
+*.log
+.DS_Store

@@ -1,0 +1,5 @@
+Contact: mailto:explore@xenoibiotech.com
+Expires: 2027-10-02T10:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.xenoibiotech.com/.well-known/security.txt
+Policy: https://www.xenoibiotech.com/privacy.html

@@ -1,0 +1,25 @@
+# Xenoi Biotech
+
+> Bioinformatics analysis, reproducible research workflows, and practical training for the next generation of scientists.
+
+Xenoi Biotech Pvt. Ltd. (Punjab, India) provides research-focused bioinformatics data analysis and hands-on computational biology education. We turn complex next-generation sequencing (NGS) data into reproducible, publication-ready genomic insights.
+
+## Pages & Structure
+
+- [Home](https://www.xenoibiotech.com/): Overview of bioinformatics services, genomic pipelines, multi-omics capabilities, and training programs.
+- [Services](https://www.xenoibiotech.com/services.html): Overview of pipeline development (Nextflow/Snakemake), data interpretation, and research consulting.
+- [Genomics Services](https://www.xenoibiotech.com/genomics.html): Specialized NGS analysis including Whole-Genome Sequencing (WGS), Whole-Exome Sequencing (WES), targeted panels, and de novo genome assembly.
+- [Workshops](https://www.xenoibiotech.com/workshops.html): Hands-on bioinformatics bootcamps including Python for Bioinformatics, NGS Data Analysis, and RNA-Seq Analysis.
+- [Career Navigator](https://www.xenoibiotech.com/career-navigator.html): A structured career guidance programme designed specifically for life science students across nine career pathways.
+- [Internships](https://www.xenoibiotech.com/internships.html): Practical training in bioinformatics, computational biology and genomics across Foundation, Applied and Capstone tiers.
+- [Collaboration](https://www.xenoibiotech.com/collaboration.html): Collaboration with colleges to provide career guidance, training and internship opportunities tailored to life science students.
+- [Team & Contact](https://www.xenoibiotech.com/team.html): Meet the team behind Xenoi Biotech, led by our Director and Lead Bioinformatician.
+- [Project Quote](https://www.xenoibiotech.com/quote.html): Submit project inquiries or training requirements for customized proposals.
+- [Privacy Policy](https://www.xenoibiotech.com/privacy.html): Privacy terms, transparent data practices, and zero-tracking policy.
+- [Terms of Use](https://www.xenoibiotech.com/terms.html): Terms of service, research-use-only disclaimers, and legal guidelines.
+
+## Contact Information
+
+- Organization: Xenoi Biotech Pvt. Ltd., Punjab, India
+- General & Project Inquiries: explore@xenoibiotech.com
+- Website: https://www.xenoibiotech.com
