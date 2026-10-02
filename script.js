@@ -3,324 +3,35 @@
     // Inner pages use static background and have zero animation/frame requests
     if (document.body.classList.contains('inner')) return;
 
-    const canvas = document.getElementById('animation-canvas');
-    if (!canvas) return;
-    const context = canvas.getContext('2d', { alpha: false });
+    const isCompact = document.documentElement.classList.contains('is-compact') ||
+                      Math.min(screen.width, screen.height) < 1100 ||
+                      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
-    // Enable medium quality image smoothing for optimal performance
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = 'medium';
-
-    // Detection: compact devices (phones & tablets) vs desktop
-    const isCompact = Math.min(screen.width, screen.height) < 1100 || matchMedia('(pointer: coarse)').matches;
-    const isPortrait = window.innerHeight > window.innerWidth;
-    const frameBase = (document.querySelector('meta[name="frame-base"]') || {}).content || '';
-
-    let setName, rawFrameCount, FRAME_STRIDE;
-    if (isCompact) {
-        if (isPortrait) {
-            setName = 'frames_phone/';
-            rawFrameCount = 50;
-            FRAME_STRIDE = 1;
-        } else {
-            setName = 'frames_tablet/';
-            rawFrameCount = 75;
-            FRAME_STRIDE = 1;
-        }
-    } else {
-        setName = 'frames/desktop-1920/';
-        rawFrameCount = 298;
-        FRAME_STRIDE = 2;
-    }
-
-    // Reload page once if orientation changes on compact devices
-    if (isCompact) {
-        const orientationMql = window.matchMedia('(orientation: portrait)');
-        const handleOrientChange = () => {
-            window.location.reload();
-        };
-        if (orientationMql.addEventListener) {
-            orientationMql.addEventListener('change', handleOrientChange);
-        } else if (orientationMql.addListener) {
-            orientationMql.addListener(handleOrientChange);
-        }
-    }
-
-    // Frame configuration
-    const effectiveFrames = [];
-    for (let i = 1; i <= rawFrameCount; i += FRAME_STRIDE) {
-        effectiveFrames.push(i);
-    }
-    const effectiveFrameCount = effectiveFrames.length;
-
-    const config = Object.assign(
-        {
-            frameCount: effectiveFrameCount,
-            framePath: frameBase + setName,
-            extension: 'avif'
-        },
-        window.ANIMATION_CONFIG || {}
-    );
-
-    const currentFrameSrc = (effectiveIdx) => {
-        const rawIdx = effectiveFrames[effectiveIdx - 1];
-        return `${config.framePath}frame_${String(rawIdx).padStart(4, '0')}.${config.extension}`;
+    // Setup intersection observer for text animations (runs on both desktop and compact)
+    const observerOptions = {
+        root: null,
+        rootMargin: '120px 0px 0px 0px',
+        threshold: 0.05
     };
 
-    // Static fallback check (save-data, slow connection, or prefers-reduced-motion on compact)
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const isSaveData = conn && conn.saveData === true;
-    const isSlowConn = conn && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g');
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isStaticFallback = isCompact && (isSaveData || isSlowConn || prefersReducedMotion);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                if (entry.target.closest('#about') && window.scrollY > (document.documentElement.scrollHeight - window.innerHeight - 350)) {
+                    return;
+                }
+                if (entry.boundingClientRect.top > 0) {
+                    entry.target.classList.remove('visible');
+                }
+            }
+        });
+    }, observerOptions);
 
-    // Array of decoded Image elements
-    const frames = new Array(effectiveFrameCount);
-    const inFlightSet = new Set();
-    const coarseSet = new Set();
-
-    // Coarse pass: every 5th effective frame plus the final frame
-    for (let i = 1; i <= effectiveFrameCount; i += 5) {
-        coarseSet.add(i);
-    }
-    coarseSet.add(effectiveFrameCount);
-    const coarseCount = coarseSet.size;
-
-    // Loader threshold calculation (coarse pass + 25% of frames on compact, max on desktop)
-    const threshold = isCompact ? (coarseCount + Math.ceil(effectiveFrameCount * 0.25)) : Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
-
-    // Loader progress hook from script-hook.js.txt
-    function reportLoaderProgress(loaded, thresh, coarseDone) {
-        let p = Math.min(1, loaded / thresh);
-        if (!coarseDone) p = Math.min(p, 0.98); // never hit 100% before the coarse pass is done
-        window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: p } }));
-    }
-
-    let loadedCount = 0;
-    let initialDrawDone = false;
-    let lastDrawnFrame = -1;
-    let scrollDirection = 1; // 1 = forward/down, -1 = backward/up
-    let lastScrollY = window.scrollY;
-
-    // Session Frame Persistence across page transitions (isolated per frame sequence)
-    const storageKey = 'savedFrame_' + config.framePath.replace(/[^a-zA-Z0-9]/g, '_');
-    const savedFrame = sessionStorage.getItem(storageKey);
-    let currFrame = (window.scrollY === 0) ? 1 : (savedFrame ? parseFloat(savedFrame) : 1);
-    if (isNaN(currFrame) || currFrame < 1 || currFrame > effectiveFrameCount) {
-        currFrame = 1;
-    }
-    let targetFrame = currFrame;
-
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem(storageKey, currFrame.toFixed(2));
+    document.querySelectorAll('.text-block').forEach(block => {
+        observer.observe(block);
     });
-
-    // Performance & Debug tracking
-    let lastDrawTime = 0;
-    let timeBetweenDraws = 0;
-    const isDebug = new URLSearchParams(window.location.search).get('debug') === '1';
-
-    if (isDebug) {
-        setInterval(() => {
-            console.log(
-                `Loaded frames: ${loadedCount}/${effectiveFrameCount} | In-flight: ${inFlightSet.size} | Current frame: ${currFrame.toFixed(2)} | Time between draws: ${timeBetweenDraws.toFixed(2)}ms`
-            );
-        }, 1000);
-    }
-
-    // Helper: Find nearest ready frame so canvas is NEVER blank or glitchy
-    function getRenderableFrame(targetIdx) {
-        if (frames[targetIdx] && frames[targetIdx].complete && frames[targetIdx].naturalWidth > 0) {
-            return frames[targetIdx];
-        }
-        // Search backwards (closest loaded earlier frame)
-        for (let i = targetIdx - 1; i >= 0; i--) {
-            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
-                return frames[i];
-            }
-        }
-        // Search forwards if no earlier frame is loaded yet
-        for (let i = targetIdx + 1; i < effectiveFrameCount; i++) {
-            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
-                return frames[i];
-            }
-        }
-        return null;
-    }
-
-    // Dynamic frame picker: coarse pass first, then closest to currFrame preferring scroll direction
-    function getNextFrame() {
-        const c = Math.max(1, Math.min(effectiveFrameCount, Math.round(currFrame)));
-        const dir = scrollDirection;
-
-        function getScore(idx) {
-            const dist = Math.abs(idx - c);
-            const isAhead = (dir >= 0) ? (idx >= c) : (idx <= c);
-            return isAhead ? dist : dist + 1000;
-        }
-
-        // 1. Coarse pass first (every 5th effective frame)
-        if (coarseSet.size > 0) {
-            let bestIdx = null;
-            let bestScore = Infinity;
-
-            for (const idx of coarseSet) {
-                if (frames[idx - 1] || inFlightSet.has(idx)) {
-                    coarseSet.delete(idx);
-                    continue;
-                }
-                const score = getScore(idx);
-                if (score < bestScore) {
-                    bestScore = score;
-                    bestIdx = idx;
-                }
-            }
-
-            if (bestIdx !== null) {
-                coarseSet.delete(bestIdx);
-                inFlightSet.add(bestIdx);
-                return bestIdx;
-            }
-        }
-
-        // 2. Fine pass - dynamically select nearest unassigned frame
-        let bestIdx = null;
-        let bestScore = Infinity;
-
-        for (let idx = 1; idx <= effectiveFrameCount; idx++) {
-            if (!frames[idx - 1] && !inFlightSet.has(idx)) {
-                const score = getScore(idx);
-                if (score < bestScore) {
-                    bestScore = score;
-                    bestIdx = idx;
-                }
-            }
-        }
-
-        if (bestIdx !== null) {
-            inFlightSet.add(bestIdx);
-            return bestIdx;
-        }
-
-        return null;
-    }
-
-    // High performance decoding using Image() and decode()
-    async function loadFrame(index) {
-        const arrayIdx = index - 1;
-        if (frames[arrayIdx]) {
-            inFlightSet.delete(index);
-            return;
-        }
-        inFlightSet.add(index);
-
-        const src = currentFrameSrc(index);
-        const img = new Image();
-        img.src = src;
-
-        try {
-            if ('decode' in img) {
-                await img.decode();
-            } else {
-                await new Promise((resolve, reject) => {
-                    img.onload = resolve;
-                    img.onerror = reject;
-                });
-            }
-            if (img.complete && img.naturalWidth > 0) {
-                frames[arrayIdx] = img;
-                loadedCount++;
-                reportLoaderProgress(loadedCount, threshold, coarseSet.size === 0);
-                if (!initialDrawDone) {
-                    initialDrawDone = true;
-                    resizeCanvas();
-                    forceRedraw();
-                }
-            }
-        } catch (err) {
-            console.warn(`Failed loading frame ${index}:`, err);
-        } finally {
-            inFlightSet.delete(index);
-        }
-    }
-
-    // Worker pool queue: exactly 6 downloads/decodes in flight at all times
-    async function preloadFrames() {
-        if (isStaticFallback) {
-            await loadFrame(1);
-            window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: 1 } }));
-            return;
-        }
-
-        // Step 1: Immediately load target initial frame (and frame 1)
-        const firstFrame = Math.max(1, Math.min(effectiveFrameCount, Math.round(targetFrame)));
-        coarseSet.delete(firstFrame);
-        await loadFrame(firstFrame);
-        if (firstFrame !== 1 && !frames[0]) {
-            coarseSet.delete(1);
-            await loadFrame(1);
-        }
-
-        // Step 2: Maintain 6 workers picking dynamically
-        const WORKER_COUNT = 6;
-        async function worker() {
-            while (loadedCount < effectiveFrameCount) {
-                const nextIdx = getNextFrame();
-                if (!nextIdx) {
-                    if (loadedCount >= effectiveFrameCount || inFlightSet.size === 0) break;
-                    await new Promise(r => setTimeout(r, 20));
-                    continue;
-                }
-                await loadFrame(nextIdx);
-            }
-        }
-
-        for (let i = 0; i < WORKER_COUNT; i++) {
-            worker();
-        }
-    }
-
-    // High-DPI Canvas Resizing capped at 1.25 dpr when isCompact, 1.5 otherwise
-    function resizeCanvas() {
-        const maxDpr = isCompact ? 1.25 : 1.5;
-        const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
-        const w = Math.round(window.innerWidth * dpr);
-        const h = Math.round(window.innerHeight * dpr);
-        if (canvas.width !== w || canvas.height !== h) {
-            canvas.width = w;
-            canvas.height = h;
-            lastDrawnFrame = -1; // Trigger redraw
-        }
-    }
-    window.addEventListener('resize', resizeCanvas, { passive: true });
-
-    // Scroll mapping
-    function updateScrollTarget() {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY) {
-            scrollDirection = 1;
-        } else if (currentScrollY < lastScrollY) {
-            scrollDirection = -1;
-        }
-        lastScrollY = currentScrollY;
-
-        const html = document.documentElement;
-        const maxScroll = Math.max(1, html.scrollHeight - window.innerHeight);
-        const scrollFraction = Math.min(1, Math.max(0, currentScrollY / maxScroll));
-        targetFrame = 1 + scrollFraction * (effectiveFrameCount - 1);
-
-        // Navigation bar transition
-        const navContainer = document.getElementById('main-nav');
-        if (navContainer) {
-            if (window.scrollY > window.innerHeight * 0.4) {
-                navContainer.classList.add('nav-fixed-top');
-            } else {
-                navContainer.classList.remove('nav-fixed-top');
-            }
-        }
-
-        updateHeaderDiminish();
-    }
 
     // Make the banner visually invisible while keeping its exact working functionality
     function updateHeaderDiminish() {
@@ -386,9 +97,262 @@
         });
     }
 
-    window.addEventListener('scroll', updateScrollTarget, { passive: true });
-    window.addEventListener('scroll', updateHeaderDiminish, { passive: true });
+    // Scroll target mapping for floating nav
+    function updateScrollTargetCommon() {
+        const navContainer = document.getElementById('main-nav');
+        if (navContainer) {
+            if (window.scrollY > window.innerHeight * 0.4) {
+                navContainer.classList.add('nav-fixed-top');
+            } else {
+                navContainer.classList.remove('nav-fixed-top');
+            }
+        }
+        updateHeaderDiminish();
+    }
+
+    window.addEventListener('scroll', updateScrollTargetCommon, { passive: true });
     window.addEventListener('resize', updateHeaderDiminish, { passive: true });
+    updateScrollTargetCommon();
+
+    // If is-compact: do nothing further for frames (no canvas, no requests, no workers)
+    if (isCompact) {
+        return;
+    }
+
+    // --- DESKTOP ANIMATION ENGINE (Unchanged) ---
+    const canvas = document.getElementById('animation-canvas');
+    if (!canvas) return;
+    const context = canvas.getContext('2d', { alpha: false });
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = 'medium';
+
+    const frameBase = (document.querySelector('meta[name="frame-base"]') || {}).content || '';
+    const setName = 'frames/desktop-1920/';
+    const rawFrameCount = 298;
+    const FRAME_STRIDE = 2;
+
+    const effectiveFrames = [];
+    for (let i = 1; i <= rawFrameCount; i += FRAME_STRIDE) {
+        effectiveFrames.push(i);
+    }
+    const effectiveFrameCount = effectiveFrames.length;
+
+    const config = Object.assign(
+        {
+            frameCount: effectiveFrameCount,
+            framePath: frameBase + setName,
+            extension: 'avif'
+        },
+        window.ANIMATION_CONFIG || {}
+    );
+
+    const currentFrameSrc = (effectiveIdx) => {
+        const rawIdx = effectiveFrames[effectiveIdx - 1];
+        return `${config.framePath}frame_${String(rawIdx).padStart(4, '0')}.${config.extension}`;
+    };
+
+    const frames = new Array(effectiveFrameCount);
+    const inFlightSet = new Set();
+    const coarseSet = new Set();
+
+    for (let i = 1; i <= effectiveFrameCount; i += 5) {
+        coarseSet.add(i);
+    }
+    coarseSet.add(effectiveFrameCount);
+    const coarseCount = coarseSet.size;
+
+    const threshold = Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
+
+    function reportLoaderProgress(loaded, thresh, coarseDone) {
+        let p = Math.min(1, loaded / thresh);
+        if (!coarseDone) p = Math.min(p, 0.98);
+        window.dispatchEvent(new CustomEvent('xb:frames', { detail: { progress: p } }));
+    }
+
+    let loadedCount = 0;
+    let initialDrawDone = false;
+    let lastDrawnFrame = -1;
+    let scrollDirection = 1;
+    let lastScrollY = window.scrollY;
+
+    const storageKey = 'savedFrame_' + config.framePath.replace(/[^a-zA-Z0-9]/g, '_');
+    const savedFrame = sessionStorage.getItem(storageKey);
+    let currFrame = (window.scrollY === 0) ? 1 : (savedFrame ? parseFloat(savedFrame) : 1);
+    if (isNaN(currFrame) || currFrame < 1 || currFrame > effectiveFrameCount) {
+        currFrame = 1;
+    }
+    let targetFrame = currFrame;
+
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem(storageKey, currFrame.toFixed(2));
+    });
+
+    let lastDrawTime = 0;
+    let timeBetweenDraws = 0;
+
+    function getRenderableFrame(targetIdx) {
+        if (frames[targetIdx] && frames[targetIdx].complete && frames[targetIdx].naturalWidth > 0) {
+            return frames[targetIdx];
+        }
+        for (let i = targetIdx - 1; i >= 0; i--) {
+            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+                return frames[i];
+            }
+        }
+        for (let i = targetIdx + 1; i < effectiveFrameCount; i++) {
+            if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+                return frames[i];
+            }
+        }
+        return null;
+    }
+
+    function getNextFrame() {
+        const c = Math.max(1, Math.min(effectiveFrameCount, Math.round(currFrame)));
+        const dir = scrollDirection;
+
+        function getScore(idx) {
+            const dist = Math.abs(idx - c);
+            const isAhead = (dir >= 0) ? (idx >= c) : (idx <= c);
+            return isAhead ? dist : dist + 1000;
+        }
+
+        if (coarseSet.size > 0) {
+            let bestIdx = null;
+            let bestScore = Infinity;
+
+            for (const idx of coarseSet) {
+                if (frames[idx - 1] || inFlightSet.has(idx)) {
+                    coarseSet.delete(idx);
+                    continue;
+                }
+                const score = getScore(idx);
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestIdx = idx;
+                }
+            }
+
+            if (bestIdx !== null) {
+                coarseSet.delete(bestIdx);
+                inFlightSet.add(bestIdx);
+                return bestIdx;
+            }
+        }
+
+        let bestIdx = null;
+        let bestScore = Infinity;
+
+        for (let idx = 1; idx <= effectiveFrameCount; idx++) {
+            if (!frames[idx - 1] && !inFlightSet.has(idx)) {
+                const score = getScore(idx);
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestIdx = idx;
+                }
+            }
+        }
+
+        if (bestIdx !== null) {
+            inFlightSet.add(bestIdx);
+            return bestIdx;
+        }
+
+        return null;
+    }
+
+    async function loadFrame(index) {
+        const arrayIdx = index - 1;
+        if (frames[arrayIdx]) {
+            inFlightSet.delete(index);
+            return;
+        }
+        inFlightSet.add(index);
+
+        const src = currentFrameSrc(index);
+        const img = new Image();
+        img.src = src;
+
+        try {
+            if ('decode' in img) {
+                await img.decode();
+            } else {
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            }
+            if (img.complete && img.naturalWidth > 0) {
+                frames[arrayIdx] = img;
+                loadedCount++;
+                reportLoaderProgress(loadedCount, threshold, coarseSet.size === 0);
+                if (!initialDrawDone) {
+                    initialDrawDone = true;
+                    resizeCanvas();
+                    forceRedraw();
+                }
+            }
+        } catch (err) {
+            console.warn(`Failed loading frame ${index}:`, err);
+        } finally {
+            inFlightSet.delete(index);
+        }
+    }
+
+    async function preloadFrames() {
+        const firstFrame = Math.max(1, Math.min(effectiveFrameCount, Math.round(targetFrame)));
+        coarseSet.delete(firstFrame);
+        await loadFrame(firstFrame);
+        if (firstFrame !== 1 && !frames[0]) {
+            coarseSet.delete(1);
+            await loadFrame(1);
+        }
+
+        const WORKER_COUNT = 6;
+        async function worker() {
+            while (loadedCount < effectiveFrameCount) {
+                const nextIdx = getNextFrame();
+                if (!nextIdx) {
+                    if (loadedCount >= effectiveFrameCount || inFlightSet.size === 0) break;
+                    await new Promise(r => setTimeout(r, 20));
+                    continue;
+                }
+                await loadFrame(nextIdx);
+            }
+        }
+
+        for (let i = 0; i < WORKER_COUNT; i++) {
+            worker();
+        }
+    }
+
+    function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        const w = Math.round(window.innerWidth * dpr);
+        const h = Math.round(window.innerHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+            canvas.width = w;
+            canvas.height = h;
+            lastDrawnFrame = -1;
+        }
+    }
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    function updateDesktopScrollTarget() {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY) {
+            scrollDirection = 1;
+        } else if (currentScrollY < lastScrollY) {
+            scrollDirection = -1;
+        }
+        lastScrollY = currentScrollY;
+
+        const html = document.documentElement;
+        const maxScroll = Math.max(1, html.scrollHeight - window.innerHeight);
+        const scrollFraction = Math.min(1, Math.max(0, currentScrollY / maxScroll));
+        targetFrame = 1 + scrollFraction * (effectiveFrameCount - 1);
+    }
+    window.addEventListener('scroll', updateDesktopScrollTarget, { passive: true });
 
     function recordDraw() {
         const now = performance.now();
@@ -398,7 +362,6 @@
         lastDrawTime = now;
     }
 
-    // Direct cover draw - NO clearRect to completely prevent white/black flashes
     function drawImageCover(img) {
         if (!img || !img.complete || img.naturalWidth <= 0) return;
         const cw = canvas.width;
@@ -426,12 +389,10 @@
         }
     }
 
-    // Main 60/120fps Animation Loop with Easing and Frame Deduplication
     function render() {
         const diff = targetFrame - currFrame;
         if (Math.abs(diff) > 0.001) {
             currFrame += diff * 0.13;
-            updateHeaderDiminish();
         } else {
             currFrame = targetFrame;
         }
@@ -450,35 +411,8 @@
         requestAnimationFrame(render);
     }
 
-    // Setup intersection observer for text animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '120px 0px 0px 0px',
-        threshold: 0.05
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            } else {
-                if (entry.target.closest('#about') && window.scrollY > (document.documentElement.scrollHeight - window.innerHeight - 350)) {
-                    return;
-                }
-                if (entry.boundingClientRect.top > 0) {
-                    entry.target.classList.remove('visible');
-                }
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.text-block').forEach(block => {
-        observer.observe(block);
-    });
-
-    // Initialize
     resizeCanvas();
-    updateScrollTarget();
+    updateDesktopScrollTarget();
     preloadFrames();
     requestAnimationFrame(render);
 })();

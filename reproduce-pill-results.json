@@ -1,0 +1,2927 @@
+[
+  {
+    "resolution": "1280x720",
+    "scrollY": 0,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 20,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 40,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 60,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 80,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 100,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 150,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 200,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 300,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 400,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 600,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 800,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1280x720",
+    "scrollY": 1600,
+    "navTop": "628.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 387,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 487,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 602,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 717,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 811,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 894,
+        "cy": 659,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1096,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 0,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 20,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 40,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 60,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 80,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 100,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 150,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 200,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 300,
+    "navTop": "808.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 831,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 400,
+    "navTop": "50.9341px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 73,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 600,
+    "navTop": "38px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 800,
+    "navTop": "38px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1440x900",
+    "scrollY": 1600,
+    "navTop": "38px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 458,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 562,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 681,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 800,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 897,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 983,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1256,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 0,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 20,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 40,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 60,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 80,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 100,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 150,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 200,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 300,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 400,
+    "navTop": "988.8px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 1011,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 600,
+    "navTop": "75.0264px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 97,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 800,
+    "navTop": "38px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  },
+  {
+    "resolution": "1920x1080",
+    "scrollY": 1600,
+    "navTop": "38px",
+    "navZ": "1200",
+    "navPointerEvents": "auto",
+    "headerZ": "1100",
+    "headerPointerEvents": "none",
+    "heroPointerEvents": "auto",
+    "itemResults": [
+      {
+        "text": "Home",
+        "cx": 698,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "active",
+        "isHit": true
+      },
+      {
+        "text": "Services\n+",
+        "cx": 802,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Programmes",
+        "cx": 921,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Workshops",
+        "cx": 1040,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "About",
+        "cx": 1137,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      },
+      {
+        "text": "Contact",
+        "cx": 1223,
+        "cy": 60,
+        "hitTag": "A",
+        "hitId": "",
+        "hitClass": "",
+        "isHit": true
+      }
+    ],
+    "ctaResult": {
+      "text": "Start a conversation",
+      "cx": 1736,
+      "cy": 42,
+      "hitTag": "A",
+      "hitId": "",
+      "hitClass": "btn btn-light header-cta",
+      "isHit": true
+    }
+  }
+]

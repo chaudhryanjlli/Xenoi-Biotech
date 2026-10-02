@@ -140,7 +140,8 @@ body::before {
 }
 
 /* Header Banner - Visually invisible banner container with active working boundary */
-.header {
+.header,
+.site-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -149,25 +150,33 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 110;
+    z-index: 1100;
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
     box-sizing: border-box;
-    pointer-events: none;
+    pointer-events: none !important;
 }
 
-.header > * {
-    pointer-events: auto;
-}
-
-.header-inner {
+.header-inner,
+.header-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    pointer-events: none !important;
+}
+
+.header .logo,
+.header .header-actions,
+.header .header-actions *,
+.header .mobile-menu-btn,
+.header .header-cta,
+.header .top-nav a,
+.header .nav-links a {
+    pointer-events: auto !important;
 }
 
 .header .top-nav {
@@ -421,8 +430,9 @@ body::before {
     top: calc(100vh - 6rem);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
+    z-index: 1200;
     transition: top 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
 }
 
 .floating-nav-container.nav-fixed-top {
@@ -1742,6 +1752,39 @@ html.xb-loading,html.xb-loading body{overflow:hidden}
     align-items: center;
     justify-content: center;
     text-decoration: none;
+}
+
+/* ===== Still Image & Performance Optimization for Compact Devices (Phones & Tablets) ===== */
+html.is-compact body {
+    background-color: #020b0d;
+}
+
+html.is-compact #animation-canvas,
+html.is-compact .hero-vignette,
+html.is-compact .content::before {
+    display: none !important;
+}
+
+html.is-compact #xb-loader {
+    display: none !important;
+}
+
+html.is-compact body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%), url('bg/home-phone.webp');
+    pointer-events: none;
+}
+
+@media (orientation: landscape) {
+    html.is-compact body::before {
+        background-image: linear-gradient(180deg, rgba(3, 10, 12, 0.72) 0%, rgba(3, 10, 12, 0.88) 100%), url('bg/home-tablet.webp');
+    }
 }
 
 

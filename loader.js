@@ -5,7 +5,7 @@
 (function () {
   var root = document.getElementById('xb-loader');
   var h = document.documentElement;
-  if (!root || h.classList.contains('xb-skip')) { if (root) root.remove(); return; }
+  if (!root || h.classList.contains('xb-skip') || h.classList.contains('is-compact')) { if (root) root.remove(); return; }
 
   var canvas = document.getElementById('xb-spiral');
   var wordmark = document.getElementById('xb-wordmark');
