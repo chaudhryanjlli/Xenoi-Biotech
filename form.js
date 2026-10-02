@@ -18,6 +18,14 @@ function initServiceParam() {
     }
 }
 
+function sanitizeText(str) {
+    if (!str || typeof str !== 'string') return '';
+    return str
+        .replace(/[\r\n\t]+/g, ' ')
+        .replace(/[<>]/g, '')
+        .trim();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initServiceParam();
 
@@ -26,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
 
     if (!form) return;
+
+    let isSubmitting = false;
 
     function showStatus(type, message, isHtmlFallback = false) {
         if (!statusMsg) return;
@@ -50,7 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // 1. Honeypot check: Ignore submission if honeypot is filled
+        // 1. Double-submit prevention
+        if (isSubmitting) return;
+
+        // 2. Honeypot check: silently stop if honeypot is filled
         const botcheck = form.querySelector('input[name="botcheck"]');
         if (botcheck) {
             if (botcheck.type === 'checkbox' && botcheck.checked) {
@@ -61,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 2. HTML5 Validation check
+        // 3. HTML5 Validation check
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
@@ -70,12 +83,58 @@ document.addEventListener('DOMContentLoaded', () => {
         const accessKeyInput = form.querySelector('input[name="access_key"]');
         const accessKey = accessKeyInput ? accessKeyInput.value.trim() : '';
 
-        // 3. If placeholder access key is detected, display fallback message
-        if (!accessKey || accessKey === 'PASTE_YOUR_ACCESS_KEY') {
+        // If no access key is present, display fallback message
+        if (!accessKey) {
             showStatus('error', '', true);
             return;
         }
 
+        const nameInput = form.querySelector('input[name="name"]');
+        const emailInput = form.querySelector('input[name="email"]');
+        const orgInput = form.querySelector('input[name="organization"]');
+        const serviceInput = form.querySelector('select[name="service"]');
+        const detailsInput = form.querySelector('textarea[name="message"]');
+        const consentInput = form.querySelector('input[name="consent"]');
+
+        const rawName = nameInput ? nameInput.value : '';
+        const rawEmail = emailInput ? emailInput.value : '';
+        const rawOrg = orgInput ? orgInput.value : '';
+        const selectedServiceText = serviceInput && serviceInput.selectedIndex >= 0 ? serviceInput.options[serviceInput.selectedIndex].text : '';
+        const rawDetails = detailsInput ? detailsInput.value : '';
+        const isConsent = consentInput ? consentInput.checked : false;
+
+        const cleanEmail = sanitizeText(rawEmail);
+        let cleanName = sanitizeText(rawName);
+
+        // If name is empty, fallback to part of email before @
+        if (!cleanName && cleanEmail.includes('@')) {
+            cleanName = sanitizeText(cleanEmail.split('@')[0]);
+        }
+        if (!cleanName) {
+            cleanName = 'Visitor';
+        }
+
+        // from_name = "<Name>" only (trim, strip line breaks & angle brackets, max 25 chars)
+        const fromName = cleanName.slice(0, 25).trim();
+
+        // subject = "<Email> - New enquiry from <Name>" (email FIRST, max ~110 chars)
+        const rawSubject = `${cleanEmail} - New enquiry from ${fromName}`;
+        const subject = rawSubject.slice(0, 110).trim();
+
+        const payload = {
+            access_key: accessKey,
+            from_name: fromName,
+            subject: subject,
+            email: cleanEmail,
+            name: rawName.trim(),
+            organization: rawOrg.trim(),
+            service: selectedServiceText || (serviceInput ? serviceInput.value : ''),
+            message: rawDetails.trim(),
+            consent: isConsent ? 'I agree to the Privacy Policy' : 'No',
+            botcheck: botcheck && botcheck.checked ? true : false
+        };
+
+        isSubmitting = true;
         const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Submit Inquiry';
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -84,20 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showStatus('info', 'Sending your inquiry...');
 
-        const formData = new FormData(form);
-
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: formData
+                body: JSON.stringify(payload)
             });
 
             const result = await response.json();
 
-            if (response.status === 200 && result.success) {
+            if (response.status === 200 && result.success === true) {
                 showStatus('success', 'Thank you! Your enquiry has been submitted. We will reply to your enquiry by email.');
                 form.reset();
             } else {
@@ -106,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             showStatus('error', '', true);
         } finally {
+            isSubmitting = false;
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHtml;
