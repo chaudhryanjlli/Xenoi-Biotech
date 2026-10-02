@@ -5,8 +5,7 @@
   var isCompact = false;
   try {
     isCompact = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
-                Math.min(screen.width, screen.height) < 600 ||
-                (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+                Math.min(screen.width, screen.height) < 600;
   } catch (e) {}
 
   if (isCompact) {
