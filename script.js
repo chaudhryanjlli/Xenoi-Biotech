@@ -125,7 +125,7 @@
     context.imageSmoothingQuality = 'medium';
 
     const frameBase = (document.querySelector('meta[name="frame-base"]') || {}).content || '';
-    const setName = 'frames/desktop-1920/';
+    const setName = 'frames/desktop-1920-v2/';
     const rawFrameCount = 298;
     const FRAME_STRIDE = 2;
 
