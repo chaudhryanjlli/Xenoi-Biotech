@@ -1,5 +1,5 @@
-/* loader-init.js: tiny synchronous script, loaded in <head> of index.html (NO defer).
-   Decides before first paint whether the loader shows. */
+/* compact-init.js: synchronous detection script in <head> of secondary pages.
+   Adds .is-compact before first paint on touch devices and iPads. */
 (function () {
   var h = document.documentElement;
   var isCompact = false;
@@ -11,12 +11,5 @@
 
   if (isCompact) {
     h.classList.add('is-compact');
-    h.classList.add('xb-skip');
-    return;
   }
-
-  try {
-    if (sessionStorage.getItem('xb-loaded') === '1') { h.classList.add('xb-skip'); return; }
-  } catch (e) {}
-  h.classList.add('xb-loading');
 })();
