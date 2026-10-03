@@ -37,8 +37,8 @@
     <script src="loader-init.js"></script>
     <noscript><style>#xb-loader{display:none!important}</style></noscript>
     <link rel="preload" as="image" href="bg/home-phone.webp" media="(orientation: portrait)">
-    <link rel="preload" as="image" href="bg/home-tablet.webp" media="(orientation: landscape)">
-    <link rel="preload" as="image" href="xenoi-logo-hq.png">
+    <link rel="preload" as="image" href="bg/home-tablet.webp" media="(orientation: landscape) and (pointer: coarse)">
+    <link rel="preload" as="image" href="xenoi-logo.webp">
 
     <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="style.css">
@@ -79,7 +79,7 @@
 <body>
     <div id="xb-loader" role="status" aria-live="polite">
       <div class="xb-loader-content">
-        <img class="xb-loader-logo" src="xenoi-logo-hq.png" alt="Xenoi Biotech" width="257" height="112" decoding="sync">
+        <img class="xb-loader-logo" src="xenoi-logo.webp" alt="Xenoi Biotech" width="257" height="112" decoding="sync">
         <div class="xb-loader-bar-track">
           <div class="xb-loader-bar-fill" id="xb-bar-fill"></div>
         </div>
@@ -92,7 +92,7 @@
     <header class="header" id="site-header">
         <div class="header-inner">
             <a href="index.html" class="logo header-logo" style="text-decoration: none; color: inherit;">
-                <img src="xenoi-logo.png" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img">
+                <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="161" height="70">
             </a>
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
@@ -318,7 +318,7 @@
             <div class="footer-grid">
                 <div class="footer-col-brand">
                     <a href="index.html" class="footer-logo">
-                        <img src="xenoi-logo.png" alt="Xenoi Biotech - Logo" class="footer-logo-img">
+                        <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
                     </a>
                     <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
                     <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
