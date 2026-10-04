@@ -14,7 +14,7 @@
   var barFill = document.getElementById('xb-bar-fill');
   var textEl = document.getElementById('xb-loader-text');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MAX_WAIT_MS = 20000;
+  var MAX_WAIT_MS = 10000;
   var MIN_SHOW_MS = 700;
   var startTime = performance.now();
 

@@ -42,17 +42,19 @@
 
         // 1. Page 1 Hero scroll indicator: gently fades out as user begins scrolling
         const heroBottom = document.querySelector('.hero-bottom');
+        let heroOpacity = null;
+        let heroPointerEvents = null;
         if (heroBottom) {
             const scrollY = window.scrollY;
             if (scrollY <= 0) {
-                heroBottom.style.opacity = '1';
-                heroBottom.style.pointerEvents = '';
+                heroOpacity = '1';
+                heroPointerEvents = '';
             } else if (scrollY >= 100) {
-                heroBottom.style.opacity = '0';
-                heroBottom.style.pointerEvents = 'none';
+                heroOpacity = '0';
+                heroPointerEvents = 'none';
             } else {
-                heroBottom.style.opacity = (1 - (scrollY / 100)).toFixed(3);
-                heroBottom.style.pointerEvents = '';
+                heroOpacity = (1 - (scrollY / 100)).toFixed(3);
+                heroPointerEvents = '';
             }
         }
 
@@ -71,8 +73,21 @@
         ].join(', ');
 
         const items = document.querySelectorAll(selector);
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
+        // READ PHASE: gather all measurements first to avoid layout thrashing
+        const rects = new Array(items.length);
+        for (let i = 0; i < items.length; i++) {
+            rects[i] = items[i].getBoundingClientRect();
+        }
+
+        // WRITE PHASE: update styles after all reads have completed
+        if (heroBottom && heroOpacity !== null) {
+            heroBottom.style.opacity = heroOpacity;
+            heroBottom.style.pointerEvents = heroPointerEvents;
+        }
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const rect = rects[i];
 
             if (rect.top >= bannerBottom) {
                 item.style.removeProperty('opacity');
@@ -92,7 +107,7 @@
                 item.style.transition = 'none';
                 item.classList.remove('banner-diminished');
             }
-        });
+        }
     }
 
     // Scroll target mapping for floating nav
@@ -108,8 +123,17 @@
         updateHeaderDiminish();
     }
 
-    window.addEventListener('scroll', updateScrollTargetCommon, { passive: true });
-    window.addEventListener('resize', updateHeaderDiminish, { passive: true });
+    let headerDiminishRaf = null;
+    function requestHeaderDiminishUpdate() {
+        if (headerDiminishRaf !== null) return;
+        headerDiminishRaf = requestAnimationFrame(() => {
+            headerDiminishRaf = null;
+            updateScrollTargetCommon();
+        });
+    }
+
+    window.addEventListener('scroll', requestHeaderDiminishUpdate, { passive: true });
+    window.addEventListener('resize', requestHeaderDiminishUpdate, { passive: true });
     updateScrollTargetCommon();
 
     // If is-compact: do nothing further for frames (no canvas, no requests, no workers)
@@ -152,12 +176,56 @@
     const frames = new Array(effectiveFrameCount);
     const inFlightSet = new Set();
     const coarseSet = new Set();
+    const isCoarseFrame = (idx) => (idx - 1) % 5 === 0 || idx === effectiveFrameCount;
 
     for (let i = 1; i <= effectiveFrameCount; i += 5) {
         coarseSet.add(i);
     }
     coarseSet.add(effectiveFrameCount);
     const coarseCount = coarseSet.size;
+
+    let consecutiveFailures = 0;
+    let fallbackTriggered = false;
+
+    function fallbackToCompact() {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+        document.documentElement.classList.add('is-compact');
+        window.dispatchEvent(new CustomEvent('xb:frames', {
+            detail: {
+                progress: 1,
+                ready: true,
+                loaded: effectiveFrameCount,
+                total: effectiveFrameCount
+            }
+        }));
+    }
+
+    function manageMemory(center) {
+        const minWin = center - 40;
+        const maxWin = center + 40;
+
+        for (let i = 1; i <= effectiveFrameCount; i++) {
+            if ((i < minWin || i > maxWin) && !isCoarseFrame(i) && frames[i - 1]) {
+                frames[i - 1] = null;
+            }
+        }
+
+        const needed = [];
+        const start = Math.max(1, minWin);
+        const end = Math.min(effectiveFrameCount, maxWin);
+        for (let i = start; i <= end; i++) {
+            if (!frames[i - 1] && !inFlightSet.has(i)) {
+                needed.push(i);
+            }
+        }
+        needed.sort((a, b) => Math.abs(a - center) - Math.abs(b - center));
+
+        for (let j = 0; j < needed.length; j++) {
+            if (inFlightSet.size >= 6) break;
+            loadFrame(needed[j]);
+        }
+    }
 
     const threshold = Math.max(coarseCount, Math.ceil(effectiveFrameCount * 0.25));
 
@@ -262,7 +330,7 @@
         let bestScore = Infinity;
 
         for (let idx = 1; idx <= effectiveFrameCount; idx++) {
-            if (!frames[idx - 1] && !inFlightSet.has(idx)) {
+            if (!frames[idx - 1] && !inFlightSet.has(idx) && Math.abs(idx - c) <= 40) {
                 const score = getScore(idx);
                 if (score < bestScore) {
                     bestScore = score;
@@ -279,7 +347,9 @@
         return null;
     }
 
+    const loadedOnceSet = new Set();
     async function loadFrame(index) {
+        if (fallbackTriggered) return;
         const arrayIdx = index - 1;
         if (frames[arrayIdx]) {
             inFlightSet.delete(index);
@@ -302,8 +372,12 @@
             }
             if (img.complete && img.naturalWidth > 0) {
                 frames[arrayIdx] = img;
-                loadedCount++;
-                reportLoaderProgress();
+                consecutiveFailures = 0;
+                if (!loadedOnceSet.has(index)) {
+                    loadedOnceSet.add(index);
+                    loadedCount++;
+                    reportLoaderProgress();
+                }
                 if (!initialDrawDone) {
                     initialDrawDone = true;
                     resizeCanvas();
@@ -312,6 +386,10 @@
             }
         } catch (err) {
             console.warn(`Failed loading frame ${index}:`, err);
+            consecutiveFailures++;
+            if (consecutiveFailures >= 3 && loadedCount === 0) {
+                fallbackToCompact();
+            }
         } finally {
             inFlightSet.delete(index);
         }
@@ -321,6 +399,7 @@
         const firstFrame = Math.max(1, Math.min(effectiveFrameCount, Math.round(targetFrame)));
         coarseSet.delete(firstFrame);
         await loadFrame(firstFrame);
+        if (fallbackTriggered) return;
         if (firstFrame !== 1 && !frames[0]) {
             coarseSet.delete(1);
             await loadFrame(1);
@@ -328,7 +407,7 @@
 
         const WORKER_COUNT = 6;
         async function worker() {
-            while (loadedCount < effectiveFrameCount) {
+            while (loadedCount < effectiveFrameCount && !fallbackTriggered) {
                 const nextIdx = getNextFrame();
                 if (!nextIdx) {
                     if (loadedCount >= effectiveFrameCount || inFlightSet.size === 0) break;
@@ -408,6 +487,7 @@
     }
 
     function render() {
+        if (fallbackTriggered) return;
         const diff = targetFrame - currFrame;
         if (Math.abs(diff) > 0.001) {
             currFrame += diff * 0.13;
@@ -424,6 +504,7 @@
                 recordDraw();
                 lastDrawnFrame = frameIdx;
             }
+            manageMemory(frameIdx + 1);
         }
 
         requestAnimationFrame(render);
