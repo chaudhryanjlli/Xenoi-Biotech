@@ -2459,3 +2459,401 @@ html.is-compact body:not(.inner) .phone-dock-label {
         max-width: calc(100% - 28px) !important;
     }
 }
+
+
+/* ==========================================================================
+   Workshops Hub & Individual Workshop Pages Styles
+   ========================================================================== */
+
+/* 1. Category Filter Tabs */
+.workshop-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 32px 0 40px;
+    align-items: center;
+}
+
+.filter-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 18px;
+    background: rgba(8, 48, 40, 0.4);
+    color: rgba(244, 253, 251, 0.8);
+    border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18));
+    border-radius: 9999px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.filter-tab .tab-count {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    background: rgba(50, 229, 166, 0.12);
+    color: var(--accent-color, #32e5a6);
+    line-height: 1.2;
+}
+
+.filter-tab:hover,
+.filter-tab:focus-visible {
+    border-color: var(--accent-color, #32e5a6);
+    color: #ffffff;
+    outline: none;
+    background: rgba(8, 48, 40, 0.6);
+}
+
+.filter-tab.active,
+.filter-tab[aria-pressed="true"] {
+    background: var(--accent-color, #32e5a6);
+    color: #03100e;
+    border-color: var(--accent-color, #32e5a6);
+    font-weight: 600;
+    box-shadow: 0 0 16px rgba(50, 229, 166, 0.35);
+}
+
+.filter-tab.active .tab-count,
+.filter-tab[aria-pressed="true"] .tab-count {
+    background: rgba(3, 16, 14, 0.25);
+    color: #03100e;
+    font-weight: 600;
+}
+
+/* 2. Workshop Cards Grid */
+.workshop-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 1024px) {
+    .workshop-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .workshop-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+.workshop-hub-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(8, 48, 40, 0.28);
+    border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18));
+    border-radius: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.workshop-hub-card:hover,
+.workshop-hub-card:focus-within {
+    border-color: var(--accent-color, #32e5a6);
+    box-shadow: 0 8px 24px rgba(50, 229, 166, 0.18);
+    transform: translateY(-2px);
+}
+
+.workshop-card-link {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 24px;
+    text-decoration: none !important;
+    color: inherit !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.workshop-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.workshop-duration-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: rgba(244, 253, 251, 0.65);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.workshop-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    color: var(--text-color, #f4fdfb);
+}
+
+.workshop-card-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(244, 253, 251, 0.75);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.workshop-card-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.view-modules-link {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-color, #32e5a6);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.workshop-hub-card:hover .view-modules-link {
+    color: var(--accent-highlight, #b0fcdb);
+}
+
+/* 3. Individual Workshop Page - Modules Curriculum */
+.workshop-curriculum {
+    margin: 40px 0;
+}
+
+.workshop-curriculum .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-color, #f4fdfb);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.workshop-modules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.workshop-module-item {
+    background: rgba(8, 48, 40, 0.25);
+    border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18));
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.workshop-module-item[open] {
+    border-color: rgba(50, 229, 166, 0.35);
+    background: rgba(8, 48, 40, 0.38);
+}
+
+.workshop-module-summary {
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    list-style: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.workshop-module-summary::-webkit-details-marker,
+.workshop-module-summary::marker {
+    display: none;
+    content: "";
+}
+
+.workshop-module-summary:hover,
+.workshop-module-summary:focus-visible {
+    background: rgba(50, 229, 166, 0.05);
+    outline: none;
+}
+
+.module-summary-left {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.module-number {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-color, #32e5a6);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.module-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color, #f4fdfb);
+    line-height: 1.4;
+}
+
+.module-summary-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.module-week-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: rgba(244, 253, 251, 0.65);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.module-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color, #32e5a6);
+    transition: transform 0.2s ease;
+}
+
+.workshop-module-item[open] .module-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* 4. Topic List Grid (2-column laptop/desktop, 1-column phone/tablet) */
+.module-topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 4px;
+    padding-top: 18px;
+}
+
+@media (max-width: 768px) {
+    .module-topics-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 16px 20px;
+    }
+
+    .workshop-module-summary {
+        padding: 16px 16px;
+        gap: 10px;
+    }
+}
+
+.topic-item {
+    background: rgba(3, 16, 14, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+.topic-name {
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--accent-highlight, #b0fcdb);
+    line-height: 1.4;
+}
+
+.topic-desc {
+    font-size: 0.88rem;
+    color: rgba(244, 253, 251, 0.75);
+    line-height: 1.5;
+}
+
+/* 5. Company Location Statement */
+.company-statement {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(244, 253, 251, 0.85);
+    margin: 36px 0 40px;
+    padding: 16px 20px;
+    background: rgba(8, 48, 40, 0.25);
+    border-left: 3px solid var(--accent-color, #32e5a6);
+    border-radius: 0 8px 8px 0;
+}
+
+/* 6. Fees, Dates and Batches Closing Section */
+.workshop-enquiry-section {
+    background: rgba(8, 48, 40, 0.35);
+    border: 1px solid var(--border-color, rgba(50, 229, 166, 0.22));
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 40px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.workshop-enquiry-section .section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color, #f4fdfb);
+}
+
+.workshop-enquiry-section .enquiry-note {
+    font-size: 1rem;
+    color: rgba(244, 253, 251, 0.8);
+    margin: 0;
+}
+
+.workshop-enquiry-section .btn {
+    margin-top: 8px;
+}
+
+/* 7. Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .filter-tab,
+    .workshop-hub-card,
+    .module-toggle-icon,
+    .workshop-module-item {
+        transition: none !important;
+        transform: none !important;
+    }
+}

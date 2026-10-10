@@ -76,7 +76,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="career-navigator.html">Programmes</a></li>
+                    <li><a href="internships.html">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
                     <li><a href="team.html">About</a></li>
                     <li><a href="quote.html" class="active" aria-current="page">Contact</a></li>
@@ -174,18 +174,45 @@
                         <label for="service">Service Type</label>
                         <select id="service" name="service" class="form-control" required>
                             <option value="" disabled selected>Select an option...</option>
-                            <option value="wgs">Whole-Genome Sequencing (WGS)</option>
-                            <option value="wes">Whole-Exome Sequencing (WES)</option>
-                            <option value="rna">Transcriptomics (RNA-Seq)</option>
-                            <option value="meta">Metagenomics</option>
-                            <option value="epi">Epigenomics</option>
-                            <option value="pipeline">Custom Pipeline Development</option>
-                            <option value="consulting">Bioinformatics Consulting</option>
-                            <option value="internship">Internship</option>
-                            <option value="career">Career guidance</option>
-                            <option value="college">Collaboration</option>
-                            <option value="workshop">Bioinformatics Workshop / Training</option>
-                            <option value="other">Other / Custom Pipeline</option>
+                            <optgroup label="Services">
+                                <option value="wgs">Whole-Genome Sequencing (WGS)</option>
+                                <option value="wes">Whole-Exome Sequencing (WES)</option>
+                                <option value="rna">Transcriptomics (RNA-Seq)</option>
+                                <option value="meta">Metagenomics</option>
+                                <option value="epi">Epigenomics</option>
+                                <option value="pipeline">Custom Pipeline Development</option>
+                                <option value="consulting">Bioinformatics Consulting</option>
+                            </optgroup>
+                            <optgroup label="Workshops (online, 30 days)">
+                                <option value="workshop">Bioinformatics Workshop / Training</option>
+                                <option value="Workshop – RNA-Seq (reference-based)">Workshop – RNA-Seq (reference-based)</option>
+                                <option value="Workshop – RNA-Seq (de novo)">Workshop – RNA-Seq (de novo)</option>
+                                <option value="Workshop – Single-cell RNA-Seq">Workshop – Single-cell RNA-Seq</option>
+                                <option value="Workshop – lncRNA-Seq">Workshop – lncRNA-Seq</option>
+                                <option value="Workshop – miRNA-Seq">Workshop – miRNA-Seq</option>
+                                <option value="Workshop – PSI-Seq (alternative splicing)">Workshop – PSI-Seq (alternative splicing)</option>
+                                <option value="Workshop – Spatial Transcriptomics">Workshop – Spatial Transcriptomics</option>
+                                <option value="Workshop – ChIP-Seq">Workshop – ChIP-Seq</option>
+                                <option value="Workshop – SNAP-ChIP (spike-in calibrated)">Workshop – SNAP-ChIP (spike-in calibrated)</option>
+                                <option value="Workshop – ATAC-Seq">Workshop – ATAC-Seq</option>
+                                <option value="Workshop – Single-cell ATAC-Seq">Workshop – Single-cell ATAC-Seq</option>
+                                <option value="Workshop – Methyl-Seq (DNA methylation)">Workshop – Methyl-Seq (DNA methylation)</option>
+                                <option value="Workshop – DNA-Seq (variant analysis)">Workshop – DNA-Seq (variant analysis)</option>
+                                <option value="Workshop – RAD-Seq">Workshop – RAD-Seq</option>
+                                <option value="Workshop – Whole-Genome de novo Assembly">Workshop – Whole-Genome de novo Assembly</option>
+                                <option value="Workshop – Targeted Metagenomics (16S / ITS)">Workshop – Targeted Metagenomics (16S / ITS)</option>
+                                <option value="Workshop – Whole-Genome (Shotgun) Metagenomics">Workshop – Whole-Genome (Shotgun) Metagenomics</option>
+                                <option value="Workshop – Microarray Data Analysis">Workshop – Microarray Data Analysis</option>
+                            </optgroup>
+                            <optgroup label="Internships">
+                                <option value="internship">Internship</option>
+                                <option value="Customised internship">Customised internship</option>
+                            </optgroup>
+                            <optgroup label="Other">
+                                <option value="career">Career guidance</option>
+                                <option value="college">Collaboration</option>
+                                <option value="other">Other / Custom Pipeline</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -255,7 +282,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    © 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="footer-legal">
                     <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
@@ -267,5 +294,6 @@
     <script src="script.js"></script>
     <script src="ui.js"></script>
     <script src="form.js"></script>
+    <script src="enquiry-prefill.js" defer></script>
 </body>
 </html>

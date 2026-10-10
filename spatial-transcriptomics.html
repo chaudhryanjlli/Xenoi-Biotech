@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Spatial Transcriptomics Data Analysis Course</title>
+    <meta name="description" content="Combine gene expression with tissue location: QC, clustering, spatial genes and deconvolution in a 30-day workshop.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/spatial-transcriptomics.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Spatial Transcriptomics Data Analysis Course">
+    <meta property="og:description" content="Combine gene expression with tissue location: QC, clustering, spatial genes and deconvolution in a 30-day workshop.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/spatial-transcriptomics.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Spatial Transcriptomics Data Analysis Course">
+    <meta name="twitter:description" content="Combine gene expression with tissue location: QC, clustering, spatial genes and deconvolution in a 30-day workshop.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Breadcrumbs & Course -->
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.xenoibiotech.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Workshops",
+              "item": "https://www.xenoibiotech.com/workshops.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Spatial Transcriptomics",
+              "item": "https://www.xenoibiotech.com/spatial-transcriptomics.html"
+            }
+          ]
+        },
+        {
+          "@type": "Course",
+          "name": "Spatial Transcriptomics",
+          "description": "Combine gene expression with tissue location.",
+          "courseMode": "Online",
+          "inLanguage": "en",
+          "provider": {
+            "@type": "Organization",
+            "name": "Xenoi Biotech",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the Spatial Transcriptomics workshop online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All Xenoi Biotech workshops are delivered online."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long is it and how is it structured?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is it for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What will I learn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Combine gene expression with tissue location, covering six modules: Foundations, Quality control, Normalization and clustering, Spatial patterns, Integration and interpretation, Mini-project and report."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the fees and dates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask."
+          }
+        }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="inner">
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="workshops.html" class="active" aria-current="page">Workshops</a></li>
+                    <li><a href="team.html">About</a></li>
+                    <li><a href="quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="workshops.html">Workshops</a>
+                <span class="sep">/</span>
+                <span class="current">Transcriptomics</span>
+            </nav>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                <span class="eyebrow" style="margin-bottom: 0;">TRANSCRIPTOMICS</span>
+                <span class="workshop-duration-badge">30 days · 6 modules · Online</span>
+            </div>
+            <h1 class="page-title">Spatial Transcriptomics 30-day workshop</h1>
+            <p class="lead-text">Combine gene expression with tissue location.</p>
+        </div>
+
+        <section class="workshop-curriculum">
+            <h2 class="section-title">What you will learn</h2>
+            <div class="workshop-modules-list">
+            <details class="workshop-module-item" open>
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 1</span>
+                        <span class="module-title">Foundations</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Week 1</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Spatial technologies</span>
+                        <span class="topic-desc">Compare slide-based and imaging-based approaches.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Data structure</span>
+                        <span class="topic-desc">Spots, coordinates, images and count matrices.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Environment setup</span>
+                        <span class="topic-desc">Run R or Python spatial tools.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Raw data processing</span>
+                        <span class="topic-desc">Align reads to spots and tissue images.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 2</span>
+                        <span class="module-title">Quality control</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 2-3</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Spot filtering</span>
+                        <span class="topic-desc">Remove low-quality or off-tissue spots.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Gene filtering</span>
+                        <span class="topic-desc">Keep informative genes.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Tissue image checks</span>
+                        <span class="topic-desc">Match expression to histology.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">QC summaries</span>
+                        <span class="topic-desc">Report quality per section.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 3</span>
+                        <span class="module-title">Normalization and clustering</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 2-3</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Normalization for spatial data</span>
+                        <span class="topic-desc">Handle depth and tissue differences.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Dimensionality reduction</span>
+                        <span class="topic-desc">Reduce the data to its main patterns.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Clustering spots</span>
+                        <span class="topic-desc">Find regions with similar expression.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Mapping clusters to tissue</span>
+                        <span class="topic-desc">Draw clusters over the image.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 4</span>
+                        <span class="module-title">Spatial patterns</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 3-4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Spatially variable genes</span>
+                        <span class="topic-desc">Find genes with location-dependent expression.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Region markers</span>
+                        <span class="topic-desc">Define genes that characterise each area.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Neighbourhood analysis</span>
+                        <span class="topic-desc">Study which regions sit next to each other.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Pattern visualization</span>
+                        <span class="topic-desc">Plot expression over tissue.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 5</span>
+                        <span class="module-title">Integration and interpretation</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 3-4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Cell-type deconvolution</span>
+                        <span class="topic-desc">Estimate cell mixtures within each spot.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Using single-cell references</span>
+                        <span class="topic-desc">Combine spatial and single-cell data.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Comparing sections or conditions</span>
+                        <span class="topic-desc">Look for differences between samples.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Biological interpretation</span>
+                        <span class="topic-desc">Link regions to function.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 6</span>
+                        <span class="module-title">Mini-project and report</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Week 4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Project dataset</span>
+                        <span class="topic-desc">Analyse a public spatial dataset.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Reproducible workflow</span>
+                        <span class="topic-desc">Record every step and setting.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Figures and write-up</span>
+                        <span class="topic-desc">Present spatial maps and findings.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Review and next steps</span>
+                        <span class="topic-desc">Discuss validation and follow-up.</span>
+                    </div>
+                </div>
+            </details>
+            </div>
+        </section>
+
+        
+        <section class="related-workshops-section" style="margin: 40px 0;">
+            <h2 class="section-title">Related workshops</h2>
+            <ul class="related-workshops-list" style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+                <li><a href="single-cell-rna-seq.html" class="inline-link">Single-cell RNA-Seq</a></li>
+                <li><a href="rna-seq-reference.html" class="inline-link">RNA-Seq (reference-based)</a></li>
+            </ul>
+        </section>
+
+
+        <section class="workshop-faq-section" style="margin: 40px 0;">
+            <h2 class="section-title">Frequently asked questions</h2>
+            <div class="workshop-modules-list">
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">Is the Spatial Transcriptomics workshop online?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Yes. All Xenoi Biotech workshops are delivered online.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">How long is it and how is it structured?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">Who is it for?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">What will I learn?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Combine gene expression with tissue location, covering six modules: Foundations, Quality control, Normalization and clustering, Spatial patterns, Integration and interpretation, Mini-project and report.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">What are the fees and dates?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="workshop-enquiry-section">
+            <h2 class="section-title">Fees, dates and batches</h2>
+            <p class="enquiry-note">Shared on enquiry.</p>
+            <a href="quote.html?workshop=spatial-transcriptomics" class="btn btn-light">Enquire about this workshop ↗</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">EXPLORE</h2>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="genomics.html">Genomics</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">PROGRAMMES</h2>
+                    <ul class="footer-links">
+                        <li><a href="career-navigator.html">Career Navigator</a></li>
+                        <li><a href="internships.html">Internships</a></li>
+                        <li><a href="collaboration.html">Collaboration</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">CONTACT</h2>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div style="margin-top: 16px;">
+                        <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>

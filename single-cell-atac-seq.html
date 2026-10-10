@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>scATAC-Seq Analysis Workshop</title>
+    <meta name="description" content="Analyse open chromatin in single cells: QC, clustering, motif activity and integration with scRNA-Seq over 30 days.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/single-cell-atac-seq.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="scATAC-Seq Analysis Workshop">
+    <meta property="og:description" content="Analyse open chromatin in single cells: QC, clustering, motif activity and integration with scRNA-Seq over 30 days.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/single-cell-atac-seq.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="scATAC-Seq Analysis Workshop">
+    <meta name="twitter:description" content="Analyse open chromatin in single cells: QC, clustering, motif activity and integration with scRNA-Seq over 30 days.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Breadcrumbs & Course -->
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.xenoibiotech.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Workshops",
+              "item": "https://www.xenoibiotech.com/workshops.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Single-cell ATAC-Seq",
+              "item": "https://www.xenoibiotech.com/single-cell-atac-seq.html"
+            }
+          ]
+        },
+        {
+          "@type": "Course",
+          "name": "Single-cell ATAC-Seq",
+          "description": "Study open chromatin in individual cells.",
+          "courseMode": "Online",
+          "inLanguage": "en",
+          "provider": {
+            "@type": "Organization",
+            "name": "Xenoi Biotech",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the Single-cell ATAC-Seq workshop online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All Xenoi Biotech workshops are delivered online."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long is it and how is it structured?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is it for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What will I learn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Study open chromatin in individual cells, covering six modules: Foundations, Quality control, Dimensionality reduction, Clusters and annotation, Regulators and integration, Mini-project and report."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the fees and dates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask."
+          }
+        }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="inner">
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="workshops.html" class="active" aria-current="page">Workshops</a></li>
+                    <li><a href="team.html">About</a></li>
+                    <li><a href="quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="workshops.html">Workshops</a>
+                <span class="sep">/</span>
+                <span class="current">Epigenomics</span>
+            </nav>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                <span class="eyebrow" style="margin-bottom: 0;">EPIGENOMICS</span>
+                <span class="workshop-duration-badge">30 days · 6 modules · Online</span>
+            </div>
+            <h1 class="page-title">Single-cell ATAC-Seq 30-day workshop</h1>
+            <p class="lead-text">Study open chromatin in individual cells.</p>
+        </div>
+
+        <section class="workshop-curriculum">
+            <h2 class="section-title">What you will learn</h2>
+            <div class="workshop-modules-list">
+            <details class="workshop-module-item" open>
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 1</span>
+                        <span class="module-title">Foundations</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Week 1</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Single-cell chromatin concepts</span>
+                        <span class="topic-desc">How accessibility is measured in single cells.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Data structure</span>
+                        <span class="topic-desc">Cells, peaks, fragments and matrices.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Environment setup</span>
+                        <span class="topic-desc">Run R or Python single-cell tools.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Fragment files</span>
+                        <span class="topic-desc">Understand the main raw output.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 2</span>
+                        <span class="module-title">Quality control</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 2-3</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Cell-level metrics</span>
+                        <span class="topic-desc">Fragment count, enrichment and fragment size.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Filtering cells</span>
+                        <span class="topic-desc">Remove low-quality cells and doublets.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Peak set definition</span>
+                        <span class="topic-desc">Build a common set of regions.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">QC summary</span>
+                        <span class="topic-desc">Report quality per sample.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 3</span>
+                        <span class="module-title">Dimensionality reduction</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 2-3</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Normalization for sparse data</span>
+                        <span class="topic-desc">Handle very sparse counts.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Latent semantic indexing</span>
+                        <span class="topic-desc">Reduce dimensions for chromatin data.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Embeddings</span>
+                        <span class="topic-desc">Visualize cells with UMAP.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Batch effects</span>
+                        <span class="topic-desc">Detect and reduce technical differences.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 4</span>
+                        <span class="module-title">Clusters and annotation</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 3-4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Clustering cells</span>
+                        <span class="topic-desc">Group cells by accessibility.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Gene activity scores</span>
+                        <span class="topic-desc">Estimate gene activity from nearby peaks.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Annotating clusters</span>
+                        <span class="topic-desc">Name cell types using known markers.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Cluster-specific peaks</span>
+                        <span class="topic-desc">Find regions that define each group.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 5</span>
+                        <span class="module-title">Regulators and integration</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Weeks 3-4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Motif activity</span>
+                        <span class="topic-desc">Infer which factors drive each cluster.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Integrating with single-cell RNA-Seq</span>
+                        <span class="topic-desc">Match chromatin to expression.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Linking peaks to genes</span>
+                        <span class="topic-desc">Predict regulatory connections.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Trajectories</span>
+                        <span class="topic-desc">Order cells by changing accessibility.</span>
+                    </div>
+                </div>
+            </details>
+
+            <details class="workshop-module-item">
+                <summary class="workshop-module-summary">
+                    <div class="module-summary-left">
+                        <span class="module-number">Module 6</span>
+                        <span class="module-title">Mini-project and report</span>
+                    </div>
+                    <div class="module-summary-right">
+                        <span class="module-week-tag">Week 4</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                </summary>
+                <div class="module-topics-grid">
+                    <div class="topic-item">
+                        <span class="topic-name">Project dataset</span>
+                        <span class="topic-desc">Analyse a public single-cell ATAC dataset.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Reproducible workflow</span>
+                        <span class="topic-desc">Record code, settings and versions.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Figures and write-up</span>
+                        <span class="topic-desc">Present clusters and regulators.</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Review and next steps</span>
+                        <span class="topic-desc">Discuss follow-up experiments.</span>
+                    </div>
+                </div>
+            </details>
+            </div>
+        </section>
+
+        
+        <section class="related-workshops-section" style="margin: 40px 0;">
+            <h2 class="section-title">Related workshops</h2>
+            <ul class="related-workshops-list" style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+                <li><a href="atac-seq.html" class="inline-link">ATAC-Seq</a></li>
+                <li><a href="single-cell-rna-seq.html" class="inline-link">Single-cell RNA-Seq</a></li>
+            </ul>
+        </section>
+
+
+        <section class="workshop-faq-section" style="margin: 40px 0;">
+            <h2 class="section-title">Frequently asked questions</h2>
+            <div class="workshop-modules-list">
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">Is the Single-cell ATAC-Seq workshop online?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Yes. All Xenoi Biotech workshops are delivered online.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">How long is it and how is it structured?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">Who is it for?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">What will I learn?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Study open chromatin in individual cells, covering six modules: Foundations, Quality control, Dimensionality reduction, Clusters and annotation, Regulators and integration, Mini-project and report.</p>
+                    </div>
+                </details>
+
+                <details class="workshop-module-item">
+                    <summary class="workshop-module-summary">
+                        <span class="module-title">What are the fees and dates?</span>
+                        <span class="module-toggle-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
+                        <p style="margin: 0;">Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="workshop-enquiry-section">
+            <h2 class="section-title">Fees, dates and batches</h2>
+            <p class="enquiry-note">Shared on enquiry.</p>
+            <a href="quote.html?workshop=single-cell-atac-seq" class="btn btn-light">Enquire about this workshop ↗</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">EXPLORE</h2>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="genomics.html">Genomics</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">PROGRAMMES</h2>
+                    <ul class="footer-links">
+                        <li><a href="career-navigator.html">Career Navigator</a></li>
+                        <li><a href="internships.html">Internships</a></li>
+                        <li><a href="collaboration.html">Collaboration</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h2 class="footer-heading">CONTACT</h2>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div style="margin-top: 16px;">
+                        <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>

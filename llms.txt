@@ -1,25 +1,45 @@
 # Xenoi Biotech
 
-> Bioinformatics analysis, reproducible research workflows, and practical training for the next generation of scientists.
+> Xenoi Biotech (Xenoibiotech) is a bioinformatics company based in Punjab, India. We work on next-generation sequencing data analysis, omics data interpretation and biological AI/ML, and we run online bioinformatics workshops and internships for students and researchers across India and internationally.
 
-Xenoi Biotech Pvt. Ltd. (Punjab, India) provides research-focused bioinformatics data analysis and hands-on computational biology education. We turn complex next-generation sequencing (NGS) data into reproducible, publication-ready genomic insights.
+## Key Pages
 
-## Pages & Structure
-
-- [Home](https://www.xenoibiotech.com/): Overview of bioinformatics services, genomic pipelines, multi-omics capabilities, and training programs.
+- [Home](https://www.xenoibiotech.com/): Xenoibiotech is a Punjab-based bioinformatics company offering NGS data analysis and hands-on workshops for researchers and students.
+- [Workshops Hub](https://www.xenoibiotech.com/workshops.html): Eighteen 30-day NGS workshops from Xenoi Biotech in Punjab: RNA-Seq, single-cell, ChIP-Seq, metagenomics and more. Enquire for dates and fees.
+- [Career Navigator](https://www.xenoibiotech.com/career-navigator.html): A structured career guidance programme designed specifically for life science students across nine career pathways.
+- [Internships](https://www.xenoibiotech.com/internships.html): Practical training in bioinformatics, computational biology and genomics across Foundation, Applied and Capstone tiers, including a customised internship that starts from your own idea.
+- [Collaboration](https://www.xenoibiotech.com/collaboration.html): Collaboration with colleges to provide career guidance, training and internship opportunities tailored to life science students.
+- [About](https://www.xenoibiotech.com/team.html): Xenoi Biotech (Xenoibiotech) combines research-oriented computational analysis with practical bioinformatics education, based in Punjab, India.
 - [Services](https://www.xenoibiotech.com/services.html): Overview of pipeline development (Nextflow/Snakemake), data interpretation, and research consulting.
 - [Genomics Services](https://www.xenoibiotech.com/genomics.html): Specialized NGS analysis including Whole-Genome Sequencing (WGS), Whole-Exome Sequencing (WES), targeted panels, and de novo genome assembly.
-- [Workshops](https://www.xenoibiotech.com/workshops.html): Hands-on bioinformatics bootcamps including Python for Bioinformatics, NGS Data Analysis, and RNA-Seq Analysis.
-- [Career Navigator](https://www.xenoibiotech.com/career-navigator.html): A structured career guidance programme designed specifically for life science students across nine career pathways.
-- [Internships](https://www.xenoibiotech.com/internships.html): Practical training in bioinformatics, computational biology and genomics across Foundation, Applied and Capstone tiers.
-- [Collaboration](https://www.xenoibiotech.com/collaboration.html): Collaboration with colleges to provide career guidance, training and internship opportunities tailored to life science students.
-- [Team & Contact](https://www.xenoibiotech.com/team.html): Meet the team behind Xenoi Biotech, led by our Director and Lead Bioinformatician.
-- [Project Quote](https://www.xenoibiotech.com/quote.html): Submit project inquiries or training requirements for customized proposals.
+- [Enquiry / Contact](https://www.xenoibiotech.com/quote.html): Request a customized proposal for NGS sequencing analysis, custom bioinformatics pipeline development, or specialized training workshops for your team.
 - [Privacy Policy](https://www.xenoibiotech.com/privacy.html): Privacy terms, transparent data practices, and zero-tracking policy.
 - [Terms of Use](https://www.xenoibiotech.com/terms.html): Terms of service, research-use-only disclaimers, and legal guidelines.
 
+## Workshops (18 Hands-On 30-Day Online Programmes)
+
+- [RNA-Seq (reference-based)](https://www.xenoibiotech.com/rna-seq-reference.html): A 30-day hands-on RNA-Seq workshop: alignment, quantification, differential expression and pathway analysis. Enquire with Xenoi Biotech.
+- [RNA-Seq (de novo)](https://www.xenoibiotech.com/rna-seq-de-novo.html): Learn to assemble, clean, annotate and compare a transcriptome without a reference genome in this 30-day practical workshop.
+- [Single-cell RNA-Seq](https://www.xenoibiotech.com/single-cell-rna-seq.html): Cluster cells, find marker genes and trace trajectories in a 30-day scRNA-Seq course with a real-data mini-project. Offered from Punjab, India.
+- [lncRNA-Seq](https://www.xenoibiotech.com/lncrna-seq.html): Identify long non-coding RNAs, predict their targets and build co-expression networks in this 30-day hands-on workshop.
+- [miRNA-Seq](https://www.xenoibiotech.com/mirna-seq.html): Process small-RNA data, find differentially expressed miRNAs and predict their gene targets in 30 practical days.
+- [PSI-Seq (alternative splicing)](https://www.xenoibiotech.com/psi-seq.html): Detect splicing events, calculate percent spliced in and test differential splicing across conditions in a 30-day course.
+- [Spatial Transcriptomics](https://www.xenoibiotech.com/spatial-transcriptomics.html): Combine gene expression with tissue location: QC, clustering, spatial genes and deconvolution in a 30-day workshop.
+- [ChIP-Seq](https://www.xenoibiotech.com/chip-seq.html): Map protein and histone-mark binding from raw reads to peaks, motifs and differential binding in 30 days. Enquire with Xenoi Biotech.
+- [SNAP-ChIP](https://www.xenoibiotech.com/snap-chip.html): Quantify histone modifications with spike-in controls and compare conditions with calibrated signal in this 30-day course.
+- [ATAC-Seq](https://www.xenoibiotech.com/atac-seq.html): Profile chromatin accessibility, find motifs and footprints, and test differential accessibility in a 30-day hands-on workshop.
+- [Single-cell ATAC-Seq](https://www.xenoibiotech.com/single-cell-atac-seq.html): Analyse open chromatin in single cells: QC, clustering, motif activity and integration with scRNA-Seq over 30 days.
+- [Methyl-Seq](https://www.xenoibiotech.com/methyl-seq.html): Align bisulfite reads, call methylation and find differentially methylated regions in a 30-day practical course.
+- [DNA-Seq (variants)](https://www.xenoibiotech.com/dna-seq.html): From reads to a prioritised variant list: alignment, calling, annotation and filtering in this 30-day hands-on workshop.
+- [RAD-Seq](https://www.xenoibiotech.com/rad-seq.html): Demultiplex, build loci, call SNPs and study population structure in a 30-day RAD-Seq workshop.
+- [Whole-Genome de novo Assembly](https://www.xenoibiotech.com/genome-assembly.html): Estimate genome size, assemble, polish and annotate a genome from short and long reads in 30 practical days.
+- [Targeted metagenomics (16S / ITS)](https://www.xenoibiotech.com/targeted-metagenomics.html): Process amplicon data, assign taxonomy and compare microbial communities in a 30-day hands-on workshop.
+- [Whole-genome (shotgun) metagenomics](https://www.xenoibiotech.com/shotgun-metagenomics.html): Profile, assemble, bin and annotate microbial community DNA in this 30-day workshop. Available from Xenoi Biotech, Punjab.
+- [Microarray](https://www.xenoibiotech.com/microarray.html): QC, normalization, differential expression and enrichment for gene-expression array data in a 30-day course.
+
 ## Contact Information
 
-- Organization: Xenoi Biotech Pvt. Ltd., Punjab, India
-- General & Project Inquiries: explore@xenoibiotech.com
+- Organization: Xenoi Biotech Pvt. Ltd. (XenoiBiotech)
+- Location: Punjab, India
+- Email: explore@xenoibiotech.com
 - Website: https://www.xenoibiotech.com
