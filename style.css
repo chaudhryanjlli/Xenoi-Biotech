@@ -2857,3 +2857,45 @@ html.is-compact body:not(.inner) .phone-dock-label {
         transform: none !important;
     }
 }
+
+/* 8. Workshop About Section */
+.workshop-about {
+    margin: 40px 0;
+}
+
+.workshop-about .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-color, #f4fdfb);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.workshop-about-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(244, 253, 251, 0.88);
+    max-width: 100%;
+    margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.page-container .workshop-about .workshop-about-text {
+    max-width: 100%;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(244, 253, 251, 0.88);
+    text-shadow: none;
+    text-align: justify !important;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+}
