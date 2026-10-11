@@ -15,3 +15,21 @@ capture-laptop-baselines.js
 
 
 
+headers*.txt
+tracked-files.txt
+site-health-report.txt
+diff-check*.txt
+*-diff.txt
+Xenoi_Workshops_*_DRAFT.md
+workshop-paragraphs.md
+test-*.js
+capture-*.js
+debug-*.js
+reproduce-*.js
+take-before-*.js
+local-server.js
+reproduce-*.json
+about-*.txt
+chip-scripts.txt
+offline-changes.txt
+ui-check.txt
