@@ -59,7 +59,7 @@ Then open your web browser and navigate to:
 The contact and quote request form in [`quote.html`](quote.html) uses **Web3Forms** for form submissions:
 - The access key is configured in `quote.html` at:
   ```html
-  <input type="hidden" name="access_key" value="e3034bcd-4e40-4c30-948a-4838bff10895">
+  <input type="hidden" name="access_key" value="[configured in quote.html]">
   ```
 - The form submits asynchronously to Web3Forms and displays inline confirmation without page reloads.
 
