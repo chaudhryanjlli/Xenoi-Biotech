@@ -40,7 +40,9 @@
             }
         } else if (interestParam) {
             const interest = interestParam.toLowerCase().trim();
-            if (interest === 'customised-internship') {
+            if (interest === 'internship') {
+                targetValue = 'internship';
+            } else if (interest === 'customised-internship') {
                 targetValue = 'Customised internship';
             }
         }
