@@ -3,5 +3,12 @@
 .qr-zoom-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(10,22,36,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);cursor:zoom-out;animation:qr-zoom-fade .15s ease-out}
 .qr-zoom-box{background:#fff;border-radius:20px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;max-width:92vw}
 .qr-zoom-box img{display:block;width:min(74vh,78vw,720px);height:auto;aspect-ratio:1/1;margin:0 auto;cursor:zoom-out}
-.qr-zoom-box p{margin:14px 0 0;font:600 14px/1.3 system-ui,sans-serif;color:#33506b}
+.qr-zoom-hint{margin:14px 0 0;font:600 14px/1.3 system-ui,sans-serif;color:#33506b}
 @keyframes qr-zoom-fade{from{opacity:0}to{opacity:1}}
+
+/* Click the podium to enlarge it (see qr-zoom.js) */
+.podium{cursor:zoom-in}
+.qr-zoom-box.podium-box{background:transparent;box-shadow:none;padding:0;width:min(1180px,94vw);max-height:94vh;overflow:auto}
+.qr-zoom-box.podium-box .podium{margin:0;cursor:zoom-out;zoom:1.35}
+.qr-zoom-box.podium-box .qr-zoom-hint{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+@media (max-width:700px){.qr-zoom-box.podium-box .podium{zoom:1}}
