@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /ngs-game/
 
 Sitemap: https://www.xenoibiotech.com/sitemap.xml

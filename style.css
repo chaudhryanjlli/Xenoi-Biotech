@@ -2903,3 +2903,4 @@ html.is-compact body:not(.inner) .phone-dock-label {
 .page-container .customised-internship-card .card-body,
 .page-container .genomics-challenge-card .card-body { max-width: 100%; }
 .page-container .genomics-challenge-card { width: 100%; box-sizing: border-box; }
+footer .footer-year-link, footer .footer-year-link:hover, footer .footer-year-link:focus-visible { color: inherit; text-decoration: none; }
