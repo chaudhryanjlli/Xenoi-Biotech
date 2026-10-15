@@ -2900,4 +2900,6 @@ html.is-compact body:not(.inner) .phone-dock-label {
     overflow-wrap: break-word;
 }
 
-.page-container .customised-internship-card .card-body { max-width: 100%; }
+.page-container .customised-internship-card .card-body,
+.page-container .genomics-challenge-card .card-body { max-width: 100%; }
+.page-container .genomics-challenge-card { width: 100%; box-sizing: border-box; }
