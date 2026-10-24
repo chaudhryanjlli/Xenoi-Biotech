@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Bioinformatics Services &amp; NGS Training India | Xenoi Biotech</title>
-    <meta name="description" content="Bioinformatics company in Punjab, India providing NGS data analysis services, eighteen 30-day online workshops, internships, and research collaborations.">
+    <title>Bioinformatics &amp; Genomics Research | Xenoi Biotech</title>
+    <meta name="description" content="Research-focused bioinformatics analysis and hands-on learning, turning next-generation sequencing data into clear insights for researchers.">
     <link rel="canonical" href="https://www.xenoibiotech.com/">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#03100e">
@@ -44,111 +44,47 @@
     <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.css">
 
-        <!-- Structured Data: Organization, WebSite, FAQPage -->
+    <!-- Structured Data: Organization & WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": ["Organization", "EducationalOrganization"],
-          "@id": "https://www.xenoibiotech.com/#org",
-          "name": "Xenoi Biotech",
-          "legalName": "Xenoi Biotech Pvt. Ltd.",
-          "alternateName": "Xenoibiotech",
+          "@type": "Organization",
+          "@id": "https://www.xenoibiotech.com/#organization",
+          "name": "Xenoi Biotech Pvt. Ltd.",
+          "alternateName": ["XenoiBiotech", "Xenoibiotech", "Xenoi Biotech"],
           "url": "https://www.xenoibiotech.com/",
           "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
-          "description": "Bioinformatics company in Punjab, India offering NGS data analysis services and online bioinformatics workshops and internships.",
           "email": "explore@xenoibiotech.com",
-          "areaServed": "India",
-          "knowsAbout": [
-            "NGS data analysis",
-            "RNA-Seq",
-            "single-cell genomics",
-            "metagenomics",
-            "epigenomics",
-            "bioinformatics training"
-          ],
+          "description": "Research-focused bioinformatics analysis and hands-on learning from next-generation sequencing data to computational biology workflows.",
           "address": {
             "@type": "PostalAddress",
             "addressRegion": "Punjab",
             "addressCountry": "IN"
-          }
+          },
+          "sameAs": []
         },
         {
           "@type": "WebSite",
           "@id": "https://www.xenoibiotech.com/#website",
           "url": "https://www.xenoibiotech.com/",
           "name": "Xenoi Biotech",
-          "description": "Bioinformatics & NGS Data Analysis Services and Training in India",
           "publisher": {
-            "@id": "https://www.xenoibiotech.com/#org"
+            "@id": "https://www.xenoibiotech.com/#organization"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What bioinformatics and NGS services does Xenoi Biotech provide?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Xenoi Biotech delivers end-to-end sequencing analysis services including Whole-Genome Sequencing (WGS), Whole-Exome Sequencing (WES), RNA-Seq differential expression, single-cell genomics, ChIP-Seq, ATAC-Seq, and metagenomic profiling using reproducible Nextflow pipelines."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How do Xenoi Biotech's 30-day online workshops differ from other short courses?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Unlike typical 3-to-4 day introductory webinars, each of our 18 workshops spans 30 days across six structured modules, providing guided hands-on execution on real research datasets from raw FASTQ to biological interpretation."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What specialized topics do the 18 bioinformatics workshops cover?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Workshops span five core domains: Transcriptomics (bulk, de novo, single-cell, spatial, lncRNA, miRNA, PSI-Seq), Epigenomics (ChIP-Seq, SNAP-ChIP, ATAC-Seq, single-cell ATAC-Seq, Methyl-Seq), Genomics (DNA-Seq, RAD-Seq, de novo assembly), Metagenomics (16S/ITS and shotgun), and Microarray analysis."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Are student bioinformatics internships available across India?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Our 4-week, 8-week, and 12-week virtual bioinformatics internships are open to undergraduate, postgraduate, and PhD scholars across India, with hands-on capstone project mentorship."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the fee for enrolling in a 30-day bioinformatics workshop?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Every 30-day online workshop fee is MRP ₹5,000, inclusive of GST. Batch dates are shared on enquiry."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Where is Xenoi Biotech located and how do we begin a project?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Xenoi Biotech Pvt. Ltd. is based in Punjab, India. To initiate a project or workshop registration, submit an inquiry via our contact page or email explore@xenoibiotech.com."
-              }
-            }
-          ]
         }
       ]
     }
     </script>
 </head>
 <body>
-        <div id="loader" aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(50,229,166,0.3);z-index:99999;pointer-events:none;"></div>
-    <script>
-      const hide = () => document.getElementById('loader')?.remove();
-      window.addEventListener('DOMContentLoaded', () => setTimeout(hide, 300));
-      setTimeout(hide, 1000);
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) hide();
-    </script>
+    <div id="xb-loader" role="status" aria-live="polite">
+      <div class="xb-loader-content">
+        <img class="xb-loader-logo" src="xenoi-logo.webp" alt="Xenoi Biotech" width="257" height="112" decoding="sync">
+        <div class="xb-loader-bar-track">
+          <div class="xb-loader-bar-fill" id="xb-bar-fill"></div>
+        </div>
         <div class="xb-loader-text" id="xb-loader-text">LOADING  0%</div>
       </div>
     </div>
@@ -157,16 +93,15 @@
 
     <header class="header" id="site-header">
         <div class="header-inner">
-            <a href="/" class="logo header-logo" style="text-decoration: none; color: inherit;">
+            <a href="index.html" class="logo header-logo" style="text-decoration: none; color: inherit;">
                 <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="161" height="70">
             </a>
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
-                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="index.html#" class="active">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="internships.html">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
-                    <li><a href="publications.html">Publications</a></li>
                     <li><a href="team.html">About</a></li>
                     <li><a href="quote.html">Contact</a></li>
                 </ul>
@@ -192,11 +127,10 @@
 
     <div class="floating-nav-container" id="main-nav">
         <nav class="floating-nav" aria-label="Main Navigation">
-            <a href="/" class="active"><span class="dot"></span> Home</a>
+            <a href="index.html#" class="active"><span class="dot"></span> Home</a>
             <a href="services.html">Services <span class="plus">+</span></a>
             <a href="internships.html">Internships</a>
             <a href="workshops.html">Workshops</a>
-            <a href="publications.html">Publications</a>
             <a href="team.html">About</a>
             <a href="quote.html">Contact</a>
         </nav>
@@ -205,10 +139,10 @@
     <main class="content" id="main">
         <section class="page page-1 hero">
             <div class="hero-container text-block visible">
-                <p class="hero-badge" style="margin-bottom: 0.75rem;">Decode complexity. Discover possibility.</p>
-                <h1 class="hero-heading">Bioinformatics &amp; NGS Data Analysis Services and Training in India</h1>
+                <span class="hero-badge">BIOINFORMATICS &middot; RESEARCH &middot; EDUCATION</span>
+                <h1 class="hero-heading">Decode complexity<br>Discover possibility</h1>
                 <p class="hero-desc">
-                    Xenoi Biotech Pvt. Ltd. is a specialized bioinformatics company based in Punjab, India. We deliver end-to-end next-generation sequencing (NGS) data analysis services for academic and industry research laboratories, alongside eighteen intensive 30-day online bioinformatics workshops, student internships, and institutional collaborations across genomics, transcriptomics, epigenomics, and metagenomics.
+                    Research-focused bioinformatics analysis and hands-on learning, from next-generation sequencing data to the skills that move your research forward.
                 </p>
             </div>
             <div class="hero-bottom text-block visible">
@@ -217,171 +151,38 @@
             </div>
         </section>
 
-                <section class="page page-2" id="services">
+        <section class="page page-2" id="services">
             <div class="text-block align-left">
-                <span class="badge">| NGS &amp; GENOMICS SERVICES</span>
-                <h2 class="section-title">End-to-End Sequencing Data Analysis</h2>
-                <p>
-                    From raw FASTQ reads to publication-grade figures, we support life-science researchers with rigorous statistical analysis and reproducible Nextflow and Snakemake pipelines. We specialize in <a href="genomics.html" class="inline-link">Whole-Genome Sequencing (WGS)</a>, <a href="genomics.html" class="inline-link">Whole-Exome Sequencing (WES)</a>, and <a href="services.html" class="inline-link">custom bioinformatics pipeline development</a>.
-                </p>
-                <p style="margin-top: 1rem; color: rgba(220, 240, 245, 0.85); line-height: 1.6;">
-                    Whether identifying somatic variants in cancer genomics, profiling rare disease cohorts, or assembling non-model genomes, our analyses deliver coordinate-sorted indexed BAMs, filtered annotated VCFs, MultiQC audits, and draft methods for your manuscript.
-                </p>
-                <div style="margin-top: 1.25rem;">
-                    <a href="genomics.html" class="btn btn-light" style="text-decoration: none; margin-right: 12px;">Genomics Services<span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
-                    <a href="services.html" class="btn btn-outline" style="text-decoration: none;">All Pipelines &amp; Consulting</a>
-                </div>
+                <span class="badge">| NGS & GENOMICS</span>
+                <h2 class="section-title">Comprehensive<br>Sequencing Analysis</h2>
+                <p>Expert pipelines for Next-Generation Sequencing (NGS), including Whole-Genome (WGS) and Whole-Exome (WES) analysis to uncover critical variants with high precision.</p>
+                <a href="genomics.html" class="btn btn-light mt-4" style="text-decoration: none;">View Genomics Services<span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
             </div>
         </section>
 
-        <section class="page page-3" id="differentiators">
+        <section class="page page-3">
             <div class="text-block align-left">
-                <span class="badge">| WHY RESEARCHERS CHOOSE US</span>
-                <h2 class="section-title">Built for Scientific Depth &amp; Discovery</h2>
-                <p>
-                    Xenoi Biotech bridges production-grade computational infrastructure with advanced research training:
-                </p>
-                <ul style="margin: 1rem 0; padding-left: 1.25rem; line-height: 1.7; color: rgba(220, 240, 245, 0.85);">
-                    <li><strong>30-Day Practical Depth:</strong> Standard industry workshops run for only 3 to 4 days. Our 30-day curriculum provides real time for hands-on mastery of terminal commands, pipeline debugging, and statistical modeling.</li>
-                    <li><strong>18 Specialised Assays:</strong> In-depth coverage of mainstream and niche sequencing protocols, including <a href="snap-chip.html" class="inline-link">SNAP-ChIP</a>, <a href="psi-seq.html" class="inline-link">PSI-Seq alternative splicing</a>, and <a href="spatial-transcriptomics.html" class="inline-link">spatial transcriptomics</a>.</li>
-                    <li><strong>International Research Mentorship:</strong> Collaborative computational workflows led by experienced bioinformatics specialists.</li>
-                    <li><strong>Dual Service &amp; Training Competency:</strong> We analyze real experimental data daily, ensuring our workshops teach current best-practice tools rather than outdated textbook scripts.</li>
-                </ul>
+                <span class="badge">| MULTI-OMICS</span>
+                <h2 class="section-title">Beyond the<br>Genome</h2>
+                <p>Dive deeper into molecular biology. We provide specialized Metagenomics, Epigenomics, and Transcriptomics data analysis to help you understand complex biological systems.</p>
             </div>
         </section>
 
         <section class="page page-4" id="training">
             <div class="text-block align-left">
-                <span class="badge">| 18 SPECIALISED WORKSHOPS</span>
-                <h2 class="section-title">Hands-On Bioinformatics Training</h2>
-                <p>
-                    All 18 workshops span 30 days online across six comprehensive modules with guided computing practicals, priced at MRP ₹5,000 (incl. GST):
-                </p>
-                <div class="home-workshops-summary" style="margin-top: 1rem; line-height: 1.6; font-size: 0.95rem; color: rgba(220, 240, 245, 0.85);">
-                    <p style="margin-bottom: 0.5rem;"><strong>Transcriptomics:</strong> <a href="rna-seq-reference.html" class="inline-link">RNA-Seq (Ref)</a> · <a href="rna-seq-de-novo.html" class="inline-link">RNA-Seq (De Novo)</a> · <a href="single-cell-rna-seq.html" class="inline-link">Single-cell RNA-Seq</a> · <a href="spatial-transcriptomics.html" class="inline-link">Spatial</a> · <a href="lncrna-seq.html" class="inline-link">lncRNA</a> · <a href="mirna-seq.html" class="inline-link">miRNA</a> · <a href="psi-seq.html" class="inline-link">PSI-Seq</a></p>
-                    <p style="margin-bottom: 0.5rem;"><strong>Epigenomics:</strong> <a href="chip-seq.html" class="inline-link">ChIP-Seq</a> · <a href="snap-chip.html" class="inline-link">SNAP-ChIP</a> · <a href="atac-seq.html" class="inline-link">ATAC-Seq</a> · <a href="single-cell-atac-seq.html" class="inline-link">Single-cell ATAC-Seq</a> · <a href="methyl-seq.html" class="inline-link">Methyl-Seq</a></p>
-                    <p style="margin-bottom: 0.5rem;"><strong>Genomics:</strong> <a href="dna-seq.html" class="inline-link">DNA-Seq</a> · <a href="rad-seq.html" class="inline-link">RAD-Seq</a> · <a href="genome-assembly.html" class="inline-link">Genome Assembly</a></p>
-                    <p style="margin-bottom: 0.5rem;"><strong>Metagenomics:</strong> <a href="targeted-metagenomics.html" class="inline-link">Targeted (16S/ITS)</a> · <a href="shotgun-metagenomics.html" class="inline-link">Shotgun Metagenomics</a></p>
-                    <p style="margin-bottom: 0.75rem;"><strong>Microarray:</strong> <a href="microarray.html" class="inline-link">Microarray Gene Expression</a></p>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <a href="workshops.html" class="btn btn-light" style="text-decoration: none; margin-right: 12px;">Browse Workshops<span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
-                    <a href="internships.html" class="btn btn-outline" style="text-decoration: none;">Explore Internships</a>
-                </div>
+                <span class="badge">| EDUCATION</span>
+                <h2 class="section-title">Empowering the<br>Next Generation</h2>
+                <p>We provide hands-on training and expert-led workshops for students and researchers to master cutting-edge bioinformatics analysis tools and workflows.</p>
+                <a href="workshops.html" class="btn btn-light mt-4" style="text-decoration: none;">Explore Workshops<span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
             </div>
         </section>
 
-        <section class="page page-5" id="programmes">
-            <div class="text-block align-left">
-                <span class="badge">| ACADEMIC PROGRAMMES</span>
-                <h2 class="section-title">Internships &amp; Institutional Collaborations</h2>
-                <p>
-                    Beyond individual workshops, we partner with academic institutions and offer structured project programs:
-                </p>
-                <ul style="margin: 1rem 0; padding-left: 1.25rem; line-height: 1.7; color: rgba(220, 240, 245, 0.85);">
-                    <li><strong><a href="internships.html" class="inline-link">Research Internships:</a></strong> 4-week, 8-week, and 12-week virtual internships covering computational project execution, capstone analysis, and scientific report drafting.</li>
-                    <li><strong><a href="collaboration.html" class="inline-link">College Collaborations:</a></strong> Guest lectures, on-campus and online faculty development programs (FDPs), and collaborative bioinformatics training MoUs for universities and colleges across India.</li>
-                    <li><strong><a href="career-navigator.html" class="inline-link">Career Navigator:</a></strong> 1-on-1 personalized mentorship mapping skill transitions into genomics data science and computational biology careers.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Proof Strip (Commented out until real data is supplied per Ground Rule 2 & Phase 3 Item 7) -->
-        <!-- OWNER-TODO: Proof Elements Strip:
-        <section class="proof-strip">
-            <div class="stat-item"><span class="stat-number">[[OWNER: students trained]]</span><span class="stat-label">Students Trained</span></div>
-            <div class="stat-item"><span class="stat-number">[[OWNER: workshops run]]</span><span class="stat-label">Workshops Completed</span></div>
-            <div class="stat-item"><span class="stat-number">[[OWNER: samples analysed]]</span><span class="stat-label">Sequencing Samples Analysed</span></div>
-            <div class="stat-item"><span class="stat-number">[[OWNER: countries served]]</span><span class="stat-label">Countries Represented</span></div>
-        </section>
-        -->
-
-        <!-- Homepage FAQ Section -->
-        <section class="page page-6" id="faq">
-            <div class="text-block align-left" style="max-width: 800px;">
-                <span class="badge">| QUESTIONS &amp; ANSWERS</span>
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <div class="faq-list" style="margin-top: 1.5rem;">
-                    <details class="faq-item">
-                        <summary class="faq-question">What bioinformatics and NGS services does Xenoi Biotech provide?</summary>
-                        <div class="faq-answer">
-                            <p>Xenoi Biotech delivers end-to-end sequencing analysis services including Whole-Genome Sequencing (WGS), Whole-Exome Sequencing (WES), RNA-Seq differential expression, single-cell genomics, ChIP-Seq, ATAC-Seq, and metagenomic profiling using reproducible Nextflow pipelines.</p>
-                        </div>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">How do Xenoi Biotech's 30-day online workshops differ from other short courses?</summary>
-                        <div class="faq-answer">
-                            <p>Unlike typical 3-to-4 day introductory webinars, each of our 18 workshops spans 30 days across six structured modules, providing guided hands-on execution on real research datasets from raw FASTQ to biological interpretation.</p>
-                        </div>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">What specialized topics do the 18 bioinformatics workshops cover?</summary>
-                        <div class="faq-answer">
-                            <p>Workshops span five core domains: Transcriptomics (bulk, de novo, single-cell, spatial, lncRNA, miRNA, PSI-Seq), Epigenomics (ChIP-Seq, SNAP-ChIP, ATAC-Seq, single-cell ATAC-Seq, Methyl-Seq), Genomics (DNA-Seq, RAD-Seq, de novo assembly), Metagenomics (16S/ITS and shotgun), and Microarray analysis.</p>
-                        </div>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">Are student bioinformatics internships available across India?</summary>
-                        <div class="faq-answer">
-                            <p>Yes. Our 4-week, 8-week, and 12-week virtual bioinformatics internships are open to undergraduate, postgraduate, and PhD scholars across India, with hands-on capstone project mentorship.</p>
-                        </div>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">What is the fee for enrolling in a 30-day bioinformatics workshop?</summary>
-                        <div class="faq-answer">
-                            <p>Every 30-day online workshop fee is MRP ₹5,000, inclusive of GST. Batch dates are shared on enquiry.</p>
-                        </div>
-                    </details>
-                    <details class="faq-item">
-                        <summary class="faq-question">Where is Xenoi Biotech located and how do we begin a project?</summary>
-                        <div class="faq-answer">
-                            <p>Xenoi Biotech Pvt. Ltd. is based in Punjab, India. To initiate a project or workshop registration, submit an inquiry via our contact page or email explore@xenoibiotech.com.</p>
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-                <section class="page page-pub" id="publications">
-            <div class="text-block align-left">
-                <span class="badge">| SCIENTIFIC RESEARCH &amp; DISCOVERY</span>
-                <h2 class="section-title">Selected Publications</h2>
-                <p style="margin-bottom: 20px; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
-                    Our computational biologists actively publish peer-reviewed genomic and transcriptomic research across international journals:
-                </p>
-                <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-                    <div style="padding: 16px 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px;">
-                        <p style="margin: 0; font-size: 0.98rem; line-height: 1.5;">
-                            Shubhangi Shree, <strong>Anjali Chaudhary</strong> et al. (2026). <a href="https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2026.1965097/abstract" target="_blank" rel="noopener noreferrer" class="inline-link">Beneficial Microbes in Plant Salt Stress Tolerance: Mechanisms, Antioxidant Defense, and Multi-Omics Insights</a>. <em>Frontiers in Microbiology</em>, 17. DOI: 10.3389/fmicb.2026.1965097 <!-- OWNER-TODO: make the DOI clickable once https://doi.org/10.3389/fmicb.2026.1965097 resolves --> (Accepted, in press).
-                        </p>
-                    </div>
-                    <div style="padding: 16px 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px;">
-                        <p style="margin: 0; font-size: 0.98rem; line-height: 1.5;">
-                            Tina Roy, <strong>Anjali Chaudhary</strong> et al. (2025). <a href="https://link.springer.com/article/10.1007/s13562-025-01013-3" target="_blank" rel="noopener noreferrer" class="inline-link">Advancement in rhizospheric microbial diversity analysis: an updated perspective</a>. <em>Journal of Plant Biochemistry and Biotechnology</em>, 35(3), 769–796. <a href="https://doi.org/10.1007/s13562-025-01013-3" target="_blank" rel="noopener noreferrer" class="inline-link">DOI: 10.1007/s13562-025-01013-3</a>
-                        </p>
-                    </div>
-                    <div style="padding: 16px 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px;">
-                        <p style="margin: 0; font-size: 0.98rem; line-height: 1.5;">
-                            <strong>Anjali Chaudhary</strong> et al. (2024). <a href="https://link.springer.com/article/10.1007/s00709-024-01995-2" target="_blank" rel="noopener noreferrer" class="inline-link">Chronological events unfolding the vegetative and floral phenology of apical bud in Crocus sativus</a>. <em>Protoplasma</em>, 262(2), 313–330. <a href="https://doi.org/10.1007/s00709-024-01995-2" target="_blank" rel="noopener noreferrer" class="inline-link">DOI: 10.1007/s00709-024-01995-2</a>
-                        </p>
-                    </div>
-                </div>
-                <div>
-                    <a href="publications.html" class="btn btn-outline" style="text-decoration: none;">View All Publications &amp; Preprints &rarr;</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="page page-7" id="about">
+        <section class="page page-5" id="about">
             <div class="text-block align-center cta-card">
                 <h2 class="section-title">Ready to analyze your data?</h2>
-                <p style="margin-bottom: 1.5rem; color: rgba(220, 240, 245, 0.88);">
-                    Partner with Xenoi Biotech for your sequencing data analysis or build practical computational biology mastery in our 30-day workshops.
-                </p>
-                <a href="quote.html" class="btn btn-light" style="text-decoration: none;">
-                    Contact Our Team
-                    <span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                </a>
+                <p style="margin-bottom: 1rem;">Partner with us for your next research project or join our upcoming bioinformatics bootcamps.</p>
+                <p class="cta-quote">"Pioneering the intersection of complex biological data. We are reshaping modern technology from ground up."</p>
+                <a href="quote.html" class="btn btn-light" style="text-decoration: none;">Contact Our Team<span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
             </div>
         </section>
     </main>
@@ -394,7 +195,7 @@
         <section class="phone-screen phone-screen-1" id="screen-1">
             <div class="phone-screen-content">
                 <span class="phone-eyebrow-amber">BIOINFORMATICS &middot; RESEARCH &middot; EDUCATION</span>
-                <p class="phone-hero-title">Decode complexity<br>Discover possibility</p>
+                <h2 class="phone-hero-title">Decode complexity<br>Discover possibility</h2>
                 <p class="phone-hero-desc">
                     Research-focused bioinformatics analysis and hands-on learning, from next-generation sequencing data to the skills that move your research forward.
                 </p>
@@ -424,7 +225,7 @@
                         </div>
                         <div class="phone-service-body">
                             <span class="phone-service-eyebrow">NGS &amp; GENOMICS</span>
-                            <p class="phone-service-title">Comprehensive Sequencing Analysis</p>
+                            <h2 class="phone-service-title">Comprehensive Sequencing Analysis</h2>
                             <p class="phone-service-text">Expert pipelines for Next-Generation Sequencing (NGS).</p>
                             <span class="phone-service-link">View Genomics Services &rarr;</span>
                         </div>
@@ -437,7 +238,7 @@
                         </div>
                         <div class="phone-service-body">
                             <span class="phone-service-eyebrow">MULTI-OMICS</span>
-                            <p class="phone-service-title">Beyond the Genome</p>
+                            <h2 class="phone-service-title">Beyond the Genome</h2>
                             <p class="phone-service-text">Metagenomics, Epigenomics, and Transcriptomics data analysis.</p>
                             <span class="phone-service-link">View Services &rarr;</span>
                         </div>
@@ -450,7 +251,7 @@
                         </div>
                         <div class="phone-service-body">
                             <span class="phone-service-eyebrow">EDUCATION</span>
-                            <p class="phone-service-title">Empowering the Next Generation</p>
+                            <h2 class="phone-service-title">Empowering the Next Generation</h2>
                             <p class="phone-service-text">Hands-on training and expert-led workshops for students and researchers.</p>
                             <span class="phone-service-link">Explore Workshops &rarr;</span>
                         </div>
@@ -472,7 +273,7 @@
         <section class="phone-screen phone-screen-3" id="screen-3">
             <div class="phone-screen-content">
                 <div class="phone-cta-card">
-                    <p class="phone-cta-title">Ready to analyze your data?</p>
+                    <h2 class="phone-cta-title">Ready to analyze your data?</h2>
                     <p class="phone-cta-desc">Partner with us for your next research project or join our upcoming bioinformatics bootcamps.</p>
                     <a href="quote.html" class="phone-btn-primary">
                         Contact Our Team
@@ -514,27 +315,21 @@
     </nav>
 
 
-        <footer class="site-footer">
+    <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-grid">
                 <div class="footer-col-brand">
-                    <a href="/" class="footer-logo">
+                    <a href="index.html" class="footer-logo">
                         <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
                     </a>
                     <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
-                    <address class="footer-address">
-                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
-                        Punjab, India<br>
-                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
-                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
-                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
-                    </address>
+                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
                 </div>
 
                 <div class="footer-col">
-                    <p class="footer-heading">EXPLORE</p>
+                    <h2 class="footer-heading">EXPLORE</h2>
                     <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="genomics.html">Genomics</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
@@ -543,21 +338,19 @@
                 </div>
 
                 <div class="footer-col">
-                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <h2 class="footer-heading">PROGRAMMES</h2>
                     <ul class="footer-links">
-                        <li><a href="internships.html">Internships</a></li>
                         <li><a href="career-navigator.html">Career Navigator</a></li>
+                        <li><a href="internships.html">Internships</a></li>
                         <li><a href="collaboration.html">Collaboration</a></li>
-                        <li><a href="resources/index.html">Resources</a></li>
-                        <li><a href="publications.html">Publications</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-col footer-col-contact">
-                    <p class="footer-heading">CONTACT</p>
+                <div class="footer-col">
+                    <h2 class="footer-heading">CONTACT</h2>
                     <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
                     <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
-                    <div class="footer-cta-wrap">
+                    <div style="margin-top: 16px;">
                         <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
                     </div>
                 </div>
@@ -565,10 +358,10 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="footer-legal">
-                    <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
                 </div>
             </div>
         </div>
