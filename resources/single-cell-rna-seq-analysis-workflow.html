@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide | Xenoi Biotech</title>
+    <meta name="description" content="Practical walkthrough of single-cell RNA-seq computational analysis: droplet QC, Seurat normalization, doublet detection, clustering, and marker annotation.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide | Xenoi Biotech">
+    <meta property="og:description" content="Practical walkthrough of single-cell RNA-seq computational analysis: droplet QC, Seurat normalization, doublet detection, clustering, and marker annotation.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide | Xenoi Biotech">
+    <meta name="twitter:description" content="Practical walkthrough of single-cell RNA-seq computational analysis: droplet QC, Seurat normalization, doublet detection, clustering, and marker annotation.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide",
+                    "item": "https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html#article",
+            "headline": "Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide",
+            "description": "Practical walkthrough of single-cell RNA-seq computational analysis: droplet QC, Seurat normalization, doublet detection, clustering, and marker annotation.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the role of Unique Molecular Identifiers (UMIs) in scRNA-seq?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "UMIs are randomized oligonucleotide barcodes attached to individual cDNA molecules prior to PCR amplification. By counting unique UMIs rather than total sequencing reads, bioinformatic workflows completely remove PCR amplification duplicates, yielding accurate transcript counts."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do you identify and remove doublets during single-cell quality control?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Computational algorithms like DoubletFinder and Scrublet simulate artificial doublets by merging random pairs of single-cell profiles, calculate a doublet neighborhood score for each real cell, and remove droplet events whose profiles match the simulated multiplet distribution."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the recommended sequencing depth per cell for droplet-based scRNA-seq?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "For standard tissue atlasing and major cell type classification, 20,000 to 30,000 reads per cell is typical. For deep transcript discovery, subtle sub-state resolution, or detection of low-abundance transcription factors, 50,000 to 100,000 reads per cell is recommended."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Single-cell RNA sequencing (scRNA-seq) quantifies transcriptome-wide gene expression across individual cells, unmasking rare subpopulations, cellular transitions, and cell-specific regulatory responses. Using microfluidic droplet barcoding, unique molecular identifiers, and specialized dimensionality reduction, scRNA-seq workflows transform heterogeneous tissue samples into high-resolution cellular atlases for developmental biology, oncology, and immunology.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Unique Molecular Identifiers (UMIs) eliminate PCR amplification bias by counting unique transcripts rather than amplified cDNA reads.</li><li style='margin-bottom: 8px;'>Stringent quality filtering must balance removing damaged cells (high mitochondrial read percentage) against retaining biologically specialized cell types.</li><li style='margin-bottom: 8px;'>Computational doublet detection algorithms like DoubletFinder or Scrublet identify technical artifacts arising from co-encapsulated cells.</li><li style='margin-bottom: 8px;'>Normalization methods such as SCTransform model technical overdispersion and sequencing depth without distorting biological gene-gene correlations.</li><li style='margin-bottom: 8px;'>Cell type annotation combines unsupervised cluster marker discovery with reference atlas label transfer and curated canonical markers.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Single-Cell RNA Sequencing and When Should It Be Used?</h2>
+                
+        <p>In multicellular organisms, every tissue is composed of a complex mosaic of cellular lineages, functional states, and transient intermediates. Traditional bulk transcriptomics measures the average gene expression across thousands or millions of cells, masking gene expression dynamics restricted to rare stem cells, infiltrating lymphocytes, or resistant tumor clones. Single-cell RNA sequencing overcomes this limitation by capturing expression profiles from individual cells.</p>
+        <p>High-throughput droplet systems (such as the 10x Genomics Chromium platform) encapsulate single cells within oil droplets alongside lysis buffer and hydrogel beads. Each bead delivers oligonucleotides containing a common sequencing adapter, a droplet-specific cell barcode, and millions of randomized Unique Molecular Identifiers (UMIs). Polyadenylated mRNAs hybridize to the oligo-dT capture sequence, initiating reverse transcription within the droplet. All cDNA is subsequently pooled and sequenced in bulk, but downstream bioinformatic demultiplexing assigns each read to its cell of origin.</p>
+        <p>scRNA-seq has become an indispensable technology across biological disciplines, enabling comprehensive mapping of immune responses, identification of novel disease biomarkers, characterization of cell fate trajectories, and spatial modeling of tissue architecture.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Plan Experimental Design, Cell Numbers, and Sequencing Depth?</h2>
+                
+        <p>Experimental success in scRNA-seq depends fundamentally on tissue dissociation quality. Single-cell protocols require viable, single-cell suspensions with viability exceeding 85% to 90%. Incomplete enzymatic digestion leaves cell aggregates, whereas over-digestion damages fragile cell types and releases ambient RNA that contaminates droplets.</p>
+        <p>Targeted cell numbers and sequencing depth involve trade-offs between biological discovery and project budget. For broad atlas generation across major cell classes, targeting 5,000 to 10,000 cells per sample with 20,000 to 30,000 reads per cell provides adequate sensitivity for moderately to highly expressed genes. Conversely, for detecting subtle transcription factor kinetics, alternative splicing, or rare stem populations, deeper sequencing (50,000 to 100,000 reads per cell) is recommended.</p>
+        <p>To control for technical batch variation, modern experimental designs incorporate multiple biological replicates per condition. Sample hashing techniques using cell surface antibodies or lipid oligonucleotides allow multiplexing multiple biological samples within a single microfluidic lane, drastically lowering reagent costs and eliminating batch effects.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Filter Low-Quality Cells, Empty Droplets, and Doublets?</h2>
+                
+        <p>Raw FASTQ data is demultiplexed and mapped to reference transcriptomes using alignment pipelines like Cell Ranger or pseudo-alignment engines like Alevin. The resulting raw feature-barcode matrix includes both intact cell profiles and background droplets containing ambient RNA. Distinguishing true cells from empty droplets relies on rank-based barcode knee-plots and statistical algorithms such as EmptyDrops.</p>
+        <p>Subsequent cell-level quality filtering evaluates three primary parameters:</p>
+        <ul>
+            <li><strong>Total Detected Genes (nFeature_RNA):</strong> Drops droplets with very low gene counts (debris or broken cells) as well as unusually high gene counts, which frequently represent multiple cells in one droplet.</li>
+            <li><strong>Total UMI Count (nCount_RNA):</strong> Tracks overall capture efficiency. Outlier cutoffs remove poorly sequenced cells or hyper-sequenced multiplets.</li>
+            <li><strong>Mitochondrial Transcript Percentage:</strong> When cell membranes rupture during tissue handling, cytoplasmic mRNA leaks out while mitochondria are retained inside the cell. A high percentage of mitochondrial reads (typically above 5% to 15%, depending on the tissue) indicates stressed or dying cells that should be excluded.</li>
+        </ul>
+        <p>Doublet filtering is also essential. Technical doublets occur when two cells are captured in the same droplet. Computational tools such as DoubletFinder or Scrublet simulate artificial doublets from the dataset and remove cells whose expression profiles closely mirror the in silico doublets.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are scRNA-Seq Datasets Normalized, Scaled, and Clustered?</h2>
+                
+        <p>Because sequencing depth varies widely between individual droplets due to stochastic capture efficiencies, raw counts must be normalized. Traditional log-normalization divides feature counts by the cell total, multiplies by a scaling factor (e.g., 10,000), and calculates natural logarithms. However, modern workflows increasingly rely on regularized negative binomial regression (such as SCTransform in Seurat), which effectively decouples technical sequencing depth from biological overdispersion.</p>
+        <p>Following normalization, feature selection identifies the top 2,000 to 3,000 highly variable genes (HVGs) that drive biological variance. Data is scaled, and dimensionality reduction is performed via Principal Component Analysis (PCA). Determining the number of significant principal components relies on elbow plots and JackStraw resampling.</p>
+        <p>Using the top principal components, a shared nearest-neighbor (SNN) graph is constructed. Community detection algorithms (Leiden or Louvain) cluster cells into discrete populations. Finally, non-linear projection algorithms like UMAP or t-SNE project the high-dimensional graph into a two-dimensional visualization where transcriptionally similar cells group together.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Annotate Cell Types and Identify Marker Genes?</h2>
+                
+        <p>Unsupervised clustering identifies mathematical groups of cells, but biological insight requires cell type annotation. Differential expression testing (using Wilcoxon rank-sum tests or hurdle models) detects marker genes specifically upregulated in each cluster relative to all other clusters.</p>
+        <p>Annotation strategies typically combine multiple complementary methodologies:</p>
+        <ul>
+            <li><strong>Canonical Marker Verification:</strong> Cross-referencing top differentially expressed genes against established literature markers (e.g., CD3D for T cells, CD19 for B cells, PECAM1 for endothelial cells).</li>
+            <li><strong>Automated Reference Label Transfer:</strong> Projecting query single-cell data onto high-quality reference atlases (such as the Human Cell Atlas) using algorithms like SingleR, Azimuth, or CellTypist to transfer validated annotations automatically.</li>
+            <li><strong>Gene Set Enrichment:</strong> Conducting Pathway analysis (Gene Ontology and KEGG) on cluster-defining gene signatures to characterize functional states (e.g., activated, exhausted, proliferating).</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Key Deliverables and Common Pitfalls in scRNA-Seq?</h2>
+                
+        <p>A complete scRNA-seq computational deliverable includes quality audit dashboards, raw and filtered count matrices, Seurat or AnnData object files, normalized UMAP embeddings, comprehensive differential gene expression spreadsheets, marker gene heatmaps, and publication-ready figures.</p>
+        <p>Common analytical pitfalls to guard against include:</p>
+        <ul>
+            <li><strong>Over-Filtering Specialized Populations:</strong> Setting rigid mitochondrial cutoffs can inadvertently purge biologically metabolically active cells (such as cardiomyocytes or proximal tubule kidney cells) that naturally express elevated mitochondrial genes.</li>
+            <li><strong>Ignoring Ambient RNA Contamination:</strong> In dissociated tissues, background RNA from lysed cells is ubiquitous. Failing to remove ambient background using tools like SoupX or DecontX can cause ectopic marker expression across unrelated clusters.</li>
+            <li><strong>Over-Clustering:</strong> Selecting an excessively high clustering resolution splits biologically continuous cell states into arbitrary, non-reproducible sub-clusters.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../single-cell-rna-seq.html" class="btn btn-light">Learn this in our 30-day workshop: Single-Cell RNA-Seq Data Analysis Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Transcriptomics & Single-Cell Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the role of Unique Molecular Identifiers (UMIs) in scRNA-seq?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">UMIs are randomized oligonucleotide barcodes attached to individual cDNA molecules prior to PCR amplification. By counting unique UMIs rather than total sequencing reads, bioinformatic workflows completely remove PCR amplification duplicates, yielding accurate transcript counts.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How do you identify and remove doublets during single-cell quality control?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Computational algorithms like DoubletFinder and Scrublet simulate artificial doublets by merging random pairs of single-cell profiles, calculate a doublet neighborhood score for each real cell, and remove droplet events whose profiles match the simulated multiplet distribution.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the recommended sequencing depth per cell for droplet-based scRNA-seq?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">For standard tissue atlasing and major cell type classification, 20,000 to 30,000 reads per cell is typical. For deep transcript discovery, subtle sub-state resolution, or detection of low-abundance transcription factors, 50,000 to 100,000 reads per cell is recommended.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Zheng, G. X., et al. (2017). Massively parallel digital transcriptional profiling of single cells. <em>Nature Communications</em>, 8, 14049. <a href='https://doi.org/10.1038/ncomms14049' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/ncomms14049</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Hao, Y., et al. (2021). Integrated analysis of multimodal single-cell data. <em>Cell</em>, 184(13), 3573–3587. <a href='https://doi.org/10.1016/j.cell.2021.04.048' target='_blank' rel='noopener noreferrer'>DOI: 10.1016/j.cell.2021.04.048</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Wolf, F. A., et al. (2018). SCANPY: large-scale single-cell gene expression data analysis. <em>Genome Biology</em>, 19(1), 15. <a href='https://doi.org/10.1186/s13059-017-1382-0' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/s13059-017-1382-0</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Lun, A. T., et al. (2019). EmptyDrops: distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data. <em>Genome Biology</em>, 20(1), 63. <a href='https://doi.org/10.1186/s13059-019-1662-y' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/s13059-019-1662-y</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="rna-seq-analysis-step-by-step.html" class="inline-link">Bulk RNA-Seq Analysis Step-by-Step Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

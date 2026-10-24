@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive guide to de novo transcriptome assembly without a reference genome: Trinity assembly, CD-HIT-EST clustering, TransDecoder, and BUSCO validation.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive guide to de novo transcriptome assembly without a reference genome: Trinity assembly, CD-HIT-EST clustering, TransDecoder, and BUSCO validation.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive guide to de novo transcriptome assembly without a reference genome: Trinity assembly, CD-HIT-EST clustering, TransDecoder, and BUSCO validation.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms",
+                    "item": "https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html#article",
+            "headline": "De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms",
+            "description": "Comprehensive guide to de novo transcriptome assembly without a reference genome: Trinity assembly, CD-HIT-EST clustering, TransDecoder, and BUSCO validation.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is N50 alone insufficient for evaluating de novo transcriptome quality?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "N50 only measures contig length distribution, not biological correctness. Artificial chimeric fusions inflate N50 values. Reliable validation requires BUSCO orthology completeness and Ex90N50 expression-weighted statistics."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I use long reads (PacBio or Nanopore) for de novo transcriptome assembly?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Full-length cDNA long reads (e.g., PacBio Iso-Seq) sequence entire transcript molecules from 5' cap to poly-A tail without assembly, or can be combined with Illumina short reads in hybrid assemblers like rnaSPAdes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I perform differential expression after de novo assembly?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Align sample-specific reads back to the unified assembly using pseudo-aligners like Salmon or Kallisto to quantify transcript abundance, followed by gene-level statistical testing in edgeR or DESeq2."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    De novo RNA-Seq transcriptome assembly reconstructs complete transcript catalogs directly from overlapping RNA sequencing reads without relying on a sequenced reference genome. By utilizing de Bruijn graph algorithms such as Trinity, filtering sequence redundancy, and predicting coding sequences with TransDecoder, researchers establish reference transcriptomes for ecological, agricultural, and non-model organism discoveries.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>De novo assembly reconstructs full-length transcripts without an existing reference genome, making it indispensable for non-model species.</li><li style='margin-bottom: 8px;'>Stringent quality trimming and rRNA removal prevent chimeric contig formation in downstream de Bruijn graph reconstruction.</li><li style='margin-bottom: 8px;'>The Trinity assembler executes Inchworm, Chrysalis, and Butterfly modules to resolve complex splicing isoforms and paralogous gene families.</li><li style='margin-bottom: 8px;'>Transcript redundancy reduction with CD-HIT-EST and coding region prediction via TransDecoder optimize the assembly for functional analysis.</li><li style='margin-bottom: 8px;'>Assembly completeness must be benchmarked using BUSCO against lineage-specific conserved ortholog datasets.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is De Novo Transcriptome Assembly and Why Is It Essential for Non-Model Species?</h2>
+                
+        <p>In life sciences, thousands of ecologically, pharmaceutically, and agriculturally vital organisms lack high-quality reference genomes. De novo transcriptome assembly solves this challenge by reconstructing expressed transcripts directly from RNA sequencing reads. Unlike reference-guided mapping where reads are aligned against genomic coordinates, de novo assembly algorithms detect overlapping k-mers among short reads to assemble continuous transcript sequences (contigs).</p>
+        <p>This approach captures biologically active isoforms, tissue-specific splice variants, and stress-responsive transcripts in species ranging from medicinal plants to marine invertebrates and non-model pathogens. A well-assembled de novo transcriptome serves as an enduring reference framework for subsequent differential expression, phylogenomics, and molecular breeding.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Sequencing Experiments for De Novo Transcriptome Assembly?</h2>
+                
+        <p>Because the assembler must bridge repetitive sequence elements and resolve alternative splicing without a physical genomic roadmap, library preparation and sequencing depth require careful calibration. Paired-end sequencing (2x150 bp) on short-read platforms (such as Illumina NovaSeq) is the benchmark standard. Paired-end reads provide crucial long-range connectivity, linking disparate exons across complex transcript topologies.</p>
+        <p>Targeted sequencing depth typically ranges from 40 to 80 million paired-end reads per tissue or developmental condition. To maximize transcriptome completeness, researchers frequently pool RNA across multiple organs (e.g., leaves, roots, apical buds, stress-treated tissues) to ensure that rarely expressed regulatory transcripts are captured in the library.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Raw Reads Cleaned and Preprocessed for Assembly Quality?</h2>
+                
+        <p>De novo assemblers are exceptionally sensitive to sequencing artifacts, adapters, and low-quality bases. Low-quality base calls produce erroneous k-mers that exponentially inflate the size and complexity of the assembly de Bruijn graph, causing fragmented contigs or assembly failures.</p>
+        <p>Pre-processing begins with rigorous quality audits using FastQC. Trimming engines such as fastp or Trimmomatic clip Illumina adapter sequences, remove low-quality bases (Phred score < 30) from read ends, and discard reads shorter than 50 bp. Furthermore, ribo-depletion or computational screening against ribosomal RNA databases (via SortMeRNA) removes residual rRNA reads, focusing assembly compute purely on mRNA sequences.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does De Bruijn Graph Assembly Work in Algorithms Like Trinity?</h2>
+                
+        <p>The standard software for short-read de novo transcriptome assembly is Trinity. Trinity executes three sequential algorithmic modules:</p>
+        <ul>
+            <li><strong>Inchworm:</strong> Deconstructs reads into k-mers (typically k=25), constructs linear de Bruijn graphs, and greedily extends them to produce primary contigs representing dominant transcript isoforms.</li>
+            <li><strong>Chrysalis:</strong> Clusters related Inchworm contigs corresponding to alternative splice forms or closely related paralogs, building individual de Bruijn graphs for each distinct gene component.</li>
+            <li><strong>Butterfly:</strong> Traces read paths and paired-end read connections through individual Chrysalis graphs, untangling alternative splicing paths to report full-length, phased transcript isoforms.</li>
+        </ul>
+        <p>The resulting raw assembly often contains thousands of alternative splicing isoforms, transcript fragments, and allelic variants requiring downstream filtering.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Reduce Redundancy and Predict Open Reading Frames?</h2>
+                
+        <p>Raw assemblies frequently exhibit high transcript redundancy that inflates multiple testing penalties during differential expression. Clustering tools like CD-HIT-EST cluster highly similar contigs (e.g., 95% sequence identity threshold) to retain only representative longest transcripts.</p>
+        <p>Following redundancy reduction, TransDecoder identifies likely coding regions within contigs. TransDecoder extracts open reading frames (ORFs) of at least 100 amino acids and evaluates hexanucleotide frequency coding bias. Candidates are validated by querying predicted peptides against UniProt and Pfam protein domains via BLASTp and HMMER, outputting high-confidence protein and CDS files.</p>
+        <p>Functional annotation proceeds by querying transcripts against Swiss-Prot, TrEMBL, and NCBI NR databases using BLASTx, alongside Gene Ontology and eggNOG orthology assignment.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Validate Assembly Completeness and Avoid Common Pitfalls?</h2>
+                
+        <p>Transcriptome quality cannot be assessed by N50 alone; a high N50 can easily result from chimeric misassemblies. Standard assessment requires three independent metrics:</p>
+        <ul>
+            <li><strong>Read Mapping Rate:</strong> Aligning input reads back to the assembled contigs using Bowtie2. Over 80% of reads should align concordantly.</li>
+            <li><strong>Ex90N50 Metric:</strong> Calculating the N50 contig length for the subset of transcripts contributing to the top 90% of total expression, avoiding skew from lowly expressed fragments.</li>
+            <li><strong>BUSCO Completeness:</strong> Benchmarking Universal Single-Copy Orthologs (BUSCO) compares assembled contigs against evolutionary conserved gene sets (e.g., embryophyta_odb10 for plants). High-quality assemblies exceed 85% to 90% complete BUSCOs.</li>
+        </ul>
+        <p>A frequent pitfall is assembling multiple biological conditions separately, which creates mismatched contig identifiers that prevent cross-condition differential expression. Best practice dictates generating a single unified de novo assembly from all pooled reads, followed by condition-specific read quantification using Kallisto or Salmon.</p>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../rna-seq-de-novo.html" class="btn btn-light">Learn this in our 30-day workshop: De Novo RNA-Seq Assembly Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? De Novo Transcriptomics Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is N50 alone insufficient for evaluating de novo transcriptome quality?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">N50 only measures contig length distribution, not biological correctness. Artificial chimeric fusions inflate N50 values. Reliable validation requires BUSCO orthology completeness and Ex90N50 expression-weighted statistics.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Can I use long reads (PacBio or Nanopore) for de novo transcriptome assembly?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Yes. Full-length cDNA long reads (e.g., PacBio Iso-Seq) sequence entire transcript molecules from 5' cap to poly-A tail without assembly, or can be combined with Illumina short reads in hybrid assemblers like rnaSPAdes.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How do I perform differential expression after de novo assembly?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Align sample-specific reads back to the unified assembly using pseudo-aligners like Salmon or Kallisto to quantify transcript abundance, followed by gene-level statistical testing in edgeR or DESeq2.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Grabherr, M. G., et al. (2011). Full-length transcriptome assembly from RNA-Seq data without a reference genome. <em>Nature Biotechnology</em>, 29(7), 644–652. <a href='https://doi.org/10.1038/nbt.1883' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nbt.1883</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Manni, M., et al. (2021). BUSCO Update: Novel and Streamlined Workflows along with Broader and Deeper Phylogenetic Coverage for Scoring of Eukaryotic, Prokaryotic, and Viral Genomes. <em>Molecular Biology and Evolution</em>, 38(10), 4647–4654. <a href='https://doi.org/10.1093/molbev/msab199' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/molbev/msab199</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Haas, B. J., et al. (2013). De novo transcript sequence reconstruction from RNA-seq using the Trinity platform for reference generation and analysis. <em>Nature Protocols</em>, 8(8), 1494–1512. <a href='https://doi.org/10.1038/nprot.2013.084' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nprot.2013.084</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="rna-seq-analysis-step-by-step.html" class="inline-link">Bulk RNA-Seq Analysis Step-by-Step Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

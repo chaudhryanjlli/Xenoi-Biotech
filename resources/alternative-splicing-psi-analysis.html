@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools | Xenoi Biotech</title>
+    <meta name="description" content="In-depth computational guide to alternative splicing and Percent Spliced-In (PSI) analysis using rMATS, SUPPA2, junction reads, and sashimi plot visualization.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools | Xenoi Biotech">
+    <meta property="og:description" content="In-depth computational guide to alternative splicing and Percent Spliced-In (PSI) analysis using rMATS, SUPPA2, junction reads, and sashimi plot visualization.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools | Xenoi Biotech">
+    <meta name="twitter:description" content="In-depth computational guide to alternative splicing and Percent Spliced-In (PSI) analysis using rMATS, SUPPA2, junction reads, and sashimi plot visualization.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools",
+                    "item": "https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html#article",
+            "headline": "Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools",
+            "description": "In-depth computational guide to alternative splicing and Percent Spliced-In (PSI) analysis using rMATS, SUPPA2, junction reads, and sashimi plot visualization.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What does a Percent Spliced-In (PSI) value of 0.8 mean?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A PSI of 0.8 indicates that in that biological sample, 80% of the transcripts transcribed from that gene locus include the alternative exon, while the remaining 20% exclude it."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between event-based (rMATS) and isoform-based (SUPPA2) analysis?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "rMATS counts physical reads spanning specific exon junctions, providing robust local evidence independent of full-length transcript deconvolution. SUPPA2 computes PSI from estimated full-length transcript abundances, offering faster execution and broader whole-transcript context."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does alternative splicing trigger Nonsense-Mediated Decay (NMD)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Exon inclusion or exclusion that alters the triplet reading frame can introduce a premature termination codon (PTC). If a PTC is recognized upstream of the final exon junction complex, cellular surveillance machinery degrades the mRNA transcript via NMD."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Alternative splicing and Percent Spliced-In (PSI or &Psi;) analysis quantifies how pre-mRNAs are differentially processed into distinct transcript isoforms across developmental or pathological states. By evaluating exon-junction spanning reads and transcript abundance with computational tools like rMATS and SUPPA2, bioinformatic workflows identify exon skipping, intron retention, and splice site shifts that alter protein structure.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Alternative splicing allows a single gene locus to generate multiple distinct functional protein isoforms with divergent activities.</li><li style='margin-bottom: 8px;'>Percent Spliced-In (&Psi;) is the mathematical ratio quantifying the proportion of transcripts that include a specific alternative exon.</li><li style='margin-bottom: 8px;'>Detection requires long, paired-end, stranded RNA sequencing with high read depth across splice junctions.</li><li style='margin-bottom: 8px;'>Event-based tools like rMATS evaluate junction-spanning reads directly, whereas isoform-based tools like SUPPA2 calculate PSI from transcript abundance.</li><li style='margin-bottom: 8px;'>Validation utilizes differential splicing statistics (|&Delta;&Psi;| > 0.1, FDR < 0.05), sashimi plots, and RT-PCR confirmation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Alternative Splicing and Why Quantify It Using Percent Spliced-In?</h2>
+                
+        <p>In eukaryotic genes, pre-mRNA molecules undergo splicing to excise non-coding introns and ligate coding exons together. Rather than producing a single static transcript, the spliceosome can selectively include or exclude specific exonic segments, alternative 5' or 3' splice sites, or entire introns. Alternative splicing significantly expands proteome diversity, with over 95% of multi-exonic human genes undergoing alternative splicing.</p>
+        <p>Aberrant splicing events drive oncogenesis, autoimmune dysfunction, and neurodegenerative disorders by truncating tumor suppressor proteins or shifting receptor isoforms. Quantifying these events requires a standardized metric: Percent Spliced-In (&Psi; or PSI). PSI values range from 0 (complete exon exclusion) to 1.0 (100% exon inclusion), providing an intuitive, normalized index for comparing splicing efficiency across biological conditions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Sequencing Experiments to Capture Splicing Events?</h2>
+                
+        <p>Quantifying alternative splicing imposes far stricter technical requirements on RNA sequencing than standard gene-level differential expression. Detecting alternative splicing depends on sequencing reads that directly span exon-exon junctions.</p>
+        <p>Key experimental design requirements include:</p>
+        <ul>
+            <li><strong>Sequencing Depth:</strong> While 20 million reads per sample is sufficient for gene-level expression, splicing analysis requires 50 to 100 million paired reads per sample to ensure adequate junction-spanning read depth across lowly expressed isoforms.</li>
+            <li><strong>Read Length:</strong> Longer paired-end reads (2x150 bp) are strongly preferred over short reads. Longer reads map more uniquely across split junction boundaries with sufficient exonic overhangs (at least 8 to 10 nt on either side of the junction).</li>
+            <li><strong>Strand Specificity:</strong> Stranded library preparation is essential to resolve antisense transcripts and ambiguous overlapping genes.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Splice Junctions Mapped and What Splicing Event Types Exist?</h2>
+                
+        <p>Computational processing begins with splice-aware alignment using STAR, configured with <code>--chimSegmentMin</code> and two-pass alignment (<code>--twopassMode Basic</code>) to maximize sensitivity for novel, non-annotated splice junctions.</p>
+        <p>Alternative splicing events are classified into five canonical categories:</p>
+        <ul>
+            <li><strong>Skipped Exon (SE):</strong> An alternative cassette exon is either included or spliced out between flanking constitutive exons.</li>
+            <li><strong>Alternative 5' Splice Site (A5SS):</strong> Shift in the donor splice site alters the 5' boundary of an upstream intron.</li>
+            <li><strong>Alternative 3' Splice Site (A3SS):</strong> Shift in the acceptor splice site alters the 3' boundary of an intron.</li>
+            <li><strong>Mutually Exclusive Exons (MXE):</strong> One of two adjacent exons is included in the mature transcript, but never both simultaneously.</li>
+            <li><strong>Retained Intron (RI):</strong> An intron is retained in the mature transcript instead of being excised.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do Algorithms Like rMATS and SUPPA2 Calculate Delta-PSI?</h2>
+                
+        <p>Two primary bioinformatic paradigms exist for alternative splicing quantification:</p>
+        <p><strong>Event-Centric Modeling (rMATS):</strong> rMATS analyzes raw junction-spanning reads directly from coordinate-sorted BAM files. For a skipped exon, it counts inclusion junction reads (connecting the upstream exon to the alternative exon, and the alternative exon to the downstream exon) and exclusion junction reads (connecting the upstream exon directly to the downstream exon). Using a hierarchical Bayesian framework, rMATS calculates the difference in inclusion levels (&Delta;&Psi; = &Psi;<sub>Condition1</sub> - &Psi;<sub>Condition2</sub>) and assigns statistical significance.</p>
+        <p><strong>Isoform-Centric Modeling (SUPPA2):</strong> SUPPA2 leverages rapid transcript quantification from Salmon or Kallisto. Given transcript-level TPM estimates and an annotated GTF file, SUPPA2 mathematically computes PSI values for each event as the ratio of expression of isoforms including the event divided by total gene expression, followed by empirical differential splicing testing.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Visualize Splicing Changes and Predict Protein Consequences?</h2>
+                
+        <p>Statistically significant splicing alterations (|&Delta;&Psi;| > 0.10, FDR < 0.05) must be inspected visually and evaluated for downstream functional consequences:</p>
+        <p><strong>Sashimi Plot Visualization:</strong> Tools like rmats2sashimiplot or IGV Sashimi display junction-spanning read arcs superimposed over genomic exon models. The height and numerical labels of the arcs represent normalized junction read depth across experimental groups, providing visual proof of differential exon inclusion.</p>
+        <p><strong>Protein Impact Modeling:</strong> Exon inclusion or exclusion frequently shifts open reading frames (frameshift mutations) or introduces premature termination codons (PTCs), triggering nonsense-mediated mRNA decay (NMD). In-frame alterations can add or remove key protein phosphorylation sites, transmembrane domains, or ligand-binding pockets.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Major Outputs and Common Pitfalls in Splicing Analysis?</h2>
+                
+        <p>Comprehensive deliverables include differential splicing summary tables categorized by event type, raw and normalized junction count spreadsheets, &Delta;&Psi; distribution plots, volcano plots of &Delta;&Psi; vs -log10(FDR), and publication-ready sashimi diagrams.</p>
+        <p>Critical pitfalls in splicing analysis include:</p>
+        <ul>
+            <li><strong>Insufficient Junction Overhang:</strong> Read mappers can falsely align reads with 1 to 2 base overhangs to pseudo-junctions. Filtering for minimum overhangs (>8 nt) prevents spurious junction calls.</li>
+            <li><strong>Conflating Gene Expression With Splicing:</strong> A gene may produce more junction reads simply because total gene transcription increased, without any shift in splicing ratio. Evaluating &Delta;&Psi; decouples splicing regulation from overall transcriptional abundance.</li>
+            <li><strong>Ignoring Intron Retention Artifacts:</strong> Pre-mRNA contamination from unlysed nuclei or genomic DNA contamination mimics intron retention events. Validation requires confirming unstranded read uniformity across introns.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../psi-seq.html" class="btn btn-light">Learn this in our 30-day workshop: Alternative Splicing / PSI-Seq Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Transcriptomics & Splicing Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What does a Percent Spliced-In (PSI) value of 0.8 mean?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">A PSI of 0.8 indicates that in that biological sample, 80% of the transcripts transcribed from that gene locus include the alternative exon, while the remaining 20% exclude it.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the difference between event-based (rMATS) and isoform-based (SUPPA2) analysis?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">rMATS counts physical reads spanning specific exon junctions, providing robust local evidence independent of full-length transcript deconvolution. SUPPA2 computes PSI from estimated full-length transcript abundances, offering faster execution and broader whole-transcript context.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does alternative splicing trigger Nonsense-Mediated Decay (NMD)?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Exon inclusion or exclusion that alters the triplet reading frame can introduce a premature termination codon (PTC). If a PTC is recognized upstream of the final exon junction complex, cellular surveillance machinery degrades the mRNA transcript via NMD.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Shen, S., et al. (2014). rMATS: robust and flexible detection of differential alternative splicing from replicate RNA-Seq data. <em>Proceedings of the National Academy of Sciences</em>, 111(51), E5593–E5601. <a href='https://doi.org/10.1073/pnas.1419161111' target='_blank' rel='noopener noreferrer'>DOI: 10.1073/pnas.1419161111</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Trincado, J. L., et al. (2018). SUPPA2: fast, accurate, and uncertainty-aware differential splicing analysis across multiple conditions. <em>RNA</em>, 24(9), 1158–1173. <a href='https://doi.org/10.1261/rna.065524.118' target='_blank' rel='noopener noreferrer'>DOI: 10.1261/rna.065524.118</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Katz, Y., et al. (2010). Analysis and design of RNA sequencing experiments for identifying isoform regulation. <em>Nature Methods</em>, 7(12), 1009–1015. <a href='https://doi.org/10.1038/nmeth.1528' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nmeth.1528</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="rna-seq-analysis-step-by-step.html" class="inline-link">Bulk RNA-Seq Analysis Step-by-Step Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

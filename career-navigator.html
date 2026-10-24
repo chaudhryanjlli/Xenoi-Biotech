@@ -4,8 +4,8 @@
     <script src="compact-init.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Career Guidance for Life Science Students | Xenoi Biotech</title>
-    <meta name="description" content="A structured career guidance programme designed specifically for life science students. Discover career pathways across industry, academia, and government.">
+    <title>Bioinformatics Career Navigator & Pathways | Xenoi Biotech</title>
+    <meta name="description" content="Discover nine high-growth bioinformatics career pathways, required computational skill stacks, and targeted training roadmaps with Xenoi Biotech in Punjab, India.">
     <link rel="canonical" href="https://www.xenoibiotech.com/career-navigator.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#03100e">
@@ -17,15 +17,15 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Xenoi Biotech">
-    <meta property="og:title" content="Career Guidance for Life Science Students | Xenoi Biotech">
-    <meta property="og:description" content="A structured career guidance programme designed specifically for life science students. Discover career pathways across industry, academia, and government.">
+    <meta property="og:title" content="Bioinformatics Career Navigator & Pathways | Xenoi Biotech">
+    <meta property="og:description" content="Discover nine high-growth bioinformatics career pathways, required computational skill stacks, and targeted training roadmaps with Xenoi Biotech in Punjab, India.">
     <meta property="og:url" content="https://www.xenoibiotech.com/career-navigator.html">
     <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Career Guidance for Life Science Students | Xenoi Biotech">
-    <meta name="twitter:description" content="A structured career guidance programme designed specifically for life science students. Discover career pathways across industry, academia, and government.">
+    <meta name="twitter:title" content="Bioinformatics Career Navigator & Pathways | Xenoi Biotech">
+    <meta name="twitter:description" content="Discover nine high-growth bioinformatics career pathways, required computational skill stacks, and targeted training roadmaps with Xenoi Biotech in Punjab, India.">
     <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Favicons -->
@@ -42,23 +42,44 @@
     <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
     <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
 
-    <!-- Structured Data: Breadcrumbs -->
+        <!-- Structured Data: Organization, Breadcrumbs -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+      "@graph": [
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.xenoibiotech.com/"
+          "@type": ["Organization", "EducationalOrganization"],
+          "@id": "https://www.xenoibiotech.com/#org",
+          "name": "Xenoi Biotech",
+          "legalName": "Xenoi Biotech Pvt. Ltd.",
+          "alternateName": "Xenoibiotech",
+          "url": "https://www.xenoibiotech.com/",
+          "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+          "description": "Bioinformatics company in Punjab, India offering NGS data analysis services and online bioinformatics workshops and internships.",
+          "email": "explore@xenoibiotech.com",
+          "areaServed": "India",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Punjab",
+            "addressCountry": "IN"
+          }
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Programmes › Career Navigator",
-          "item": "https://www.xenoibiotech.com/career-navigator.html"
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.xenoibiotech.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Career Navigator",
+              "item": "https://www.xenoibiotech.com/career-navigator.html"
+            }
+          ]
         }
       ]
     }
@@ -69,15 +90,16 @@
     
     <header class="site-header" id="site-header">
         <div class="header-inner">
-            <a href="index.html" class="header-logo" aria-label="Xenoi Biotech Home">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
                 <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
             </a>
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="career-navigator.html" class="active" aria-current="page">Programmes</a></li>
+                    <li><a href="internships.html" class="active">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="publications.html">Publications</a></li>
                     <li><a href="team.html">About</a></li>
                     <li><a href="quote.html">Contact</a></li>
                 </ul>
@@ -99,7 +121,7 @@
     <main class="page-container text-block visible" id="main">
         <div class="page-header-block">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <span class="sep">/</span>
                 <span class="current">Programmes › Career Navigator</span>
             </nav>
@@ -129,7 +151,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
                     </div>
                     <h3 class="card-title">Biotech &amp; Pharma</h3>
-                    <p class="card-body">QC/QA, production, validation, technical support</p>
+                    <p class="card-body">QC/QA, assay validation, and drug target analysis. Build applied laboratory and analytical competence through our <a href="internships.html" class="inline-link">research internships</a>.</p>
                 </div>
 
                 <div class="card">
@@ -137,7 +159,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </div>
                     <h3 class="card-title">Bioinformatics &amp; Data</h3>
-                    <p class="card-body">Omics analysis, data annotation, scientific coding, AI/ML support</p>
+                    <p class="card-body">Omics analysis, workflow automation, and computational modeling. Master hands-on pipelines in our <a href="workshops.html" class="inline-link">30-day online workshops</a>.</p>
                 </div>
 
                 <div class="card">
@@ -145,7 +167,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                     </div>
                     <h3 class="card-title">Clinical &amp; Healthcare</h3>
-                    <p class="card-body">Clinical research, pharmacovigilance, diagnostics, medical labs</p>
+                    <p class="card-body">Genomic diagnostics, rare variant filtering, and oncology panels. Learn variant calling in our <a href="dna-seq.html" class="inline-link">DNA-Seq workshop</a>.</p>
                 </div>
 
                 <div class="card">
@@ -153,7 +175,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
                     </div>
                     <h3 class="card-title">Environment &amp; Sustainability</h3>
-                    <p class="card-body">Ecology, EIA (environmental impact assessment), water testing, waste management, ESG support</p>
+                    <p class="card-body">Microbial ecology, environmental impact assessment, and metagenomic surveillance. Explore <a href="targeted-metagenomics.html" class="inline-link">16S/ITS metagenomics</a>.</p>
                 </div>
 
                 <div class="card">
@@ -161,7 +183,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                     </div>
                     <h3 class="card-title">Agriculture &amp; Food</h3>
-                    <p class="card-body">Seed industry, plant tissue culture, agri-inputs, food safety, extension</p>
+                    <p class="card-body">Crop genomics, marker-assisted breeding, and food safety testing. Gain expertise in <a href="genome-assembly.html" class="inline-link">de novo genome assembly</a>.</p>
                 </div>
 
                 <div class="card">
@@ -169,7 +191,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     </div>
                     <h3 class="card-title">Regulatory &amp; Scientific Writing</h3>
-                    <p class="card-body">Regulatory affairs, medical writing, documentation, literature review</p>
+                    <p class="card-body">Dossier preparation, methods documentation, and scientific reporting. See how we draft deliverables in our <a href="services.html" class="inline-link">bioinformatics services</a>.</p>
                 </div>
 
                 <div class="card">
@@ -177,7 +199,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
                     </div>
                     <h3 class="card-title">Wildlife &amp; Field Science</h3>
-                    <p class="card-body">Biodiversity surveys, conservation projects, NGOs, field assistant roles</p>
+                    <p class="card-body">Conservation genomics, population structure, and phylogeography. Master reduced-representation genomics in <a href="rad-seq.html" class="inline-link">RAD-Seq analysis</a>.</p>
                 </div>
 
                 <div class="card">
@@ -185,7 +207,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                     </div>
                     <h3 class="card-title">Education &amp; Communication</h3>
-                    <p class="card-body">Edtech, coaching, content creation, science communication</p>
+                    <p class="card-body">Academic teaching, training facilitation, and scientific outreach. Partner with us via <a href="collaboration.html" class="inline-link">college collaborations</a>.</p>
                 </div>
 
                 <div class="card">
@@ -193,7 +215,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     </div>
                     <h3 class="card-title">Entrepreneurship &amp; Freelance</h3>
-                    <p class="card-body">Tutoring, lab services, digital education, consulting, startups</p>
+                    <p class="card-body">Contract pipeline engineering, consulting, and independent bioinformatics services. Enquire via our <a href="quote.html" class="inline-link">consultation desk</a>.</p>
                 </div>
             </div>
             <span class="grid-caption">Note: Career pathways are indicative.</span>
@@ -352,21 +374,27 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+        <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-grid">
                 <div class="footer-col-brand">
-                    <a href="index.html" class="footer-logo">
+                    <a href="/" class="footer-logo">
                         <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
                     </a>
                     <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
-                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">EXPLORE</h2>
+                    <p class="footer-heading">EXPLORE</p>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="genomics.html">Genomics</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
@@ -375,18 +403,20 @@
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">PROGRAMMES</h2>
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
                     <ul class="footer-links">
-                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="internships.html">Internships</a></li>
+                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="collaboration.html">Collaboration</a></li>
+                        <li><a href="resources/index.html">Resources</a></li>
+                        <li><a href="publications.html">Publications</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-col">
-                    <h2 class="footer-heading">CONTACT</h2>
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
                     <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
-                    <p class="footer-contact-muted">Customized research and training solutions tailored to your needs</p>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
                     <div class="footer-cta-wrap">
                         <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
                     </div>
@@ -395,10 +425,10 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    © 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="footer-legal">
-                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
                 </div>
             </div>
         </div>

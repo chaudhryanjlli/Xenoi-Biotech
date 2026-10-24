@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RNA-Seq Analysis Step by Step: FASTQ to Discovery | Xenoi</title>
+    <meta name="description" content="Step-by-step RNA-Seq analysis guide: quality control, read trimming, splice-aware alignment, quantification, and differential expression modeling in R.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="RNA-Seq Analysis Step by Step: FASTQ to Discovery | Xenoi">
+    <meta property="og:description" content="Step-by-step RNA-Seq analysis guide: quality control, read trimming, splice-aware alignment, quantification, and differential expression modeling in R.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RNA-Seq Analysis Step by Step: FASTQ to Discovery | Xenoi">
+    <meta name="twitter:description" content="Step-by-step RNA-Seq analysis guide: quality control, read trimming, splice-aware alignment, quantification, and differential expression modeling in R.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article, Organization, Breadcrumbs -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "RNA-Seq Analysis Step by Step",
+                    "item": "https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html#article",
+            "headline": "RNA-Seq Analysis Step by Step: From FASTQ to Biological Discovery",
+            "description": "A comprehensive practical guide detailing the end-to-end RNA-Seq bioinformatics workflow: quality control, adapter removal, splice-aware alignment, transcript quantification, and differential expression analysis.",
+            "datePublished": "2026-10-20T09:00:00+05:30",
+            "dateModified": "2026-10-25",
+            "inLanguage": "en-IN",
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review before publishing -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">RNA-Seq Step by Step</span>
+            </nav>
+            <span class="eyebrow">TECHNICAL WORKFLOW GUIDE</span>
+            <h1 class="page-title">RNA-Seq Analysis Step by Step: From FASTQ to Biological Discovery</h1>
+            
+            <div class="course-meta-bar" style="margin: 16px 0 24px 0;">
+                <span class="meta-item"><strong>Author:</strong> Anjali Chaudhary, Director &amp; Bioinformatics Scientist</span>
+                <span class="meta-item"><strong>Published:</strong> October 2026</span>
+                <span class="meta-item"><strong>Last updated:</strong> October 2026</span>
+                <span class="meta-item"><strong>Reading time:</strong> 10 min read</span>
+            </div>
+
+            <!-- Direct Answer Paragraph (40-60 words) -->
+            <p class="lead-text">
+                RNA-Seq data analysis converts millions of short sequencing reads into biologically meaningful gene expression profiles. The standard reference-based pipeline proceeds systematically through five stages: raw read quality assessment with FastQC, adapter and low-quality trimming via fastp, splice-aware genomic alignment with STAR, gene-level feature quantification with featureCounts or Salmon, and negative binomial differential expression modeling with DESeq2.
+            </p>
+        </div>
+
+        <article class="article-content">
+            <!-- Key Takeaways Box -->
+            <div class="key-takeaways-box" style="background: rgba(50, 229, 166, 0.05); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-color); padding: 20px; border-radius: 6px; margin-bottom: 32px;">
+                <h3 style="margin-top: 0; color: var(--accent-highlight); font-size: 1.15rem;">Key Takeaways</h3>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.65; color: var(--text-color);">
+                    <li>Quality control before and after trimming prevents optical artifacts and adapter read-through from skewing alignments.</li>
+                    <li>Splice-aware aligners like STAR or HISAT2 are mandatory for eukaryotic transcriptomes to span exon-exon junctions across introns.</li>
+                    <li>Differential expression packages require raw un-normalized integer read counts as input; never feed FPKM, RPKM, or TPM into DESeq2 or edgeR.</li>
+                    <li>Biological replicates (minimum n=3 per condition) are essential to estimate biological variation across negative binomial dispersions.</li>
+                </ul>
+            </div>
+
+            <h2>What is the Standard RNA-Seq Workflow Architecture?</h2>
+            <p>
+                Bulk RNA sequencing (RNA-Seq) is the premier tool for interrogating transcriptome dynamics across physiological states, disease models, and environmental perturbations. Modern high-throughput sequencers (e.g., Illumina NovaSeq X, NextSeq 2000) deliver tens of millions of paired-end reads per sample formatted as compressed FASTQ files.
+            </p>
+            <p>
+                However, transforming gigabytes of raw base calls and Phred quality scores into statistically validated lists of upregulated and downregulated genes requires a standardized computational architecture. Each phase of the pipeline builds upon the previous, demanding stringent quality checkpoints to ensure reproducible science.
+            </p>
+
+            <h2>How Do You Assess Raw Sequencing Quality with FastQC and MultiQC?</h2>
+            <p>
+                Before executing sequence alignment, every computational biologist must inspect raw read characteristics. FastQC assesses base-level metrics across the sequencing run, checking:
+            </p>
+            <ul>
+                <li><strong>Per-Base Sequence Quality:</strong> Phred quality scores (Q-scores) across cycles. Scores above Q30 represent an accuracy of 99.9%, whereas severe dips towards the 3' read ends indicate sequencing degradation.</li>
+                <li><strong>Per-Base Sequence Content &amp; GC Bias:</strong> Detects systematic imbalances in nucleotide composition or deviation from the organism's expected GC percentage.</li>
+                <li><strong>Adapter Contamination:</strong> Identifies read-through into Illumina TruSeq or Nextera synthetic adapters when cDNA fragments are shorter than the sequencing cycle length.</li>
+                <li><strong>Sequence Duplication Levels:</strong> High duplication may reflect natural high-abundance transcripts or PCR over-amplification artifacts during library construction.</li>
+            </ul>
+            <p>
+                When managing multiple samples, running <strong>MultiQC</strong> aggregates individual FastQC reports into a single interactive HTML summary, highlighting outliers across biological replicates.
+            </p>
+
+            <h2>Why is Read Preprocessing and Trimming Critical?</h2>
+            <p>
+                Suboptimal reads compromise alignment efficiency and introduce spurious mismatches. Modern preprocessing tools like <strong>fastp</strong> execute high-speed adapter clipping, poly-A/poly-T tail removal, and sliding-window quality trimming.
+            </p>
+            <p>
+                Unlike older tools like Trimmomatic, fastp automatically detects adapter sequences without manual FASTA specification and generates simultaneous pre- and post-filtering QC reports. Reads that fall below length thresholds (typically &lt;35 bp post-trimming) are discarded to prevent non-specific multi-mapping across the reference genome.
+            </p>
+
+            <h2>How Does Splice-Aware Alignment Function with STAR and HISAT2?</h2>
+            <p>
+                Unlike genomic DNA sequencing where reads map contiguously to chromosome assemblies, mature eukaryotic mRNA transcripts lack introns. Consequently, reads spanning exon-exon junctions cannot map linearly to genomic DNA.
+            </p>
+            <p>
+                Standard genomic mappers (BWA-MEM or Bowtie2) fail at splice junctions. Instead, RNA-Seq requires splice-aware aligners:
+            </p>
+            <ul>
+                <li><strong>STAR (Spliced Transcripts Alignment to a Reference):</strong> Employs a sequential maximum mappable prefix search based on suffix arrays. It is extraordinarily accurate and fast, though computationally demanding, requiring ~32 GB of RAM for the human genome index.</li>
+                <li><strong>HISAT2:</strong> Utilizes Hierarchical Graph FM indexing, achieving exceptionally high alignment accuracy with significantly lower memory footprints (~4-8 GB RAM).</li>
+            </ul>
+            <p>
+                Both aligners produce coordinate-sorted BAM (Binary Alignment Map) files. Post-alignment indexing with <code>samtools</code> allows rapid visual inspection of coverage tracks in the Integrative Genomics Viewer (IGV).
+            </p>
+
+            <h2>How are Reads Quantified into Count Matrices?</h2>
+            <p>
+                Once reads are aligned, the next phase calculates the number of reads assigned to each genomic feature (genes, transcripts, or exons) based on reference annotations (GTF/GFF3).
+            </p>
+            <p>
+                <strong>featureCounts</strong> (part of Subread) is the gold standard for counting mapped reads against genomic intervals. Alternatively, pseudoaligners such as <strong>Salmon</strong> or <strong>Kallisto</strong> bypass full BAM generation, quantifying transcript abundances directly from raw FASTQs in minutes while correcting for GC and sequence-specific fragment biases.
+            </p>
+            <p>
+                Crucially, differential expression testing tools (DESeq2, edgeR) demand <em>raw integer counts</em>. Normalized values like TPM (Transcripts Per Kilobase Million) or FPKM (Fragments Per Kilobase of transcript per Million mapped reads) remove library-size variation mathematically required for negative binomial statistical models and should never be fed into count-based testing engines.
+            </p>
+
+            <h2>How Do You Model Differential Gene Expression with DESeq2?</h2>
+            <p>
+                RNA-Seq count data exhibit severe overdispersion: the variance in gene expression across biological replicates substantially exceeds the mean. Ordinary linear regression and Poisson models underestimate false discovery rates under these conditions.
+            </p>
+            <p>
+                <strong>DESeq2</strong> models count data using the Negative Binomial distribution with dispersion parameters estimated via empirical Bayes shrinkage. The workflow in R proceeds as follows:
+            </p>
+            <ol>
+                <li><strong>Median-of-Ratios Normalization:</strong> Scales counts for differences in sequencing depth and compositional skew caused by highly expressed outlier genes.</li>
+                <li><strong>Dispersion Estimation:</strong> Shrinks gene-wise dispersion estimates towards a fitted mean-dispersion curve, providing robust statistical power even with modest sample sizes (n=3).</li>
+                <li><strong>Generalized Linear Model (GLM) Fitting:</strong> Fits logarithmic fold changes and tests for significance using the Wald test or Likelihood Ratio Test (LRT).</li>
+                <li><strong>False Discovery Rate (FDR) Correction:</strong> Adjusts p-values using the Benjamini-Hochberg procedure (yielding adjusted p-values / padj) to control type-I errors across 20,000+ simultaneous gene tests.</li>
+            </ol>
+
+            <h2>How Do You Interpret and Visualize Transcriptomic Discoveries?</h2>
+            <p>
+                The output of DESeq2 is an annotated table of Log2 Fold Changes (LFC) and adjusted p-values. Standard downstream exploratory figures include:
+            </p>
+            <ul>
+                <li><strong>Principal Component Analysis (PCA):</strong> Verifies clustering among biological replicates and uncovers batch effects across experimental batches.</li>
+                <li><strong>Volcano Plots:</strong> Visualizes statistical significance (-log10 padj) versus effect size (log2 fold change), pinpointing major transcriptional drivers.</li>
+                <li><strong>Hierarchical Heatmaps:</strong> Visualizes variance-stabilized expression patterns across treatment cohorts using packages like <code>pheatmap</code> or <code>ComplexHeatmap</code>.</li>
+                <li><strong>Functional Pathway Enrichment:</strong> Maps significantly altered gene sets to Gene Ontology (GO) and KEGG pathways via <code>clusterProfiler</code> to elucidate biological mechanism.</li>
+            </ul>
+
+            <div class="article-cta-box" style="margin: 36px 0; padding: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px;">
+                <h3 style="margin-top: 0; color: #ffffff;">Need End-to-End RNA-Seq Analysis for Your Laboratory?</h3>
+                <p style="margin-bottom: 16px; color: var(--text-color);">
+                    Xenoi Biotech provides complete, reproducible transcriptomics data analysis services. We take your raw FASTQ files and deliver MultiQC audits, indexed alignments, DESeq2 statistics, and publication-ready figures.
+                </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="../services.html" class="btn btn-light">Explore Analysis Services</a>
+                    <a href="../rna-seq-reference.html" class="btn btn-outline">Learn in our 30-Day Workshop</a>
+                </div>
+            </div>
+
+            <h2>Further Reading &amp; Authoritative Literature</h2>
+            <ul class="citation-list" style="font-size: 0.92rem; line-height: 1.6; color: var(--text-color);">
+                <li><strong>DESeq2 Methodology:</strong> Love, M. I., Huber, W., &amp; Anders, S. (2014). Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. <em>Genome Biology</em>, 15(12), 550. <a href="https://doi.org/10.1186/s13059-014-0550-8" class="inline-link" target="_blank" rel="noopener">doi:10.1186/s13059-014-0550-8</a></li>
+                <li><strong>STAR Spliced Aligner:</strong> Dobin, A., et al. (2013). STAR: ultrafast universal RNA-seq aligner. <em>Bioinformatics</em>, 29(1), 15–21. <a href="https://doi.org/10.1093/bioinformatics/bts635" class="inline-link" target="_blank" rel="noopener">doi:10.1093/bioinformatics/bts635</a></li>
+                <li><strong>Fastp Preprocessing:</strong> Chen, S., et al. (2018). fastp: an ultra-fast all-in-one FASTQ preprocessor. <em>Bioinformatics</em>, 34(17), i884–i890. <a href="https://doi.org/10.1093/bioinformatics/bty560" class="inline-link" target="_blank" rel="noopener">doi:10.1093/bioinformatics/bty560</a></li>
+                <li><strong>Bioconductor RNA-Seq Workflow:</strong> Law, C. W., et al. (2016). RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR. <em>F1000Research</em>, 5, 1408. <a href="https://doi.org/10.12688/f1000research.9003.2" class="inline-link" target="_blank" rel="noopener">doi:10.12688/f1000research.9003.2</a></li>
+            </ul>
+
+            <!-- Author Bio Box -->
+            <div class="author-bio-card" style="margin-top: 40px; padding: 24px; border: 1px solid var(--border-color); border-radius: 8px; background: rgba(255,255,255,0.02); display: flex; gap: 20px; align-items: center;">
+                <div class="profile-avatar" style="width: 60px; height: 60px; font-size: 1.25rem;">AC</div>
+                <div class="author-bio-info">
+                    <h3 style="margin: 0 0 4px 0; font-size: 1.15rem; color: #ffffff;">About the Author: Anjali Chaudhary</h3>
+                    <p style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--accent-highlight); text-transform: uppercase; font-family: 'Fira Code', monospace;">Director &amp; Bioinformatics Scientist · Xenoi Biotech</p>
+                    <p style="margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-color);">
+                        Anjali Chaudhary leads genomic data analysis and curriculum design at Xenoi Biotech in Punjab, India. Her expertise encompasses next-generation transcriptomic pipelines, differential expression modeling, and scalable bioinformatics architectures.
+                    </p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+        <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

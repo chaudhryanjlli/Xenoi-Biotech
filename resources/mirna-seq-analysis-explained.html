@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling | Xenoi Biotech</title>
+    <meta name="description" content="End-to-end guide to small RNA and microRNA-seq data analysis: adapter clipping, miRDeep2 quantification, novel hairpin prediction, and target mRNA validation.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling | Xenoi Biotech">
+    <meta property="og:description" content="End-to-end guide to small RNA and microRNA-seq data analysis: adapter clipping, miRDeep2 quantification, novel hairpin prediction, and target mRNA validation.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling | Xenoi Biotech">
+    <meta name="twitter:description" content="End-to-end guide to small RNA and microRNA-seq data analysis: adapter clipping, miRDeep2 quantification, novel hairpin prediction, and target mRNA validation.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling",
+                    "item": "https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html#article",
+            "headline": "Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling",
+            "description": "End-to-end guide to small RNA and microRNA-seq data analysis: adapter clipping, miRDeep2 quantification, novel hairpin prediction, and target mRNA validation.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is paired-end sequencing unnecessary for microRNA analysis?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Mature microRNAs are only 18 to 24 nucleotides long. A single 50-nucleotide sequencing read already captures the entire microRNA molecule and sequences into the downstream adapter, rendering paired-end sequencing redundant."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What are isomiRs and why should they be analyzed?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "IsomiRs are mature microRNA structural variants arising from non-templated nucleotide additions (e.g., 3' uridylation) or alternative cleavage events. They alter microRNA stability, turnover rates, and target-binding affinities."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do bioinformaticians distinguish true microRNAs from degraded mRNA fragments?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "True microRNAs exhibit sharp length distributions (21 to 23 nt), align precisely to genomic hairpins with low folding free energy, and display characteristic 5' and 3' Drosha/Dicer cleavage patterns without random degradation tiling."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Small RNA sequencing (miRNA-seq) profiles non-coding RNA molecules typically 18 to 24 nucleotides in length that post-transcriptionally repress target mRNAs. By executing specialized 3' adapter trimming, hairpin alignment against miRBase, and novel hairpin prediction with miRDeep2, bioinformatic workflows quantify mature miRNA abundance and predict regulated gene networks in developmental and clinical conditions.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>MicroRNAs are short, 18-to-24 nucleotide non-coding regulators that bind complementary sequences in target mRNA 3' UTRs.</li><li style='margin-bottom: 8px;'>Because miRNAs are shorter than sequencing reads, every read sequences directly into the 3' adapter sequence, making adapter clipping essential.</li><li style='margin-bottom: 8px;'>Alignment strategies must manage multi-mapping reads arising from conserved miRNA families sharing identical seed sequences.</li><li style='margin-bottom: 8px;'>miRDeep2 models Dicer and Drosha biogenesis signatures to discover novel miRNAs alongside annotated miRBase entries.</li><li style='margin-bottom: 8px;'>Target prediction combines seed-sequence thermodynamics (TargetScan, miRDB) with reciprocal inverse expression correlation from matched mRNA-seq.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are MicroRNAs and Why Are They Key Post-Transcriptional Regulators?</h2>
+                
+        <p>MicroRNAs (miRNAs) are endogenous single-stranded non-coding RNA molecules averaging 22 nucleotides in length. They are transcribed as primary pri-miRNAs, processed by the Drosha-DGCR8 microprocessor complex into precursor pre-miRNA hairpins (~70 nt), and exported to the cytoplasm where Dicer cleaves them into mature duplexes. One strand is loaded into the RNA-Induced Silencing Complex (RISC).</p>
+        <p>Guided by nucleotides 2 through 8 at the 5' end (termed the seed sequence), RISC binds complementary sequences primarily within the 3' untranslated regions (UTRs) of target mRNAs, inducing translational repression or mRNA destabilization. Profiling miRNAs provides vital insight into post-transcriptional gene regulatory cascades in oncology, immunology, and metabolic pathology.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Small RNA Sequencing Libraries and Select Sizes?</h2>
+                
+        <p>Standard RNA extraction protocols and library preparation kits must be adapted for small RNA. Total RNA extraction using column or phenol-chloroform protocols must not utilize size-exclusion filters that discard fractions smaller than 200 nucleotides.</p>
+        <p>Small RNA library construction involves ligating specialized 3' and 5' RNA adapters directly to mature RNA molecules with intact 5' phosphate and 3' hydroxyl groups, followed by reverse transcription. Gel-based or magnetic bead-based size selection then isolates cDNA fragments corresponding strictly to the ~18 to 35 nt small RNA fraction, separating miRNAs from longer degradation intermediates.</p>
+        <p>Single-end sequencing (1x50 bp) is standard. Because mature miRNAs are only ~22 nt long, paired-end sequencing provides zero additional information and wastes sequencing throughput. A depth of 10 to 15 million reads per sample is sufficient for comprehensive miRNA profiling.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Adapters Clipped and Processed for Length Distribution QC?</h2>
+                
+        <p>Because reads are 50 bp long while mature miRNAs are only ~22 bp, every genuine miRNA read sequences entirely through the insert and continues into the 3' adapter sequence. Raw data cannot be aligned until the 3' adapter is accurately identified and clipped.</p>
+        <p>Tools such as Cutadapt or fastp clip the 3' adapter sequence, discard reads without recognizable adapter sequence (frequently non-specific primer dimers), and filter out inserts shorter than 17 nt or longer than 32 nt. A high-quality small RNA library displays a prominent, sharp peak at 21 to 23 nt corresponding to canonical mature microRNAs.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Reads Aligned to miRBase and How Are Novel miRNAs Discovered?</h2>
+                
+        <p>Clipped reads are collapsed into unique non-redundant sequences with abundance counts. Computational alignment proceeds using bowtie with parameters configured for short reads (e.g., zero or one mismatch in the seed region).</p>
+        <p>Reads are mapped sequentially against reference databases:</p>
+        <ul>
+            <li><strong>Non-miRNA Filtering:</strong> Screened against databases of ribosomal RNA (rRNA), transfer RNA (tRNA), small nuclear RNA (snRNA), and small nucleolar RNA (snoRNA) via Rfam to remove non-miRNA small RNA fragments.</li>
+            <li><strong>Known miRNA Quantification:</strong> Mapped against mature and hairpin sequences in miRBase to quantify known miRNAs.</li>
+            <li><strong>Novel miRNA Discovery via miRDeep2:</strong> Unannotated reads mapped to the reference genome are evaluated by miRDeep2. miRDeep2 scores genomic loci based on whether read pileups reflect authentic Drosha/Dicer cleavage (abundant mature reads, moderate star reads, and absence of reads in loop regions) paired with secondary structure thermodynamic folding stability calculated via RNAfold.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Identify Differential miRNAs and Predict Their Target Genes?</h2>
+                
+        <p>Read count tables of annotated and novel miRNAs are statistically modeled using negative binomial distributions in DESeq2 or edgeR. Because small RNA library sizes can be skewed by a handful of extremely abundant tissue-specific miRNAs, normalization algorithms like trimmed mean of M-values (TMM) or relative log expression (RLE) are applied.</p>
+        <p>Biological interpretation centers on target mRNA prediction. Bioinformatic pipelines integrate target prediction databases such as TargetScan, miRDB, and TarBase. To filter the thousands of theoretical target predictions down to high-confidence functional interactions, researchers perform integrative reciprocal correlation: when matched mRNA-seq data is available, an authentic miRNA-target pair displays an inverse expression correlation across experimental conditions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Key Deliverables and Common Pitfalls in miRNA-Seq?</h2>
+                
+        <p>A full miRNA-seq deliverable includes length distribution QC plots, collapsed unique read tables, miRBase mature and precursor expression matrices, miRDeep2 novel hairpin discovery reports with predicted secondary structures, differential expression spreadsheets, and miRNA-target network visualizations.</p>
+        <p>Common analytical pitfalls to avoid include:</p>
+        <ul>
+            <li><strong>Mishandling Multi-Mapping Reads:</strong> Many paralogous miRNA genes produce identical mature sequences (e.g., hsa-let-7a-1, let-7a-2, and let-7a-3). Counts must be summarized at the mature miRNA level rather than genomic precursor loci to avoid zero-count inflation.</li>
+            <li><strong>Ignoring IsomiRs:</strong> Post-transcriptional 3' adenylation, uridylation, or imprecise Dicer cleavage produces sequence variants termed isomiRs. Bioinformatic workflows should quantify isomiRs to capture functional shifting in target repertoires.</li>
+            <li><strong>Overreliance on Computational Target Prediction:</strong> In silico target prediction databases yield up to 50% false-positive regulatory interactions unless filtered by biological context, tissue expression, or experimental cross-linking data (CLASH/CLIP-seq).</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../mirna-seq.html" class="btn btn-light">Learn this in our 30-day workshop: miRNA-Seq Data Analysis Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Small RNA & MicroRNA Profiling Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is paired-end sequencing unnecessary for microRNA analysis?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Mature microRNAs are only 18 to 24 nucleotides long. A single 50-nucleotide sequencing read already captures the entire microRNA molecule and sequences into the downstream adapter, rendering paired-end sequencing redundant.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What are isomiRs and why should they be analyzed?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">IsomiRs are mature microRNA structural variants arising from non-templated nucleotide additions (e.g., 3' uridylation) or alternative cleavage events. They alter microRNA stability, turnover rates, and target-binding affinities.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How do bioinformaticians distinguish true microRNAs from degraded mRNA fragments?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">True microRNAs exhibit sharp length distributions (21 to 23 nt), align precisely to genomic hairpins with low folding free energy, and display characteristic 5' and 3' Drosha/Dicer cleavage patterns without random degradation tiling.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Friedlander, M. R., et al. (2012). miRDeep2 accurately identifies known and novel microRNAs in animals. <em>Nucleic Acids Research</em>, 40(1), 37–52. <a href='https://doi.org/10.1093/nar/gkr688' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/nar/gkr688</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Kozomara, A., et al. (2019). miRBase: from microRNA sequences to function. <em>Nucleic Acids Research</em>, 47(D1), D155–D162. <a href='https://doi.org/10.1093/nar/gky1141' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/nar/gky1141</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Agarwal, V., et al. (2015). Predicting effective microRNA target sites in mammalian mRNAs. <em>eLife</em>, 4, e05005. <a href='https://doi.org/10.7554/eLife.05005' target='_blank' rel='noopener noreferrer'>DOI: 10.7554/eLife.05005</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="rna-seq-analysis-step-by-step.html" class="inline-link">Bulk RNA-Seq Analysis Step-by-Step Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

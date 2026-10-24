@@ -3,24 +3,24 @@
     'use strict';
 
     const WORKSHOP_MAP = {
-        'rna-seq-reference': 'Workshop – RNA-Seq (reference-based)',
-        'rna-seq-de-novo': 'Workshop – RNA-Seq (de novo)',
-        'single-cell-rna-seq': 'Workshop – Single-cell RNA-Seq',
-        'lncrna-seq': 'Workshop – lncRNA-Seq',
-        'mirna-seq': 'Workshop – miRNA-Seq',
-        'psi-seq': 'Workshop – PSI-Seq (alternative splicing)',
-        'spatial-transcriptomics': 'Workshop – Spatial Transcriptomics',
-        'chip-seq': 'Workshop – ChIP-Seq',
-        'snap-chip': 'Workshop – SNAP-ChIP (spike-in calibrated)',
-        'atac-seq': 'Workshop – ATAC-Seq',
-        'single-cell-atac-seq': 'Workshop – Single-cell ATAC-Seq',
-        'methyl-seq': 'Workshop – Methyl-Seq (DNA methylation)',
-        'dna-seq': 'Workshop – DNA-Seq (variant analysis)',
-        'rad-seq': 'Workshop – RAD-Seq',
-        'genome-assembly': 'Workshop – Whole-Genome de novo Assembly',
-        'targeted-metagenomics': 'Workshop – Targeted Metagenomics (16S / ITS)',
-        'shotgun-metagenomics': 'Workshop – Whole-Genome (Shotgun) Metagenomics',
-        'microarray': 'Workshop – Microarray Data Analysis'
+        'rna-seq-reference': 'Workshop: RNA-Seq (reference-based)',
+        'rna-seq-de-novo': 'Workshop: RNA-Seq (de novo)',
+        'single-cell-rna-seq': 'Workshop: Single-cell RNA-Seq',
+        'lncrna-seq': 'Workshop: lncRNA-Seq',
+        'mirna-seq': 'Workshop: miRNA-Seq',
+        'psi-seq': 'Workshop: PSI-Seq (alternative splicing)',
+        'spatial-transcriptomics': 'Workshop: Spatial Transcriptomics',
+        'chip-seq': 'Workshop: ChIP-Seq',
+        'snap-chip': 'Workshop: SNAP-ChIP (spike-in calibrated)',
+        'atac-seq': 'Workshop: ATAC-Seq',
+        'single-cell-atac-seq': 'Workshop: Single-cell ATAC-Seq',
+        'methyl-seq': 'Workshop: Methyl-Seq (DNA methylation)',
+        'dna-seq': 'Workshop: DNA-Seq (variant analysis)',
+        'rad-seq': 'Workshop: RAD-Seq',
+        'genome-assembly': 'Workshop: Whole-Genome de novo Assembly',
+        'targeted-metagenomics': 'Workshop: Targeted Metagenomics (16S / ITS)',
+        'shotgun-metagenomics': 'Workshop: Whole-Genome (Shotgun) Metagenomics',
+        'microarray': 'Workshop: Microarray Data Analysis'
     };
 
     function initPrefill() {

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive guide to spatial transcriptomics analysis: histological image alignment, Space Ranger processing, spatially variable gene detection, and deconvolution.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive guide to spatial transcriptomics analysis: histological image alignment, Space Ranger processing, spatially variable gene detection, and deconvolution.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive guide to spatial transcriptomics analysis: histological image alignment, Space Ranger processing, spatially variable gene detection, and deconvolution.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows",
+                    "item": "https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html#article",
+            "headline": "Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows",
+            "description": "Comprehensive guide to spatial transcriptomics analysis: histological image alignment, Space Ranger processing, spatially variable gene detection, and deconvolution.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the resolution difference between 10x Visium and single-cell spatial platforms?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard 10x Visium features 55-micron spots containing 1 to 10 cells, requiring deconvolution. Sub-cellular platforms (such as 10x Xenium, Vizgen MERSCOPE, or Stereo-seq) offer single-cell or sub-micron optical resolution capturing individual RNA molecules within cell boundaries."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is cell-type deconvolution necessary for capture-spot spatial transcriptomics?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Because each capture spot contains transcripts from multiple adjacent cells, deconvolution algorithms mathematically unmix the spot expression profile using an scRNA-seq reference to infer the exact cellular composition of each spot."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can spatial transcriptomics be applied to formal-fixed paraffin-embedded (FFPE) archival samples?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Modern FFPE spatial chemistries utilize paired hybridization probe sets targeted to specific exons rather than oligo-dT capture, overcoming RNA degradation common in archival paraffin blocks."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Spatial transcriptomics integrates high-throughput RNA sequencing with histological tissue imaging to quantify gene expression while preserving exact two-dimensional anatomical coordinates. By combining captured mRNA barcodes with tissue morphology and computational tools like Seurat Spatial and Giotto, researchers dissect cellular microenvironments, tumor-stroma boundaries, and localized tissue niches.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Spatial transcriptomics preserves morphological context that is lost during tissue dissociation in standard single-cell RNA-seq.</li><li style='margin-bottom: 8px;'>Spatial capture spots (e.g., 55 &mu;m diameter in 10x Visium) typically capture 1 to 10 cells per spot, requiring computational cell-type deconvolution.</li><li style='margin-bottom: 8px;'>Analysis integrates high-resolution histological images (H&E or immunofluorescence) with spot-level transcriptomic barcode matrices.</li><li style='margin-bottom: 8px;'>Spatially variable gene algorithms (SpatialDE, Moran's I) identify genes whose expression patterns correlate with physical tissue architecture.</li><li style='margin-bottom: 8px;'>Multi-omics integration pairs spatial transcriptomics with scRNA-seq references to map discrete cell subsets into physical tissue niches.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Spatial Transcriptomics and Why Does Spatial Context Matter?</h2>
+                
+        <p>In classical single-cell biology, isolating individual cells requires enzymatic dissociation of intact tissues. While dissociation enables single-cell resolution, it destroys spatial geography, cell-cell contact interfaces, and morphological tissue architecture. Knowing that an immune cell is activated provides limited insight if one cannot determine whether it is actively invading a tumor core or sequestered in distant stroma.</p>
+        <p>Spatial transcriptomics bridges this divide. By placing cryosectioned histological tissue slices directly onto microarrays printed with spatially barcoded capture probes, mRNA transcripts released from tissue permeabilization hybridize in situ at their precise spatial coordinates. Sequencing these spatially tagged libraries reveals spatial gene expression maps that directly align with underlying histology.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Prepare Tissue Sections and Design Spatial Capture Experiments?</h2>
+                
+        <p>Spatial transcriptomics requires rigorous histological and molecular optimization. Tissue quality must be verified using RNA Integrity Number (RIN >= 7). Fresh-frozen or formal-fixed paraffin-embedded (FFPE) tissue sections are cut at 5 to 10 &mu;m thickness and mounted within designated capture areas on specialized slides.</p>
+        <p>A critical experimental milestone is tissue permeabilization optimization. The tissue must be enzymatically permeabilized with pepsin or collagenase long enough to allow cellular mRNA to diffuse down to the capture oligonucleotides on the slide surface, but brief enough to prevent lateral diffusion that blurs spatial resolution. High-resolution brightfield H&E imaging or fluorescent imaging is performed prior to or during permeabilization.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Spatial Images and Barcode Matrices Processed?</h2>
+                
+        <p>Processing begins with pipeline software such as Space Ranger from 10x Genomics. Space Ranger aligns the high-resolution microscope image with sequencing reads, identifies fiducial frame markers, registers capture spots underneath the tissue boundary, and demultiplexes spatial barcodes against reference transcriptomes.</p>
+        <p>Quality control inspects:</p>
+        <ul>
+            <li><strong>Tissue Coverage:</strong> Confirming that identified capture spots accurately overlay histological tissue boundaries and exclude bare slide areas.</li>
+            <li><strong>UMI and Gene Counts per Spot:</strong> Spots over dense, metabolically active tissue regions display high UMI counts, whereas acellular or necrotic zones show low transcript counts.</li>
+            <li><strong>Mitochondrial Fraction:</strong> Evaluating tissue damage or hypoxia markers across spatial coordinates.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Detect Spatially Variable Genes and Cluster Tissue Niches?</h2>
+                
+        <p>Following quality control, spot-level gene expression is normalized using regularized negative binomial regression (SCTransform in Seurat or Giotto) to stabilize variance across spots with differing cellular densities.</p>
+        <p>Unsupervised clustering identifies spatial domains sharing distinct transcriptional signatures. Beyond standard clustering, researchers identify Spatially Variable Genes (SVGs), genes whose expression is non-randomly distributed across physical space. Statistical algorithms such as SpatialDE, Trendsceek, and spatial autocorrelation metrics (Moran's I and Geary's C) identify genes displaying localized spatial gradients, localized hotspots, or boundary-specific expression independent of cluster boundaries.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Cell-Type Deconvolution Integrate Single-Cell Reference Atlases?</h2>
+                
+        <p>In standard capture-array platforms like 10x Visium, each 55-micron spot captures mRNA from approximately 1 to 10 individual cells. Consequently, spots represent miniature multi-cellular mixtures rather than pure single cells.</p>
+        <p>To resolve single-cell identities within each spot, computational cell-type deconvolution algorithms are applied. Tools such as RCTD (Robust Cell Type Deconvolution), Cell2location, and stereoscope take a matched single-cell RNA-seq reference atlas and probabilistically estimate the absolute or relative abundance of each cell type within every individual spatial spot. This enables precise mapping of rare immune subsets, fibroblasts, and specialized epithelial lineages across histological tissue zones.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Major Outputs and Analytical Pitfalls in Spatial Transcriptomics?</h2>
+                
+        <p>Standard deliverables include spatial feature plots displaying gene expression and cluster identities directly overlaid onto histological images, spatial domain cluster maps, cell-type deconvolution proportion matrices per spot, spatially variable gene rankings, and spatial ligand-receptor interaction networks.</p>
+        <p>Critical analytical pitfalls include:</p>
+        <ul>
+            <li><strong>Lateral RNA Diffusion:</strong> Over-permeabilization causes mRNA to diffuse laterally across adjacent spots, creating artificial co-expression signatures. Verifying sharp expression boundaries at histological margins confirms protocol fidelity.</li>
+            <li><strong>Misalignment Between Image and Array:</strong> Errors in automated fiducial grid detection produce misregistered spatial coordinates. Manual inspection in Loupe Browser is essential.</li>
+            <li><strong>Ignoring Spot Cell Density Variations:</strong> Differences in spot transcript counts frequently reflect cell packing density rather than biological upregulation; rigorous normalization is mandatory.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../spatial-transcriptomics.html" class="btn btn-light">Learn this in our 30-day workshop: Spatial Transcriptomics Data Analysis Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Spatial Biology & Transcriptomics Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the resolution difference between 10x Visium and single-cell spatial platforms?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Standard 10x Visium features 55-micron spots containing 1 to 10 cells, requiring deconvolution. Sub-cellular platforms (such as 10x Xenium, Vizgen MERSCOPE, or Stereo-seq) offer single-cell or sub-micron optical resolution capturing individual RNA molecules within cell boundaries.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is cell-type deconvolution necessary for capture-spot spatial transcriptomics?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Because each capture spot contains transcripts from multiple adjacent cells, deconvolution algorithms mathematically unmix the spot expression profile using an scRNA-seq reference to infer the exact cellular composition of each spot.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Can spatial transcriptomics be applied to formal-fixed paraffin-embedded (FFPE) archival samples?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Yes. Modern FFPE spatial chemistries utilize paired hybridization probe sets targeted to specific exons rather than oligo-dT capture, overcoming RNA degradation common in archival paraffin blocks.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Svensson, V., et al. (2018). SpatialDE: identification of spatially variable genes. <em>Nature Methods</em>, 15(5), 343–346. <a href='https://doi.org/10.1038/nmeth.4636' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nmeth.4636</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Dries, R., et al. (2021). Giotto: a toolbox for integrative analysis and visualization of spatial data. <em>Genome Biology</em>, 22(1), 78. <a href='https://doi.org/10.1186/s13059-021-02286-2' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/s13059-021-02286-2</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Cable, D. M., et al. (2022). Robust decomposition of cell type mixtures in spatial transcriptomics. <em>Nature Biotechnology</em>, 40(4), 517–526. <a href='https://doi.org/10.1038/s41587-021-00830-w' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41587-021-00830-w</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="single-cell-rna-seq-analysis-workflow.html" class="inline-link">Single-Cell RNA-Seq Workflow Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

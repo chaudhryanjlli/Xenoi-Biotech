@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive guide to DNA methylation and methyl-seq data analysis: bisulfite conversion, Bismark alignment, CpG extraction, and DMR identification.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive guide to DNA methylation and methyl-seq data analysis: bisulfite conversion, Bismark alignment, CpG extraction, and DMR identification.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive guide to DNA methylation and methyl-seq data analysis: bisulfite conversion, Bismark alignment, CpG extraction, and DMR identification.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow",
+                    "item": "https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html#article",
+            "headline": "DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow",
+            "description": "Comprehensive guide to DNA methylation and methyl-seq data analysis: bisulfite conversion, Bismark alignment, CpG extraction, and DMR identification.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How does Enzymatic Methyl-Seq (EM-seq) compare to sodium bisulfite sequencing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "EM-seq replaces aggressive chemical bisulfite treatment with an enzymatic two-step reaction (TET2 and APOBEC3A). Because it avoids harsh chemical fragmentation, EM-seq preserves longer DNA fragment lengths, improves library yields, and provides more uniform genomic coverage."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is an M-bias plot and why is it checked during methyl-seq QC?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "An M-bias plot displays methylation percentage as a function of sequencing cycle position along the reads. Spikes or drops in methylation at the extreme 5' or 3' ends indicate non-templated nucleotide additions during end repair that must be clipped before downstream analysis."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What constitutes a biological Differentially Methylated Region (DMR)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A DMR is a continuous genomic interval (typically 200 to 1,000 bp containing multiple CpG dinucleotides) displaying a statistically significant difference in average methylation level (usually &ge;20% to 25%) between experimental cohorts."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    DNA methylation sequencing (Methyl-Seq / WGBS) profiles 5-methylcytosine epigenetic modifications across genomes at single-base resolution. By employing sodium bisulfite treatment to convert unmethylated cytosines into uracils while preserving methylated cytosines, specialized aligners like Bismark and statistical packages like methylKit quantify methylation levels and detect differentially methylated regions.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>DNA methylation at cytosine bases (5mC) regulates transcriptional silencing, genomic imprinting, and heterochromatin maintenance.</li><li style='margin-bottom: 8px;'>Sodium bisulfite treatment introduces extreme sequence asymmetry, reducing four-letter genomic complexity toward a three-letter code.</li><li style='margin-bottom: 8px;'>Specialized 3-letter aligners like Bismark or bwa-meth map bisulfite-converted reads against in silico converted reference genomes.</li><li style='margin-bottom: 8px;'>Non-CpG methylation (CHG and CHH contexts) provides a built-in internal quality control metric for bisulfite conversion efficiency.</li><li style='margin-bottom: 8px;'>Differentially Methylated Regions (DMRs) are identified through beta-binomial modeling across adjacent CpG clusters rather than isolated single bases.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is DNA Methylation and Why Profile Epigenetic Cytosine Modifications?</h2>
+                
+        <p>DNA methylation, predominantly the covalent addition of a methyl group to the fifth carbon of cytosine rings (5-methylcytosine, 5mC), is among the most stable and functionally critical epigenetic modifications in eukaryotic organisms. Predominantly occurring in symmetrical CpG dinucleotide contexts in vertebrates, DNA methylation at gene promoters and distal enhancers suppresses transcription by sterically impeding transcription factor binding and recruiting repressive methyl-CpG-binding domain (MBD) chromatin remodelers.</p>
+        <p>Profiling DNA methylation reveals mechanistic insights into embryonic development, cellular reprogramming, genomic imprinting, X-chromosome inactivation, and aging clocks. In oncology, aberrant promoter hypermethylation of tumor suppressor genes alongside global genomic hypomethylation represents a defining hallmark of malignant transformation.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Sodium Bisulfite Conversion Work and How Do You Design Experiments?</h2>
+                
+        <p>Standard DNA sequencing cannot distinguish 5-methylcytosine from unmethylated cytosine because DNA polymerases read both as cytosine. Sodium bisulfite conversion resolves this by chemically treating denatured genomic DNA: unmethylated cytosines undergo hydrolytic deamination to uracil, whereas methylated cytosines remain intact. During subsequent PCR amplification, polymerases copy uracils as thymines, translating epigenetic modifications into permanent, sequence-readable C-to-T transitions.</p>
+        <p>Experimental protocols include Whole-Genome Bisulfite Sequencing (WGBS) for unbiased, comprehensive methylome coverage, and Reduced Representation Bisulfite Sequencing (RRBS) which uses restriction enzymes (e.g., MspI) to enrich for CpG-dense promoter islands at reduced sequencing cost.</p>
+        <p>Because bisulfite treatment degrades DNA integrity through depurination, high input quality and careful sonication are vital. Paired-end sequencing (2x150 bp) at 30x coverage for WGBS ensures adequate depth to distinguish biological hemimethylation from sequencing errors.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Bisulfite-Converted Reads Mapped to Reference Genomes?</h2>
+                
+        <p>Sodium bisulfite conversion introduces profound bioinformatic complexity. Converting almost all unmethylated cytosines to thymines collapses sequence diversity down toward a three-letter alphabet (A, G, T), drastically elevating reference genome alignment ambiguity.</p>
+        <p>Standard short-read aligners like standard BWA fail on bisulfite data. Specialized tools, such as Bismark or bwa-meth, utilize in silico three-letter genome transformations. Bismark converts the reference genome in silico (all C-to-T on the forward strand and all G-to-A on the reverse strand) and aligns reads using Bowtie2. It systematically tracks which strand originated the read (original top, original bottom, or complementary strands) to determine the exact methylation status of every cytosine.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Quantify CpG Methylation and Evaluate Conversion Rates?</h2>
+                
+        <p>Following alignment and PCR duplicate removal with <code>deduplicate_bismark</code>, methylation extraction parses every mapped cytosine. For each coordinate, the software calculates the methylation ratio: (methylated cytosines) / (methylated + unmethylated cytosines).</p>
+        <p>Quality control evaluates the Bisulfite Conversion Efficiency. In mammalian somatic genomes, non-CpG cytosine contexts (CHG and CHH, where H is A, C, or T) are almost entirely unmethylated. Residual C-calls in CHG/CHH contexts, or in unmethylated spike-in control DNA (such as unmethylated Lambda phage DNA), directly quantify incomplete chemical conversion. A conversion rate exceeding 99.0% to 99.5% is mandatory for valid downstream analysis.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Differentially Methylated Regions (DMRs) Statistically Identified?</h2>
+                
+        <p>Isolated single-CpG methylation fluctuations are frequently stochastic. Biologically impactful epigenetic regulation operates across coordinated chromosomal segments termed Differentially Methylated Regions (DMRs), such as promoter CpG islands or tissue-specific enhancers.</p>
+        <p>Statistical frameworks implemented in R packages like <code>methylKit</code> or <code>DSS</code> model count variance using beta-binomial distributions. By grouping adjacent CpGs within moving genomic windows (e.g., 500 bp to 1,000 bp containing at least 5 CpGs) and borrowing variance information across biological replicates, these tools identify genomic regions exhibiting statistically significant differences in methylation percentage (|&Delta;methylation| > 25%, q-value < 0.01).</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are Key Methylation Deliverables and Methodological Pitfalls?</h2>
+                
+        <p>Production deliverables include Bismark alignment summaries, conversion rate metrics, genome-wide CpG coverage bedGraph and bigWig tracks, complete DMR annotation spreadsheets linking coordinates to nearby genes, and methylation correlation heatmaps.</p>
+        <p>Common methodological pitfalls include:</p>
+        <ul>
+            <li><strong>Ignoring End-Repair Methylation Artifacts (M-bias):</strong> During library preparation, unmethylated cytosines introduced during end repair can skew methylation calls at the ends of reads. Evaluating M-bias plots and trimming the first and last 2 to 3 bp resolves this bias.</li>
+            <li><strong>Incomplete Bisulfite Conversion:</strong> Incomplete chemical conversion causes false-positive hypermethylation calls across the entire genome. Verifying unmethylated Lambda phage spike-in controls is critical.</li>
+            <li><strong>Failure to Distinguish 5mC from 5hmC:</strong> Standard sodium bisulfite conversion cannot distinguish 5-methylcytosine from 5-hydroxymethylcytosine (5hmC). When distinguishing active demethylation intermediates is required, oxidative bisulfite sequencing (oxBS-seq) or enzymatic methyl-seq (EM-seq) is utilized.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../methyl-seq.html" class="btn btn-light">Learn this in our 30-day workshop: DNA Methylation / Methyl-Seq Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Epigenomics & Methylation Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does Enzymatic Methyl-Seq (EM-seq) compare to sodium bisulfite sequencing?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">EM-seq replaces aggressive chemical bisulfite treatment with an enzymatic two-step reaction (TET2 and APOBEC3A). Because it avoids harsh chemical fragmentation, EM-seq preserves longer DNA fragment lengths, improves library yields, and provides more uniform genomic coverage.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is an M-bias plot and why is it checked during methyl-seq QC?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">An M-bias plot displays methylation percentage as a function of sequencing cycle position along the reads. Spikes or drops in methylation at the extreme 5' or 3' ends indicate non-templated nucleotide additions during end repair that must be clipped before downstream analysis.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What constitutes a biological Differentially Methylated Region (DMR)?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">A DMR is a continuous genomic interval (typically 200 to 1,000 bp containing multiple CpG dinucleotides) displaying a statistically significant difference in average methylation level (usually &ge;20% to 25%) between experimental cohorts.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Krueger, F., and Andrews, S. R. (2011). Bismark: a flexible aligner and methylation caller for Bisulfite-Seq applications. <em>Bioinformatics</em>, 27(11), 1571–1572. <a href='https://doi.org/10.1093/bioinformatics/btr167' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/bioinformatics/btr167</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Akalin, A., et al. (2012). methylKit: a comprehensive R package for the analysis of genome-wide DNA methylation profiles. <em>Genome Biology</em>, 13(10), R87. <a href='https://doi.org/10.1186/gb-2012-13-10-r87' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/gb-2012-13-10-r87</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Park, Y., and Wu, H. (2016). Differential methylation analysis for BS-seq data under general experimental design. <em>Bioinformatics</em>, 32(10), 1446–1453. <a href='https://doi.org/10.1093/bioinformatics/btw399' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/bioinformatics/btw399</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="atac-seq-vs-chip-seq.html" class="inline-link">ATAC-Seq vs ChIP-Seq Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

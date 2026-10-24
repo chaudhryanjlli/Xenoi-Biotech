@@ -33,3 +33,6 @@ about-*.txt
 chip-scripts.txt
 offline-changes.txt
 ui-check.txt
+
+# Sensitive owner action items
+OWNER_TODO.md

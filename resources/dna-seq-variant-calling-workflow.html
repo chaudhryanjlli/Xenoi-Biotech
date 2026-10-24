@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF | Xenoi Biotech</title>
+    <meta name="description" content="Standard computational guide to DNA-seq germline and somatic variant calling using GATK Best Practices, BWA-MEM2, DeepVariant, and Ensembl VEP annotation.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF | Xenoi Biotech">
+    <meta property="og:description" content="Standard computational guide to DNA-seq germline and somatic variant calling using GATK Best Practices, BWA-MEM2, DeepVariant, and Ensembl VEP annotation.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF | Xenoi Biotech">
+    <meta name="twitter:description" content="Standard computational guide to DNA-seq germline and somatic variant calling using GATK Best Practices, BWA-MEM2, DeepVariant, and Ensembl VEP annotation.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF",
+                    "item": "https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html#article",
+            "headline": "DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF",
+            "description": "Standard computational guide to DNA-seq germline and somatic variant calling using GATK Best Practices, BWA-MEM2, DeepVariant, and Ensembl VEP annotation.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between GATK HaplotypeCaller and DeepVariant?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "GATK HaplotypeCaller uses classical probabilistic Bayesian modeling and local de Bruijn graph assembly. Google DeepVariant uses deep convolutional neural networks trained on truth datasets (Genome in a Bottle) to call variants as an image classification task, achieving high accuracy in difficult-to-map regions."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What does the Transition/Transversion (Ti/Tv) ratio indicate in quality control?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Because methylcytosine deamination naturally elevates transition mutations (A<->G, C<->T) over transversions, the expected human genomic Ti/Tv ratio is ~2.1 (~3.0 in coding exomes). A significantly lower Ti/Tv indicates random sequencing error noise."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is joint genotyping preferred over single-sample variant calling in cohorts?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Joint genotyping pools sequencing evidence across all samples simultaneously. This empowers the algorithm to detect subtle variants in low-coverage individuals that would be missed in single-sample calling, and accurately separates non-variant homozygous sites from missing data."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    DNA-Seq variant calling identifies single nucleotide polymorphisms (SNPs), small insertions and deletions (indels), and structural variants from whole-genome or exome sequencing data. Following the GATK Best Practices pipeline, comprising BWA-MEM2 alignment, duplicate marking, base quality score recalibration, and HaplotypeCaller, bioinformatic workflows produce high-accuracy, clinically annotated Variant Call Format (VCF) files.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Variant calling identifies single nucleotide variants (SNVs) and small indels distinguishing an individual genome from a reference standard.</li><li style='margin-bottom: 8px;'>BWA-MEM2 accelerates paired-end genomic alignment while maintaining exact mathematical equivalence to traditional BWA-MEM.</li><li style='margin-bottom: 8px;'>Duplicate marking and Base Quality Score Recalibration (BQSR) remove PCR artifacts and correct systematic sequencer quality estimation errors.</li><li style='margin-bottom: 8px;'>GATK HaplotypeCaller executes local de novo assembly around active genomic regions to untangle complex insertion and deletion events.</li><li style='margin-bottom: 8px;'>Downstream annotation with Ensembl VEP or SnpEff predicts transcript consequences, protein amino acid alterations, and clinical pathogenicity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is DNA-Seq Variant Calling and Why Is It Foundational in Genomics?</h2>
+                
+        <p>Every individual organism possesses a unique genomic architecture containing millions of inherited or acquired sequence variations relative to species reference genomes. DNA sequencing (DNA-Seq) paired with computational variant calling identifies these variations, which include single nucleotide variants (SNVs), small insertions and deletions (indels), and large copy number and structural variations.</p>
+        <p>In medical genomics, variant calling identifies pathogenic mutations responsible for rare Mendelian disorders, characterizes pharmacogenomic drug metabolism profiles, and maps somatic driver mutations in cancer genomes. In agricultural and evolutionary biology, variant calling uncovers quantitative trait loci (QTLs) for crop improvement and illuminates population migration history.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design DNA-Seq Experiments for Germline and Somatic Discovery?</h2>
+                
+        <p>Experimental design parameters differ fundamentally depending on whether the biological goal is germline variant discovery or somatic cancer mutation profiling:</p>
+        <ul>
+            <li><strong>Germline Variant Calling:</strong> Because germline variants exist in heterozygous (50%) or homozygous (100%) states in diploid genomes, Whole-Genome Sequencing (WGS) at 30x coverage or Whole-Exome Sequencing (WES) at 50x to 100x coverage provides ample statistical confidence for accurate genotyping.</li>
+            <li><strong>Somatic Tumor Variant Calling:</strong> Tumors are heterogeneous mixtures of malignant clones, normal stromal cells, and immune infiltrates. Somatic mutations frequently occur at sub-clonal allele frequencies below 5% to 10%. Consequently, somatic profiling requires deep WES (150x to 300x) paired with a matched normal blood sample to subtract inherited germline variants.</li>
+        </ul>
+        <p>Sequencing utilizes paired-end short reads (2x150 bp) to ensure confident alignment across repetitive elements and low-complexity regions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Reads Aligned, Duplicates Marked, and Base Scores Recalibrated?</h2>
+                
+        <p>Computational processing follows the globally established GATK Best Practices pipeline:</p>
+        <ul>
+            <li><strong>Alignment:</strong> Raw FASTQ reads are aligned to reference builds (such as GRCh38/hg38) using BWA-MEM2. Read group headers (@RG) with sample, library, and lane tags must be attached during alignment.</li>
+            <li><strong>Duplicate Marking:</strong> PCR amplification during library construction produces duplicate fragments. Picard or GATK MarkDuplicates tags these duplicates so they are evaluated only once during variant calling, preventing PCR amplification bias from falsifying variant allele frequencies.</li>
+            <li><strong>Base Quality Score Recalibration (BQSR):</strong> Sequencing machines produce systematic error patterns (e.g., quality score drops at specific dinucleotides or cycles). GATK BaseRecalibrator builds a covariate model against known polymorphic sites (dbSNP) and recalibrates base quality scores to reflect true physical error probabilities.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does GATK HaplotypeCaller Discover Germline and Somatic Variants?</h2>
+                
+        <p>Traditional variant callers evaluated single alignment columns independently. Modern callers like GATK HaplotypeCaller operate via local de novo assembly:</p>
+        <p>When HaplotypeCaller detects an active genomic region showing evidence of variation, it discards the existing alignment, builds a local de Bruijn graph from the reads, and assembles the most likely biological haplotypes. It subsequently aligns read sequences against each candidate haplotype using a Pair-HMM algorithm to calculate likelihoods for each possible genotype.</p>
+        <p>In multi-sample cohorts, HaplotypeCaller is executed in Genomic VCF (<code>-ERC GVCF</code>) mode for each individual. Joint genotyping across all GVCFs via <code>GenotypeGVCFs</code> distinguishes truly homozygous reference sites from sites lacking sequencing coverage, eliminating missing-data bias across cohorts.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Filter Raw Variants and Annotate Biological Consequences?</h2>
+                
+        <p>Raw VCF files contain false positives arising from sequencing errors, strand bias, and mapping artifacts. Filtering is executed using Variant Quality Score Recalibration (VQSR) in large cohorts, or rigorous hard filtering thresholds (e.g., QD < 2.0, FS > 60.0, MQ < 40.0, ReadPosRankSum < -8.0) for smaller datasets.</p>
+        <p>High-confidence filtered variants are annotated using Ensembl Variant Effect Predictor (VEP) or SnpEff. Annotation tools predict the transcript-level impact of each variant (synonymous, missense, nonsense, frameshift, splice site disruption) and append in silico pathogenicity scores (SIFT, PolyPhen-2, CADD, REVEL) alongside population allele frequencies from gnomAD, 1000 Genomes, and ClinVar clinical records.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Core Deliverables and Critical Pitfalls in DNA-Seq?</h2>
+                
+        <p>Standard deliverables include coordinate-sorted, deduplicated BAM files with index files, MultiQC alignment statistics reports, raw and filtered VCF files, comprehensive annotated variant spreadsheets, and transition/transversion (Ti/Tv) quality control ratios.</p>
+        <p>Critical pitfalls in DNA-Seq analysis include:</p>
+        <ul>
+            <li><strong>Mismatched Reference Builds:</strong> Mixing reference chromosome naming conventions (e.g., 'chr1' in UCSC vs '1' in Ensembl) causes alignment failures or silently drops chromosomes.</li>
+            <li><strong>Calling Variants Without Read Groups:</strong> Failing to specify read group identifiers prevents GATK from executing duplicate marking and recalibration.</li>
+            <li><strong>Abnormal Ti/Tv Ratios:</strong> In human whole-genome sequencing, the ratio of transitions to transversions should approximate 2.0 to 2.1 (and ~2.8 to 3.0 in exomes). A low Ti/Tv ratio indicates substantial false-positive error contamination.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../dna-seq.html" class="btn btn-light">Learn this in our 30-day workshop: DNA-Seq Variant Calling Workshop</a>
+                    <a href="../genomics.html" class="btn btn-outline">Need this analysis done for your data? WGS & WES Genomic Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the difference between GATK HaplotypeCaller and DeepVariant?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">GATK HaplotypeCaller uses classical probabilistic Bayesian modeling and local de Bruijn graph assembly. Google DeepVariant uses deep convolutional neural networks trained on truth datasets (Genome in a Bottle) to call variants as an image classification task, achieving high accuracy in difficult-to-map regions.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What does the Transition/Transversion (Ti/Tv) ratio indicate in quality control?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Because methylcytosine deamination naturally elevates transition mutations (A<->G, C<->T) over transversions, the expected human genomic Ti/Tv ratio is ~2.1 (~3.0 in coding exomes). A significantly lower Ti/Tv indicates random sequencing error noise.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is joint genotyping preferred over single-sample variant calling in cohorts?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Joint genotyping pools sequencing evidence across all samples simultaneously. This empowers the algorithm to detect subtle variants in low-coverage individuals that would be missed in single-sample calling, and accurately separates non-variant homozygous sites from missing data.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Van der Auwera, G. A., and O'Connor, B. D. (2020). <em>Genomics in the Cloud: Using Docker, GATK, and WDL in Terra</em>. O'Reilly Media. Current Protocols: <a href='https://doi.org/10.1002/0471250953.bi1110s43' target='_blank' rel='noopener noreferrer'>DOI: 10.1002/0471250953.bi1110s43</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>McLaren, W., et al. (2016). The Ensembl Variant Effect Predictor. <em>Genome Biology</em>, 17(1), 122. <a href='https://doi.org/10.1186/s13059-016-0974-4' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/s13059-016-0974-4</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Vasimuddin, M., et al. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. <em>IEEE International Parallel and Distributed Processing Symposium (IPDPS)</em>, 314–324. <a href='https://doi.org/10.1109/IPDPS.2019.00041' target='_blank' rel='noopener noreferrer'>DOI: 10.1109/IPDPS.2019.00041</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="wgs-vs-wes.html" class="inline-link">WGS vs WES Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

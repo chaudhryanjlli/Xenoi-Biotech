@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive guide to SNAP-ChIP spike-in calibration: internal nucleosome controls, cross-sample antibody normalization, and quantitative ChIP-seq workflows.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive guide to SNAP-ChIP spike-in calibration: internal nucleosome controls, cross-sample antibody normalization, and quantitative ChIP-seq workflows.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive guide to SNAP-ChIP spike-in calibration: internal nucleosome controls, cross-sample antibody normalization, and quantitative ChIP-seq workflows.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling",
+                    "item": "https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html#article",
+            "headline": "SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling",
+            "description": "Comprehensive guide to SNAP-ChIP spike-in calibration: internal nucleosome controls, cross-sample antibody normalization, and quantitative ChIP-seq workflows.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How does SNAP-ChIP differ from Drosophila or mouse spike-in chromatin?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Drosophila (S2) or mouse spike-in uses cross-species cells. While this controls for global sequencing depth, it cannot measure antibody cross-reactivity or off-target PTM binding. SNAP-ChIP uses synthetic human nucleosomes with defined PTMs and barcodes, measuring both quantity and specificity."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can SNAP-ChIP be applied to transcription factor ChIP-seq?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "SNAP-ChIP was engineered specifically for histone post-translational modifications (PTMs). For transcription factors, synthetic recombinant nucleosomes do not replicate TF-DNA binding kinetics; cross-species cell spike-ins are preferred for TFs."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is global histone modification loss undetectable with standard ChIP-seq normalization?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard normalization tools divide read counts by total sequencing library size (RPM). If a drug wipes out 90% of a histone mark globally, RPM artificially inflates the remaining 10% of reads to reach 1,000,000, masking the true biological loss."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Sample Normalization and Antibody Profiling Chromatin Immunoprecipitation (SNAP-ChIP) spike-in calibration utilizes recombinant, DNA-barcoded designer nucleosomes to provide internal quantitative standards for ChIP-seq. By directly quantifying cross-sample antibody cross-reactivity and technical recovery, SNAP-ChIP transforms qualitative sequencing signal into authentic, reproducible quantitative histone modification landscapes.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Standard ChIP-seq is non-quantitative, making cross-sample comparisons vulnerable to antibody variability and technical fluctuations.</li><li style='margin-bottom: 8px;'>SNAP-ChIP introduces semi-synthetic recombinant nucleosomes carrying specific post-translational modifications alongside unique barcoded DNA.</li><li style='margin-bottom: 8px;'>Internal spike-ins allow bioinformaticians to measure antibody on-target specificity and cross-reactivity directly within every assay.</li><li style='margin-bottom: 8px;'>Mathematical normalization factors derived from spike-in recovery equalize technical variation across drug-treated and disease cohorts.</li><li style='margin-bottom: 8px;'>Calibrated peak calling prevents catastrophic errors such as misinterpreting global histone hypermethylation or hypomethylation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">Why Is Standard ChIP-Seq Non-Quantitative and How Does SNAP-ChIP Solve It?</h2>
+                
+        <p>Chromatin Immunoprecipitation sequencing (ChIP-seq) is the cornerstone technology for mapping histone post-translational modifications (PTMs) and transcription factor occupancy. However, standard ChIP-seq possesses a fundamental limitation: it is intrinsically non-quantitative. In traditional sequencing, raw read counts are normalized to total library depth (e.g., Reads Per Million, RPM). This normalization mathematically forces every sample to have the same total signal, wiping out true biological global shifts in histone modification levels.</p>
+        <p>Furthermore, standard ChIP-seq is vulnerable to batch-to-batch antibody variation and technical immunoprecipitation efficiencies. SNAP-ChIP (Sample Normalization and Antibody Profiling) overcomes these vulnerabilities by spiking recombinant, barcoded designer nucleosomes (dNucs) directly into cell lysates prior to antibody addition.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Designer Nucleosomes Structured and Added to Experimental Samples?</h2>
+                
+        <p>SNAP-ChIP reagents consist of pools of recombinant human nucleosomes synthesized with defined, homogenous histone modifications (e.g., H3K4me1, H3K4me2, H3K4me3, H3K27me3, H3K27ac) wrapped around recombinant DNA containing unique 20-to-24 base-pair identification barcodes.</p>
+        <p>The spike-in pool is added to fragmented chromatin lysate at a known molar ratio relative to total cell count. Because the designer nucleosomes are present during the entire immunoprecipitation reaction, they encounter the exact same antibody incubation, wash stringency, and library preparation steps as endogenous chromatin. Following sequencing, the abundance of recovered barcode reads directly measures antibody efficiency and recovery.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Barcode Reads Demultiplexed and Assessed for Antibody Specificity?</h2>
+                
+        <p>Computational processing begins by demultiplexing raw sequencing reads into two streams: reads mapping to the endogenous host genome, and reads matching synthetic spike-in barcode sequences.</p>
+        <p>The spike-in reads are analyzed to generate an Antibody Specificity Audit:</p>
+        <ul>
+            <li><strong>On-Target Specificity:</strong> The percentage of spike-in reads that match the intended target modification (e.g., H3K4me3). High-quality antibodies display >80% to 90% on-target binding.</li>
+            <li><strong>Cross-Reactivity Profiling:</strong> Quantifies non-specific cross-reactivity with closely related modifications (e.g., an H3K4me3 antibody cross-binding H3K4me2 or H3K4me1).</li>
+            <li><strong>Recovery Efficiency:</strong> Tracks the absolute percentage of input spike-in nucleosomes recovered during the immunoprecipitation.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Calculate Mathematical Calibration Factors for Signal Normalization?</h2>
+                
+        <p>Once on-target recovery is quantified across all experimental samples, a sample-specific normalization factor (&alpha;) is calculated. Rather than normalizing to total sequencing depth, the endogenous genomic read count is scaled inversely proportional to on-target spike-in recovery:</p>
+        <pre><code>Scale_Factor_i = Target_Spike_Reads_Baseline / Target_Spike_Reads_i</code></pre>
+        <p>Using these scaling factors, coordinate-sorted BAM files are converted into calibrated bigWig coverage tracks via <code>deepTools bamCoverage --scaleFactor</code>. This calibration ensures that heights in genome browser coverage tracks reflect true quantitative histone occupancy across control, drug-treated, or mutant conditions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Calibrated Peak Calling Prevent False Biological Inferences?</h2>
+                
+        <p>Standard peak callers like MACS2 assume that background noise and total signal are comparable across samples. When evaluating epigenetic therapies (e.g., EZH2 inhibitors that trigger global depletion of H3K27me3), standard RPM normalization falsely inflates residual background signal, causing MACS2 to call thousands of spurious, artificial peaks.</p>
+        <p>Under SNAP-ChIP calibration, global reduction in target recovery drops the scaling factor appropriately, faithfully depicting global chromatin clearance in bigWig tracks and preventing erroneous peak calls. Conversely, when comparing biological samples with identical global levels, spike-in calibration effectively equalizes technical variation caused by pipetting disparities or antibody lot inconsistencies.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Major Deliverables and Pitfalls in Quantitative Epigenomics?</h2>
+                
+        <p>A rigorous SNAP-ChIP deliverable includes antibody on-target specificity bar graphs, cross-reactivity heatmaps across the designer nucleosome panel, sample-specific calibration factor tables, calibrated bigWig signal tracks, quantitative differential binding tables from DiffBind or csaw, and comparative genome browser snapshots.</p>
+        <p>Key pitfalls in spike-in calibration include:</p>
+        <ul>
+            <li><strong>Adding Spike-Ins After Immunoprecipitation:</strong> Spike-in nucleosomes added after IP only control for sequencing library preparation, failing to account for antibody capture efficiency variations.</li>
+            <li><strong>Inaccurate Cell Counting:</strong> Because spike-in quantity is calibrated against cell number, inaccurate haemocytometer counts introduce systematic scaling errors.</li>
+            <li><strong>Off-Target Cross-Reactivity Contamination:</strong> Using poorly characterized antibodies with high cross-reactivity compromises scaling calculations; antibodies must demonstrate >80% target specificity.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../snap-chip.html" class="btn btn-light">Learn this in our 30-day workshop: SNAP-ChIP Quantitative Epigenomics Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Quantitative Epigenomics & ChIP Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does SNAP-ChIP differ from Drosophila or mouse spike-in chromatin?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Drosophila (S2) or mouse spike-in uses cross-species cells. While this controls for global sequencing depth, it cannot measure antibody cross-reactivity or off-target PTM binding. SNAP-ChIP uses synthetic human nucleosomes with defined PTMs and barcodes, measuring both quantity and specificity.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Can SNAP-ChIP be applied to transcription factor ChIP-seq?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">SNAP-ChIP was engineered specifically for histone post-translational modifications (PTMs). For transcription factors, synthetic recombinant nucleosomes do not replicate TF-DNA binding kinetics; cross-species cell spike-ins are preferred for TFs.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is global histone modification loss undetectable with standard ChIP-seq normalization?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Standard normalization tools divide read counts by total sequencing library size (RPM). If a drug wipes out 90% of a histone mark globally, RPM artificially inflates the remaining 10% of reads to reach 1,000,000, masking the true biological loss.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Grzybowski, A. T., et al. (2015). Calibrating ChIP-Seq with one-pot internal standard. <em>Molecular Cell</em>, 58(5), 886–899. <a href='https://doi.org/10.1016/j.molcel.2015.04.022' target='_blank' rel='noopener noreferrer'>DOI: 10.1016/j.molcel.2015.04.022</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Shah, R. N., et al. (2018). Examining the Targets of Histone Modification Antibodies Using SNAP-ChIP. <em>Molecular Cell</em>, 72(1), 162–177. <a href='https://doi.org/10.1016/j.molcel.2018.08.015' target='_blank' rel='noopener noreferrer'>DOI: 10.1016/j.molcel.2018.08.015</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Orlando, D. A., et al. (2014). Quantitative ChIP-Seq Normalization using Spike-in Chromatin. <em>Cell Reports</em>, 9(3), 1163–1170. <a href='https://doi.org/10.1016/j.celrep.2014.10.018' target='_blank' rel='noopener noreferrer'>DOI: 10.1016/j.celrep.2014.10.018</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="atac-seq-vs-chip-seq.html" class="inline-link">ATAC-Seq vs ChIP-Seq Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

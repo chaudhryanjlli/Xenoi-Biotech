@@ -2,4 +2,20 @@ User-agent: *
 Allow: /
 Disallow: /ngs-game/
 
+# AI search crawlers - allowed so AI assistants can cite the site
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.xenoibiotech.com/sitemap.xml

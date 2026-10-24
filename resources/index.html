@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bioinformatics Resources and Guides | Xenoi Biotech</title>
+    <meta name="description" content="In-depth computational biology guides, NGS data analysis tutorials, and methodology comparisons across transcriptomics, epigenomics, genomics, and metagenomics.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/index.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Bioinformatics Resources and Guides | Xenoi Biotech">
+    <meta property="og:description" content="In-depth computational biology guides, NGS data analysis tutorials, and methodology comparisons across transcriptomics, epigenomics, genomics, and metagenomics.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/index.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bioinformatics Resources and Guides | Xenoi Biotech">
+    <meta name="twitter:description" content="In-depth computational biology guides, NGS data analysis tutorials, and methodology comparisons across transcriptomics, epigenomics, genomics, and metagenomics.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: CollectionPage + ItemList -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                }
+            ]
+        },
+        {
+            "@type": "CollectionPage",
+            "@id": "https://www.xenoibiotech.com/resources/index.html#webpage",
+            "url": "https://www.xenoibiotech.com/resources/index.html",
+            "name": "Bioinformatics Resources and Guides | Xenoi Biotech",
+            "description": "Comprehensive bioinformatics guides and NGS computational tutorials covering transcriptomics, epigenomics, genomics, metagenomics, and microarrays.",
+            "publisher": {
+                "@id": "https://www.xenoibiotech.com/#org"
+            }
+        },
+        {
+            "@type": "ItemList",
+            "@id": "https://www.xenoibiotech.com/resources/index.html#itemlist",
+            "name": "Bioinformatics Articles and Explainer Guides",
+            "numberOfItems": 19,
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "url": "https://www.xenoibiotech.com/resources/rna-seq-analysis-step-by-step.html",
+                    "name": "RNA-Seq Analysis Step-by-Step: From FASTQ to Differential Expression"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "url": "https://www.xenoibiotech.com/resources/deseq2-vs-edger.html",
+                    "name": "DESeq2 vs edgeR: Comparing Statistical Methods for RNA-Seq Differential Expression"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "url": "https://www.xenoibiotech.com/resources/single-cell-rna-seq-analysis-workflow.html",
+                    "name": "Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "url": "https://www.xenoibiotech.com/resources/spatial-transcriptomics-explained.html",
+                    "name": "Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "url": "https://www.xenoibiotech.com/resources/de-novo-rna-seq-transcriptome-assembly.html",
+                    "name": "De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 6,
+                    "url": "https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html",
+                    "name": "Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 7,
+                    "url": "https://www.xenoibiotech.com/resources/mirna-seq-analysis-explained.html",
+                    "name": "Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 8,
+                    "url": "https://www.xenoibiotech.com/resources/alternative-splicing-psi-analysis.html",
+                    "name": "Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 9,
+                    "url": "https://www.xenoibiotech.com/resources/atac-seq-vs-chip-seq.html",
+                    "name": "ATAC-Seq vs ChIP-Seq: Choosing the Right Epigenomic Assay for Your Research"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 10,
+                    "url": "https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html",
+                    "name": "Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 11,
+                    "url": "https://www.xenoibiotech.com/resources/snap-chip-spike-in-calibration.html",
+                    "name": "SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 12,
+                    "url": "https://www.xenoibiotech.com/resources/dna-methylation-methyl-seq-analysis.html",
+                    "name": "DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 13,
+                    "url": "https://www.xenoibiotech.com/resources/wgs-vs-wes.html",
+                    "name": "WGS vs WES: Technical, Financial, and Diagnostic Comparison for Genomic Research"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 14,
+                    "url": "https://www.xenoibiotech.com/resources/dna-seq-variant-calling-workflow.html",
+                    "name": "DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 15,
+                    "url": "https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html",
+                    "name": "RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 16,
+                    "url": "https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html",
+                    "name": "De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 17,
+                    "url": "https://www.xenoibiotech.com/resources/16s-vs-shotgun-metagenomics.html",
+                    "name": "16S vs Shotgun Metagenomics: Choosing the Right Microbiome Sequencing Strategy"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 18,
+                    "url": "https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html",
+                    "name": "Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 19,
+                    "url": "https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html",
+                    "name": "Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <span class="current">Resources</span>
+            </nav>
+            <span class="eyebrow">KNOWLEDGE HUB</span>
+            <h1 class="page-title">Bioinformatics Resources and Guides</h1>
+            <p class="lead-text">
+                Authoritative computational biology guides, practical next-generation sequencing workflows, and algorithmic comparisons written by the scientific team at Xenoi Biotech in Punjab, India.
+            </p>
+        </div>
+
+        <article class="article-content">
+            
+            <section class="content-section" style="margin-bottom: 48px;">
+                <h2 class="section-title" style="font-size: 1.5rem; color: var(--accent-highlight); margin-bottom: 8px;">Transcriptomics</h2>
+                <p style="margin-bottom: 24px; color: rgba(220, 240, 245, 0.8); font-size: 1.02rem;">Bulk, single-cell, spatial, and non-coding RNA sequencing computational analysis workflows.</p>
+                <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="rna-seq-analysis-step-by-step.html" class="inline-link" style="color: #ffffff;">RNA-Seq Analysis Step-by-Step: From FASTQ to Differential Expression</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Step-by-step computational workflow from raw FASTQ reads to differential expression in reference-guided RNA-seq.
+                    </p>
+                    <a href="rna-seq-analysis-step-by-step.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="deseq2-vs-edger.html" class="inline-link" style="color: #ffffff;">DESeq2 vs edgeR: Comparing Statistical Methods for RNA-Seq Differential Expression</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Head-to-head comparison of negative binomial normalization, dispersion shrinkage, and statistical modeling in DESeq2 vs edgeR.
+                    </p>
+                    <a href="deseq2-vs-edger.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="single-cell-rna-seq-analysis-workflow.html" class="inline-link" style="color: #ffffff;">Single-Cell RNA-Seq Analysis Workflow: End-to-End Computational Guide</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Complete single-cell RNA-seq pipeline covering droplet filtering, normalization with SCTransform, clustering, and marker annotation.
+                    </p>
+                    <a href="single-cell-rna-seq-analysis-workflow.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="spatial-transcriptomics-explained.html" class="inline-link" style="color: #ffffff;">Spatial Transcriptomics Analysis Explained: Spatially Resolved Gene Expression Workflows</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Spatially resolved transcriptomics guide integrating histological tissue images with 10x Visium spot deconvolution and spatial variable genes.
+                    </p>
+                    <a href="spatial-transcriptomics-explained.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="de-novo-rna-seq-transcriptome-assembly.html" class="inline-link" style="color: #ffffff;">De Novo RNA-Seq Transcriptome Assembly: Complete Workflow for Non-Model Organisms</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Reconstructing full-length transcript catalogs for non-model organisms without a reference genome using Trinity and TransDecoder.
+                    </p>
+                    <a href="de-novo-rna-seq-transcriptome-assembly.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="lncrna-seq-analysis-explained.html" class="inline-link" style="color: #ffffff;">Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Systematic identification, coding potential filtering via CPC2/CNCI, and cis-trans target prediction for long non-coding RNAs.
+                    </p>
+                    <a href="lncrna-seq-analysis-explained.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="mirna-seq-analysis-explained.html" class="inline-link" style="color: #ffffff;">Small RNA and MicroRNA-Seq Analysis Explained: Detection, Target Prediction, and Profiling</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Small RNA sequencing analysis covering 3' adapter clipping, hairpin quantification in miRBase, and novel miRNA discovery with miRDeep2.
+                    </p>
+                    <a href="mirna-seq-analysis-explained.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="alternative-splicing-psi-analysis.html" class="inline-link" style="color: #ffffff;">Alternative Splicing and Percent Spliced-In (PSI) Analysis: Computational Methods and Tools</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Quantifying Percent Spliced-In (PSI), alternative exon skipping, and splice junction regulation using rMATS and SUPPA2.
+                    </p>
+                    <a href="alternative-splicing-psi-analysis.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                </div>
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 48px;">
+                <h2 class="section-title" style="font-size: 1.5rem; color: var(--accent-highlight); margin-bottom: 8px;">Epigenomics</h2>
+                <p style="margin-bottom: 24px; color: rgba(220, 240, 245, 0.8); font-size: 1.02rem;">Chromatin accessibility, histone post-translational modifications, and DNA methylation profiling.</p>
+                <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="atac-seq-vs-chip-seq.html" class="inline-link" style="color: #ffffff;">ATAC-Seq vs ChIP-Seq: Choosing the Right Epigenomic Assay for Your Research</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Comparative analysis of open chromatin accessibility profiling versus target-specific histone and transcription factor mapping.
+                    </p>
+                    <a href="atac-seq-vs-chip-seq.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="single-cell-atac-seq-explained.html" class="inline-link" style="color: #ffffff;">Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Resolving single-cell chromatin accessibility, TF-IDF / LSI dimensionality reduction, pseudo-bulk peak calling, and motif enrichment.
+                    </p>
+                    <a href="single-cell-atac-seq-explained.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="snap-chip-spike-in-calibration.html" class="inline-link" style="color: #ffffff;">SNAP-ChIP Spike-In Calibration Explained: Quantitative Epigenomics and Histone PTM Profiling</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Quantitative ChIP-seq calibration using recombinant designer nucleosomes to measure antibody cross-reactivity and normalize global PTM shifts.
+                    </p>
+                    <a href="snap-chip-spike-in-calibration.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="dna-methylation-methyl-seq-analysis.html" class="inline-link" style="color: #ffffff;">DNA Methylation and Whole-Genome Bisulfite Sequencing (WGBS) Analysis Workflow</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Whole-genome bisulfite sequencing (WGBS) workflow covering Bismark alignment, non-CpG conversion QC, and DMR calling.
+                    </p>
+                    <a href="dna-methylation-methyl-seq-analysis.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                </div>
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 48px;">
+                <h2 class="section-title" style="font-size: 1.5rem; color: var(--accent-highlight); margin-bottom: 8px;">Genomics</h2>
+                <p style="margin-bottom: 24px; color: rgba(220, 240, 245, 0.8); font-size: 1.02rem;">Whole-genome variant calling, population genomics, and chromosome-level de novo genome assembly.</p>
+                <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="wgs-vs-wes.html" class="inline-link" style="color: #ffffff;">WGS vs WES: Technical, Financial, and Diagnostic Comparison for Genomic Research</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Technical, financial, and diagnostic comparison between whole-genome sequencing and whole-exome sequencing.
+                    </p>
+                    <a href="wgs-vs-wes.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="dna-seq-variant-calling-workflow.html" class="inline-link" style="color: #ffffff;">DNA-Seq Variant Calling Workflow: Best Practices from FASTQ to Annotated VCF</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        GATK Best Practices germline and somatic variant discovery pipeline from BWA-MEM2 alignment to Ensembl VEP clinical annotation.
+                    </p>
+                    <a href="dna-seq-variant-calling-workflow.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="rad-seq-population-genomics.html" class="inline-link" style="color: #ffffff;">RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Fractional genome sequencing for non-model population genetics, restriction enzyme digestion, and Stacks 2 SNP cataloging.
+                    </p>
+                    <a href="rad-seq-population-genomics.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="genome-assembly-short-vs-long-reads.html" class="inline-link" style="color: #ffffff;">De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        De novo genome assembly guide comparing short-read de Bruijn graphs against PacBio HiFi and Nanopore string graphs with Hi-C scaffolding.
+                    </p>
+                    <a href="genome-assembly-short-vs-long-reads.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                </div>
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 48px;">
+                <h2 class="section-title" style="font-size: 1.5rem; color: var(--accent-highlight); margin-bottom: 8px;">Metagenomics</h2>
+                <p style="margin-bottom: 24px; color: rgba(220, 240, 245, 0.8); font-size: 1.02rem;">Targeted amplicon vs shotgun metagenomic profiling, taxonomic classification, and metabolic modeling.</p>
+                <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="16s-vs-shotgun-metagenomics.html" class="inline-link" style="color: #ffffff;">16S vs Shotgun Metagenomics: Choosing the Right Microbiome Sequencing Strategy</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Choosing between targeted 16S amplicon profiling and untargeted whole-metagenome shotgun sequencing for microbiome studies.
+                    </p>
+                    <a href="16s-vs-shotgun-metagenomics.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="shotgun-metagenomics-workflow.html" class="inline-link" style="color: #ffffff;">Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        Comprehensive taxonomic classification with Kraken 2 / MetaPhlAn 4, functional pathway profiling with HUMAnN 3, and MAG binning.
+                    </p>
+                    <a href="shotgun-metagenomics-workflow.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                </div>
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 48px;">
+                <h2 class="section-title" style="font-size: 1.5rem; color: var(--accent-highlight); margin-bottom: 8px;">Microarray</h2>
+                <p style="margin-bottom: 24px; color: rgba(220, 240, 245, 0.8); font-size: 1.02rem;">High-density probe hybridization data analysis, robust multi-array normalization, and linear modeling in R.</p>
+                <div class="guides-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    
+                <div class="resource-card" style="padding: 24px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-highlight); margin-bottom: 6px;">By Xenoibiotech &middot; October 2026</div>
+                    <h3 class="card-title" style="margin: 0 0 10px 0; font-size: 1.15rem;">
+                        <a href="microarray-differential-expression-in-r.html" class="inline-link" style="color: #ffffff;">Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow</a>
+                    </h3>
+                    <p style="margin: 0 0 14px 0; font-size: 0.95rem; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">
+                        End-to-end Bioconductor workflow in R executing RMA background correction, normalization, and empirical Bayes linear modeling in limma.
+                    </p>
+                    <a href="microarray-differential-expression-in-r.html" class="inline-link" style="font-weight: 500; font-size: 0.92rem;">Read guide &rarr;</a>
+                </div>
+            
+                </div>
+            </section>
+        
+
+            <!-- CTA Section -->
+            <section class="content-section" style="margin-top: 48px; padding: 28px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 8px;">
+                <h2 style="font-size: 1.35rem; color: var(--accent-highlight); margin-bottom: 12px;">Looking for Hands-On Bioinformatics Training or Custom Pipelines?</h2>
+                <p style="line-height: 1.7; color: rgba(220, 240, 245, 0.9); margin-bottom: 20px;">
+                    Our team provides eighteen 30-day online workshops, structured research internships, and commercial NGS analysis services for universities, healthcare institutions, and biotechnology companies.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../workshops.html" class="btn btn-light">Explore 18 NGS Workshops</a>
+                    <a href="../services.html" class="btn btn-outline">Explore Data Analysis Services</a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

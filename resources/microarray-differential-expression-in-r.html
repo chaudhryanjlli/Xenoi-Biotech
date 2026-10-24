@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow | Xenoi Biotech</title>
+    <meta name="description" content="Complete guide to differential gene expression analysis microarray in R using Bioconductor packages, RMA normalization, limma linear models, and probe annotation.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow | Xenoi Biotech">
+    <meta property="og:description" content="Complete guide to differential gene expression analysis microarray in R using Bioconductor packages, RMA normalization, limma linear models, and probe annotation.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow | Xenoi Biotech">
+    <meta name="twitter:description" content="Complete guide to differential gene expression analysis microarray in R using Bioconductor packages, RMA normalization, limma linear models, and probe annotation.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow",
+                    "item": "https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html#article",
+            "headline": "Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow",
+            "description": "Complete guide to differential gene expression analysis microarray in R using Bioconductor packages, RMA normalization, limma linear models, and probe annotation.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is the limma package preferred over standard Student's t-tests for microarrays?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "limma employs empirical Bayes shrinkage to borrow variance information across all genes on the array. This moderates individual gene variances toward a pooled prior, stabilizing error estimates in small-sample experiments and dramatically reducing false positives."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is RMA normalization and when should it be applied?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Robust Multi-array Average (RMA) is a multi-chip model that performs background adjustment, quantile normalization, and median-polish probe summarization on raw Affymetrix probe intensity files. It should be applied to raw CEL files to generate dependable log2 expression values."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do you convert Affymetrix probe IDs to official gene symbols in R?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Bioconductor platform annotation packages (such as hgu133plus2.db or AnnotationDbi) map manufacturer probe set IDs to official gene symbols, Entrez IDs, and Ensembl identifiers using the select() or mapIds() functions."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Differential Gene Expression Analysis Microarray in R: Step-by-Step Bioconductor Workflow</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Differential gene expression analysis of microarray data in R enables rigorous quantification of transcriptional changes across experimental conditions using Bioconductor packages. By executing background correction, robust multi-array average (RMA) normalization, and empirical Bayes linear modeling through limma, researchers identify statistically robust biomarkers and regulated pathways from legacy and current probe hybridization datasets.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Bioconductor provides an open-source, mathematically audited ecosystem in R specifically designed for high-density oligonucleotide microarray architectures.</li><li style='margin-bottom: 8px;'>Robust Multi-array Average (RMA) executes background subtraction, quantile normalization, and median-polish probe summarization to produce dependable log2 intensity values.</li><li style='margin-bottom: 8px;'>Linear models combined with empirical Bayes variance moderation in limma outperform standard t-tests by borrowing information across all probed genes.</li><li style='margin-bottom: 8px;'>Probe identifiers must be mapped to current Ensembl or Entrez gene symbols using platform-specific annotation packages to ensure biological relevance.</li><li style='margin-bottom: 8px;'>Public repositories like NCBI GEO and ArrayExpress host thousands of valuable microarray datasets ready for re-analysis, meta-analysis, and cross-validation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Microarray Profiling and Why Is Bioconductor in R the Industry Standard?</h2>
+                
+        <p>Microarrays laid the computational foundation of high-throughput genomics. Although RNA sequencing is prevalent today, DNA microarrays remain widely deployed due to cost-efficiency in large clinical cohorts, established regulatory compliance, and massive public data archives. Thousands of landmark biological studies housed in the NCBI Gene Expression Omnibus (GEO) and EBI ArrayExpress exist as raw microarray probe intensity files, representing an invaluable discovery resource.</p>
+        <p>Microarray technology relies on nucleic acid hybridization: fluorescently labeled target cDNA or cRNA hybridizes to millions of microscopic, sequence-specific oligonucleotide probes immobilized on a solid glass or silicon substrate. Fluorescence intensity at each probe feature directly reflects the abundance of its complementary transcript.</p>
+        <p>The R programming language, paired with the Bioconductor project, represents the global standard for microarray analysis. Bioconductor establishes rigorous S4 data structures (such as ExpressionSet) that encapsulate expression matrices, sample phenotypic metadata, and platform probe annotations within a unified, reproducible container.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Import Raw CEL Files and Design Microarray Contrasts?</h2>
+                
+        <p>The workflow begins with raw platform data files, most commonly Affymetrix binary or text CEL files. Using packages such as <code>oligo</code> or <code>affy</code>, raw intensities and optical background levels are parsed directly into R from local directories or downloaded programmatically via <code>GEOquery</code>.</p>
+        <p>Experimental design requires formulating a clean model matrix that accurately reflects biological groups, technical covariates, and batch effects. For example, in a two-factor cancer study comparing tumor vs normal tissue across male and female subjects:</p>
+        <pre><code>design <- model.matrix(~ 0 + Condition + Batch, data = pData(eset))
+colnames(design) <- c("Tumor", "Normal", "Batch2")</code></pre>
+        <p>A contrast matrix is subsequently defined using the <code>makeContrasts</code> function in <code>limma</code>. This explicit mathematical specification ensures that statistical tests evaluate exact biological hypotheses (e.g., <code>Contrast <- makeContrasts(TumorVsNormal = Tumor - Normal, levels = design)</code>) without confounding baseline assumptions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Perform Background Correction and RMA Normalization in R?</h2>
+                
+        <p>Raw probe intensities contain optical noise, non-specific binding, and technical hybridization disparities between array chips. Converting raw probe-level data into reliable gene-level expression requires three sequential computational steps implemented in the Robust Multi-array Average (RMA) algorithm:</p>
+        <ul>
+            <li><strong>Background Adjustment:</strong> A normal-exponential convolution model estimates true sequence-specific signal by adjusting probe intensities based on surrounding background distribution.</li>
+            <li><strong>Quantile Normalization:</strong> Forces the empirical intensity distribution of every array chip to match a common target distribution, equalizing inter-array variance caused by differences in dye labeling or scanning laser intensity.</li>
+            <li><strong>Probe Summarization:</strong> Affymetrix arrays feature probe sets (typically 11 to 20 probe pairs per transcript). Median polish summarization computes a single, robust multi-chip log2-scale expression estimate for each probe set while mitigating probe-specific affinity outliers.</li>
+        </ul>
+        <p>Quality control diagnostic plots (e.g., MA-plots, boxplots of unnormalized vs normalized intensities, and Relative Log Expression plots) confirm that inter-array technical variation has been resolved successfully prior to modeling.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Empirical Bayes Linear Modeling in limma Identify Differential Genes?</h2>
+                
+        <p>Traditional Student's t-tests perform poorly on microarray data. Because sample sizes in biological experiments are often small (e.g., n = 3 to 5 replicates), individual gene variance estimates are inherently unstable, leading to high rates of both false positives and false negatives.</p>
+        <p>The <code>limma</code> (Linear Models for Microarray Data) package solves this problem through empirical Bayes shrinkage. By fitting a linear model to each gene and then borrowing variance information across all genes on the array, limma shrinks extreme sample variances toward a shared pooled prior value. This generates moderated t-statistics and moderated F-statistics with increased degrees of freedom, dramatically improving statistical power.</p>
+        <p>Multiple testing correction is strictly applied using the Benjamini-Hochberg False Discovery Rate (FDR). Researchers select differentially expressed genes by applying combined thresholds, such as an adjusted p-value (FDR) below 0.05 and an absolute log2 fold-change greater than 1.0 (representing a two-fold change in expression).</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Annotate Probe IDs and Perform Gene Ontology Enrichment?</h2>
+                
+        <p>Microarray output tables initially present results keyed by manufacturer probe set IDs (e.g., <code>1552345_a_at</code>). Biological interpretation requires mapping these probe IDs to official HUGO Gene Nomenclature Committee (HGNC) symbols, Entrez IDs, and Ensembl identifiers.</p>
+        <p>In Bioconductor, platform-specific annotation packages (such as <code>hgu133plus2.db</code> or <code>clariomdhuman.db</code>) provide fast, relational mapping. When multiple probe sets map to a single gene symbol, bioinformaticians typically select the probe set with the highest average intensity or maximum interquartile range (IQR) to avoid duplicate bias.</p>
+        <p>Annotated gene lists are subsequently investigated for higher-order biological function. Over-representation analysis (ORA) and Gene Set Enrichment Analysis (GSEA) using packages like <code>clusterProfiler</code>, <code>topGO</code>, or <code>fgsea</code> reveal enriched biological processes, molecular pathways (KEGG, Reactome), and cellular components perturbed between experimental conditions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are Typical Microarray Deliverables and How Do You Avoid Common Pitfalls?</h2>
+                
+        <p>A production-grade microarray analysis package includes normalized expression matrices, QC diagnostic visualizations (PCA plots, density distributions), complete limma top-table spreadsheets with logFC, average expression, moderated t, p-value, and FDR, publication-ready volcano plots, hierarchical clustering heatmaps, and functional enrichment summaries.</p>
+        <p>Key pitfalls to avoid during microarray differential expression in R include:</p>
+        <ul>
+            <li><strong>Re-normalizing Pre-normalized Data:</strong> Downloading pre-normalized values from GEO and erroneously running RMA again will distort expression values. Raw CEL files should always be preferred.</li>
+            <li><strong>Ignoring Array Batch Effects:</strong> Large cohorts scanned on different dates or processed in different batches often show prominent batch clustering. Tools like <code>ComBat</code> or incorporating batch as a blocking factor in limma are mandatory.</li>
+            <li><strong>Uncorrected Multiple Comparisons:</strong> Reporting raw p-values without Benjamini-Hochberg FDR adjustment leads to hundreds of spurious false-positive discoveries across 40,000+ probed features.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../microarray.html" class="btn btn-light">Learn this in our 30-day workshop: Microarray Differential Expression Analysis in R Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Microarray & Expression Profiling Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is the limma package preferred over standard Student's t-tests for microarrays?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">limma employs empirical Bayes shrinkage to borrow variance information across all genes on the array. This moderates individual gene variances toward a pooled prior, stabilizing error estimates in small-sample experiments and dramatically reducing false positives.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is RMA normalization and when should it be applied?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Robust Multi-array Average (RMA) is a multi-chip model that performs background adjustment, quantile normalization, and median-polish probe summarization on raw Affymetrix probe intensity files. It should be applied to raw CEL files to generate dependable log2 expression values.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How do you convert Affymetrix probe IDs to official gene symbols in R?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Bioconductor platform annotation packages (such as hgu133plus2.db or AnnotationDbi) map manufacturer probe set IDs to official gene symbols, Entrez IDs, and Ensembl identifiers using the select() or mapIds() functions.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Ritchie, M. E., et al. (2015). limma powers differential expression analyses for RNA-sequencing and microarray studies. <em>Nucleic Acids Research</em>, 43(7), e47. <a href='https://doi.org/10.1093/nar/gkv007' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/nar/gkv007</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Irizarry, R. A., et al. (2003). Exploration, normalization, and summaries of high density oligonucleotide array probe level data. <em>Biostatistics</em>, 4(2), 249–264. <a href='https://doi.org/10.1093/biostatistics/4.2.249' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/biostatistics/4.2.249</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Gentleman, R. C., et al. (2004). Bioconductor: open software development for computational biology and bioinformatics. <em>Genome Biology</em>, 5(10), R80. <a href='https://doi.org/10.1186/gb-2004-5-10-r80' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/gb-2004-5-10-r80</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Bioconductor Core Team. (2024). <em>Bioconductor: Analysis and Comprehension of High-Throughput Genomic Data</em>. Official Documentation: <a href='https://bioconductor.org' target='_blank' rel='noopener noreferrer'>Bioconductor Portal</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="deseq2-vs-edger.html" class="inline-link">DESeq2 vs edgeR Differential Expression Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

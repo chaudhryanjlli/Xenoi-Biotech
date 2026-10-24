@@ -19,7 +19,19 @@
                     t.classList.toggle('active', isActive);
                 });
 
-                // Filter cards (without JS, all cards remain visible in HTML)
+                // Filter sections and cards
+                const sections = document.querySelectorAll('.workshop-category-section');
+                sections.forEach(sec => {
+                    const group = sec.getAttribute('data-group');
+                    if (filter === 'all' || group === filter) {
+                        sec.removeAttribute('hidden');
+                        sec.style.display = '';
+                    } else {
+                        sec.setAttribute('hidden', '');
+                        sec.style.display = 'none';
+                    }
+                });
+
                 cards.forEach(card => {
                     const group = card.getAttribute('data-group');
                     if (filter === 'all' || group === filter) {

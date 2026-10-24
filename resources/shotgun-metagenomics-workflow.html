@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics | Xenoi Biotech</title>
+    <meta name="description" content="End-to-end computational guide to shotgun metagenomics analysis: host DNA filtering, Kraken 2 taxonomic profiling, HUMAnN 3 functional modeling, and MAG binning.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics | Xenoi Biotech">
+    <meta property="og:description" content="End-to-end computational guide to shotgun metagenomics analysis: host DNA filtering, Kraken 2 taxonomic profiling, HUMAnN 3 functional modeling, and MAG binning.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics | Xenoi Biotech">
+    <meta name="twitter:description" content="End-to-end computational guide to shotgun metagenomics analysis: host DNA filtering, Kraken 2 taxonomic profiling, HUMAnN 3 functional modeling, and MAG binning.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics",
+                    "item": "https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html#article",
+            "headline": "Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics",
+            "description": "End-to-end computational guide to shotgun metagenomics analysis: host DNA filtering, Kraken 2 taxonomic profiling, HUMAnN 3 functional modeling, and MAG binning.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/shotgun-metagenomics-workflow.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How does shotgun metagenomics distinguish living bacteria from dead bacterial DNA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard shotgun sequencing cannot distinguish DNA originating from viable versus non-viable cells. To specifically profile active metabolizing microbes, researchers perform metatranscriptomics (sequencing microbial mRNA) or utilize viability dyes like propidium monoazide (PMA)."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is a Metagenome-Assembled Genome (MAG)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A MAG is a draft microbial genome reconstructed directly from metagenomic sequencing reads by assembling contigs and binning them together using sequence composition and coverage co-variance across samples, without ever culturing the microbe in the laboratory."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is host DNA removal mandatory prior to public metagenomic data deposition?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "In human microbiome studies, host reads contain the patient's private germline genomic DNA. Public deposition of un-decontaminated raw reads violates clinical data privacy regulations (such as HIPAA and GDPR)."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Shotgun Metagenomics Analysis Workflow: Taxonomic Profiling and Functional Metagenomics</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Shotgun metagenomics directly sequences the total genomic DNA of complex microbial communities without PCR amplicon bias. By applying host sequence decontamination, k-mer and clade-specific taxonomic profiling via Kraken 2 and MetaPhlAn 4, and metabolic pathway reconstruction via HUMAnN 3, bioinformatic workflows resolve species-level microbial diversity and functional genetic capacity.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Shotgun metagenomics profiles all genomic DNA present in an environmental or clinical sample, capturing bacteria, archaea, viruses, and fungi.</li><li style='margin-bottom: 8px;'>Unlike 16S amplicon sequencing, shotgun data resolves species-level and strain-level taxonomy alongside full functional metabolic potential.</li><li style='margin-bottom: 8px;'>Host decontamination using Bowtie2 or Minimap2 is critical to remove human, animal, or plant host DNA contamination before microbial classification.</li><li style='margin-bottom: 8px;'>Taxonomic profiling balances k-mer-based classification (Kraken 2 / Bracken) against marker-gene methods (MetaPhlAn 4).</li><li style='margin-bottom: 8px;'>Metagenome-Assembled Genomes (MAGs) reconstructed through MEGAHIT de novo assembly and MetaBAT 2 binning uncover novel, uncultured microbial species.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Shotgun Metagenomics and How Does It Compare to 16S Amplicon Sequencing?</h2>
+                
+        <p>Microbial communities inhabit every biological niche, from the human gastrointestinal tract to marine sediments and agricultural soil. Traditional 16S rRNA amplicon sequencing targets a single hypervariable region of the bacterial ribosomal gene. While cost-effective, 16S sequencing is restricted to bacteria and archaea, suffers from PCR amplification biases, and generally lacks resolution below the genus level.</p>
+        <p>Shotgun metagenomics overcomes these limitations by untargeted sequencing of all genomic DNA present in the sample. This captures bacteria, archaea, DNA viruses, bacteriophages, and eukaryotic fungi simultaneously. Crucially, shotgun sequencing provides both taxonomic composition (who is there) and functional genetic potential (what metabolic pathways they can perform), enabling profound insights into microbiome-host dynamics.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Sequencing Experiments and Filter Host Contamination?</h2>
+                
+        <p>Shotgun metagenomics requires paired-end sequencing (2x150 bp) on high-throughput short-read platforms. Required sequencing depth depends on community complexity: human gut microbiomes typically require 20 to 40 million read pairs per sample, whereas highly complex soil or sediment samples require 60 to 100+ million read pairs to capture low-abundance organisms.</p>
+        <p>A mandatory preliminary step is Host Decontamination. In clinical mucosal biopsies, saliva, or plant root endosphere samples, host DNA can constitute over 90% to 99% of total reads. Raw reads are aligned against the host reference genome (e.g., GRCh38 for human, T2T-CHM13, or crop references) using Bowtie2 or Minimap2. All reads mapping to the host genome are permanently excised, ensuring that downstream compute and public repository uploads are fully decontaminated.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Taxonomic Profiling Work in Kraken 2 and MetaPhlAn 4?</h2>
+                
+        <p>Two complementary computational methodologies drive taxonomic classification in shotgun metagenomics:</p>
+        <ul>
+            <li><strong>k-mer Exact Matching (Kraken 2 + Bracken):</strong> Kraken 2 breaks reads into k-mers (typically k=35) and queries a pre-computed database (NCBI RefSeq) to assign reads to the Lowest Common Ancestor (LCA) on the taxonomic tree. Because reads mapped to higher taxonomic levels (e.g., genus) cannot be counted directly at species level, Bayesian re-estimation software (Bracken) statistically redistributes reads to generate highly accurate species-level relative abundances.</li>
+            <li><strong>Clade-Specific Marker Genes (MetaPhlAn 4):</strong> MetaPhlAn aligns reads against a curated database of over 1 million unique clade-specific marker genes that uniquely identify specific microbial species and strains. This strategy minimizes false positives caused by conserved genomic regions shared across related taxa.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Reconstruct Functional Metabolic Pathways Using HUMAnN 3?</h2>
+                
+        <p>Beyond identifying species names, shotgun metagenomics directly profiles microbial functional capabilities. The standard software tool is HUMAnN 3 (HMP Unified Metabolic Analysis Network 3).</p>
+        <p>HUMAnN 3 executes a tiered search strategy: reads are first mapped against species-specific pangenomes identified by MetaPhlAn using Bowtie2. Unmapped reads are then translated into amino acid space and aligned against the UniRef50/UniRef90 protein database using Diamond. By mapping gene abundances to functional hierarchies (UniProt, KEGG, MetaCyc), HUMAnN 3 quantifies gene families and computes metabolic pathway completeness and abundance (e.g., short-chain fatty acid synthesis, antibiotic resistance, secondary metabolite production).</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Metagenome-Assembled Genomes (MAGs) Binned and Evaluated?</h2>
+                
+        <p>A transformative application of shotgun metagenomics is reconstructing novel, uncultured microbial genomes directly from environmental samples without laboratory cultivation:</p>
+        <ul>
+            <li><strong>De Novo Co-Assembly:</strong> High-throughput metagenomic assemblers (such as MEGAHIT or metaSPAdes) assemble decontaminated reads into continuous contigs.</li>
+            <li><strong>Contig Binning:</strong> Binning algorithms (MetaBAT 2, MaxBin 2, CONCOCT) group contigs into discrete genome bins based on two orthogonal signals: tetra-nucleotide sequence composition frequency and differential contig read coverage across multiple samples.</li>
+            <li><strong>MAG Quality Assessment (CheckM):</strong> Evaluates assembled bins against lineage-specific marker genes. High-quality MAGs display >90% completeness and <5% contamination with low strain heterogeneity.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are Key Metagenomic Deliverables and Methodological Pitfalls?</h2>
+                
+        <p>Standard deliverables include host filtering audits, Bracken species abundance tables, MetaPhlAn taxonomic profile hierarchies, HUMAnN 3 pathway abundance matrices, diversity metrics (Shannon alpha diversity, Bray-Curtis beta diversity PCoA plots), and MAG assembly FASTA files.</p>
+        <p>Key pitfalls to guard against include:</p>
+        <ul>
+            <li><strong>Neglecting Batch-Specific Extraction Contaminants:</strong> Low-biomass samples (e.g., blood, lung, clean-room environments) are easily overwhelmed by kit-reagent contaminants (the 'kitome'). Including non-template negative extraction controls is mandatory.</li>
+            <li><strong>Database Incompleteness:</strong> Environmental soils contain vast numbers of uncharacterized taxa lacking representatives in RefSeq. Relying solely on reference databases misses uncharacterized taxa; MAG assembly should be integrated.</li>
+            <li><strong>Compositional Data Misinterpretation:</strong> Relative abundance metrics sum to 100%, meaning an increase in one dominant microbe artificially forces apparent reductions in all other taxa. Applying compositionally aware statistical tools (such as ANCOM-BC or ALDEx2) prevents spurious differential abundance discoveries.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../shotgun-metagenomics.html" class="btn btn-light">Learn this in our 30-day workshop: Shotgun Metagenomics Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Metagenomics & Microbiome Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does shotgun metagenomics distinguish living bacteria from dead bacterial DNA?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Standard shotgun sequencing cannot distinguish DNA originating from viable versus non-viable cells. To specifically profile active metabolizing microbes, researchers perform metatranscriptomics (sequencing microbial mRNA) or utilize viability dyes like propidium monoazide (PMA).</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is a Metagenome-Assembled Genome (MAG)?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">A MAG is a draft microbial genome reconstructed directly from metagenomic sequencing reads by assembling contigs and binning them together using sequence composition and coverage co-variance across samples, without ever culturing the microbe in the laboratory.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is host DNA removal mandatory prior to public metagenomic data deposition?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">In human microbiome studies, host reads contain the patient's private germline genomic DNA. Public deposition of un-decontaminated raw reads violates clinical data privacy regulations (such as HIPAA and GDPR).</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Wood, D. E., et al. (2019). Improved metagenomic analysis with Kraken 2. <em>Genome Biology</em>, 20(1), 257. <a href='https://doi.org/10.1186/s13059-019-1891-0' target='_blank' rel='noopener noreferrer'>DOI: 10.1186/s13059-019-1891-0</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Blanco-Míguez, A., et al. (2023). Extending and improving metagenomic taxonomic profiling with uncharacterized species using MetaPhlAn 4. <em>Nature Biotechnology</em>, 41(11), 1633–1644. <a href='https://doi.org/10.1038/s41587-023-01688-w' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41587-023-01688-w</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Beghini, F., et al. (2021). Integrating taxonomic, functional, and strain-level profiling of diverse microbial communities with bioBakery 3. <em>eLife</em>, 10, e65088. <a href='https://doi.org/10.7554/eLife.65088' target='_blank' rel='noopener noreferrer'>DOI: 10.7554/eLife.65088</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="16s-vs-shotgun-metagenomics.html" class="inline-link">16S vs Shotgun Metagenomics Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

@@ -4,8 +4,8 @@
     <script src="compact-init.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>RAD-Seq Data Analysis for Population Genetics</title>
-    <meta name="description" content="Demultiplex, build loci, call SNPs and study population structure in a 30-day RAD-Seq workshop.">
+    <title>RAD-Seq Population Genetics Workshop (30-Day, Online)</title>
+    <meta name="description" content="Demultiplex restriction site reads, assemble loci, call population SNPs, and analyze genetic diversity in a hands-on 30-day online workshop with real RAD-Seq data.">
     <link rel="canonical" href="https://www.xenoibiotech.com/rad-seq.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#03100e">
@@ -16,15 +16,15 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Xenoi Biotech">
-    <meta property="og:title" content="RAD-Seq Data Analysis for Population Genetics">
-    <meta property="og:description" content="Demultiplex, build loci, call SNPs and study population structure in a 30-day RAD-Seq workshop.">
+    <meta property="og:title" content="RAD-Seq Population Genetics Workshop (30-Day, Online) | Xenoi Biotech">
+    <meta property="og:description" content="Demultiplex restriction site reads, assemble loci, call population SNPs, and analyze genetic diversity in a hands-on 30-day online workshop with real RAD-Seq data.">
     <meta property="og:url" content="https://www.xenoibiotech.com/rad-seq.html">
     <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="RAD-Seq Data Analysis for Population Genetics">
-    <meta name="twitter:description" content="Demultiplex, build loci, call SNPs and study population structure in a 30-day RAD-Seq workshop.">
+    <meta name="twitter:title" content="RAD-Seq Population Genetics Workshop (30-Day, Online) | Xenoi Biotech">
+    <meta name="twitter:description" content="Demultiplex restriction site reads, assemble loci, call population SNPs, and analyze genetic diversity in a hands-on 30-day online workshop with real RAD-Seq data.">
     <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Favicons -->
@@ -42,93 +42,135 @@
     <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
 
     <!-- Structured Data: Breadcrumbs & Course -->
-        <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+            <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://www.xenoibiotech.com/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Workshops",
-              "item": "https://www.xenoibiotech.com/workshops.html"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "RAD-Seq",
-              "item": "https://www.xenoibiotech.com/rad-seq.html"
-            }
-          ]
-        },
-        {
-          "@type": "Course",
-          "name": "RAD-Seq",
-          "description": "Discover genetic markers in many individuals using reduced-representation sequencing.",
-          "courseMode": "Online",
-          "inLanguage": "en",
-          "provider": {
-            "@type": "Organization",
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
             "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
             "alternateName": "Xenoibiotech",
-            "url": "https://www.xenoibiotech.com"
-          }
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "description": "Bioinformatics company in Punjab, India offering NGS data analysis services and online bioinformatics workshops and internships.",
+            "areaServed": "India",
+            "knowsAbout": [
+                "NGS data analysis",
+                "RNA-Seq",
+                "single-cell genomics",
+                "metagenomics",
+                "epigenomics",
+                "bioinformatics training"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is the RAD-Seq workshop online?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. All Xenoi Biotech workshops are delivered online."
-          }
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Workshops",
+                    "item": "https://www.xenoibiotech.com/workshops.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "RAD-Seq",
+                    "item": "https://www.xenoibiotech.com/rad-seq.html"
+                }
+            ]
         },
         {
-          "@type": "Question",
-          "name": "How long is it and how is it structured?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data."
-          }
+            "@type": "Course",
+            "name": "RAD-Seq Population Genetics Workshop (30-Day, Online)",
+            "description": "Demultiplex restriction site reads, build loci, call SNPs, and study genetic variation and population structure.",
+            "url": "https://www.xenoibiotech.com/rad-seq.html",
+            "provider": {
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "inLanguage": "en-IN",
+            "hasCourseInstance": {
+                "@type": "CourseInstance",
+                "courseMode": "Online",
+                "courseWorkload": "P30D",
+                "duration": "P30D"
+            },
+            "offers": {
+                "@type": "Offer",
+                "price": "5000",
+                "priceCurrency": "INR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://www.xenoibiotech.com/quote.html?workshop=rad-seq"
+            },
+            "creator": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            }
         },
         {
-          "@type": "Question",
-          "name": "Who is it for?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What will I learn?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Discover genetic markers in many individuals using reduced-representation sequencing, covering six modules: Foundations, Demultiplexing and cleaning, Locus construction, SNP discovery, Population analysis, Mini-project and report."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the fees and dates?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask."
-          }
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Is this RAD-Seq workshop delivered online?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. All Xenoi Biotech workshops are delivered 100% online, allowing researchers and students across India and internationally to participate with remote compute support."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How long is the workshop and what is the workload?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The workshop runs for 30 days across 6 structured modules. Learners typically dedicate 1 to 2 flexible hours per day to work through pipeline commands, code exercises, and the mini-project."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Who is this workshop designed for?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "It is built for B.Sc., M.Sc., and Ph.D. students, postdoctoral researchers, faculty members, and industry professionals in biotechnology, biochemistry, microbiology, and medicine who need to analyze NGS datasets independently."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What will I learn in this workshop?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You will learn Stacks pipeline execution (process_radtags, ustacks/pstacks, cstacks, sstacks, populations), SNP filtering for call rate and minor allele frequency, Fst differentiation, heterozygosity metrics, PCA, and ancestry clustering."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What are the fees, dates, and enrollment details?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The workshop fee is MRP \u20b95,000, inclusive of GST. Batch dates are shared on enquiry. Use the Enrol now button to reserve your place or receive the upcoming schedule."
+                    }
+                }
+            ]
         }
-          ]
-        }
-      ]
-    }
+    ]
+}
     </script>
 </head>
 <body class="inner">
@@ -136,15 +178,16 @@
     
     <header class="site-header" id="site-header">
         <div class="header-inner">
-            <a href="index.html" class="header-logo" aria-label="Xenoi Biotech Home">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
                 <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
             </a>
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="internships.html">Internships</a></li>
-                    <li><a href="workshops.html" class="active" aria-current="page">Workshops</a></li>
+                    <li><a href="workshops.html" class="active">Workshops</a></li>
+                    <li><a href="publications.html">Publications</a></li>
                     <li><a href="team.html">About</a></li>
                     <li><a href="quote.html">Contact</a></li>
                 </ul>
@@ -166,7 +209,7 @@
     <main class="page-container text-block visible" id="main">
         <div class="page-header-block">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <span class="sep">/</span>
                 <a href="workshops.html">Workshops</a>
                 <span class="sep">/</span>
@@ -176,13 +219,36 @@
                 <span class="eyebrow" style="margin-bottom: 0;">GENOMICS</span>
                 <span class="workshop-duration-badge">30 days · 6 modules · Online</span>
             </div>
-            <h1 class="page-title">RAD-Seq 30-day workshop</h1>
-            <p class="lead-text">Discover genetic markers in many individuals using reduced-representation sequencing.</p>
+            <h1 class="page-title">RAD-Seq Population Genetics Workshop (30-Day, Online)</h1>
+            <p class="lead-text">Demultiplex restriction site reads, build loci, call SNPs, and study genetic variation and population structure.</p>
         </div>
+
+        <section class="batch" aria-labelledby="batch-h">
+            <h2 id="batch-h" class="batch-title">Next batch</h2>
+            <ul class="batch-list">
+                <!-- OWNER-TODO: batch start date: <li><strong>Starts:</strong> [[OWNER: date]]</li> -->
+                <li><strong>Duration:</strong> 30 days, 6 modules, online</li>
+                <li><strong>Fee:</strong> MRP &#8377;5,000 (incl. GST)</li>
+                <!-- OWNER-TODO: seats per batch: <li><strong>Seats:</strong> [[OWNER: number]] per batch</li> -->
+                <!-- OWNER-TODO: instructor details: <li><strong>Instructor:</strong> [[OWNER: name, qualification]]</li> -->
+                <!-- OWNER-TODO: certificate criteria: <li><strong>Certificate:</strong> [[OWNER: yes/no and criteria]]</li> -->
+                <!-- OWNER-TODO: prerequisites: <li><strong>Prerequisites:</strong> [[OWNER: for example B.Sc. in life sciences; no coding needed]]</li> -->
+            </ul>
+            <a href="quote.html?workshop=rad-seq" class="btn btn-light">Enrol now</a>
+        </section>
 
         <section class="workshop-about">
             <h2 class="section-title">About this workshop</h2>
             <p class="workshop-about-text">RAD-Seq sequences only the DNA next to restriction-enzyme cut sites, which makes it a cost-effective way to find thousands of genetic markers across many individuals. That has made it popular for population genetics, linkage maps and studies of species with no genome. This workshop covers the whole analysis: understanding how the enzymes shape the data, separating reads by individual using barcodes, cleaning reads, and building loci with or without a reference genome. You then call SNPs, filter genotypes for depth, missing data and artefacts, and export the results for downstream tools. The final modules show how to measure diversity, visualise population structure with PCA and compare populations, so you can move from raw reads to a population-level result.</p>
+        </section>
+
+                <section class="tools-section">
+            <h2 class="section-title">Tools and pipelines you will use</h2>
+            <p style="color: rgba(244, 253, 251, 0.85); line-height: 1.6; margin-bottom: 12px;">This workshop emphasizes standard, open-source bioinformatics tools widely used in peer-reviewed genomics literature:</p>
+            <div class="tools-grid">
+                <a href="https://catchenlab.life.illinois.edu/stacks/" class="tool-tag" target="_blank" rel="noopener noreferrer">Stacks ↗</a><a href="https://bowtie-bio.sourceforge.net/bowtie2/index.shtml" class="tool-tag" target="_blank" rel="noopener noreferrer">Bowtie2 ↗</a><a href="https://samtools.github.io/bcftools/" class="tool-tag" target="_blank" rel="noopener noreferrer">BCFtools ↗</a><a href="https://vcftools.github.io/" class="tool-tag" target="_blank" rel="noopener noreferrer">VCFtools ↗</a><a href="https://www.cog-genomics.org/plink/" class="tool-tag" target="_blank" rel="noopener noreferrer">PLINK ↗</a><a href="https://rajanil.github.io/fastStructure/" class="tool-tag" target="_blank" rel="noopener noreferrer">fastSTRUCTURE ↗</a>
+            </div>
+            <!-- REVIEW(owner): verify tools -->
         </section>
 
         <section class="workshop-curriculum">
@@ -228,7 +294,7 @@
                         <span class="module-title">Demultiplexing and cleaning</span>
                     </div>
                     <div class="module-summary-right">
-                        <span class="module-week-tag">Weeks 2-3</span>
+                        <!-- OWNER-TODO: confirm week split -->
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
@@ -261,7 +327,7 @@
                         <span class="module-title">Locus construction</span>
                     </div>
                     <div class="module-summary-right">
-                        <span class="module-week-tag">Weeks 2-3</span>
+                        <!-- OWNER-TODO: confirm week split -->
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
@@ -294,7 +360,7 @@
                         <span class="module-title">SNP discovery</span>
                     </div>
                     <div class="module-summary-right">
-                        <span class="module-week-tag">Weeks 3-4</span>
+                        <!-- OWNER-TODO: confirm week split -->
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
@@ -327,7 +393,7 @@
                         <span class="module-title">Population analysis</span>
                     </div>
                     <div class="module-summary-right">
-                        <span class="module-week-tag">Weeks 3-4</span>
+                        <!-- OWNER-TODO: confirm week split -->
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
@@ -389,102 +455,147 @@
         </section>
 
         
-        <section class="related-workshops-section" style="margin: 40px 0;">
-            <h2 class="section-title">Related workshops</h2>
+        
+        <section class="workshop-deliverables" style="margin: 36px 0;">
+            <h2 class="section-title">What you receive &amp; prerequisites</h2>
+            <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 16px;">
+                <div class="card" style="padding: 24px; background: rgba(8, 48, 40, 0.28); border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18)); border-radius: 10px;">
+                    <h3 style="color: var(--accent-highlight, #b0fcdb); font-size: 1.15rem; margin-bottom: 10px;">What you receive</h3>
+                    <ul style="padding-left: 20px; margin: 0; color: rgba(244, 253, 251, 0.85); line-height: 1.6;">
+                        <li>30 days of structured online self-paced access &amp; mentor guidance</li>
+                        <li>Curated real-world NGS benchmark datasets</li>
+                        <li>Reusable pipeline scripts and command-line code templates</li>
+                        <li>Independent capstone mini-project evaluation</li>
+                        <li>Certificate of Completion issued by Xenoi Biotech Pvt. Ltd.</li>
+                    </ul>
+                </div>
+                <div class="card" style="padding: 24px; background: rgba(8, 48, 40, 0.28); border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18)); border-radius: 10px;">
+                    <h3 style="color: var(--accent-highlight, #b0fcdb); font-size: 1.15rem; margin-bottom: 10px;">Prerequisites &amp; setup</h3>
+                    <ul style="padding-left: 20px; margin: 0; color: rgba(244, 253, 251, 0.85); line-height: 1.6;">
+                        <li>Basic life science background (B.Sc., M.Sc., B.Tech, or research scholar)</li>
+                        <li>No prior programming or Linux experience required (covered in Module 1)</li>
+                        <li>Laptop or PC with 8 GB RAM and internet access</li>
+                        <li>Remote compute setup instructions provided during onboarding</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- OWNER-TODO: sample dataset and benchmark output figure:
+            <div class="sample-dataset-placeholder" style="margin-top: 20px; padding: 20px; background: rgba(8,48,40,0.2); border: 1px dashed rgba(50,229,166,0.3); border-radius: 8px;">
+                <h4>Sample Dataset &amp; Output Figure</h4>
+                <p>[[OWNER: add sample dataset accession (e.g. NCBI SRA / GEO) and example publication figure]]</p>
+            </div>
+            -->
+            <div class="course-meta-bar">
+                <p class="course-instructor-credit" style="margin: 0;">Course curriculum designed by <strong>Anjali Chaudhary</strong>, Bioinformatics Scientist at Xenoi Biotech. <!-- REVIEW(owner): confirm instructor attribution --></p>
+                <p class="last-updated" style="margin: 0;">Last updated: October 2026</p>
+            </div>
+        </section>
+
+                <section class="related-workshops-section" style="margin: 40px 0;">
+            <h2 class="section-title">Related workshops &amp; services</h2>
+            <p style="color: rgba(244, 253, 251, 0.8); margin-bottom: 14px;">Broaden your computational biology expertise with complementary workshops:</p>
             <ul class="related-workshops-list" style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
-                <li><a href="dna-seq.html" class="inline-link">DNA-Seq (variants)</a></li>
-                <li><a href="genome-assembly.html" class="inline-link">Whole-Genome de novo Assembly</a></li>
+                <li><a href="dna-seq.html" class="inline-link">DNA-Seq (variants)</a></li><li><a href="genome-assembly.html" class="inline-link">Whole-Genome Assembly</a></li><li><a href="targeted-metagenomics.html" class="inline-link">Targeted Metagenomics</a></li>
             </ul>
+            <div style="margin-top: 20px; padding: 18px 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color, rgba(50, 229, 166, 0.18)); border-radius: 8px;">
+                <p style="margin: 0; color: rgba(244, 253, 251, 0.9);">Need this analysis done for your laboratory data? Explore our <a href="genomics.html" class="inline-link">Genomics Services</a> or consult on <a href="services.html" class="inline-link">Custom Bioinformatics Pipelines</a>.</p>
+            </div>
         </section>
 
 
-        <section class="workshop-faq-section" style="margin: 40px 0;">
+                <section class="workshop-faq-section" style="margin: 40px 0;">
             <h2 class="section-title">Frequently asked questions</h2>
             <div class="workshop-modules-list">
                 <details class="workshop-module-item">
                     <summary class="workshop-module-summary">
-                        <span class="module-title">Is the RAD-Seq workshop online?</span>
+                        <span class="module-title">Is this RAD-Seq workshop delivered online?</span>
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </summary>
                     <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
-                        <p style="margin: 0;">Yes. All Xenoi Biotech workshops are delivered online.</p>
+                        <p style="margin: 0;">Yes. All Xenoi Biotech workshops are delivered 100% online, allowing researchers and students across India and internationally to participate with remote compute support.</p>
                     </div>
                 </details>
 
                 <details class="workshop-module-item">
                     <summary class="workshop-module-summary">
-                        <span class="module-title">How long is it and how is it structured?</span>
+                        <span class="module-title">How long is the workshop and what is the workload?</span>
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </summary>
                     <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
-                        <p style="margin: 0;">It runs for 30 days in 6 modules, from foundations to core analysis and interpretation, and ends with a mini-project on real data.</p>
+                        <p style="margin: 0;">The workshop runs for 30 days across 6 structured modules. Learners typically dedicate 1 to 2 flexible hours per day to work through pipeline commands, code exercises, and the mini-project.</p>
                     </div>
                 </details>
 
                 <details class="workshop-module-item">
                     <summary class="workshop-module-summary">
-                        <span class="module-title">Who is it for?</span>
+                        <span class="module-title">Who is this workshop designed for?</span>
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </summary>
                     <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
-                        <p style="margin: 0;">Bachelor's, master's and PhD students, postdoctoral researchers and motivated independent learners.</p>
+                        <p style="margin: 0;">It is built for B.Sc., M.Sc., and Ph.D. students, postdoctoral researchers, faculty members, and industry professionals in biotechnology, biochemistry, microbiology, and medicine who need to analyze NGS datasets independently.</p>
                     </div>
                 </details>
 
                 <details class="workshop-module-item">
                     <summary class="workshop-module-summary">
-                        <span class="module-title">What will I learn?</span>
+                        <span class="module-title">What will I learn in this workshop?</span>
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </summary>
                     <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
-                        <p style="margin: 0;">Discover genetic markers in many individuals using reduced-representation sequencing, covering six modules: Foundations, Demultiplexing and cleaning, Locus construction, SNP discovery, Population analysis, Mini-project and report.</p>
+                        <p style="margin: 0;">You will learn Stacks pipeline execution (process_radtags, ustacks/pstacks, cstacks, sstacks, populations), SNP filtering for call rate and minor allele frequency, Fst differentiation, heterozygosity metrics, PCA, and ancestry clustering.</p>
                     </div>
                 </details>
 
                 <details class="workshop-module-item">
                     <summary class="workshop-module-summary">
-                        <span class="module-title">What are the fees and dates?</span>
+                        <span class="module-title">What are the fees, dates, and enrollment details?</span>
                         <span class="module-toggle-icon" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </summary>
                     <div style="padding: 0 24px 20px; color: rgba(244, 253, 251, 0.8); line-height: 1.6;">
-                        <p style="margin: 0;">Fees, dates and batches are shared on enquiry. Use the Enquire about this workshop button to ask.</p>
+                        <p style="margin: 0;">The workshop fee is MRP &#8377;5,000, inclusive of GST. Batch dates are shared on enquiry. Use the Enrol now button to reserve your place or receive the upcoming schedule.</p>
                     </div>
                 </details>
             </div>
         </section>
 
-        <section class="workshop-enquiry-section">
+                <section class="workshop-enquiry-section">
             <h2 class="section-title">Fees, dates and batches</h2>
-            <p class="enquiry-note">Shared on enquiry.</p>
+            <p class="enquiry-note">The workshop fee is MRP &#8377;5,000 (incl. GST). Batch dates and onboarding materials are shared upon enquiry.</p>
             <a href="quote.html?workshop=rad-seq" class="btn btn-light">Enquire about this workshop ↗</a>
         </section>
     </main>
 
-    <footer class="site-footer">
+        <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-grid">
                 <div class="footer-col-brand">
-                    <a href="index.html" class="footer-logo">
+                    <a href="/" class="footer-logo">
                         <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
                     </a>
                     <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
-                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">EXPLORE</h2>
+                    <p class="footer-heading">EXPLORE</p>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="genomics.html">Genomics</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
@@ -493,19 +604,21 @@
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">PROGRAMMES</h2>
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
                     <ul class="footer-links">
-                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="internships.html">Internships</a></li>
+                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="collaboration.html">Collaboration</a></li>
+                        <li><a href="resources/index.html">Resources</a></li>
+                        <li><a href="publications.html">Publications</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-col">
-                    <h2 class="footer-heading">CONTACT</h2>
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
                     <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
                     <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
-                    <div style="margin-top: 16px;">
+                    <div class="footer-cta-wrap">
                         <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
                     </div>
                 </div>
@@ -513,10 +626,10 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="footer-legal">
-                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
                 </div>
             </div>
         </div>

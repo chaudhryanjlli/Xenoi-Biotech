@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive guide to RAD-seq population genomics: restriction enzyme digestion, Stacks 2 processing, SNP discovery, and demographic inference.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive guide to RAD-seq population genomics: restriction enzyme digestion, Stacks 2 processing, SNP discovery, and demographic inference.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive guide to RAD-seq population genomics: restriction enzyme digestion, Stacks 2 processing, SNP discovery, and demographic inference.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing",
+                    "item": "https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html#article",
+            "headline": "RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing",
+            "description": "Comprehensive guide to RAD-seq population genomics: restriction enzyme digestion, Stacks 2 processing, SNP discovery, and demographic inference.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/rad-seq-population-genomics.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What causes allele dropout in RAD sequencing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Allele dropout occurs when a single nucleotide mutation alters or destroys the restriction enzyme recognition sequence in one allele. The enzyme cannot cut that DNA molecule, so only the alternative allele is sequenced, falsely presenting a heterozygous individual as homozygous."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can RAD-seq be performed without a reference genome?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The Stacks and ipyrad de novo pipelines assemble homologous loci directly from sequence overlaps across individuals without requiring any reference genome, making RAD-seq ideal for non-model organisms."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does Stacks differentiate biological SNPs from sequencing errors?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Stacks uses a multinomial likelihood model that evaluates read depth and error rates at each nucleotide position, distinguishing genuine heterozygous base calls from random low-frequency sequencing errors."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">RAD-Seq Population Genomics Workflow: Restriction Site Associated DNA Sequencing</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Restriction Site Associated DNA Sequencing (RAD-Seq) is a fractional genome sequencing strategy that samples reproducible homologous loci adjacent to specific restriction enzyme cut sites. Using computational pipelines like Stacks 2 and ipyrad, RAD-Seq cost-effectively identifies thousands of SNPs across hundreds of non-model individuals to resolve population structure, gene flow, and phylogenetic lineages.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>RAD-Seq reduces genome complexity by sequencing only DNA fragments flanking specific restriction enzyme recognition motifs.</li><li style='margin-bottom: 8px;'>The method enables high-density SNP discovery across large ecological populations without requiring prior reference genome sequence.</li><li style='margin-bottom: 8px;'>Upstream demultiplexing via process_radtags rescues barcode reads and filters low-quality sequences prior to locus building.</li><li style='margin-bottom: 8px;'>Software suites like Stacks 2 construct homologous loci either de novo (ustacks, cstacks, sstacks) or aligned to a reference genome.</li><li style='margin-bottom: 8px;'>Downstream population genetic modules calculate fixation indices (FST), nucleotide diversity (&pi;), and input matrices for demographic inference.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is RAD-Seq and Why Is It Preferred in Ecological Population Genetics?</h2>
+                
+        <p>In evolutionary biology, conservation genomics, and molecular ecology, researchers frequently investigate non-model species across large geographic populations (tens to hundreds of individuals). Whole-genome sequencing across hundreds of large-genome organisms (such as conifers, amphibians, or marine teleosts) remains cost-prohibitive. RAD-Seq (Restriction site Associated DNA Sequencing) resolves this economic bottleneck by sampling a consistent, homologous fraction of the genome across all individuals.</p>
+        <p>By digesting high-molecular-weight genomic DNA with rare-cutting or double-digestion restriction enzymes (e.g., SbfI, PstI, EcoRI) and ligating barcoded sequencing adapters to the cut overhangs, RAD-Seq sequences only the genomic intervals directly adjacent to the restriction cut sites. Because these cut sites are conserved across individuals, researchers sequence the exact same homologous loci repeatedly, generating thousands of informative single nucleotide polymorphisms (SNPs) at a fraction of whole-genome sequencing costs.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Single-Digest vs Double-Digest RAD Experiments?</h2>
+                
+        <p>RAD sequencing encompasses several protocol variants tailored to specific taxonomic genome sizes and required marker densities:</p>
+        <ul>
+            <li><strong>Single-Digest RAD (sdRAD):</strong> Uses a single rare-cutting restriction enzyme (such as SbfI, an 8-bp cutter), followed by mechanical shearing and size selection. Provides robust, long loci and minimal allele dropout.</li>
+            <li><strong>Double-Digest RAD (ddRAD):</strong> Employs two different restriction enzymes (a rare cutter and a frequent cutter, such as PstI and MseI) without mechanical shearing. Library fragment sizes are strictly controlled by dual enzymatic cuts and magnetic bead size selection, lowering laboratory preparation overhead.</li>
+        </ul>
+        <p>Targeted marker density must match the study questions: phylogeography and broad population divergence require 5,000 to 20,000 SNPs, whereas linkage disequilibrium mapping and fine-scale genome-wide association studies (GWAS) require 50,000 to 100,000+ loci.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Barcodes Demultiplexed and Checked for Restriction Overhangs?</h2>
+                
+        <p>Raw multiplexed sequencing reads are demultiplexed into individual sample files using <code>process_radtags</code> in the Stacks software suite.</p>
+        <p>The software performs three sequential quality checks simultaneously:</p>
+        <ul>
+            <li><strong>Barcode Deconvolution:</strong> Matches sample-specific in-line barcodes, allowing up to 1 mismatch to rescue high-quality reads with minor sequencing errors.</li>
+            <li><strong>Restriction Site Verification:</strong> Confirms the presence of an intact restriction enzyme recognition overhang at the beginning of the read. Reads lacking the correct restriction cut signature represent non-specific shearing artifacts and are purged.</li>
+            <li><strong>Sliding-Window Quality Filtering:</strong> Discards reads whose average Phred quality score drops below 20 across a sliding window.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Stacks 2 Build Loci De Novo vs Reference-Guided?</h2>
+                
+        <p>Depending on whether a reference genome exists, analysis diverges into two computational tracks in Stacks 2:</p>
+        <p><strong>De Novo Locus Building:</strong></p>
+        <ul>
+            <li><code>ustacks</code>: Aligns reads within an individual into matching stacks, building alleles and putative diploid loci based on a maximum nucleotide distance parameter (<code>-M</code>).</li>
+            <li><code>cstacks</code>: Merges loci across a representative catalog of individuals to create a master catalog of population-wide loci using distance parameter (<code>-n</code>).</li>
+            <li><code>sstacks</code> and <code>tsv2bam</code>: Matches individual loci back against the catalog and reconstructs paired-end contigs.</li>
+            <li><code>gstacks</code>: Calls SNPs and genotypes across the population using a maximum-likelihood framework.</li>
+        </ul>
+        <p><strong>Reference-Guided Analysis:</strong> When an annotated reference genome is available, demultiplexed reads are mapped directly using BWA-MEM2 or Bowtie2. Coordinate-sorted BAM files are input directly into <code>gstacks</code>, bypassing de novo catalog construction and eliminating paralogous collapse.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Calculate Population Genetics Statistics (FST, Pi, Heterozygosity)?</h2>
+                
+        <p>The final module of the Stacks pipeline, <code>populations</code>, filters loci and computes population-level summary statistics:</p>
+        <p>Filtering parameters enforce data completeness across biological groups: for example, requiring a locus to be present in at least 75% of individuals (<code>-r 0.75</code>) across all populations (<code>-p 3</code>), with a minimum minor allele frequency (<code>--min-maf 0.05</code>).</p>
+        <p>The software outputs classic evolutionary and population metrics: observed and expected heterozygosity (Ho, He), nucleotide diversity (&pi;), inbreeding coefficients (FIS), and pairwise population differentiation indices (FST). Furthermore, <code>populations</code> exports filtered genotype matrices in standard formats (VCF, Structure, PLINK, Treemix, Phylip) for downstream demographic modeling and phylogenetic reconstruction.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Major Outputs and Common Pitfalls in RAD-Seq?</h2>
+                
+        <p>A full deliverable includes demultiplexing audit summaries, locus coverage depth distributions, filtered VCF files, population genetic statistics tables, PCA and ADMIXTURE population structure plots, and neighbor-joining phylogenetic trees.</p>
+        <p>Critical analytical pitfalls include:</p>
+        <ul>
+            <li><strong>Allele Dropout from Restriction Site Mutations:</strong> Mutations within the restriction enzyme recognition site prevent digestion, causing the corresponding allele to drop out entirely and creating artificial homozygous calls. Filtering for locus presence across replicates mitigates dropout bias.</li>
+            <li><strong>Over-Merging Paralogous Loci:</strong> Setting the de novo assembly distance parameter <code>-M</code> or <code>-n</code> too high clusters duplicated gene paralogs into single chimeric loci, creating spurious hyper-variable SNPs.</li>
+            <li><strong>Ignoring PCR Duplicates in ddRAD:</strong> In ddRAD libraries without unique molecular identifiers (UMIs), identical reads from PCR amplification cannot be distinguished from independent biological fragments, which skews allele frequency estimates.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../rad-seq.html" class="btn btn-light">Learn this in our 30-day workshop: RAD-Seq Population Genomics Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Population Genetics & RAD-Seq Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What causes allele dropout in RAD sequencing?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Allele dropout occurs when a single nucleotide mutation alters or destroys the restriction enzyme recognition sequence in one allele. The enzyme cannot cut that DNA molecule, so only the alternative allele is sequenced, falsely presenting a heterozygous individual as homozygous.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Can RAD-seq be performed without a reference genome?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Yes. The Stacks and ipyrad de novo pipelines assemble homologous loci directly from sequence overlaps across individuals without requiring any reference genome, making RAD-seq ideal for non-model organisms.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does Stacks differentiate biological SNPs from sequencing errors?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Stacks uses a multinomial likelihood model that evaluates read depth and error rates at each nucleotide position, distinguishing genuine heterozygous base calls from random low-frequency sequencing errors.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Rochette, N. C., Rivera-Colón, A. G., and Catchen, J. M. (2019). Stacks 2: Analytical methods for paired-end sequencing in RAD-seq. <em>Molecular Ecology</em>, 28(21), 4737–4754. <a href='https://doi.org/10.1111/mec.15201' target='_blank' rel='noopener noreferrer'>DOI: 10.1111/mec.15201</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Eaton, D. A., and Overcast, I. (2020). ipyrad: Interactive assembly and analysis of RADseq datasets. <em>Bioinformatics</em>, 36(8), 2592–2594. <a href='https://doi.org/10.1093/bioinformatics/btaa796' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/bioinformatics/btaa796</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Andrews, K. R., et al. (2016). Harnessing the power of RADseq for ecological and evolutionary genomics. <em>Nature Reviews Genetics</em>, 17(2), 81–92. <a href='https://doi.org/10.1038/nrg.2016.29' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nrg.2016.29</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="wgs-vs-wes.html" class="inline-link">WGS vs WES Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

@@ -4,28 +4,27 @@
     <script src="compact-init.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Genomics &amp; NGS Data Analysis | Xenoi Biotech</title>
-    <meta name="description" content="Specialized NGS sequencing data analysis including Whole-Genome (WGS), Whole-Exome (WES), targeted panels, and de novo genome assembly for researchers.">
+    <title>NGS Genomics &amp; Sequencing Analysis Services | Xenoi Biotech</title>
+    <meta name="description" content="Specialised NGS genomics analysis services in India: whole-genome, exome, variant calling, annotation, and custom bioinformatics pipelines from Xenoi Biotech.">
     <link rel="canonical" href="https://www.xenoibiotech.com/genomics.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#03100e">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
 
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Xenoi Biotech">
-    <meta property="og:title" content="Genomics &amp; NGS Data Analysis | Xenoi Biotech">
-    <meta property="og:description" content="Specialized NGS sequencing data analysis including Whole-Genome (WGS), Whole-Exome (WES), targeted panels, and de novo genome assembly for researchers.">
+    <meta property="og:title" content="NGS Genomics &amp; Sequencing Analysis Services | Xenoi Biotech">
+    <meta property="og:description" content="Specialised NGS genomics analysis services in India: whole-genome, exome, variant calling, annotation, and custom bioinformatics pipelines from Xenoi Biotech.">
     <meta property="og:url" content="https://www.xenoibiotech.com/genomics.html">
     <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Genomics &amp; NGS Data Analysis | Xenoi Biotech">
-    <meta name="twitter:description" content="Specialized NGS sequencing data analysis including Whole-Genome (WGS), Whole-Exome (WES), targeted panels, and de novo genome assembly for researchers.">
+    <meta name="twitter:title" content="NGS Genomics &amp; Sequencing Analysis Services | Xenoi Biotech">
+    <meta name="twitter:description" content="Specialised NGS genomics analysis services in India: whole-genome, exome, variant calling, annotation, and custom bioinformatics pipelines from Xenoi Biotech.">
     <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
 
     <!-- Favicons -->
@@ -42,11 +41,28 @@
     <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
     <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
 
-    <!-- Structured Data: Breadcrumbs & Services -->
+    <!-- Structured Data: Organization, BreadcrumbList, Services, FAQPage -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
+        {
+          "@type": ["Organization", "EducationalOrganization"],
+          "@id": "https://www.xenoibiotech.com/#org",
+          "name": "Xenoi Biotech",
+          "legalName": "Xenoi Biotech Pvt. Ltd.",
+          "alternateName": "Xenoibiotech",
+          "url": "https://www.xenoibiotech.com/",
+          "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+          "description": "Bioinformatics company in Punjab, India offering NGS data analysis services and online bioinformatics workshops and internships.",
+          "email": "explore@xenoibiotech.com",
+          "areaServed": "India",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Punjab",
+            "addressCountry": "IN"
+          }
+        },
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
@@ -59,6 +75,12 @@
             {
               "@type": "ListItem",
               "position": 2,
+              "name": "Services",
+              "item": "https://www.xenoibiotech.com/services.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
               "name": "Genomics",
               "item": "https://www.xenoibiotech.com/genomics.html"
             }
@@ -66,47 +88,81 @@
         },
         {
           "@type": "Service",
-          "@id": "https://www.xenoibiotech.com/genomics.html#wgs",
-          "name": "Whole-Genome Sequencing (WGS)",
-          "description": "High-precision variant calling (SNPs, Indels, SVs, CNVs) across complete genomes.",
+          "@id": "https://www.xenoibiotech.com/genomics.html#wgs-service",
+          "serviceType": "Whole-Genome Sequencing Analysis",
+          "name": "Whole-Genome Sequencing (WGS) Analysis",
+          "description": "Comprehensive reference alignment, single nucleotide variant calling, indel detection, copy number variation (CNV), and structural variant (SV) profiling across whole genomes.",
           "provider": {
-            "@type": "Organization",
-            "@id": "https://www.xenoibiotech.com/#organization"
+            "@id": "https://www.xenoibiotech.com/#org"
           },
-          "areaServed": "IN"
+          "areaServed": "Worldwide"
         },
         {
           "@type": "Service",
-          "@id": "https://www.xenoibiotech.com/genomics.html#wes",
-          "name": "Whole-Exome Sequencing (WES)",
-          "description": "Deep coverage analysis of coding regions for rare disease and population genomics research.",
+          "@id": "https://www.xenoibiotech.com/genomics.html#wes-service",
+          "serviceType": "Whole-Exome Sequencing Analysis",
+          "name": "Whole-Exome Sequencing (WES) Analysis",
+          "description": "Targeted exome capture analysis, high-depth variant identification, somatic mutation calling, and clinical database functional annotation for rare disease and cancer research.",
           "provider": {
-            "@type": "Organization",
-            "@id": "https://www.xenoibiotech.com/#organization"
+            "@id": "https://www.xenoibiotech.com/#org"
           },
-          "areaServed": "IN"
+          "areaServed": "Worldwide"
         },
         {
           "@type": "Service",
-          "@id": "https://www.xenoibiotech.com/genomics.html#panels",
-          "name": "Targeted Panels",
-          "description": "Focused sequencing analysis for research-use targeted panels.",
+          "@id": "https://www.xenoibiotech.com/genomics.html#denovo-service",
+          "serviceType": "De Novo Genome Assembly",
+          "name": "De Novo Genome Assembly & Annotation",
+          "description": "Contig assembly, scaffolding, error correction, repeat masking, and structural gene annotation for novel plant, animal, and microbial genomes.",
           "provider": {
-            "@type": "Organization",
-            "@id": "https://www.xenoibiotech.com/#organization"
+            "@id": "https://www.xenoibiotech.com/#org"
           },
-          "areaServed": "IN"
+          "areaServed": "Worldwide"
         },
         {
-          "@type": "Service",
-          "@id": "https://www.xenoibiotech.com/genomics.html#denovo",
-          "name": "De Novo Assembly",
-          "description": "De novo assembly and structural annotation of novel microbial and plant genomes.",
-          "provider": {
-            "@type": "Organization",
-            "@id": "https://www.xenoibiotech.com/#organization"
-          },
-          "areaServed": "IN"
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What variant types are identified in Whole-Genome and Exome Sequencing analysis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our pipelines detect single nucleotide variants (SNVs), small insertions/deletions (Indels), copy number variants (CNVs), and large structural variants (SVs) including inversions and translocations using validated algorithms like GATK HaplotypeCaller, DeepVariant, and Manta."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which reference genomes and annotation databases are utilized?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We utilize standard reference builds such as GRCh38/hg38 and T2T-CHM13 for human studies, alongside organism-specific Ensembl and NCBI builds. Functional annotation is performed using Ensembl VEP, SnpEff, ClinVar, gnomAD, and dbSNP."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can you process long-read sequencing data from Oxford Nanopore or PacBio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We operate dedicated workflows for long-read data, including PacBio HiFi reads and Oxford Nanopore FASTQ/BAM files, using specialized tools such as Minimap2, Clair3, Flye, and Medaka for accurate assembly and SV discovery."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are your genomics analysis services intended for clinical diagnosis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unless specifically contracted under clinical compliance frameworks in writing, all sequencing analysis deliverables provided by Xenoi Biotech are strictly intended for research use only (RUO)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can researchers learn hands-on variant calling and assembly pipelines?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Researchers and scholars can enrol in our 30-day online workshops, including DNA-Seq Variant Analysis, Whole-Genome De Novo Assembly, and RAD-Seq, each priced at MRP ₹5,000 (incl. GST)."
+              }
+            }
+          ]
         }
       ]
     }
@@ -117,15 +173,16 @@
     
     <header class="site-header" id="site-header">
         <div class="header-inner">
-            <a href="index.html" class="header-logo" aria-label="Xenoi Biotech Home">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
                 <img src="xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
             </a>
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html" class="active" aria-current="page">Services</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
                     <li><a href="internships.html">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="publications.html">Publications</a></li>
                     <li><a href="team.html">About</a></li>
                     <li><a href="quote.html">Contact</a></li>
                 </ul>
@@ -147,7 +204,7 @@
     <main class="page-container text-block visible" id="main">
         <div class="page-header-block">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <span class="sep">/</span>
                 <a href="services.html">Services</a>
                 <span class="sep">/</span>
@@ -156,7 +213,7 @@
             <span class="eyebrow">NGS &amp; GENOMICS</span>
             <h1 class="page-title">Genomics &amp; NGS Data Analysis</h1>
             <p class="lead-text">
-                Specialized Next-Generation Sequencing data analysis. We turn vast amounts of sequence data into precise genomic insights.
+                Specialized Next-Generation Sequencing data analysis services for whole genomes, exomes, targeted panels, and de novo assemblies, designed for high-impact research publications.
             </p>
             <div class="notice-bar">
                 <span class="notice-icon">
@@ -169,11 +226,55 @@
                 <span>Our analysis services are for research use unless agreed otherwise in writing.</span>
             </div>
             <p class="intro-text">
-                This page details Xenoi Biotech's specialized Next-Generation Sequencing (NGS) data analysis services, including Whole-Genome Sequencing (WGS), Whole-Exome Sequencing (WES), targeted panels, and de novo genome assembly. We process high-throughput sequencing data with precision bioinformatics pipelines to deliver comprehensive variant calling and functional annotations. Research teams can explore our <a href="services.html" class="inline-link">pipeline development services</a> or request a project proposal. Interested in learning the analysis? See our <a href="dna-seq.html" class="inline-link">DNA-Seq</a> and <a href="spatial-transcriptomics.html" class="inline-link">spatial transcriptomics</a> <a href="workshops.html" class="inline-link">workshops</a>.
+                High-throughput sequencing produces immense datasets where identifying authentic biological variants demands rigorous error-filtering, standardized alignment algorithms, and multi-database functional annotation. Based in Punjab, India, Xenoi Biotech assists academic institutions, clinical genetics researchers, and agro-biotechnology teams across India and globally. We process short-read and long-read sequencing data across model and non-model systems, bridging raw instrument outputs with actionable biological interpretation. In addition to sequencing analysis, explore our broader <a href="services.html" class="inline-link">bioinformatics pipeline services</a>, or build computational competence through our <a href="dna-seq.html" class="inline-link">DNA-Seq workshop</a> and <a href="genome-assembly.html" class="inline-link">genome assembly workshop</a>.
             </p>
         </div>
 
-        <div class="cards-grid-2">
+        <!-- How a Project Works -->
+        <section class="project-workflow-section" aria-labelledby="workflow-heading" style="margin-bottom: 48px;">
+            <h2 id="workflow-heading" style="font-size: 1.6rem; margin-bottom: 24px;">How a Genomics Project Works</h2>
+            <div class="steps-list">
+                <div class="step-item">
+                    <span class="step-num">1</span>
+                    <div class="step-content">
+                        <strong>Sequencing Specifications Review:</strong> We examine your assay design, target depth (e.g. 30x WGS, 100x WES), platform chemistry, and reference assembly requirements.
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">2</span>
+                    <div class="step-content">
+                        <strong>Checksum Data Validation:</strong> Raw FASTQ files are transferred via secure checksum-verified channels to confirm read integrity and lack of file truncation.
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">3</span>
+                    <div class="step-content">
+                        <strong>Pipeline Configuration:</strong> Workflows are parameterized according to GATK Best Practices or DeepVariant pipelines containerized in Nextflow.
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">4</span>
+                    <div class="step-content">
+                        <strong>Variant Calling &amp; Multi-Tier Filtering:</strong> High-confidence SNVs, indels, CNVs, and SVs are detected, filtered, and annotated against public databases.
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">5</span>
+                    <div class="step-content">
+                        <strong>Deliverable Generation:</strong> We deliver coordinate-sorted indexed BAM/CRAM files, annotated VCFs/TSVs, MultiQC audits, and circos/circos-style plots.
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">6</span>
+                    <div class="step-content">
+                        <strong>Post-Delivery Consultation:</strong> Dedicated scientific consultation to guide interpretation of candidate variants and assist in drafting manuscript methods.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Core Cards -->
+        <div class="cards-grid-2" style="margin-bottom: 48px;">
             <div class="card" id="wgs">
                 <div class="card-icon-tile">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -184,8 +285,8 @@
                         <path d="M4 21l3-3"></path>
                     </svg>
                 </div>
-                <h2 class="card-title">Whole-Genome Sequencing (WGS)</h2>
-                <p class="card-body">High-precision variant calling (SNPs, Indels, SVs, CNVs) across complete genomes.</p>
+                <h3 class="card-title">Whole-Genome Sequencing (WGS)</h3>
+                <p class="card-body">High-precision variant calling (SNPs, Indels, SVs, CNVs) across complete genomes for population genomics and trait mapping.</p>
             </div>
 
             <div class="card" id="wes">
@@ -199,8 +300,8 @@
                         <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line>
                     </svg>
                 </div>
-                <h2 class="card-title">Whole-Exome Sequencing (WES)</h2>
-                <p class="card-body">Deep coverage analysis of coding regions for rare disease and population genomics research.</p>
+                <h3 class="card-title">Whole-Exome Sequencing (WES)</h3>
+                <p class="card-body">Deep coverage analysis of coding regions for rare disease etiology, oncological somatic mutation calling, and pedigree analysis.</p>
             </div>
 
             <div class="card" id="panels">
@@ -211,8 +312,8 @@
                         <line x1="9" y1="21" x2="9" y2="9"></line>
                     </svg>
                 </div>
-                <h2 class="card-title">Targeted Panels</h2>
-                <p class="card-body">Focused sequencing analysis for research-use targeted panels.</p>
+                <h3 class="card-title">Targeted Panels</h3>
+                <p class="card-body">Focused sequencing analysis for custom amplicon or hybridization capture panels with ultra-deep coverage verification.</p>
             </div>
 
             <div class="card" id="denovo">
@@ -223,19 +324,139 @@
                         <polyline points="2 12 12 17 22 12"></polyline>
                     </svg>
                 </div>
-                <h2 class="card-title">De Novo Assembly</h2>
-                <p class="card-body">De novo assembly and structural annotation of novel microbial and plant genomes.</p>
+                <h3 class="card-title">De Novo Assembly</h3>
+                <p class="card-body">De novo assembly, scaffolding, and structural annotation of novel microbial, plant, and fungal genomes using hybrid sequencing strategies.</p>
             </div>
         </div>
 
-        <p style="color: rgba(255,255,255,0.85); font-size: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
-            Looking for practical learning? Check out our <a href="workshops.html" class="inline-link">bioinformatics workshops</a> and <a href="internships.html" class="inline-link">genomics internships</a>.
-        </p>
+        <!-- 8 Detailed H2 Sections for AEO/GEO Depth -->
+        <article class="article-content">
+            <h2 id="deliverables">What We Deliver</h2>
+            <p>
+                Genomics datasets require standardized data formats to ensure reproducibility and seamless integration into downstream statistical analyses or medical genetics archives. For each sample cohort, we deliver:
+            </p>
+            <ul>
+                <li><strong>Sequencing QC Audits:</strong> MultiQC aggregation evaluating base call quality per cycle, GC distribution, duplication levels, and target capture efficiency (for WES/panels).</li>
+                <li><strong>Analysis-Ready Alignments:</strong> Coordinate-sorted BAM or compressed CRAM files with duplicate read markings (Picard/GATK MarkDuplicates) and BAI/CRAI index files.</li>
+                <li><strong>Calibrated Variant Call Sets:</strong> High-confidence VCF files containing filtered SNVs and small indels, provided with both site-only and sample-level genotype quality fields.</li>
+                <li><strong>Deep Functional Annotations:</strong> Formatted variant spreadsheets annotated via Ensembl Variant Effect Predictor (VEP) and SnpEff, incorporating allele frequencies from gnomAD, clinical significance from ClinVar, and pathogenicity predictions (REVEL, CADD).</li>
+                <li><strong>Structural Variation &amp; CNV Tables:</strong> Tabulated copy number alterations and structural rearrangement calls (inversions, duplications, translocations) with breakpoint coordinates.</li>
+                <li><strong>Publication Visualizations &amp; Methods:</strong> Visual summaries (circos plots, variant density distribution charts) and complete draft methodology write-ups for journal submission.</li>
+            </ul>
 
-        <section class="cta-band">
+            <h2 id="input-data">Input Data We Accept</h2>
+            <p>
+                Our computational pipelines accommodate data from major sequencing platforms, core facilities, and collaborative consortia:
+            </p>
+            <ul>
+                <li><strong>Primary Raw Data:</strong> Paired-end or single-end FASTQ files (compressed .fastq.gz), multiplexed sequencing archives, and unaligned BAM (uBAM) files.</li>
+                <li><strong>Pre-Aligned Data:</strong> BAM or CRAM files for variant recalibration, re-annotation, or joint genotyping cohorts.</li>
+                <li><strong>Platforms Supported:</strong> Illumina platforms (NovaSeq 6000, NovaSeq X Plus, NextSeq 2000, MiSeq), MGI/DNBSEQ (G400, T7), Oxford Nanopore Technologies (R10.4.1 flow cells), and PacBio (Revio, Sequel IIe HiFi reads).</li>
+                <li><strong>Genomic Systems:</strong> Human (GRCh37/hg19, GRCh38/hg38, T2T-CHM13), model vertebrates, crop species, agricultural pathogens, and environmental isolates.</li>
+            </ul>
+
+            <h2 id="tools-callers">Tools, Callers, and Pipelines</h2>
+            <p>
+                All genomic analyses are executed using benchmarked software implementations adhering to GATK Best Practices, deep learning variant models, and community-validated pipelines:
+            </p>
+            <ul>
+                <li><strong>Alignment &amp; Preprocessing:</strong> BWA-MEM2, Bowtie2, Minimap2, samtools, Picard Tools, fastp.</li>
+                <li><strong>Variant Calling:</strong> GATK HaplotypeCaller, Google DeepVariant, FreeBayes, Strelka2, Mutect2 (somatic), Clair3 (long-read). Interested in variant calling? Enrol in our <a href="dna-seq.html" class="inline-link">DNA-Seq data analysis workshop</a>.</li>
+                <li><strong>Structural Variation &amp; CNV:</strong> Manta, Delly, LUMPY, CNVkit, Control-FREEC, Sniffles2.</li>
+                <li><strong>De Novo Assembly &amp; Scaffolding:</strong> SPAdes, Flye, Hifiasm, Canu, RagTag. Learn assembly hands-on in our <a href="genome-assembly.html" class="inline-link">whole-genome assembly workshop</a>.</li>
+                <li><strong>Annotation Engines:</strong> Ensembl VEP, SnpEff, ANNOVAR, ClinVar, dbSNP, gnomAD, COSMIC.</li>
+                <li><strong>Population &amp; Epigenetics:</strong> PLINK, VCFtools, Bismark. Explore epigenetic variation in our <a href="methyl-seq.html" class="inline-link">Methyl-Seq workshop</a>.</li>
+            </ul>
+
+            <h2 id="turnaround">Turnaround Times</h2>
+            <p>
+                Genomics timelines depend on sample numbers, coverage requirements, and whether joint cohort genotyping or de novo scaffolding is required. Standard WES cohorts typically complete within 7 to 10 business days following data integrity checks.
+            </p>
+            <!-- OWNER-TODO: genomics turnaround time commitment:
+            | Sequencing Assay | Cohort Size | Typical Delivery |
+            |---|---|---|
+            | Whole-Exome Sequencing (WES) | 1–12 samples | [[OWNER: X working days]] |
+            | Whole-Genome Sequencing (WGS, 30x) | 1–6 samples | [[OWNER: X working days]] |
+            | Microbial De Novo Assembly | 1–10 isolates | [[OWNER: X working days]] |
+            | Targeted Amplicon Panel | Up to 48 samples | [[OWNER: X working days]] |
+            -->
+            <p>
+                Contact our genomics team through the <a href="quote.html" class="inline-link">consultation form</a> for a tailored milestone schedule.
+            </p>
+
+            <h2 id="pricing">Pricing &amp; Quotations</h2>
+            <p>
+                Analysis pricing is structured according to sample volume, data volume (gigabases of raw reads), and downstream annotation depth:
+            </p>
+            <!-- OWNER-TODO: genomics pricing details:
+            <p>Indicative pricing starts from [[OWNER: ₹X per exome]] and [[OWNER: ₹X per genome]].</p>
+            -->
+            <p>
+                We provide itemized, formal quotations within 24 working hours of receiving your sample specifications, with GST-compliant invoicing tailored for university grants and funded research laboratories across India.
+            </p>
+
+            <h2 id="security">Data Security &amp; Research Confidentiality</h2>
+            <p>
+                Genetic datasets require uncompromising security protocols. We uphold strict procedural barriers to protect client data integrity:
+            </p>
+            <!-- OWNER-TODO: genomics security details:
+            <ul>
+                <li>NDAs: [[OWNER: executed prior to data transfer]]</li>
+                <li>Storage: [[OWNER: isolated project directories with strict ACLs]]</li>
+                <li>Data Purging: [[OWNER: raw data deleted X days following client sign-off]]</li>
+            </ul>
+            -->
+            <p>
+                Confidentiality agreements are signed prior to accessing proprietary sequences. Data files are stored on secure compute volumes with restricted access, and files are permanently purged following verified client project acceptance.
+            </p>
+
+            <h2 id="sample-reports">Sample Genomic Reports</h2>
+            <p>
+                We maintain sample deliverable packages illustrating our variant filtering summaries, MultiQC quality audits, and annotation tables.
+            </p>
+            <!-- OWNER-TODO: sample genomics report download:
+            <p><a href="sample-reports/xenoi-genomics-sample-report.pdf" class="btn btn-outline">Download Sample Exome Analysis Report (PDF)</a></p>
+            -->
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary class="faq-question">What variant types are identified in Whole-Genome and Exome Sequencing analysis?</summary>
+                    <div class="faq-answer">
+                        <p>Our pipelines detect single nucleotide variants (SNVs), small insertions/deletions (Indels), copy number variants (CNVs), and large structural variants (SVs) including inversions and translocations using validated algorithms like GATK HaplotypeCaller, DeepVariant, and Manta.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Which reference genomes and annotation databases are utilized?</summary>
+                    <div class="faq-answer">
+                        <p>We utilize standard reference builds such as GRCh38/hg38 and T2T-CHM13 for human studies, alongside organism-specific Ensembl and NCBI builds. Functional annotation is performed using Ensembl VEP, SnpEff, ClinVar, gnomAD, and dbSNP.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Can you process long-read sequencing data from Oxford Nanopore or PacBio?</summary>
+                    <div class="faq-answer">
+                        <p>Yes. We operate dedicated workflows for long-read data, including PacBio HiFi reads and Oxford Nanopore FASTQ/BAM files, using specialized tools such as Minimap2, Clair3, Flye, and Medaka for accurate assembly and SV discovery.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Are your genomics analysis services intended for clinical diagnosis?</summary>
+                    <div class="faq-answer">
+                        <p>Unless specifically contracted under clinical compliance frameworks in writing, all sequencing analysis deliverables provided by Xenoi Biotech are strictly intended for research use only (RUO).</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">How can researchers learn hands-on variant calling and assembly pipelines?</summary>
+                    <div class="faq-answer">
+                        <p>Researchers and scholars can enrol in our 30-day online workshops, including DNA-Seq Variant Analysis, Whole-Genome De Novo Assembly, and RAD-Seq, each priced at MRP ₹5,000 (incl. GST).</p>
+                    </div>
+                </details>
+            </div>
+        </article>
+
+        <section class="cta-band" style="margin-top: 48px;">
             <div class="cta-band-content">
-                <h3>Get a Quote for Genomics</h3>
-                <p>Tell us your sequencing specifications and data goals.</p>
+                <h3>Get a Quote for Genomics Analysis</h3>
+                <p>Provide your sequencing specifications and target deliverables to receive an itemized proposal within 24 working hours.</p>
             </div>
             <div class="cta-band-action">
                 <a href="quote.html?service=wgs" class="btn btn-light">
@@ -246,21 +467,27 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+        <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-grid">
                 <div class="footer-col-brand">
-                    <a href="index.html" class="footer-logo">
+                    <a href="/" class="footer-logo">
                         <img src="xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
                     </a>
                     <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
-                    <p class="footer-disclaimer">Xenoi Biotech Pvt. Ltd. · Punjab, India</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">EXPLORE</h2>
+                    <p class="footer-heading">EXPLORE</p>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="genomics.html">Genomics</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
@@ -269,19 +496,21 @@
                 </div>
 
                 <div class="footer-col">
-                    <h2 class="footer-heading">PROGRAMMES</h2>
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
                     <ul class="footer-links">
-                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="internships.html">Internships</a></li>
+                        <li><a href="career-navigator.html">Career Navigator</a></li>
                         <li><a href="collaboration.html">Collaboration</a></li>
+                        <li><a href="resources/index.html">Resources</a></li>
+                        <li><a href="publications.html">Publications</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-col">
-                    <h2 class="footer-heading">CONTACT</h2>
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
                     <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
                     <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
-                    <div style="margin-top: 16px;">
+                    <div class="footer-cta-wrap">
                         <a href="quote.html" class="btn btn-light btn-sm">Request a quote</a>
                     </div>
                 </div>
@@ -289,10 +518,10 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    © 2026 XenoiBiotech Pvt. Ltd. All rights reserved.
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="footer-legal">
-                    <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies | Xenoi Biotech</title>
+    <meta name="description" content="Complete technical guide to de novo genome assembly: short reads vs long reads, string graphs vs de Bruijn graphs, polishing, and Hi-C scaffolding.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies | Xenoi Biotech">
+    <meta property="og:description" content="Complete technical guide to de novo genome assembly: short reads vs long reads, string graphs vs de Bruijn graphs, polishing, and Hi-C scaffolding.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies | Xenoi Biotech">
+    <meta name="twitter:description" content="Complete technical guide to de novo genome assembly: short reads vs long reads, string graphs vs de Bruijn graphs, polishing, and Hi-C scaffolding.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies",
+                    "item": "https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html#article",
+            "headline": "De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies",
+            "description": "Complete technical guide to de novo genome assembly: short reads vs long reads, string graphs vs de Bruijn graphs, polishing, and Hi-C scaffolding.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/genome-assembly-short-vs-long-reads.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is an N50 metric and why does it not guarantee assembly accuracy?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "N50 is the contig length such that 50% of the total assembly is contained in contigs of that size or larger. While it measures contiguity, it does not assess sequence correctness; a chimeric assembly artificially merging unrelated chromosomes displays a high N50 despite severe structural errors."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does Hi-C chromosome conformation capture order assembled contigs into chromosomes?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Hi-C measures physical 3D contact frequency between chromatin loci in intact nuclei. Because chromatin contact probability correlates inversely with linear physical distance along chromosomes, scaffolding algorithms use contact density to group, order, and orient contigs into full chromosomes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why do homopolymer runs cause indel errors in nanopore sequencing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "As an identical nucleotide repeats (e.g., AAAAAA), the ionic current passing through the biological nanopore remains constant, making it difficult for neural network basecallers to determine the exact number of identical bases traversing the pore."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">De Novo Genome Assembly Guide: Short Reads vs Long Reads and Hybrid Strategies</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    De novo genome assembly reconstructs complete chromosome-scale genomic sequences from unaligned sequencing reads. By combining long-read technologies (PacBio HiFi, Oxford Nanopore) that bridge complex repetitive regions with high-accuracy short reads for error correction, and Hi-C chromatin conformation data for chromosome scaffolding, modern assemblers produce platinum-standard reference genomes.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>Genome assembly must bridge repetitive elements, segmental duplications, and structural heterozygosity to achieve chromosome-scale contiguity.</li><li style='margin-bottom: 8px;'>Short reads (Illumina) excel at base-level accuracy (Q40+) but fail to bridge repeats longer than read length (150 to 300 bp).</li><li style='margin-bottom: 8px;'>Long reads (PacBio HiFi, Oxford Nanopore) span repetitive elements spanning tens of kilobases, resolving complex centromeric and telomeric regions.</li><li style='margin-bottom: 8px;'>String graph and overlap-layout-consensus (OLC) algorithms in assemblers like Hifiasm and Flye supersede short-read de Bruijn graphs.</li><li style='margin-bottom: 8px;'>Scaffolding using Hi-C chromosome conformation capture clusters assembled contigs into biologically ordered, chromosome-scale scaffolds.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is De Novo Genome Assembly and Why Are Repetitive Sequences Challenging?</h2>
+                
+        <p>A high-quality reference genome is the foundational resource for all downstream genetics, functional genomics, and molecular breeding. De novo genome assembly reconstructs an organism's entire DNA sequence from scratch without relying on an existing reference scaffold.</p>
+        <p>The central obstacle in genome assembly is repetitive DNA. Eukaryotic genomes are replete with transposable elements, tandem satellite repeats, and segmental duplications spanning thousands to tens of thousands of base pairs. When a repetitive element exceeds the length of sequencing reads, short-read assemblers cannot determine how flanking unique sequences connect, causing the de Bruijn graph to collapse into fragmented, unordered contigs.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do Short Reads, Long Reads, and Ultra-Long Reads Compare?</h2>
+                
+        <p>Modern genome assembly strategies select sequencing technologies based on read length, per-base error profiles, and project objectives:</p>
+        <ul>
+            <li><strong>Short Reads (Illumina):</strong> Deliver exceptional base accuracy (error rate < 0.1%, Q30 to Q40) at low cost, but cannot span repeats longer than 300 to 500 bp. Primarily utilized today for hybrid assembly, small bacterial genomes, and post-assembly polishing.</li>
+            <li><strong>PacBio HiFi Long Reads:</strong> Circular Consensus Sequencing (CCS) passes multiple times over a circularized DNA template, yielding long reads (15 to 20 kb) with >99.9% base accuracy (Q30+). Represents the gold standard for eukaryotic assembly.</li>
+            <li><strong>Oxford Nanopore Ultra-Long Reads:</strong> Generates continuous reads exceeding 50 kb to 100+ kb (with records over 1 Mb). While raw base accuracy is lower (Q20 to Q28 with current chemistries), ultra-long reads span massive heterochromatic satellite arrays and complex structural rearrangements.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do Assembly Algorithms Work: De Bruijn Graphs vs String Graphs?</h2>
+                
+        <p>Different sequencing data types dictate distinct algorithmic paradigms:</p>
+        <p><strong>De Bruijn Graph Assemblers (Short Reads):</strong> Algorithms like SPAdes or Abyss fragment short reads into fixed-length k-mers and construct directed graphs where nodes represent k-mers and edges represent overlaps. While memory-efficient, graph paths become tangled whenever repeats exceed k-mer length.</p>
+        <p><strong>String Graph and Overlap-Layout-Consensus (Long Reads):</strong> Long-read assemblers such as <code>Hifiasm</code> (for HiFi) and <code>Flye</code> (for Nanopore) bypass k-mer fragmentation. They compute all-versus-all read overlaps directly, construct string graphs that preserve entire read contexts, resolve bubbles caused by heterozygous alleles, and output phased, contiguous contigs spanning megabases.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Polish Draft Assemblies and Correct Residual Errors?</h2>
+                
+        <p>While long-read contigs achieve remarkable contiguity (often N50 values of tens of megabases), draft assemblies may retain base errors (particularly homopolymer indels in Nanopore reads). Error polishing ensures accurate open reading frame annotation:</p>
+        <ul>
+            <li><strong>Long-Read Polishing:</strong> Re-mapping long reads against the draft assembly using Medaka or Racon to resolve consensus ambiguities.</li>
+            <li><strong>Short-Read Polishing:</strong> Mapping high-accuracy paired-end Illumina reads against the assembly and applying polishing engines like Pilon or NextPolish to correct residual single-base substitutions and homopolymer frameshifts.</li>
+        </ul>
+        <p>Caution must be exercised to avoid over-polishing, which can accidentally overwrite true biological heterozygous variants in repetitive regions.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Hi-C Scaffolding Achieve Chromosome-Scale Assemblies?</h2>
+                
+        <p>Even the best long-read assemblies output contigs separated by biological gaps (such as ribosomal RNA arrays or active centromeres). Elevating fragmented contigs into full-length chromosome scaffolds requires long-range physical linkage data, predominantly provided by High-Throughput Chromosome Conformation Capture (Hi-C).</p>
+        <p>Hi-C cross-links chromatin in intact nuclei, digest with restriction enzymes, and ligates physically proximal DNA fragments together. Because chromatin interactions decay exponentially with physical genomic distance, computational scaffolding tools (such as YaHS, SALSA2, or ALLHiC) calculate interaction frequencies between contig ends. Contigs belonging to the same chromosome display strong interaction blocks, enabling bioinformaticians to orient, order, and join contigs into chromosome-level scaffolds.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Evaluate Assembly Quality (QUAST, BUSCO, Merqury) and Avoid Pitfalls?</h2>
+                
+        <p>Comprehensive assembly evaluation relies on three complementary quality metrics:</p>
+        <ul>
+            <li><strong>Contiguity (QUAST):</strong> Evaluates total assembly length, contig count, L50, and N50. Total assembly size must closely match biological genome size estimates from flow cytometry or k-mer analysis.</li>
+            <li><strong>Gene Completeness (BUSCO):</strong> Benchmarks the presence of conserved single-copy orthologs. Platinum assemblies display >95% to 98% complete, single-copy BUSCOs.</li>
+            <li><strong>Base Accuracy and Phasing (Merqury):</strong> k-mer analysis comparing high-accuracy Illumina reads against the assembly to calculate the Quality Value (QV score, targeting QV > 50) and identify unphased haplotype duplications.</li>
+        </ul>
+        <p>A frequent pitfall is false haplotype duplication: in highly heterozygous genomes, alternative alleles fail to merge into a single diploid consensus, creating artificial genome size inflation and duplicated BUSCO scores. Tools like <code>purge_dups</code> identify and remove redundant haplotypic contigs.</p>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../genome-assembly.html" class="btn btn-light">Learn this in our 30-day workshop: De Novo Genome Assembly Workshop</a>
+                    <a href="../genomics.html" class="btn btn-outline">Need this analysis done for your data? De Novo Genome Assembly & Genomics Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is an N50 metric and why does it not guarantee assembly accuracy?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">N50 is the contig length such that 50% of the total assembly is contained in contigs of that size or larger. While it measures contiguity, it does not assess sequence correctness; a chimeric assembly artificially merging unrelated chromosomes displays a high N50 despite severe structural errors.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How does Hi-C chromosome conformation capture order assembled contigs into chromosomes?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Hi-C measures physical 3D contact frequency between chromatin loci in intact nuclei. Because chromatin contact probability correlates inversely with linear physical distance along chromosomes, scaffolding algorithms use contact density to group, order, and orient contigs into full chromosomes.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why do homopolymer runs cause indel errors in nanopore sequencing?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">As an identical nucleotide repeats (e.g., AAAAAA), the ionic current passing through the biological nanopore remains constant, making it difficult for neural network basecallers to determine the exact number of identical bases traversing the pore.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Kolmogorov, M., et al. (2019). Assembly of long, error-prone reads using repeat graphs. <em>Nature Biotechnology</em>, 37(5), 540–546. <a href='https://doi.org/10.1038/s41587-019-0286-8' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41587-019-0286-8</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Cheng, H., et al. (2021). Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm. <em>Nature Methods</em>, 18(2), 170–175. <a href='https://doi.org/10.1038/s41592-020-01053-6' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41592-020-01053-6</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Gurevich, A., et al. (2013). QUAST: quality assessment tool for genome assemblies. <em>Bioinformatics</em>, 29(8), 1072–1075. <a href='https://doi.org/10.1093/bioinformatics/btt086' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/bioinformatics/btt086</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="wgs-vs-wes.html" class="inline-link">WGS vs WES Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

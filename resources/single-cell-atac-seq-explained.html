@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes | Xenoi Biotech</title>
+    <meta name="description" content="Comprehensive computational guide to single-cell ATAC-seq analysis, covering Tn5 tagmentation, barcode deconvolution, ArchR and Signac workflows, and motif enrichment.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes | Xenoi Biotech">
+    <meta property="og:description" content="Comprehensive computational guide to single-cell ATAC-seq analysis, covering Tn5 tagmentation, barcode deconvolution, ArchR and Signac workflows, and motif enrichment.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes | Xenoi Biotech">
+    <meta name="twitter:description" content="Comprehensive computational guide to single-cell ATAC-seq analysis, covering Tn5 tagmentation, barcode deconvolution, ArchR and Signac workflows, and motif enrichment.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes",
+                    "item": "https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html#article",
+            "headline": "Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes",
+            "description": "Comprehensive computational guide to single-cell ATAC-seq analysis, covering Tn5 tagmentation, barcode deconvolution, ArchR and Signac workflows, and motif enrichment.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/single-cell-atac-seq-explained.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How many cells and reads per nucleus are typically required for scATAC-seq?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard experiments target between 5,000 and 10,000 nuclei per sample, sequenced at a depth of 25,000 to 50,000 paired-end reads per nucleus to achieve comprehensive chromatin accessibility mapping while maintaining cost efficiency."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between bulk ATAC-seq and single-cell ATAC-seq?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Bulk ATAC-seq measures average chromatin accessibility across heterogeneous populations of thousands to millions of cells. Single-cell ATAC-seq profiles accessibility within individual nuclei, resolving rare cell types, cell-to-cell regulatory heterogeneity, and developmental lineages."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How is gene expression inferred from scATAC-seq data without RNA sequencing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Gene activity matrices sum accessibility fragments falling within gene bodies and flanking promoter regions. This proxy metric correlates with active transcription and facilitates label transfer from matched scRNA-seq reference atlases."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Single-Cell ATAC-Seq Analysis Explained: From Barcoded FASTQ to Epigenomic Landscapes</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Single-cell Assay for Transposase-Accessible Chromatin using sequencing (scATAC-seq) profiles open chromatin across individual nuclei to resolve cellular heterogeneity in gene regulation. By capturing cell-specific accessible cis-regulatory elements, transcription factor binding dynamics, and motif enrichment at single-cell resolution, scATAC-seq identifies cell type-specific regulatory programs in complex developmental and disease tissues.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>High-throughput scATAC-seq captures genome-wide chromatin accessibility across thousands of individual nuclei simultaneously.</li><li style='margin-bottom: 8px;'>Data matrices are inherently ultra-sparse, requiring specialized dimensionality reduction such as Latent Semantic Indexing (LSI) rather than standard PCA.</li><li style='margin-bottom: 8px;'>Quality control centers on transcription start site (TSS) enrichment scores, nucleosomal fragment length periodicity, and cell-calling filters.</li><li style='margin-bottom: 8px;'>Peak calling must be performed across aggregated pseudo-bulk clusters to preserve sensitivity for cell-type-specific regulatory peaks.</li><li style='margin-bottom: 8px;'>Integrated frameworks like Signac in R or ArchR quantify gene activity scores and motif accessibility to identify master regulatory drivers.</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Is Single-Cell ATAC-Seq and Why Is It Used in Genomics?</h2>
+                
+        <p>Chromatin accessibility is the foundational layer determining transcriptional potential. While bulk ATAC-seq provides an ensemble average across millions of cells, it obscures regulatory diversity in complex tissues such as the brain, tumor microenvironments, or developing embryos. Single-cell ATAC-seq resolves this limitation by profiling chromatin accessibility within individual cellular envelopes.</p>
+        <p>The core assay utilizes a hyperactive Tn5 transposase loaded with sequencing adapters. In intact nuclei, Tn5 inserts adapters into nucleosome-depleted, sterically accessible DNA regions while leaving tightly wrapped heterochromatin untouched. In droplet-based microfluidics platforms, individual permeabilized nuclei are co-encapsulated with gel beads carrying unique cell barcodes. Following transposase cut-and-paste reactions, PCR amplification tags each open chromatin fragment with its cell-specific barcode, allowing simultaneous sequencing of thousands of individual epigenomes.</p>
+        <p>Researchers employ scATAC-seq to reconstruct developmental differentiation trajectories, map cell-type-specific enhancer-promoter interactions, identify pioneering transcription factors driving cell fate transitions, and dissect epigenetic alterations in diseased tissues.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Single-Cell ATAC-Seq Experiments and Library Depth?</h2>
+                
+        <p>Successful single-cell epigenomic studies require meticulous experimental design, starting with sample preparation. Intact nuclei isolation is critical: cell lysis protocols must completely remove the cytoplasmic membrane while preserving the nuclear envelope to prevent Tn5 leakage and excessive mitochondrial contamination. Over-lysis compromises nuclear integrity, whereas under-lysis leaves cytoplasmic debris that clogs microfluidic channels.</p>
+        <p>Sequencing depth requirements differ fundamentally from RNA sequencing. In scATAC-seq, each diploid locus contains at most two copies of accessible DNA. A high-quality scATAC-seq experiment typically targets 25,000 to 50,000 paired-end reads per cell. Paired-end sequencing (2x50 bp) is strictly required to infer the precise fragment size between Tn5 cleavage events, which distinguishes sub-nucleosomal fragments from mono-nucleosomal and di-nucleosomal coils.</p>
+        <p>Biological replicates are vital to validate that identified open chromatin states represent true biological features rather than batch-associated transposase digestion variations. Whenever possible, multiplexing strategies utilizing hash barcodes or multiplex pooling can minimize technical batch artifacts across multi-sample cohorts.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are Raw Barcodes Processed and Assessed for Epigenomic Quality?</h2>
+                
+        <p>Computational processing begins with raw FASTQ files. Upstream pipelines such as Cell Ranger ATAC or Chromap trim adapter sequences, map paired-end reads to the reference genome using Bowtie2 or BWA-MEM, and correct cell barcode sequencing errors against whitelist libraries. Reads are subsequently assigned to individual nuclei, duplicate reads are tagged, and a coordinate-sorted fragment file is generated.</p>
+        <p>Quality control in scATAC-seq differs substantially from transcriptomics. Key metrics include:</p>
+        <ul>
+            <li><strong>Transcription Start Site (TSS) Enrichment:</strong> Calculates the ratio of fragment insertion density at canonical TSS positions relative to flanking background regions. A score greater than 6 to 8 indicates robust signal-to-noise ratio.</li>
+            <li><strong>Nucleosomal Periodicity:</strong> A distribution plot of fragment lengths must display a distinct sub-nucleosomal peak (under 147 bp) followed by clear mono-nucleosomal (~200 bp) and multi-nucleosomal peaks reflecting Tn5 cutting between histone octamers.</li>
+            <li><strong>Total Unique Fragments per Cell:</strong> Filtering thresholds typically remove nuclei with fewer than 1,000 to 3,000 unique fragments to exclude dying cells, while setting an upper cutoff to eliminate multiplet droplets.</li>
+            <li><strong>Mitochondrial Fraction:</strong> High mitochondrial reads signify damaged nuclei, typically requiring exclusion above 5% to 10%.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Does Peak Calling, Normalization, and Cell Clustering Work?</h2>
+                
+        <p>Because scATAC-seq data at the individual cell level is binary and ultra-sparse (most accessible loci show 0 or 1 reads), standard peak callers like MACS2 fail if run on individual cells. The computational standard requires pseudo-bulk aggregation: grouping cells by preliminary transcriptional or k-mer similarity, pooling their reads into aggregate pseudo-bulk BAM files, and calling narrow peaks using MACS3 with adjusted parameters (shift -75 bp, ext_size 150 bp).</p>
+        <p>Once an atlas of high-confidence consensus peaks is assembled, an individual cell-by-peak binary or count matrix is quantified. Dimensionality reduction must handle extreme sparsity. Standard Principal Component Analysis (PCA) performs poorly because zeros represent a mixture of true biological heterochromatin and dropout. Instead, Term Frequency-Inverse Document Frequency (TF-IDF) normalization followed by Singular Value Decomposition (SVD), termed Latent Semantic Indexing (LSI), is executed.</p>
+        <p>LSI reduces thousands of noisy peak dimensions into 30 to 50 informative components. The first LSI component typically correlates strongly with sequencing depth and is inspected carefully before downstream graph-based clustering (Leiden or Louvain algorithms) and UMAP visualization.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Infer Transcription Factor Motifs and Gene Activity Scores?</h2>
+                
+        <p>Biological interpretation requires translating peak coordinates into functional regulatory mechanisms. Two primary computational approaches drive this interpretation:</p>
+        <p><strong>Gene Activity Matrices:</strong> By aggregating accessibility fragments across gene bodies and proximal promoter regions (e.g., 2 kb upstream), computational models infer a pseudo-expression score for each gene. While not a direct substitute for scRNA-seq, gene activity scores allow researchers to identify known marker genes and cross-integrate scATAC-seq datasets with reference scRNA-seq atlases using mutual nearest neighbors.</p>
+        <p><strong>Motif Accessibility and Footprinting:</strong> Tools like chromVAR calculate transcription factor motif enrichment across individual cells by testing whether open peaks containing specific JASPAR or HOCOMOCO motifs display higher accessibility than expected given GC content and overall depth. Furthermore, digital genomic footprinting via tools such as TOBIAS evaluates localized protection footprints where transcription factor proteins physically shield DNA bases from Tn5 cleavage.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Typical Deliverables and Common Pitfalls to Avoid?</h2>
+                
+        <p>A rigorous scATAC-seq deliverable package includes MultiQC summary audits, processed fragment files with index tables, consensus peak BED files, normalized LSI embeddings, cluster-annotated UMAP coordinates, differential accessibility tables with false discovery rate (FDR) adjustments, and motif enrichment statistics.</p>
+        <p>Several critical pitfalls must be avoided during analysis:</p>
+        <ul>
+            <li><strong>Failure to inspect LSI Component 1:</strong> Frequently, LSI 1 reflects technical read depth rather than biological variance. If correlated (R > 0.8), LSI 1 should be excluded from downstream clustering to prevent cells from clustering solely by coverage.</li>
+            <li><strong>Inappropriate Peak Calling Strategies:</strong> Calling peaks on total pooled data without pseudo-bulk grouping risks missing rare cell populations whose private peaks are diluted out by abundant cell types.</li>
+            <li><strong>Neglecting Batch Integration:</strong> Combining multi-batch single-cell datasets without batch correction (such as Harmony or Seurat Integration) frequently causes technical clustering by sequencing run or tagmentation batch.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../single-cell-atac-seq.html" class="btn btn-light">Learn this in our 30-day workshop: Single-Cell ATAC-Seq Data Analysis Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? Epigenomics & Single-Cell Analysis Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How many cells and reads per nucleus are typically required for scATAC-seq?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Standard experiments target between 5,000 and 10,000 nuclei per sample, sequenced at a depth of 25,000 to 50,000 paired-end reads per nucleus to achieve comprehensive chromatin accessibility mapping while maintaining cost efficiency.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the difference between bulk ATAC-seq and single-cell ATAC-seq?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Bulk ATAC-seq measures average chromatin accessibility across heterogeneous populations of thousands to millions of cells. Single-cell ATAC-seq profiles accessibility within individual nuclei, resolving rare cell types, cell-to-cell regulatory heterogeneity, and developmental lineages.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How is gene expression inferred from scATAC-seq data without RNA sequencing?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Gene activity matrices sum accessibility fragments falling within gene bodies and flanking promoter regions. This proxy metric correlates with active transcription and facilitates label transfer from matched scRNA-seq reference atlases.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Buenrostro, J. D., et al. (2013). Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin, DNA-binding sites and nucleosome positions. <em>Nature Methods</em>, 10(12), 1213–1218. <a href='https://doi.org/10.1038/nmeth.2688' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nmeth.2688</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Stuart, T., et al. (2021). Single-cell chromatin state analysis with Signac. <em>Nature Methods</em>, 18(11), 1333–1341. <a href='https://doi.org/10.1038/s41592-021-01282-5' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41592-021-01282-5</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Granja, J. M., et al. (2021). ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis. <em>Nature Genetics</em>, 53(3), 403–411. <a href='https://doi.org/10.1038/s41588-021-00790-6' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/s41588-021-00790-6</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>10x Genomics. (2023). <em>Cell Ranger ATAC Software Suite and Algorithmic Overview</em>. Official Documentation: <a href='https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/what-is-cell-ranger-atac' target='_blank' rel='noopener noreferrer'>10x Genomics ATAC Docs</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="atac-seq-vs-chip-seq.html" class="inline-link">ATAC-Seq vs ChIP-Seq Comparison Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>

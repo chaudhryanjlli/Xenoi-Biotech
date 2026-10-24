@@ -116,7 +116,7 @@
                 </div>
                 <nav class="drawer-nav" aria-label="Mobile Navigation">
                     <ul class="drawer-links">
-                        <li><a href="index.html" class="drawer-link ${isHome ? 'active' : ''}" ${isHome ? 'aria-current="page"' : ''}>Home</a></li>
+                        <li><a href="/" class="drawer-link ${isHome ? 'active' : ''}" ${isHome ? 'aria-current="page"' : ''}>Home</a></li>
                         <li><a href="services.html" class="drawer-link ${isServices ? 'active' : ''}" ${isServices ? 'aria-current="page"' : ''}>Services</a></li>
                         <li><a href="internships.html" class="drawer-link ${isInternships ? 'active' : ''}" ${isInternships ? 'aria-current="page"' : ''}>Internships</a></li>
                         <li><a href="career-navigator.html" class="drawer-link ${isCareer ? 'active' : ''}" ${isCareer ? 'aria-current="page"' : ''}>Career Navigator</a></li>

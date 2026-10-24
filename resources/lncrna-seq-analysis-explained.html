@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <script src="../compact-init.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function | Xenoi Biotech</title>
+    <meta name="description" content="End-to-end computational guide to long non-coding RNA-seq analysis: transcript reconstruction, coding potential filtering with CPC2, and cis-trans target prediction.">
+    <link rel="canonical" href="https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html">
+    <meta name="theme-color" content="#03100e">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Xenoi Biotech">
+    <meta property="og:title" content="Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function | Xenoi Biotech">
+    <meta property="og:description" content="End-to-end computational guide to long non-coding RNA-seq analysis: transcript reconstruction, coding potential filtering with CPC2, and cis-trans target prediction.">
+    <meta property="og:url" content="https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html">
+    <meta property="og:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function | Xenoi Biotech">
+    <meta name="twitter:description" content="End-to-end computational guide to long non-coding RNA-seq analysis: transcript reconstruction, coding potential filtering with CPC2, and cis-trans target prediction.">
+    <meta name="twitter:image" content="https://www.xenoibiotech.com/xenoi-logo.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="view-transition" content="same-origin">
+    <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
+    <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
+
+    <!-- Structured Data: Article + FAQPage -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://www.xenoibiotech.com/#org",
+            "name": "Xenoi Biotech",
+            "legalName": "Xenoi Biotech Pvt. Ltd.",
+            "alternateName": "Xenoibiotech",
+            "url": "https://www.xenoibiotech.com/",
+            "logo": "https://www.xenoibiotech.com/xenoi-logo.png",
+            "email": "explore@xenoibiotech.com",
+            "areaServed": "India",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "Punjab",
+                "addressCountry": "IN"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.xenoibiotech.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Resources",
+                    "item": "https://www.xenoibiotech.com/resources/index.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function",
+                    "item": "https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html#article",
+            "headline": "Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function",
+            "description": "End-to-end computational guide to long non-coding RNA-seq analysis: transcript reconstruction, coding potential filtering with CPC2, and cis-trans target prediction.",
+            "datePublished": "2026-10-24",
+            "dateModified": "2026-10-25",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.xenoibiotech.com/#org"
+            },
+            "mainEntityOfPage": "https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://www.xenoibiotech.com/resources/lncrna-seq-analysis-explained.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is stranded library preparation strictly required for lncRNA sequencing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Many regulatory lncRNAs are transcribed in the antisense direction directly across the exons or promoters of protein-coding genes. Non-stranded sequencing cannot determine which strand generated the read, causing ambiguous read assignment."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between an intergenic lncRNA (lincRNA) and an antisense lncRNA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Long intergenic non-coding RNAs (lincRNAs) reside in the genomic intervals between protein-coding genes without overlapping them, whereas antisense lncRNAs are transcribed from the opposite strand of a protein-coding locus."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do bioinformaticians validate that a novel lncRNA is non-coding in the laboratory?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "In silico predictions via CPC2 and Pfam are validated in vitro using in vitro translation assays, ribosome profiling (Ribo-seq) to confirm lack of ribosome footprinting, and Western blotting."
+                    }
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body class="inner">
+    <!-- REVIEW(owner): scientific review of this guide -->
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="header-logo" aria-label="Xenoi Biotech Home">
+                <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Bioinformatics and Genomics Research Logo" class="brand-logo-img" width="184" height="80">
+            </a>
+            <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../internships.html">Internships</a></li>
+                    <li><a href="../workshops.html">Workshops</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../team.html">About</a></li>
+                    <li><a href="../quote.html">Contact</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a href="../quote.html" class="btn btn-light">Start a conversation</a>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <a href="../quote.html" class="btn btn-light header-cta">Start a conversation</a>
+                <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="top-nav" aria-label="Toggle Navigation">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container text-block visible" id="main">
+        <div class="page-header-block">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Resources</a>
+                <span class="sep">/</span>
+                <span class="current">Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function</span>
+            </nav>
+            <span class="eyebrow">BIOINFORMATICS RESEARCH GUIDE</span>
+            <h1 class="page-title">Long Non-Coding RNA-Seq Analysis Explained: Identification, Coding Potential, and Function</h1>
+            
+            <div class="article-meta" style="margin: 12px 0 20px 0; font-size: 0.92rem; color: var(--accent-highlight);">
+                <span>By Xenoibiotech</span> &middot; <span>Last updated: October 2026</span>
+            </div>
+
+            <!-- Direct 40-60 word answer -->
+            <div class="direct-answer-box" style="padding: 20px; background: rgba(50, 229, 166, 0.05); border-left: 3px solid var(--accent-color); border-radius: 4px; margin-bottom: 24px;">
+                <p style="font-size: 1.05rem; line-height: 1.6; margin: 0; color: #ffffff;">
+                    Long non-coding RNA sequencing (lncRNA-seq) identifies and quantifies non-protein-coding RNA molecules greater than 200 nucleotides in length. Through ribo-depleted RNA sequencing, StringTie transcript assembly, and coding potential filtering via CPC2 and CNCI, bioinformatic workflows discover novel regulatory transcripts that govern chromatin remodeling, transcriptional interference, and post-transcriptional mRNA stability.
+                </p>
+            </div>
+
+            <!-- Key takeaways -->
+            <div class="takeaways-box" style="padding: 20px; background: rgba(8, 48, 40, 0.25); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 32px;">
+                <h2 style="font-size: 1.15rem; color: var(--accent-highlight); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Key Takeaways</h2>
+                <ul style="padding-left: 20px; margin: 0; color: rgba(220, 240, 245, 0.9); line-height: 1.6;">
+                    <li style='margin-bottom: 8px;'>lncRNAs represent a diverse class of regulatory transcripts exceeding 200 nucleotides lacking protein-coding capability.</li><li style='margin-bottom: 8px;'>Ribosomal RNA depletion (Ribo-Zero) is strongly preferred over poly-A selection because many regulatory lncRNAs lack polyadenylated tails.</li><li style='margin-bottom: 8px;'>Transcript assembly tools like StringTie reconstruct novel unannotated isoforms that must be rigorously filtered for coding potential.</li><li style='margin-bottom: 8px;'>Computational tools such as CPC2, CNCI, and CPAT utilize sequence features and ORF lengths to separate true non-coding RNAs from novel proteins.</li><li style='margin-bottom: 8px;'>Functional prediction utilizes genomic neighborhood correlation (cis-regulation within 100 kb) and co-expression network analysis (trans-regulation).</li>
+                </ul>
+            </div>
+        </div>
+
+        <article class="article-content" style="line-height: 1.75; color: rgba(220, 240, 245, 0.9);">
+            
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are Long Non-Coding RNAs and Why Profile Them With Next-Generation Sequencing?</h2>
+                
+        <p>For decades, non-coding regions of eukaryotic genomes were mischaracterized as evolutionary debris. High-throughput transcriptomic sequencing has overturned this dogma, demonstrating that the vast majority of eukaryotic genomes are transcribed into non-coding RNAs. Long non-coding RNAs (lncRNAs) are defined as RNA molecules longer than 200 nucleotides that do not encode functional proteins.</p>
+        <p>Despite low evolutionary sequence conservation compared to protein-coding exons, lncRNAs execute crucial biological roles. They function as molecular scaffolds organizing nuclear ribonucleoprotein complexes, molecular decoys sequestering microRNAs (sponge activity), and epigenetic guides directing histone-modifying enzymes to target genomic loci. Profiling lncRNAs is critical in cancer biology, stem cell differentiation, and environmental stress resilience.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Design Sequencing Libraries for Accurate lncRNA Profiling?</h2>
+                
+        <p>A crucial experimental choice distinguishes lncRNA sequencing from standard mRNA-seq: library enrichment method. While standard mRNA-seq employs oligo-dT beads to capture polyadenylated transcripts, many functional lncRNAs (particularly nuclear-retained and enhancer RNAs) are non-polyadenylated or bimorphic.</p>
+        <p>Consequently, total RNA extraction followed by ribosomal RNA depletion (e.g., Ribo-Zero or riboPOOL) is the required protocol for comprehensive lncRNA profiling. Furthermore, stranded (directional) paired-end sequencing (2x150 bp) is mandatory. Stranded libraries reveal the exact transcriptional orientation of overlapping antisense and bidirectional lncRNAs relative to neighboring protein-coding genes.</p>
+        <p>Because lncRNAs are expressed at substantially lower copy numbers than protein-coding mRNAs, deeper sequencing (50 to 80 million paired reads per sample) is recommended to ensure robust assembly and detection of low-abundance transcripts.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Are lncRNA Transcripts Assembled and Reconstructed?</h2>
+                
+        <p>Following quality control with FastQC and adapter trimming, reads are aligned to the reference genome using splice-aware aligners like STAR or HISAT2 with strict parameters ensuring high-fidelity mapping of spliced exon-intron junctions.</p>
+        <p>Reference-guided transcript assembly is then conducted using StringTie. StringTie reconstructs all expressed transcripts, whether previously annotated or novel. Assemblies from all individual samples are merged using <code>stringtie --merge</code> to construct a unified non-redundant transcriptome catalog for the experimental cohort.</p>
+        <p>The merged assembly is compared against the reference gene annotation (GENCODE or Ensembl) using GffCompare. This step categorizes transcripts using class codes, highlighting intergenic lncRNAs (class code 'u'), antisense transcripts (class code 'x'), and intronic transcripts (class code 'i').</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Filter Transcripts to Verify Non-Coding Potential?</h2>
+                
+        <p>Identifying bona fide novel lncRNAs requires a rigorous multi-tier computational filtering pipeline to purge truncated protein-coding mRNAs, non-coding fragments, and pseudogenes:</p>
+        <ul>
+            <li><strong>Transcript Length and Exon Count:</strong> Filter out transcripts shorter than 200 nucleotides. Multi-exonic transcripts are prioritized to minimize false-positive background noise.</li>
+            <li><strong>Expression Threshold:</strong> Remove transcripts with negligible expression across all samples (e.g., requiring FPKM > 0.5 or TPM > 1.0 in at least two replicates).</li>
+            <li><strong>Coding Potential Calculation:</strong> Filter candidates through orthogonal machine-learning algorithms including CPC2 (Coding Potential Calculator 2), CNCI (Coding-Non-Coding Index), and CPAT. Transcripts must be classified as non-coding across multiple tools.</li>
+            <li><strong>Pfam Domain and BLAST Searches:</strong> Query predicted open reading frames against the Pfam protein domain database and NCBI Swiss-Prot via HMMER and BLASTx to eliminate transcripts encoding known functional protein domains.</li>
+        </ul>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">How Do You Predict lncRNA Target Genes and Biological Function?</h2>
+                
+        <p>Because lncRNAs do not possess direct enzymatic activities like kinases or transcription factors, functional inference relies on identifying their regulated target genes:</p>
+        <p><strong>Cis-Regulation Prediction:</strong> Many lncRNAs regulate proximal protein-coding genes through transcriptional interference or chromatin remodeling. Computational pipelines identify all protein-coding genes located within 10 kb to 100 kb upstream or downstream of the lncRNA locus and calculate Pearson or Spearman expression correlation.</p>
+        <p><strong>Trans-Regulation and Co-Expression Networks:</strong> lncRNAs can regulate distant genes on different chromosomes by acting as RNA guides or miRNA sponges. Weighted Gene Co-Expression Network Analysis (WGCNA) groups lncRNAs and mRNAs into co-expression modules, linking lncRNAs to cellular pathways through guilt-by-association Gene Ontology enrichment.</p>
+    
+            </section>
+        
+            <section class="content-section" style="margin-bottom: 32px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 14px;">What Are the Key Deliverables and Analytical Pitfalls in lncRNA-Seq?</h2>
+                
+        <p>Deliverables include GFF3/GTF catalogs of novel and annotated lncRNAs, coding potential assessment tables, normalized expression matrices (FPKM/TPM), differential lncRNA expression results from DESeq2 or edgeR, cis-target proximity maps, and co-expression network files.</p>
+        <p>Common analytical pitfalls include:</p>
+        <ul>
+            <li><strong>Using Poly-A Selection:</strong> Relying on standard poly-A capture loses 30% to 50% of non-polyadenylated regulatory lncRNAs.</li>
+            <li><strong>Relying on a Single Coding Potential Tool:</strong> Different algorithms prioritize different sequence attributes; using only one tool results in high false-positive rates. Consensus across CPC2 and CNCI is best practice.</li>
+            <li><strong>Overinterpreting Cis Correlation:</strong> High correlation between a lncRNA and an adjacent protein-coding gene does not prove direct regulation; both may simply share a bidirectional open chromatin promoter.</li>
+        </ul>
+    
+            </section>
+        
+
+            <!-- Related actions: Workshop and Service -->
+            <section class="content-section" style="margin: 36px 0; padding: 24px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 6px;">
+                <h2 style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 12px;">Apply These Skills in Your Research</h2>
+                <p style="margin-bottom: 16px;">
+                    Master this computational workflow step by step with our hands-on mentoring, or collaborate with our data science team for production analysis:
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="../lncrna-seq.html" class="btn btn-light">Learn this in our 30-day workshop: lncRNA-Seq Data Analysis Workshop</a>
+                    <a href="../services.html" class="btn btn-outline">Need this analysis done for your data? lncRNA Sequencing & Profiling Services</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section" id="faqs" style="margin-top: 40px;">
+                <h2 class="section-title" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">Why is stranded library preparation strictly required for lncRNA sequencing?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Many regulatory lncRNAs are transcribed in the antisense direction directly across the exons or promoters of protein-coding genes. Non-stranded sequencing cannot determine which strand generated the read, causing ambiguous read assignment.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">What is the difference between an intergenic lncRNA (lincRNA) and an antisense lncRNA?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">Long intergenic non-coding RNAs (lincRNAs) reside in the genomic intervals between protein-coding genes without overlapping them, whereas antisense lncRNAs are transcribed from the opposite strand of a protein-coding locus.</p>
+            </div>
+        
+            <div class="faq-item" style="margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-highlight); margin-bottom: 8px;">How do bioinformaticians validate that a novel lncRNA is non-coding in the laboratory?</h3>
+                <p style="margin: 0; line-height: 1.6; color: rgba(220, 240, 245, 0.85);">In silico predictions via CPC2 and Pfam are validated in vitro using in vitro translation assays, ribosome profiling (Ribo-seq) to confirm lack of ribosome footprinting, and Western blotting.</p>
+            </div>
+        
+            </section>
+
+            <!-- Further reading -->
+            <section class="content-section" id="further-reading" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <h2 class="section-title" style="font-size: 1.25rem; color: var(--accent-highlight); margin-bottom: 14px;">Further Reading and Authoritative Sources</h2>
+                <ul style="padding-left: 20px; color: rgba(220, 240, 245, 0.85);">
+                    <li style='margin-bottom: 10px; line-height: 1.5;'>Kang, Y. J., et al. (2017). CPC2: a fast and accurate coding potential calculator based on sequence intrinsic features. <em>Nucleic Acids Research</em>, 45(W1), W12–W16. <a href='https://doi.org/10.1093/nar/gkx428' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/nar/gkx428</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Pertea, M., et al. (2015). StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. <em>Nature Biotechnology</em>, 33(3), 290–295. <a href='https://doi.org/10.1038/nbt.3122' target='_blank' rel='noopener noreferrer'>DOI: 10.1038/nbt.3122</a></li><li style='margin-bottom: 10px; line-height: 1.5;'>Wucher, V., et al. (2017). FEELnc: a tool for long non-coding RNA annotation and its application to the dog transcriptome. <em>Nucleic Acids Research</em>, 45(8), e57. <a href='https://doi.org/10.1093/nar/gkx129' target='_blank' rel='noopener noreferrer'>DOI: 10.1093/nar/gkx129</a></li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.95rem;">
+                    Related Guide: <a href="rna-seq-analysis-step-by-step.html" class="inline-link">Bulk RNA-Seq Analysis Step-by-Step Guide</a>
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="../xenoi-logo.webp" alt="Xenoi Biotech - Logo" class="footer-logo-img" width="110" height="48">
+                    </a>
+                    <p class="footer-desc">Bioinformatics analysis, reproducible research workflows and practical training for the next generation of scientists.</p>
+                    <address class="footer-address">
+                        <strong>Xenoi Biotech Pvt. Ltd.</strong><br>
+                        Punjab, India<br>
+                        <!-- OWNER-TODO: phone: Phone: <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a><br> -->
+                        Email: <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a><br>
+                        <!-- OWNER-TODO: CIN & GSTIN: CIN: [[OWNER: CIN]] · GSTIN: [[OWNER: GSTIN]] -->
+                    </address>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">EXPLORE</p>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../genomics.html">Genomics</a></li>
+                        <li><a href="../workshops.html">Workshops</a></li>
+                        <li><a href="../team.html">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-heading">PROGRAMMES &amp; RESEARCH</p>
+                    <ul class="footer-links">
+                        <li><a href="../internships.html">Internships</a></li>
+                        <li><a href="../career-navigator.html">Career Navigator</a></li>
+                        <li><a href="../collaboration.html">Collaboration</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="../publications.html">Publications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col-contact">
+                    <p class="footer-heading">CONTACT</p>
+                    <a href="mailto:explore@xenoibiotech.com" class="footer-email">explore@xenoibiotech.com</a>
+                    <p class="footer-muted-text">Customized research and training solutions tailored to your needs</p>
+                    <div class="footer-cta-wrap">
+                        <a href="../quote.html" class="btn btn-light btn-sm">Request a quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 Xenoi Biotech Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../loader.js" defer></script>
+    <script src="../script.js"></script>
+    <script src="../ui.js"></script>
+</body>
+</html>
