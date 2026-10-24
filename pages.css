@@ -189,7 +189,7 @@ body.inner .top-nav {
 body.inner .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -204,6 +204,7 @@ body.inner .nav-links a {
     position: relative;
     display: inline-block;
     transition: color 0.2s ease;
+    white-space: nowrap !important;
 }
 
 body.inner .nav-links a:hover {
@@ -523,6 +524,68 @@ body.inner .intro-text {
         -webkit-hyphens: auto;
         line-height: 1.7;
     }
+}
+
+/* Publications and Resources: left align all text, remove text-align: justify and hyphens */
+body.inner.publications-page,
+body.inner.resources-page,
+body.inner.resource-guide,
+body.inner:has(#publications-list),
+body.inner:has(.guides-grid),
+body.inner:has(.key-takeaways-box),
+body.inner:has(.publication-item) {
+    text-align: left;
+}
+
+body.inner.publications-page .page-container *,
+body.inner.resources-page .page-container *,
+body.inner.resource-guide .page-container *,
+body.inner .article-content,
+body.inner .article-content *,
+body.inner #publications-list,
+body.inner #publications-list *,
+body.inner .publication-item,
+body.inner .publication-item *,
+body.inner .guides-grid,
+body.inner .guides-grid *,
+body.inner .resource-card,
+body.inner .resource-card *,
+body.inner .key-takeaways-box,
+body.inner .key-takeaways-box *,
+body.inner .course-meta-bar,
+body.inner .course-meta-bar * {
+    text-align: left !important;
+    text-justify: auto !important;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+}
+
+/* Resources & Publications Grid & Width */
+body.inner .guides-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    margin-bottom: 32px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+    body.inner .guides-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+body.inner .resource-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+}
+
+body.inner #publications-list,
+body.inner .publication-item {
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 @media (max-width: 600px) {

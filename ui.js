@@ -104,6 +104,7 @@
             const isInternships = path.includes('internships.html');
             const isCollab = path.includes('collaboration.html');
             const isWorkshops = path.includes('workshops.html');
+            const isPublications = path.includes('publications.html');
             const isAbout = path.includes('team.html');
             const isContact = path.includes('quote.html');
 
@@ -122,6 +123,7 @@
                         <li><a href="career-navigator.html" class="drawer-link ${isCareer ? 'active' : ''}" ${isCareer ? 'aria-current="page"' : ''}>Career Navigator</a></li>
                         <li><a href="collaboration.html" class="drawer-link ${isCollab ? 'active' : ''}" ${isCollab ? 'aria-current="page"' : ''}>Collaboration</a></li>
                         <li><a href="workshops.html" class="drawer-link ${isWorkshops ? 'active' : ''}" ${isWorkshops ? 'aria-current="page"' : ''}>Workshops</a></li>
+                        <li><a href="publications.html" class="drawer-link ${isPublications ? 'active' : ''}" ${isPublications ? 'aria-current="page"' : ''}>Publications</a></li>
                         <li><a href="team.html" class="drawer-link ${isAbout ? 'active' : ''}" ${isAbout ? 'aria-current="page"' : ''}>About</a></li>
                         <li><a href="quote.html" class="drawer-link ${isContact ? 'active' : ''}" ${isContact ? 'aria-current="page"' : ''}>Contact</a></li>
                     </ul>

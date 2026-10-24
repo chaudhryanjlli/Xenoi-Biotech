@@ -465,14 +465,15 @@ body::before {
 .floating-nav {
     display: flex;
     align-items: center;
-    gap: 2.65rem; /* Increased by 5% */
+    gap: 2.2rem;
     background: var(--nav-bg);
     border: 1px solid var(--border-color);
-    padding: 0.85rem 2.65rem; /* Increased by 5% */
+    padding: 0.85rem 2.2rem;
     border-radius: 50px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(50, 229, 166, 0.08);
+    white-space: nowrap;
 }
 
 .floating-nav a {
@@ -484,6 +485,7 @@ body::before {
     align-items: center;
     gap: 0.55rem;
     transition: color 0.3s;
+    white-space: nowrap;
 }
 
 .floating-nav a:hover, .floating-nav a.active {
@@ -3078,11 +3080,13 @@ footer .footer-year-link, footer .footer-year-link:hover, footer .footer-year-li
 }
 
 .article-content {
-    max-width: 840px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
     font-size: 1.05rem;
     line-height: 1.75;
     color: rgba(244, 253, 251, 0.9);
+    box-sizing: border-box;
 }
 
 .article-content h2 {

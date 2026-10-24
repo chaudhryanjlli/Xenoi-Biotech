@@ -36,3 +36,8 @@ ui-check.txt
 
 # Sensitive owner action items
 OWNER_TODO.md
+
+# Reports and QA screenshots
+CHANGES_VS_LIVE.md
+screenshots_check/
+scratch/
