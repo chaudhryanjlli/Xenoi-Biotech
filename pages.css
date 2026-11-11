@@ -526,66 +526,147 @@ body.inner .intro-text {
     }
 }
 
-/* Publications and Resources: left align all text, remove text-align: justify and hyphens */
-body.inner.publications-page,
-body.inner.resources-page,
-body.inner.resource-guide,
-body.inner:has(#publications-list),
-body.inner:has(.guides-grid),
-body.inner:has(.key-takeaways-box),
-body.inner:has(.publication-item) {
-    text-align: left;
+/* Width & Container Consistency: Guides, Publications, Resources & Inner Pages */
+body.inner .page-container p,
+body.inner .quote-container p,
+body.inner .lead-text,
+body.inner .intro-text,
+body.inner .section-intro,
+body.inner .publication-item p,
+body.inner .article-content p,
+body.inner .resource-card p,
+body.inner.publications-page #publications-list,
+body.inner.publications-page .publication-item,
+body.inner.publications-page .publication-item p,
+body.inner.resource-guide p,
+body.inner.resource-guide ul,
+body.inner.resource-guide ol,
+body.inner.resource-guide h2,
+body.inner.resource-guide h3,
+body.inner.resource-guide .key-takeaways-box,
+body.inner.resource-guide .article-cta-box,
+body.inner.resource-guide .author-bio-card {
+    max-width: none;
+    box-sizing: border-box;
 }
 
-body.inner.publications-page .page-container *,
-body.inner.resources-page .page-container *,
-body.inner.resource-guide .page-container *,
-body.inner .article-content,
-body.inner .article-content *,
-body.inner #publications-list,
-body.inner #publications-list *,
-body.inner .publication-item,
-body.inner .publication-item *,
-body.inner .guides-grid,
-body.inner .guides-grid *,
-body.inner .resource-card,
-body.inner .resource-card *,
-body.inner .key-takeaways-box,
-body.inner .key-takeaways-box *,
-body.inner .course-meta-bar,
-body.inner .course-meta-bar * {
-    text-align: left !important;
-    text-justify: auto !important;
-    hyphens: none !important;
-    -webkit-hyphens: none !important;
+/* Publications List: one entry per row with a thin divider at full container width */
+body.inner.publications-page #publications-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-/* Resources & Publications Grid & Width */
+body.inner.publications-page .publication-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+body.inner.publications-page .publication-item p {
+    width: 100%;
+}
+
+/* Resources Index Grid */
 body.inner .guides-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px !important;
-    margin-bottom: 32px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
     body.inner .guides-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
     }
 }
 
 body.inner .resource-card {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    margin-bottom: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
 }
 
-body.inner #publications-list,
-body.inner .publication-item {
-    width: 100% !important;
-    box-sizing: border-box !important;
+/* Guide Typography & Vertical Spacing */
+body.inner.resource-guide h2 {
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: #ffffff;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+body.inner.resource-guide h3 {
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--accent-highlight, #32e5a6);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    width: 100%;
+}
+
+body.inner.resource-guide p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-color, rgba(244, 253, 251, 0.9));
+    width: 100%;
+}
+
+body.inner.resource-guide ul,
+body.inner.resource-guide ol {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-left: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.inner.resource-guide li {
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+    color: var(--text-color, rgba(244, 253, 251, 0.9));
+}
+
+body.inner.resource-guide li:last-child {
+    margin-bottom: 0;
+}
+
+body.inner.resource-guide .key-takeaways-box {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.inner.resource-guide .key-takeaways-box ul {
+    margin-bottom: 0;
+}
+
+body.inner.resource-guide .article-cta-box {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.inner.resource-guide .author-bio-card {
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.inner.resource-guide .citation-list li {
+    margin-bottom: 0.65rem;
 }
 
 @media (max-width: 600px) {
