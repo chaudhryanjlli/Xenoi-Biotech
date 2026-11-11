@@ -518,28 +518,68 @@ body.inner .intro-text {
 }
 
 /* Justified text across inner pages on desktop & tablet (601px+) */
+/* Body text is justified and hyphenated on desktop (>600px). Columns/cards under 600px wide remain left-aligned to avoid awkward word spacing. */
 @media (min-width: 601px) {
     body.inner .lead-text,
     body.inner .intro-text,
     body.inner .section-intro,
-    body.inner p:not(.footer-desc):not(.footer-disclaimer):not(.footer-muted-text):not(.cta-quote):not(.legal-toc-title),
-    body.inner .card-body,
-    body.inner .programme-val,
-    body.inner .workshop-info p,
-    body.inner .timeline-content p,
-    body.inner .timeline-step-h p,
-    body.inner .legal-content p,
-    body.inner .legal-section p,
-    body.inner .cta-band p {
+    body.inner .page-container:not(.legal-layout) > p,
+    body.inner .page-container:not(.legal-layout) section > p,
+    body.inner .article-content > p,
+    body.inner .publication-item p,
+    body.inner .workshop-about-text,
+    body.inner .workshop-research-note {
         text-align: justify;
         text-justify: inter-word;
         hyphens: auto;
         -webkit-hyphens: auto;
         line-height: 1.7;
     }
+
+    body.inner .cta-band p,
+    body.inner .card-body,
+    body.inner .programme-val,
+    body.inner .workshop-info p,
+    body.inner .timeline-content p,
+    body.inner .timeline-step-h p,
+    body.inner .step-card p,
+    body.inner .domain-card p,
+    body.inner .profile-info p,
+    body.inner .legal-content p,
+    body.inner .legal-section p {
+        text-align: left;
+        hyphens: none;
+        -webkit-hyphens: none;
+        line-height: 1.6;
+    }
 }
 
-/* Width & Container Consistency: Guides, Publications, Resources (Restricted to .page-wide) */
+/* Code and Pre overflow handling */
+pre, code {
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+/* Site-Wide Main Content Text Width Consistency */
+/* Inner pages (except privacy, terms, 404): full container width for main body text, headings, lists */
+body.inner .page-container:not(.legal-layout) p:not(.card p):not(.info-card p):not(.form-card p):not(.office-card p):not(.office-map-placeholder p):not(.workshop-card-desc):not(.profile-card p):not(.step-card p):not(.faq-answer p):not(.footer-desc):not(.footer-disclaimer):not(.footer-muted-text),
+body.inner .page-container:not(.legal-layout) > ul:not(.checklist):not(.nav-links):not(.footer-links),
+body.inner .page-container:not(.legal-layout) > ol,
+body.inner .page-container:not(.legal-layout) section:not(.legal-section) > ul:not(.checklist):not(.nav-links):not(.footer-links),
+body.inner .page-container:not(.legal-layout) section:not(.legal-section) > ol,
+body.inner .page-container:not(.legal-layout) .workshop-about-text,
+body.inner .page-container:not(.legal-layout) .workshop-research-note,
+body.inner .page-container:not(.legal-layout) .article-content > p,
+body.inner .page-container:not(.legal-layout) .article-content > ul,
+body.inner .page-container:not(.legal-layout) .article-content > ol,
+body.inner .page-container:not(.legal-layout) .course-meta-bar,
+body.inner .page-container:not(.legal-layout) .course-meta-bar p,
+body.inner .page-container:not(.legal-layout) .tools-section > p,
+body.inner .page-container:not(.legal-layout) .tools-section > ul,
+body.inner .page-container:not(.legal-layout) .related-workshops-section > p,
+body.inner .page-container:not(.legal-layout) .tools-highlight-box,
+body.inner .page-container:not(.legal-layout) .tools-highlight-box p,
 body.inner .page-container.page-wide p,
 body.inner .page-wide .lead-text,
 body.inner .page-wide .intro-text,
@@ -559,7 +599,15 @@ body.inner.resource-guide .key-takeaways-box,
 body.inner.resource-guide .article-cta-box,
 body.inner.resource-guide .author-bio-card {
     max-width: none;
+    width: 100%;
     box-sizing: border-box;
+}
+
+/* Explicit exemption to protect legal pages (privacy, terms) and 404 page */
+body.inner .legal-layout .legal-content p,
+body.inner .legal-section p,
+body.inner .error-page-panel p {
+    max-width: 455px;
 }
 
 body.inner.publications-page #publications-list h2,
@@ -699,6 +747,8 @@ body.inner.resource-guide .citation-list li {
     body.inner .intro-text,
     body.inner .section-intro,
     body.inner p,
+    body.inner .workshop-about-text,
+    body.inner .page-container .workshop-about .workshop-about-text,
     body.inner .card-body,
     body.inner .programme-val,
     body.inner .workshop-info p,
@@ -709,8 +759,8 @@ body.inner.resource-guide .citation-list li {
     body.inner .cta-band p {
         text-align: left !important;
         text-justify: auto !important;
-        hyphens: auto;
-        -webkit-hyphens: auto;
+        hyphens: none !important;
+        -webkit-hyphens: none !important;
         font-size: 1rem;
         line-height: 1.65;
     }
@@ -2850,4 +2900,37 @@ body.inner .roadmap-content {
         margin-left: auto !important;
         margin-right: auto !important;
     }
+}
+
+
+/* Standard Vertical Rhythm System */
+body.inner .page-container h2:not(.modal h2) {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+}
+
+body.inner .page-container h3:not(.modal h3) {
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+body.inner .page-container p:not(.card p):not(.profile-card p):not(.footer p) {
+    margin-bottom: 1rem;
+}
+
+body.inner .page-container ul:not(.nav-links):not(.footer-links):not(.checklist),
+body.inner .page-container ol {
+    margin-bottom: 1.25rem;
+}
+
+body.inner .page-container ul:not(.nav-links):not(.footer-links):not(.checklist) > li,
+body.inner .page-container ol > li {
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+}
+
+body.inner .page-container .step-card,
+body.inner .page-container .service-card,
+body.inner .page-container .programme-card {
+    margin-bottom: 1.25rem;
 }
