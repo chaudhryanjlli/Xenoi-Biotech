@@ -67,5 +67,5 @@ Xenoi Biotech Pvt. Ltd. is a bioinformatics company based in Punjab, India. It p
 - [Microarray Differential Expression in R](https://www.xenoibiotech.com/resources/microarray-differential-expression-in-r.html): Step-by-step Bioconductor workflow using RMA and limma.
 
 ## Company & Contact
-- [About Us](https://www.xenoibiotech.com/team.html): Team backgrounds, computational expertise, and company mission in Punjab, India.
+- [About Us](https://www.xenoibiotech.com/team.html): Leadership by Director & Bioinformatics Scientist Dr. Anjali Chaudhary, team backgrounds, computational expertise, and company mission in Punjab, India.
 - [Contact & Quote Request](https://www.xenoibiotech.com/quote.html): Project inquiry form, registered office location, and consultation requests. Email: explore@xenoibiotech.com.
