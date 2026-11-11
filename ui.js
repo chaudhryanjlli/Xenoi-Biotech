@@ -98,11 +98,11 @@
 
             // Current pathname detection
             const path = window.location.pathname.toLowerCase();
+            const isResource = path.includes('/resources/');
+            const rel = isResource ? '../' : '';
             const isHome = path === '/' || path.endsWith('/index.html') || path.endsWith('/');
             const isServices = path.includes('services.html');
-            const isCareer = path.includes('career-navigator.html');
             const isInternships = path.includes('internships.html');
-            const isCollab = path.includes('collaboration.html');
             const isWorkshops = path.includes('workshops.html');
             const isPublications = path.includes('publications.html');
             const isAbout = path.includes('team.html');
@@ -118,14 +118,12 @@
                 <nav class="drawer-nav" aria-label="Mobile Navigation">
                     <ul class="drawer-links">
                         <li><a href="/" class="drawer-link ${isHome ? 'active' : ''}" ${isHome ? 'aria-current="page"' : ''}>Home</a></li>
-                        <li><a href="services.html" class="drawer-link ${isServices ? 'active' : ''}" ${isServices ? 'aria-current="page"' : ''}>Services</a></li>
-                        <li><a href="internships.html" class="drawer-link ${isInternships ? 'active' : ''}" ${isInternships ? 'aria-current="page"' : ''}>Internships</a></li>
-                        <li><a href="career-navigator.html" class="drawer-link ${isCareer ? 'active' : ''}" ${isCareer ? 'aria-current="page"' : ''}>Career Navigator</a></li>
-                        <li><a href="collaboration.html" class="drawer-link ${isCollab ? 'active' : ''}" ${isCollab ? 'aria-current="page"' : ''}>Collaboration</a></li>
-                        <li><a href="workshops.html" class="drawer-link ${isWorkshops ? 'active' : ''}" ${isWorkshops ? 'aria-current="page"' : ''}>Workshops</a></li>
-                        <li><a href="publications.html" class="drawer-link ${isPublications ? 'active' : ''}" ${isPublications ? 'aria-current="page"' : ''}>Publications</a></li>
-                        <li><a href="team.html" class="drawer-link ${isAbout ? 'active' : ''}" ${isAbout ? 'aria-current="page"' : ''}>About</a></li>
-                        <li><a href="quote.html" class="drawer-link ${isContact ? 'active' : ''}" ${isContact ? 'aria-current="page"' : ''}>Contact</a></li>
+                        <li><a href="${rel}services.html" class="drawer-link ${isServices ? 'active' : ''}" ${isServices ? 'aria-current="page"' : ''}>Services</a></li>
+                        <li><a href="${rel}internships.html" class="drawer-link ${isInternships ? 'active' : ''}" ${isInternships ? 'aria-current="page"' : ''}>Internships</a></li>
+                        <li><a href="${rel}workshops.html" class="drawer-link ${isWorkshops ? 'active' : ''}" ${isWorkshops ? 'aria-current="page"' : ''}>Workshops</a></li>
+                        <li><a href="${rel}publications.html" class="drawer-link ${isPublications ? 'active' : ''}" ${isPublications ? 'aria-current="page"' : ''}>Publications</a></li>
+                        <li><a href="${rel}team.html" class="drawer-link ${isAbout ? 'active' : ''}" ${isAbout ? 'aria-current="page"' : ''}>About</a></li>
+                        <li><a href="${rel}quote.html" class="drawer-link ${isContact ? 'active' : ''}" ${isContact ? 'aria-current="page"' : ''}>Contact</a></li>
                     </ul>
                 </nav>
                 <div class="drawer-footer">

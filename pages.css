@@ -5,8 +5,9 @@
 
 /* 0. CSS Design Tokens & Header Variables */
 :root {
-    --bar-h: 92px;
-    --logo-h: 80px;
+    --bar-h: 85.2px;
+    --logo-h: 70px;
+    --site-gutter: 4.5rem;
     --site-max-w: 1180px;
     --topbar-bg: rgba(3, 10, 12, 0.82);
     --accent-color: #32e5a6;
@@ -17,6 +18,7 @@
 
 @media (max-width: 1024px) {
     :root {
+        --site-gutter: 24px;
         --bar-h: 62px;
         --logo-h: 39px;
     }
@@ -24,6 +26,7 @@
 
 @media (max-width: 600px) {
     :root {
+        --site-gutter: 16px;
         --bar-h: 56px;
         --logo-h: 34px;
     }
@@ -109,7 +112,8 @@ body.inner .site-header {
     left: 0;
     right: 0;
     width: 100%;
-    height: var(--bar-h, 92px);
+    height: var(--bar-h, 85.2px);
+    padding: 0.45rem var(--site-gutter) 0.55rem;
     background: var(--topbar-bg, rgba(3, 10, 12, 0.82)) !important;
     backdrop-filter: blur(20px) saturate(120%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(120%) !important;
@@ -117,10 +121,9 @@ body.inner .site-header {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
     overflow: visible;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-left: env(safe-area-inset-left, 0px);
-    padding-right: env(safe-area-inset-right, 0px);
     pointer-events: none !important;
 }
 
@@ -141,16 +144,17 @@ body.inner .site-header .dropdown-item {
 }
 
 body.inner .header-inner {
-    max-width: var(--site-max-w, 1180px);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     height: 100%;
-    padding: 0 24px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
     box-sizing: border-box;
     overflow: visible;
+    position: relative;
 }
 
 body.inner .header-logo {
@@ -161,7 +165,7 @@ body.inner .header-logo {
     flex-shrink: 0;
     overflow: visible;
     height: 100%;
-    padding: 6px 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -184,6 +188,9 @@ body.inner .header-logo:hover .brand-logo-img {
 body.inner .top-nav {
     display: flex;
     align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 body.inner .nav-links {
