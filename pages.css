@@ -196,10 +196,16 @@ body.inner .top-nav {
 body.inner .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 33.44px;
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+@media (max-width: 1207px) and (min-width: 1127px) {
+    body.inner .nav-links {
+        gap: clamp(20px, calc(20px + (100vw - 1126px) * 0.1659), 33.44px);
+    }
 }
 
 body.inner .nav-links a {
@@ -253,7 +259,7 @@ body.inner .mobile-menu-btn {
 }
 
 /* Mobile Top Navigation & Menu Disclosure */
-@media (max-width: 1024px) {
+@media (max-width: 1126px) {
     body.inner .site-header {
         height: var(--bar-h);
         min-height: var(--bar-h);
@@ -533,28 +539,40 @@ body.inner .intro-text {
     }
 }
 
-/* Width & Container Consistency: Guides, Publications, Resources & Inner Pages */
-body.inner .page-container p,
-body.inner .quote-container p,
-body.inner .lead-text,
-body.inner .intro-text,
-body.inner .section-intro,
-body.inner .publication-item p,
-body.inner .article-content p,
-body.inner .resource-card p,
+/* Width & Container Consistency: Guides, Publications, Resources (Restricted to .page-wide) */
+body.inner .page-container.page-wide p,
+body.inner .page-wide .lead-text,
+body.inner .page-wide .intro-text,
+body.inner .page-wide .section-intro,
+body.inner .page-wide .publication-item p,
+body.inner .page-wide .article-content p,
+body.inner .page-wide .resource-card p,
 body.inner.publications-page #publications-list,
 body.inner.publications-page .publication-item,
 body.inner.publications-page .publication-item p,
-body.inner.resource-guide p,
-body.inner.resource-guide ul,
-body.inner.resource-guide ol,
-body.inner.resource-guide h2,
-body.inner.resource-guide h3,
+body.inner.resource-guide .page-wide p,
+body.inner.resource-guide .page-wide ul,
+body.inner.resource-guide .page-wide ol,
+body.inner.resource-guide .page-wide h2,
+body.inner.resource-guide .page-wide h3,
 body.inner.resource-guide .key-takeaways-box,
 body.inner.resource-guide .article-cta-box,
 body.inner.resource-guide .author-bio-card {
     max-width: none;
     box-sizing: border-box;
+}
+
+body.inner.publications-page #publications-list h2,
+body.inner.publications-page h2.section-title,
+body.inner.resources-page h2.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 0;
+    margin-bottom: 24px;
+    letter-spacing: normal;
+    color: #ffffff;
+    text-shadow: none;
 }
 
 /* Publications List: one entry per row with a thin divider at full container width */

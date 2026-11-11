@@ -3047,37 +3047,7 @@ footer .footer-year-link, footer .footer-year-link:hover, footer .footer-year-li
     text-decoration: underline;
 }
 
-.steps-list {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-    counter-reset: step-counter;
-}
 
-.step-item {
-    counter-increment: step-counter;
-    position: relative;
-    padding-left: 48px;
-    margin-bottom: 20px;
-}
-
-.step-item::before {
-    content: counter(step-counter);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(50, 229, 166, 0.15);
-    border: 1px solid var(--accent-color, #32e5a6);
-    color: var(--accent-color, #32e5a6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
 
 .article-content {
     max-width: 100%;

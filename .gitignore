@@ -39,5 +39,9 @@ OWNER_TODO.md
 
 # Reports and QA screenshots
 CHANGES_VS_LIVE.md
+REGRESSION_REPORT.md
+BRAND_CHANGES.md
+SECURITY_REVIEW.md
+ANTIGRAVITY_PROMPT.txt
 screenshots_check/
 scratch/
