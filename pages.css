@@ -1549,15 +1549,11 @@ body.inner .programme-card {
     box-sizing: border-box;
 }
 
-body.inner .programme-card.featured {
-    border-color: rgba(50, 229, 166, 0.4);
-    background: rgba(6, 32, 28, 0.85);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(50, 229, 166, 0.1);
-}
-
-body.inner .programme-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(50, 229, 166, 0.5);
+@media (hover: hover) {
+    body.inner .programme-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(50, 229, 166, 0.5);
+    }
 }
 
 body.inner .programme-header {
