@@ -36,8 +36,8 @@
 
     <meta name="view-transition" content="same-origin">
     <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style.css?v=20261111">
-    <link rel="stylesheet" href="pages.css?v=20261111">
+    <link rel="stylesheet" href="style.css?v=20261114">
+    <link rel="stylesheet" href="pages.css?v=20261114">
     <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
     <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
 
@@ -173,7 +173,19 @@
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
-                    <li><a href="services.html" class="active">Services</a></li>
+                    <li class="sm-wrap">
+                    <a href="services.html" class="active" aria-haspopup="true">Services</a>
+                    <ul class="sm-panel" aria-label="Services">
+                        <li><a href="services.html"><strong>All services</strong><small>Pipelines, consulting and project overview</small></a></li>
+                        <li><a href="services.html#data-types"><strong>Data analysis</strong><small>NGS and microarray data, analysed for you</small></a></li>
+                        <li><a href="genomics.html"><strong>Genomics analysis</strong><small>Variant calling and genome-scale projects</small></a></li>
+                    </ul>
+                    <ul class="sm-mobile">
+                        <li><a href="services.html">All services</a></li>
+                        <li><a href="services.html#data-types">Data analysis</a></li>
+                        <li><a href="genomics.html">Genomics analysis</a></li>
+                    </ul>
+                </li>
                     <li><a href="internships.html">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
                     <li><a href="publications.html">Publications</a></li>
@@ -202,181 +214,160 @@
                 <span class="sep">/</span>
                 <span class="current">Services</span>
             </nav>
-            <span class="eyebrow">BIOINFORMATICS &amp; DATA SERVICES</span>
-            <h1 class="page-title">Bioinformatics Analysis Services &amp; Pipelines</h1>
-            <p class="lead-text">
-                Xenoi Biotech provides end-to-end bioinformatics analysis services, custom workflow engineering, and statistical interpretation for academic researchers, biotechnology enterprises, and clinical laboratories worldwide.
-            </p>
-            <p class="intro-text">
-                Navigating complex next-generation sequencing datasets requires computational precision, robust statistical models, and reproducible pipeline architecture. Based in Punjab, India, our team collaborates with principal investigators and commercial teams to transform raw sequencing reads into validated biological insights. Whether your project involves differential gene expression, chromatin accessibility, variant discovery, or metagenomic profiling, we combine industry-standard tools with transparent reporting so that your findings withstand rigorous peer review. For focused sequencing data solutions, review our dedicated <a href="genomics.html" class="inline-link">genomics analysis services</a>. Researchers interested in building in-house computational skills can also explore our <a href="workshops.html" class="inline-link">30-day online bioinformatics workshops</a>.
-            </p>
         </div>
 
-        <!-- How a project works -->
-        <section class="project-workflow-section" aria-labelledby="workflow-heading" style="margin-bottom: 48px;">
-            <h2 id="workflow-heading" style="font-size: 1.6rem; margin-bottom: 24px;">How a Project Works</h2>
-            <div class="steps-list">
-                <div class="step-item">
-                    <span class="step-num">1</span>
-                    <div class="step-content">
-                        <strong>Project Scoping &amp; Consultation:</strong> We discuss your research hypothesis, sequencing library design, biological replicates, and target deliverables.
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">2</span>
-                    <div class="step-content">
-                        <strong>Secure Data Ingestion &amp; QC Audit:</strong> Raw FASTQ/BAM files are transferred via secure checksum-verified channels for pre-analysis quality control.
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">3</span>
-                    <div class="step-content">
-                        <strong>Formal Proposal &amp; Milestone Agreement:</strong> You receive an itemized proposal detailing pipeline architecture, software versions, and delivery schedules.
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">4</span>
-                    <div class="step-content">
-                        <strong>Containerized Pipeline Execution:</strong> Analyses are executed using reproducible Nextflow or Snakemake pipelines containerized in Docker/Singularity.
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">5</span>
-                    <div class="step-content">
-                        <strong>Deliverables &amp; Visual Reporting:</strong> You receive processed alignment files, annotated tables, publication-ready vector figures, and methods write-ups.
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">6</span>
-                    <div class="step-content">
-                        <strong>Post-Delivery Support &amp; Review:</strong> We provide video walk-throughs and assist with responding to reviewer questions during paper submission.
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="da-hero">
+  <p class="da-eyebrow">BIOINFORMATICS &amp; DATA ANALYSIS SERVICES</p>
+  <h1>Bioinformatics Analysis Services &amp; Pipelines</h1>
+  <p class="da-lead">Xenoi Biotech provides end-to-end analysis of sequencing and array data, custom workflow engineering and statistical interpretation for academic researchers, biotechnology companies and clinical laboratories. Whether your project involves differential gene expression, chromatin accessibility, variant discovery or metagenomic profiling, we combine industry-standard tools with transparent reporting, so that your findings withstand peer review.</p>
+  <p class="da-lead">Based in Punjab, India, our team works with principal investigators and commercial teams to turn raw sequencing reads into validated biological insight, using documented and reproducible workflows. For focused sequencing projects, see our <a href="genomics.html">genomics analysis services</a>. If you want to build these skills in your own lab, explore our <a href="workshops.html">30-day online bioinformatics workshops</a>.</p>
+</section>
 
-        <!-- Service Core Cards -->
-        <div class="cards-grid" style="margin-bottom: 48px;">
-            <div class="card" id="pipeline-development">
-                <div class="card-icon-tile">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                    </svg>
-                </div>
-                <h3 class="card-title">Pipeline Development</h3>
-                <p class="card-body">Custom workflows built with Nextflow and Snakemake, tailored exactly to your specific lab protocols, <a href="genomics.html" class="inline-link">NGS sequencing requirements</a>, and computing environment.</p>
-            </div>
-            <div class="card" id="data-interpretation">
-                <div class="card-icon-tile">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                </div>
-                <h3 class="card-title">Data Interpretation</h3>
-                <p class="card-body">Advanced statistical modeling and visualization to turn your VCFs and count matrices into actionable biological insights for research publication.</p>
-            </div>
-            <div class="card" id="consulting">
-                <div class="card-icon-tile">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                </div>
-                <h3 class="card-title">Consulting</h3>
-                <p class="card-body">Strategic advice on experimental design, sequencing depth requirements, and analytical strategy before you ever run a gel. Also explore our hands-on <a href="workshops.html" class="inline-link">training workshops</a>.</p>
-            </div>
-        </div>
+<section class="da-spot" aria-labelledby="da-spot-title">
+  <div class="da-spot-main">
+    <span class="da-tag">FEATURED SERVICE</span>
+    <h2 id="da-spot-title" class="da-spot-title">ATAC-seq data analysis</h2>
+    <p class="da-spot-text">Chromatin accessibility shows which regulatory regions are open in your cells. We analyse bulk and single-cell ATAC-seq data from FASTQ files to peaks, accessibility differences and enriched motifs, using a documented and reproducible workflow.</p>
+    <ol class="da-flow" aria-label="ATAC-seq analysis steps">
+      <li>FASTQ</li><li>Quality control</li><li>Peak calling</li><li>Differential accessibility</li><li>Motif enrichment</li>
+    </ol>
+    <div class="da-btns">
+      <a class="da-btn da-btn-primary" href="quote.html">Discuss your ATAC-seq data</a>
+      <a class="da-btn da-btn-outline" href="#epigenomics">Explore the guides ↓</a>
+    </div>
+  </div>
+  <div class="da-spot-links">
+    <a href="resources/atac-seq-vs-chip-seq.html"><strong>ATAC-seq vs ChIP-seq</strong><small>Choosing the right epigenomic assay</small></a>
+    <a href="resources/single-cell-atac-seq-explained.html"><strong>Single-cell ATAC-seq explained</strong><small>From barcoded FASTQ to epigenomic landscapes</small></a>
+    <a href="atac-seq.html"><strong>ATAC-seq workshop</strong><small>30-day online, hands-on training</small></a>
+  </div>
+</section>
 
-        <!-- 8 Detailed H2 Sections for AEO/GEO Depth -->
-        <article class="article-content">
-            <h2 id="deliverables">What We Deliver</h2>
-            <p>
-                Every research engagement concludes with clean, organized, and audit-ready computational assets. We do not provide opaque spreadsheets; our deliverables are engineered so that your laboratory can verify each step, archive intermediate data, and directly embed figures into scientific manuscripts:
-            </p>
-            <ul>
-                <li><strong>Interactive MultiQC Quality Reports:</strong> Comprehensive HTML audits tracking read counts, base quality distributions, adapter contamination, and duplication metrics across all samples.</li>
-                <li><strong>Coordinate-Sorted Alignments:</strong> Standardized BAM/CRAM files indexed with samtools, complete with alignment rate summaries and coverage metrics.</li>
-                <li><strong>Processed Data Matrices &amp; Annotations:</strong> Filtered expression count tables (DESeq2/edgeR ready) or functionally annotated VCF files with Ensembl VEP, SnpEff, or ClinVar annotations.</li>
-                <li><strong>Publication-Grade Visualizations:</strong> High-resolution vector figures (PDF, TIFF, SVG) including PCA plots, volcano plots, clustered heatmaps, pathway enrichment bubble charts, and genomic track snapshots.</li>
-                <li><strong>Manuscript-Ready Methodology:</strong> Fully articulated draft paragraphs for your manuscript's Materials &amp; Methods section, specifying software release versions, reference genome builds, parameters, and citations.</li>
-            </ul>
+<section id="data-types" aria-labelledby="da-data-title">
+  <h2 id="da-data-title" class="da-h2">Data we analyse</h2>
+  <div class="da-grid">
+    <article class="da-card da-card-wide">
+      <h3>Transcriptomics</h3>
+      <p class="da-sub">Bulk, single-cell, spatial and non-coding RNA data.</p>
+      <ul class="da-list da-list-2">
+        <li><a href="resources/rna-seq-analysis-step-by-step.html">Bulk RNA-seq (reference-guided)</a></li>
+        <li><a href="resources/de-novo-rna-seq-transcriptome-assembly.html">De novo RNA-seq assembly</a></li>
+        <li><a href="resources/single-cell-rna-seq-analysis-workflow.html">Single-cell RNA-seq</a></li>
+        <li><a href="resources/spatial-transcriptomics-explained.html">Spatial transcriptomics</a></li>
+        <li><a href="resources/lncrna-seq-analysis-explained.html">Long non-coding RNA-seq</a></li>
+        <li><a href="resources/mirna-seq-analysis-explained.html">Small RNA and miRNA-seq</a></li>
+        <li><a href="resources/alternative-splicing-psi-analysis.html">Alternative splicing (PSI)</a></li>
+      </ul>
+    </article>
+    <article class="da-card" id="epigenomics">
+      <h3>Epigenomics</h3>
+      <p class="da-sub">Chromatin accessibility, histone marks and DNA methylation.</p>
+      <ul class="da-list">
+        <li><a href="resources/atac-seq-vs-chip-seq.html">ATAC-seq and ChIP-seq</a></li>
+        <li><a href="resources/single-cell-atac-seq-explained.html">Single-cell ATAC-seq</a></li>
+        <li><a href="resources/snap-chip-spike-in-calibration.html">SNAP-ChIP spike-in calibration</a></li>
+        <li><a href="resources/dna-methylation-methyl-seq-analysis.html">DNA methylation (WGBS)</a></li>
+      </ul>
+    </article>
+    <article class="da-card">
+      <h3>Genomics</h3>
+      <p class="da-sub">Variants, populations and genome assembly.</p>
+      <ul class="da-list">
+        <li><a href="resources/dna-seq-variant-calling-workflow.html">Whole-genome and whole-exome variant calling</a></li>
+        <li><a href="resources/wgs-vs-wes.html">WGS or WES: which to choose</a></li>
+        <li><a href="resources/rad-seq-population-genomics.html">RAD-seq population genomics</a></li>
+        <li><a href="resources/genome-assembly-short-vs-long-reads.html">De novo genome assembly</a></li>
+      </ul>
+    </article>
+    <article class="da-card">
+      <h3>Metagenomics</h3>
+      <p class="da-sub">Who is in your sample, and what are they doing.</p>
+      <ul class="da-list">
+        <li><a href="resources/16s-vs-shotgun-metagenomics.html">16S and shotgun metagenomics</a></li>
+        <li><a href="resources/shotgun-metagenomics-workflow.html">Shotgun metagenomics workflow</a></li>
+      </ul>
+    </article>
+    <article class="da-card">
+      <h3>Microarray</h3>
+      <p class="da-sub">Probe-based expression data.</p>
+      <ul class="da-list">
+        <li><a href="resources/microarray-differential-expression-in-r.html">Differential expression in R</a></li>
+      </ul>
+    </article>
+  </div>
+</section>
 
-            <h2 id="input-data">Input Data We Accept</h2>
-            <p>
-                We accept raw sequencing outputs and intermediate files from academic sequencing cores and commercial facilities across India and internationally:
-            </p>
-            <ul>
-                <li><strong>File Formats:</strong> Raw FASTQ files (gzipped), multiplexed sequencing runs, alignment BAM/CRAM files, raw variant call formats (VCF), and single-cell 10x Genomics feature-barcode matrices.</li>
-                <li><strong>Sequencing Platforms:</strong> Short-read data from Illumina (NovaSeq, NextSeq, MiSeq) and MGI/DNBSEQ; long-read data from Oxford Nanopore Technologies (MinION, PromethION) and Pacific Biosciences (Sequel II, Revio HiFi).</li>
-                <li><strong>Target Organisms:</strong> Human, mouse, rat, model agronomic crops (rice, wheat, Arabidopsis), livestock, fungal isolates, bacterial pathogens, and complex environmental microbial communities. Non-model organisms are supported with custom reference genome indexing.</li>
-            </ul>
+<section aria-labelledby="da-how-title">
+  <h2 id="da-how-title" class="da-h2">How a project works</h2>
+  <ol class="da-steps">
+    <li><span class="da-num">1</span><strong>Scoping and consultation</strong><span>We discuss your hypothesis, library design, biological replicates and the deliverables you need.</span></li>
+    <li><span class="da-num">2</span><strong>Data transfer and QC</strong><span>Raw FASTQ or BAM files arrive through checksum-verified channels for pre-analysis quality control.</span></li>
+    <li><span class="da-num">3</span><strong>Proposal and milestones</strong><span>You receive an itemised proposal with the pipeline design, software versions and delivery schedule.</span></li>
+    <li><span class="da-num">4</span><strong>Pipeline execution</strong><span>Analyses run in reproducible Nextflow or Snakemake pipelines, containerised with Docker or Singularity.</span></li>
+    <li><span class="da-num">5</span><strong>Deliverables</strong><span>You receive processed files, annotated tables, publication-ready figures and a methods write-up.</span></li>
+    <li><span class="da-num">6</span><strong>Support and review</strong><span>We provide video walk-throughs and help you respond to reviewer questions during submission.</span></li>
+  </ol>
+</section>
 
-            <h2 id="tools-pipelines">Tools and Pipeline Frameworks</h2>
-            <p>
-                To guarantee reproducibility across computing clusters, our pipelines rely on containerized environments managed with Nextflow and Snakemake:
-            </p>
-            <ul>
-                <li><strong>Quality Control &amp; Trimming:</strong> FastQC, Fastp, Trimmomatic, MultiQC.</li>
-                <li><strong>Sequence Alignment:</strong> STAR, HISAT2, BWA-MEM2, Bowtie2, Minimap2.</li>
-                <li><strong>Transcriptomics &amp; Quantification:</strong> featureCounts, Salmon, Kallisto, DESeq2, edgeR, clusterProfiler. Want to master transcriptomics yourself? See our <a href="rna-seq-reference.html" class="inline-link">RNA-Seq workshop</a> and <a href="single-cell-rna-seq.html" class="inline-link">single-cell RNA-Seq workshop</a>.</li>
-                <li><strong>Epigenomics &amp; Chromatin:</strong> MACS2/MACS3, deepTools, HOMER, DiffBind, ChIPseeker. Compare methods in our <a href="chip-seq.html" class="inline-link">ChIP-Seq workshop</a> and <a href="atac-seq.html" class="inline-link">ATAC-Seq workshop</a>.</li>
-                <li><strong>Metagenomics:</strong> QIIME 2, DADA2, Kraken2, Bracken, MetaPhlAn, HUMAnN 3. Learn hands-on in our <a href="shotgun-metagenomics.html" class="inline-link">shotgun metagenomics workshop</a>.</li>
-                <li><strong>Workflow Management:</strong> Nextflow, Snakemake, Conda, Docker, and Singularity container configurations.</li>
-            </ul>
+<section aria-labelledby="da-need-title">
+  <h2 id="da-need-title" class="da-h2">What you receive, and what we need</h2>
+  <div class="da-two">
+    <article class="da-card">
+      <h3>What you receive</h3>
+      <ul class="da-checks">
+        <li>Interactive MultiQC reports covering read counts, base quality, adapter content and duplication</li>
+        <li>Coordinate-sorted, indexed BAM or CRAM alignments with alignment and coverage summaries</li>
+        <li>Filtered count tables (DESeq2 and edgeR ready) or annotated VCF files (Ensembl VEP, SnpEff, ClinVar)</li>
+        <li>Publication-grade vector figures: PCA, volcano plots, heatmaps, pathway enrichment and genome tracks</li>
+        <li>Draft Materials and Methods text with software versions, reference builds, parameters and citations</li>
+      </ul>
+    </article>
+    <article class="da-card">
+      <h3>What we need from you</h3>
+      <ul class="da-checks">
+        <li>Raw FASTQ (gzipped), BAM or CRAM, VCF files, or 10x Genomics feature-barcode matrices</li>
+        <li>Short-read data from Illumina or MGI/DNBSEQ, or long-read data from Oxford Nanopore or PacBio</li>
+        <li>The organism and reference genome. Non-model organisms are supported with custom reference indexing</li>
+        <li>A sample sheet describing groups and replicates, and the question you want answered</li>
+      </ul>
+    </article>
+  </div>
+</section>
 
-            <h2 id="turnaround">Turnaround Time &amp; Project Timelines</h2>
-            <p>
-                Project durations depend on sample volume, depth of sequencing, and required statistical depth. Standard turnarounds typically range from 5 to 15 business days for standard RNA-Seq and WES cohorts once data integrity is confirmed.
-            </p>
-            <!-- OWNER-TODO: turnaround times table:
-            | Assay Type | Sample Volume | Indicative Turnaround |
-            |---|---|---|
-            | RNA-Seq Differential Expression | Up to 12 samples | [[OWNER: X working days]] |
-            | Whole-Exome Sequencing (WES) | Up to 24 samples | [[OWNER: X working days]] |
-            | Whole-Genome Sequencing (WGS) | 1-6 samples | [[OWNER: X working days]] |
-            | Custom Pipeline Development | Single workflow | [[OWNER: X working days]] |
-            -->
-            <p>
-                Contact us through our <a href="quote.html" class="inline-link">project inquiry form</a> with your sample numbers to receive an accurate turnaround commitment.
-            </p>
+<section aria-labelledby="da-tools-title">
+  <h2 id="da-tools-title" class="da-h2">Tools we use</h2>
+  <p class="da-lead">Our pipelines use containerised environments managed with Nextflow and Snakemake, so results can be reproduced on other computing clusters.</p>
+  <ul class="da-chips">
+    <li><b>QC and trimming</b> FastQC · Fastp · Trimmomatic · MultiQC</li>
+    <li><b>Alignment</b> STAR · HISAT2 · BWA-MEM2 · Bowtie2 · Minimap2</li>
+    <li><b>Transcriptomics</b> featureCounts · Salmon · Kallisto · DESeq2 · edgeR · clusterProfiler</li>
+    <li><b>Epigenomics</b> MACS2/MACS3 · deepTools · HOMER · DiffBind · ChIPseeker</li>
+    <li><b>Metagenomics</b> QIIME 2 · DADA2 · Kraken2 · Bracken · MetaPhlAn · HUMAnN 3</li>
+    <li><b>Workflows</b> Nextflow · Snakemake · Conda · Docker · Singularity</li>
+  </ul>
+  <p class="da-note">Want to learn these tools yourself? See our <a href="rna-seq-reference.html">RNA-Seq</a>, <a href="single-cell-rna-seq.html">single-cell RNA-Seq</a>, <a href="chip-seq.html">ChIP-Seq</a>, <a href="atac-seq.html">ATAC-Seq</a> and <a href="shotgun-metagenomics.html">shotgun metagenomics</a> workshops.</p>
+</section>
 
-            <h2 id="pricing">Pricing &amp; Project Scoping</h2>
-            <p>
-                Because research designs vary significantly in biological complexity, replicate structures, and pipeline demands, pricing is structured transparently per sample or as milestone-based pipeline engineering:
-            </p>
-            <!-- OWNER-TODO: pricing details:
-            <p>Indicative pricing starts from [[OWNER: customized quote per project]].</p>
-            -->
-            <p>
-                We provide itemized, formal proposals within 24 working hours of receiving your project scope, with GST-compliant invoicing suitable for institutional research grants and DST/DBT funding allocations.
-            </p>
+<section aria-labelledby="da-terms-title">
+  <h2 id="da-terms-title" class="da-h2">Timelines, pricing and confidentiality</h2>
+  <div class="da-t3">
+    <article class="da-card">
+      <h3>Turnaround</h3>
+      <p>Duration depends on sample number, sequencing depth and the statistics required. Standard RNA-seq and WES cohorts typically take 5 to 15 business days once data integrity is confirmed. Send your sample numbers through the <a href="quote.html">project inquiry form</a> for an accurate estimate.</p>
+    </article>
+    <article class="da-card">
+      <h3>Pricing</h3>
+      <p>Pricing is per sample or milestone-based for pipeline engineering. We send an itemised proposal within 24 working hours of receiving your project scope, with GST-compliant invoicing suitable for institutional grants and DST/DBT funding.</p>
+    </article>
+    <article class="da-card">
+      <h3>Confidentiality</h3>
+      <p>We sign a mutual non-disclosure agreement before accepting proprietary samples. Data transfer uses TLS/SSL encryption, and project storage is partitioned and open only to the assigned analysts.</p>
+    </article>
+  </div>
+</section>
 
-            <h2 id="security">Data Security &amp; Research Confidentiality</h2>
-            <p>
-                Protecting intellectual property, unpublished experimental findings, and sensitive human genetic data is central to our operational principles:
-            </p>
-            <!-- OWNER-TODO: data security specifics:
-            <ul>
-                <li>Non-Disclosure Agreements (NDA): [[OWNER: confirmed available prior to file receipt]]</li>
-                <li>Data Transfer: [[OWNER: encrypted SFTP / AWS S3 / institutional drive]]</li>
-                <li>Data Retention: [[OWNER: raw data purged 30 days post-delivery; reports archived for X months]]</li>
-                <li>Server Infrastructure: [[OWNER: server locations, e.g. dedicated local servers / AWS India (ap-south-1)]]</li>
-            </ul>
-            -->
-            <p>
-                We execute mutual non-disclosure agreements prior to accepting proprietary samples. All data transfer channels utilize TLS/SSL encryption, and project storage directories are strictly partitioned and accessible solely to assigned computational analysts.
-            </p>
-
-            <h2 id="sample-reports">Sample Deliverables &amp; QC Reports</h2>
-            <p>
-                Evaluating report clarity before commissioning analysis is standard practice for research teams. We provide anonymized sample deliverable bundles demonstrating our visual formatting and documentation standards upon request.
-            </p>
-            <!-- OWNER-TODO: sample report download link:
-            <p><a href="sample-reports/xenoi-rnaseq-sample-report.pdf" class="btn btn-outline">Download Sample RNA-Seq Report (PDF)</a></p>
-            -->
-
+        <!-- Keep existing FAQ section -->
+        <article class="article-content" style="margin-top: 48px;">
             <h2 id="faq">Frequently Asked Questions</h2>
             <div class="faq-list">
                 <details class="faq-item">
@@ -412,10 +403,10 @@
             </div>
         </article>
 
-        <section class="cta-band" style="margin-top: 48px;">
+        <section class="cta-band" style="margin-top: 48px; border: 1.5px solid var(--da-acc, #2de0b0);">
             <div class="cta-band-content">
                 <h3>Ready to discuss your bioinformatics project?</h3>
-                <p>Submit your sequencing specifications to receive a formal scope and proposal within 24 working hours.</p>
+                <p>Submit your sequencing specifications to receive a formal scope and proposal within 24 working hours. Anonymized sample deliverable bundles are available on request.</p>
             </div>
             <div class="cta-band-action">
                 <a href="quote.html" class="btn btn-light">

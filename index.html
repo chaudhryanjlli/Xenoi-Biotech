@@ -42,7 +42,7 @@
 
     <meta name="view-transition" content="same-origin">
     <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style.css?v=20261111">
+    <link rel="stylesheet" href="style.css?v=20261114">
     <style>
         .floating-nav { gap: 2.2rem; padding: 0.85rem 2.2rem; }
         .floating-nav a, .nav-links a { white-space: nowrap; }
@@ -104,7 +104,19 @@
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
                     <li><a href="index.html#" class="active">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li class="sm-wrap">
+                    <a href="services.html" aria-haspopup="true">Services</a>
+                    <ul class="sm-panel" aria-label="Services">
+                        <li><a href="services.html"><strong>All services</strong><small>Pipelines, consulting and project overview</small></a></li>
+                        <li><a href="services.html#data-types"><strong>Data analysis</strong><small>NGS and microarray data, analysed for you</small></a></li>
+                        <li><a href="genomics.html"><strong>Genomics analysis</strong><small>Variant calling and genome-scale projects</small></a></li>
+                    </ul>
+                    <ul class="sm-mobile">
+                        <li><a href="services.html">All services</a></li>
+                        <li><a href="services.html#data-types">Data analysis</a></li>
+                        <li><a href="genomics.html">Genomics analysis</a></li>
+                    </ul>
+                </li>
                     <li><a href="internships.html">Internships</a></li>
                     <li><a href="workshops.html">Workshops</a></li>
                     <li><a href="publications.html">Publications</a></li>

@@ -35,8 +35,8 @@
 
     <meta name="view-transition" content="same-origin">
     <link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../style.css?v=20261111">
-    <link rel="stylesheet" href="../pages.css?v=20261111">
+    <link rel="stylesheet" href="../style.css?v=20261114">
+    <link rel="stylesheet" href="../pages.css?v=20261114">
     <link rel="preload" as="image" href="../bg/inner-desktop.webp" media="(min-width: 901px)">
     <link rel="preload" as="image" href="../bg/inner-mobile.webp" media="(max-width: 900px)">
 
@@ -228,7 +228,19 @@
             <nav class="top-nav" id="top-nav" aria-label="Main Navigation">
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
-                    <li><a href="../services.html">Services</a></li>
+                    <li class="sm-wrap">
+                    <a href="../services.html" aria-haspopup="true">Services</a>
+                    <ul class="sm-panel" aria-label="Services">
+                        <li><a href="../services.html"><strong>All services</strong><small>Pipelines, consulting and project overview</small></a></li>
+                        <li><a href="../services.html#data-types"><strong>Data analysis</strong><small>NGS and microarray data, analysed for you</small></a></li>
+                        <li><a href="../genomics.html"><strong>Genomics analysis</strong><small>Variant calling and genome-scale projects</small></a></li>
+                    </ul>
+                    <ul class="sm-mobile">
+                        <li><a href="../services.html">All services</a></li>
+                        <li><a href="../services.html#data-types">Data analysis</a></li>
+                        <li><a href="../genomics.html">Genomics analysis</a></li>
+                    </ul>
+                </li>
                     <li><a href="../internships.html">Internships</a></li>
                     <li><a href="../workshops.html">Workshops</a></li>
                     <li><a href="../publications.html">Publications</a></li>
@@ -518,7 +530,7 @@
             <section class="content-section" style="margin-top: 48px; padding: 28px; background: rgba(50, 229, 166, 0.04); border: 1px solid var(--border-color); border-radius: 8px;">
                 <h2 style="font-size: 1.35rem; color: var(--accent-highlight); margin-bottom: 12px;">Looking for Hands-On Bioinformatics Training or Custom Pipelines?</h2>
                 <p style="line-height: 1.7; color: rgba(220, 240, 245, 0.9); ">
-                    Our team provides eighteen 30-day online workshops, structured research internships, and commercial NGS analysis services for universities, healthcare institutions, and biotechnology companies.
+                    Our team provides eighteen 30-day online workshops, structured research internships, and commercial NGS analysis services for universities, healthcare institutions, and biotechnology companies. <a href="../services.html#data-types">See all the data types we analyse</a>
                 </p>
                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                     <a href="../workshops.html" class="btn btn-light">Explore 18 NGS Workshops</a>
