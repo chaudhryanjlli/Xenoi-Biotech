@@ -3477,7 +3477,8 @@ h2.rt-h2,
     text-decoration: none;
 }
 .rtx-bar:focus-visible{outline:2px solid #fff;outline-offset:-4px}
-@media (max-width:480px){.rtx-bar{font-size:.78rem;padding:6px 10px}}
+@media (max-width:430px){.rtx-bar{font-size:12px;padding:6px 10px}}
+@media (max-width:340px){.rtx-bar{text-align:center}}
 
 body:not(.inner) .header,
 html.is-compact body:not(.inner) .header {

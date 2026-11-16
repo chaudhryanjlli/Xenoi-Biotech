@@ -2966,3 +2966,16 @@ body.inner .page-container .programme-card {
 @media (max-width:1000px){.da-steps,.da-t3{grid-template-columns:1fr 1fr}}
 @media (max-width:900px){.da-spot,.da-grid,.da-two{grid-template-columns:1fr}.da-list-2{column-count:1}.da-spot{padding:24px 20px}}
 @media (max-width:600px){.da-steps,.da-t3{grid-template-columns:1fr}.da-card{padding:20px}.da-btn{width:100%}}
+
+.px-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.px-amt{font-size:1.9rem;font-weight:700;line-height:1.1;color:var(--accent,#2de0b0);letter-spacing:-.01em}
+.px-per{font-size:.95rem;color:rgba(232,241,239,.76)}
+.px-sm .px-amt{font-size:1.25rem}
+.px-sm .px-per{font-size:.85rem}
+.px-note{width:100% !important;max-width:none !important;box-sizing:border-box;margin:0 0 22px;padding:14px 18px;border:1px solid #14423a;border-left:4px solid var(--accent,#2de0b0);border-radius:12px;background:rgba(10,28,28,.9);color:var(--text,#e8f1ef);line-height:1.6;font-size:.95rem}
+.px-note strong{font-weight:700}
+
+.il-box{margin:36px 0 0;padding:18px 22px;border:1px solid #14423a;border-left:4px solid var(--accent,#2de0b0);border-radius:12px;background:rgba(10,28,28,.9);color:var(--text,#e8f1ef);line-height:1.65;font-size:.97rem}
+.il-box p{margin:0}
+.il-box strong{font-weight:700}
+.il-box a{color:var(--accent,#2de0b0);text-decoration:underline;text-underline-offset:3px}
