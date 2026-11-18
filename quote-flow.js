@@ -1,0 +1,993 @@
+const BOOKING_URL = "";
+const BOOKING_PREFILL = false;
+
+(function () {
+    'use strict';
+
+    const NEED_CONFIG = {
+        'workshop': {
+            name: 'Workshop',
+            sub: '30-day online, hands-on NGS workshop',
+            totalSteps: 3
+        },
+        'training': {
+            name: 'Training',
+            sub: 'Mentored, hands-on training in bioinformatics',
+            totalSteps: 3
+        },
+        'research-training': {
+            name: 'Research Training',
+            sub: '6 months, mentored, a research paper we submit to a journal',
+            totalSteps: 3
+        },
+        'data-analysis': {
+            name: 'Data analysis',
+            sub: 'We analyse your sequencing or array data',
+            totalSteps: 2
+        },
+        'other': {
+            name: 'Other',
+            sub: 'Collaboration, career guidance or a different question',
+            totalSteps: 2
+        }
+    };
+
+    let state = {
+        need: '',
+        step: 1,
+        // Step 2 values
+        workshop: '',
+        feeAgree: false,
+        // Step 3 values
+        name: '',
+        email: '',
+        phone: '',
+        org: '',
+        level: '',
+        programming: '',
+        hours: '',
+        dataType: '',
+        samples: '',
+        organism: '',
+        budget: '',
+        question: '',
+        learnGoal: '',
+        researchArea: '',
+        anythingElse: '',
+        otherTopic: '',
+        otherHelp: '',
+        prefDate: '',
+        altDate: '',
+        prefTime: '',
+        consent: false
+    };
+
+    let workshopOptions = [];
+    let detectedTimeZone = 'UTC';
+    try {
+        detectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Calcutta';
+    } catch (e) {
+        detectedTimeZone = 'Asia/Calcutta';
+    }
+
+    function getTodayString() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function initLegacyOptions(form) {
+        const serviceSelect = form.querySelector('#service');
+        if (serviceSelect) {
+            const opts = Array.from(serviceSelect.options);
+            workshopOptions = opts
+                .filter(o => o.text.startsWith('Workshop:'))
+                .map(o => ({ value: o.value, text: o.text }));
+        }
+    }
+
+    function checkPrefill(form) {
+        const params = new URLSearchParams(window.location.search);
+        const workshopSlug = params.get('workshop');
+        const interestParam = params.get('interest');
+        const serviceParam = params.get('service');
+
+        const legacyService = form.querySelector('#service');
+        const currentServiceVal = legacyService ? legacyService.value : '';
+
+        if (workshopSlug) {
+            state.need = 'workshop';
+            state.step = 2;
+            const slugLower = workshopSlug.toLowerCase().trim();
+            const matched = workshopOptions.find(o => o.text.toLowerCase().includes(slugLower) || o.value.toLowerCase().includes(slugLower));
+            if (matched) {
+                state.workshop = matched.value;
+            }
+            return true;
+        }
+
+        if (interestParam) {
+            const intLower = interestParam.toLowerCase().trim();
+            if (intLower === 'internship') {
+                state.need = 'research-training';
+                state.step = 2;
+                return true;
+            } else if (intLower === 'customised-internship') {
+                state.need = 'training';
+                state.step = 2;
+                return true;
+            }
+        }
+
+        if (serviceParam || currentServiceVal) {
+            const val = (serviceParam || currentServiceVal).toLowerCase();
+            if (val.startsWith('workshop:')) {
+                state.need = 'workshop';
+                state.step = 2;
+                state.workshop = currentServiceVal;
+                return true;
+            } else if (val === 'internship') {
+                state.need = 'research-training';
+                state.step = 2;
+                return true;
+            } else if (val === 'customised internship' || val === 'customised-internship') {
+                state.need = 'training';
+                state.step = 2;
+                return true;
+            } else if (['wgs', 'wes', 'rna', 'meta', 'epi', 'pipeline', 'consulting'].includes(val)) {
+                state.need = 'data-analysis';
+                state.step = 2; // Step 2 of 2
+                if (val === 'wgs') state.dataType = 'WGS';
+                else if (val === 'wes') state.dataType = 'WES';
+                else if (val === 'rna') state.dataType = 'Bulk RNA-seq';
+                else if (val === 'meta') state.dataType = 'Metagenomics';
+                else if (val === 'epi') state.dataType = 'ATAC-seq / ChIP-seq';
+                return true;
+            } else if (['career', 'college', 'other'].includes(val)) {
+                state.need = 'other';
+                state.step = 2; // Step 2 of 2
+                if (val === 'college') state.otherTopic = 'Collaboration';
+                else if (val === 'career') state.otherTopic = 'Career guidance';
+                else state.otherTopic = 'Something else';
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function renderStepsIndicator(currentStep, totalSteps) {
+        let circlesHtml = '';
+        for (let i = 1; i <= totalSteps; i++) {
+            const onClass = i <= currentStep ? ' class="on"' : '';
+            circlesHtml += `<b${onClass}>${i}</b>`;
+            if (i < totalSteps) {
+                circlesHtml += `<i></i>`;
+            }
+        }
+        return `
+            <div class="qf-steps" aria-hidden="true">
+                ${circlesHtml}
+                <span>STEP ${currentStep} OF ${totalSteps}</span>
+            </div>
+        `;
+    }
+
+    function render(container) {
+        const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
+        const totalSteps = isShortFlow ? 2 : 3;
+        const currentStep = state.step;
+
+        let content = '';
+
+        if (currentStep === 1) {
+            content = renderStep1();
+        } else if (currentStep === 2 && !isShortFlow) {
+            content = renderStep2();
+        } else {
+            // Step 3 for 3-step flows, or Step 2 for 2-step flows
+            content = renderStep3(isShortFlow ? 2 : 3, totalSteps);
+        }
+
+        container.innerHTML = `
+            ${renderStepsIndicator(currentStep, totalSteps)}
+            <div class="qf-step" aria-live="polite">
+                ${content}
+            </div>
+        `;
+
+        // Focus step heading
+        const heading = container.querySelector('.qf-h');
+        if (heading) {
+            heading.focus();
+        }
+
+        bindEvents(container);
+    }
+
+    function renderStep1() {
+        return `
+            <h2 class="qf-h" tabindex="-1">What do you need?</h2>
+            <p class="qf-sub">Choose one. All our programmes and services are fee-based.</p>
+            <fieldset class="qf-opts">
+                <legend class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">What do you need?</legend>
+
+                <label class="qf-opt ${state.need === 'workshop' ? 'is-sel' : ''}">
+                    <input type="radio" name="qf-need" value="workshop" form="qf-noform" ${state.need === 'workshop' ? 'checked' : ''}>
+                    <strong>Workshop</strong>
+                    <span>30-day online, hands-on NGS workshop</span>
+                </label>
+
+                <label class="qf-opt ${state.need === 'training' ? 'is-sel' : ''}">
+                    <input type="radio" name="qf-need" value="training" form="qf-noform" ${state.need === 'training' ? 'checked' : ''}>
+                    <strong>Training</strong>
+                    <span>Mentored, hands-on training in bioinformatics</span>
+                </label>
+
+                <label class="qf-opt ${state.need === 'research-training' ? 'is-sel' : ''}">
+                    <input type="radio" name="qf-need" value="research-training" form="qf-noform" ${state.need === 'research-training' ? 'checked' : ''}>
+                    <strong>Research Training</strong>
+                    <span>6 months, mentored, a research paper we submit to a journal</span>
+                </label>
+
+                <label class="qf-opt ${state.need === 'data-analysis' ? 'is-sel' : ''}">
+                    <input type="radio" name="qf-need" value="data-analysis" form="qf-noform" ${state.need === 'data-analysis' ? 'checked' : ''}>
+                    <strong>Data analysis</strong>
+                    <span>We analyse your sequencing or array data</span>
+                </label>
+
+                <label class="qf-opt qf-opt-w ${state.need === 'other' ? 'is-sel' : ''}">
+                    <input type="radio" name="qf-need" value="other" form="qf-noform" ${state.need === 'other' ? 'checked' : ''}>
+                    <strong>Other</strong>
+                    <span>Collaboration, career guidance or a different question</span>
+                </label>
+            </fieldset>
+
+            <div class="qf-err" id="qf-need-err" style="display:none">Please choose one option.</div>
+
+            <div class="qf-actions">
+                <button type="button" class="qf-btn" id="qf-btn-step1">Continue</button>
+            </div>
+        `;
+    }
+
+    function renderStep2() {
+        const cfg = NEED_CONFIG[state.need] || { name: 'Programme' };
+        let middleHtml = '';
+
+        if (state.need === 'workshop') {
+            let optionsHtml = '<option value="">Select a workshop...</option>';
+            workshopOptions.forEach(opt => {
+                const sel = state.workshop === opt.value ? ' selected' : '';
+                optionsHtml += `<option value="${escapeHtml(opt.value)}"${sel}>${escapeHtml(opt.text)}</option>`;
+            });
+
+            middleHtml = `
+                <label class="qf-lab" for="qf-workshop-sel">WHICH WORKSHOP *</label>
+                <select id="qf-workshop-sel" class="qf-in" form="qf-noform">
+                    ${optionsHtml}
+                </select>
+                <div class="qf-err" id="qf-workshop-err" style="display:none">Please select a workshop.</div>
+
+                <div class="qf-fee">
+                    <div class="qf-price">₹5,999<small>per workshop</small></div>
+                    <p>Payment is not taken here. Our team will confirm the fee and payment details with you after the first call.</p>
+                </div>
+            `;
+        } else if (state.need === 'training') {
+            middleHtml = `
+                <div class="qf-fee">
+                    <div class="qf-feehead">Fee-based programme</div>
+                    <p>Our team will share the fee with you after the first call. Payment is not taken here.</p>
+                    <p>We do not offer stipends or unpaid positions.</p>
+                </div>
+            `;
+        } else if (state.need === 'research-training') {
+            middleHtml = `
+                <div class="qf-fee">
+                    <div class="qf-price">₹10,000<small>per month</small></div>
+                    <p>Payment is not taken here. Our team will confirm the fee and payment details with you after the first call.</p>
+                    <p>We do not offer stipends or unpaid positions.</p>
+                </div>
+            `;
+        }
+
+        return `
+            <h2 class="qf-h" tabindex="-1">Before you continue</h2>
+            <p class="qf-sub">${escapeHtml(cfg.name)}</p>
+
+            ${middleHtml}
+
+            <label class="qf-check" for="qf-fee-agree">
+                <input type="checkbox" id="qf-fee-agree" form="qf-noform" ${state.feeAgree ? 'checked' : ''}>
+                <span>I understand this is a fee-based programme and I am ready to pay the fee.</span>
+            </label>
+            <div class="qf-err" id="qf-fee-err" style="display:none">Please confirm to continue.</div>
+
+            <div class="qf-actions">
+                <button type="button" class="qf-btn" id="qf-btn-step2">Continue</button>
+                <button type="button" class="qf-btn-2" id="qf-btn-step2-back">Back</button>
+            </div>
+        `;
+    }
+
+    function renderStep3(stepNum, totalSteps) {
+        const cfg = NEED_CONFIG[state.need] || { name: 'Details' };
+        const isOther = (state.need === 'other');
+        const reqStar = isOther ? '' : ' *';
+
+        let customFieldsHtml = '';
+
+        if (state.need === 'workshop') {
+            customFieldsHtml = `
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-level">CURRENT LEVEL *</label>
+                        <select id="qf-level" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['Undergraduate', 'Postgraduate', 'PhD', 'Working professional'], state.level)}
+                        </select>
+                        <div class="qf-err" id="qf-level-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div>
+                        <label class="qf-lab" for="qf-prog">PROGRAMMING EXPERIENCE *</label>
+                        <select id="qf-prog" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['None', 'Basic', 'Comfortable'], state.programming)}
+                        </select>
+                        <div class="qf-err" id="qf-prog-err" style="display:none">This field is required.</div>
+                    </div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-anything">ANYTHING WE SHOULD KNOW?</label>
+                    <textarea id="qf-anything" class="qf-in" form="qf-noform" placeholder="Describe your background, goals, or any specific questions...">${escapeHtml(state.anythingElse)}</textarea>
+                </div>
+            `;
+        } else if (state.need === 'training') {
+            customFieldsHtml = `
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-level">CURRENT LEVEL *</label>
+                        <select id="qf-level" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['Undergraduate', 'Postgraduate', 'PhD', 'Working professional'], state.level)}
+                        </select>
+                        <div class="qf-err" id="qf-level-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div>
+                        <label class="qf-lab" for="qf-prog">PROGRAMMING EXPERIENCE *</label>
+                        <select id="qf-prog" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['None', 'Basic', 'Comfortable'], state.programming)}
+                        </select>
+                        <div class="qf-err" id="qf-prog-err" style="display:none">This field is required.</div>
+                    </div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-learn">WHAT WOULD YOU LIKE TO DO OR LEARN? *</label>
+                    <textarea id="qf-learn" class="qf-in" form="qf-noform" placeholder="Tell us about the topics, datasets, or skills you want to work on...">${escapeHtml(state.learnGoal)}</textarea>
+                    <div class="qf-err" id="qf-learn-err" style="display:none">This field is required.</div>
+                </div>
+            `;
+        } else if (state.need === 'research-training') {
+            customFieldsHtml = `
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-level">CURRENT LEVEL *</label>
+                        <select id="qf-level" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['Undergraduate', 'Postgraduate', 'PhD', 'Working professional'], state.level)}
+                        </select>
+                        <div class="qf-err" id="qf-level-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div>
+                        <label class="qf-lab" for="qf-prog">PROGRAMMING EXPERIENCE *</label>
+                        <select id="qf-prog" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['None', 'Basic', 'Comfortable'], state.programming)}
+                        </select>
+                        <div class="qf-err" id="qf-prog-err" style="display:none">This field is required.</div>
+                    </div>
+                </div>
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-hours">HOURS PER WEEK YOU CAN GIVE *</label>
+                        <select id="qf-hours" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions(['Under 5', '5 to 10', 'More than 10'], state.hours)}
+                        </select>
+                        <div class="qf-err" id="qf-hours-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div></div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-area">RESEARCH AREA OF INTEREST</label>
+                    <textarea id="qf-area" class="qf-in" form="qf-noform" placeholder="Cancer genomics, metagenomics, plant genetics, transcriptomics, etc.">${escapeHtml(state.researchArea)}</textarea>
+                </div>
+            `;
+        } else if (state.need === 'data-analysis') {
+            customFieldsHtml = `
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-datatype">DATA TYPE *</label>
+                        <select id="qf-datatype" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions([
+                                'Bulk RNA-seq', 'Single-cell RNA-seq', 'Spatial transcriptomics',
+                                'ATAC-seq / ChIP-seq', 'DNA methylation', 'WGS', 'WES',
+                                'Metagenomics', 'Microarray', 'Other / not sure'
+                            ], state.dataType)}
+                        </select>
+                        <div class="qf-err" id="qf-datatype-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div>
+                        <label class="qf-lab" for="qf-samples">NUMBER OF SAMPLES *</label>
+                        <input type="number" id="qf-samples" class="qf-in" min="1" placeholder="e.g. 12" form="qf-noform" value="${escapeHtml(state.samples)}">
+                        <div class="qf-err" id="qf-samples-err" style="display:none">Enter at least 1.</div>
+                    </div>
+                </div>
+                <div class="qf-row">
+                    <div>
+                        <label class="qf-lab" for="qf-organism">ORGANISM *</label>
+                        <input type="text" id="qf-organism" class="qf-in" placeholder="e.g. Human, mouse, rice" form="qf-noform" value="${escapeHtml(state.organism)}">
+                        <div class="qf-err" id="qf-organism-err" style="display:none">This field is required.</div>
+                    </div>
+                    <div>
+                        <label class="qf-lab" for="qf-budget">BUDGET IN MIND (OPTIONAL)</label>
+                        <select id="qf-budget" class="qf-in" form="qf-noform">
+                            <option value="">Select...</option>
+                            ${renderSelectOptions([
+                                'Not sure, send a quote', 'Under ₹10,000', '₹10,000 to ₹50,000',
+                                '₹50,000 to ₹1,00,000', 'More than ₹1,00,000'
+                            ], state.budget)}
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-question">WHAT QUESTION DO YOU WANT ANSWERED? *</label>
+                    <textarea id="qf-question" class="qf-in" form="qf-noform" placeholder="Describe your project in a few lines…">${escapeHtml(state.question)}</textarea>
+                    <div class="qf-err" id="qf-question-err" style="display:none">This field is required.</div>
+                </div>
+            `;
+        } else if (state.need === 'other') {
+            customFieldsHtml = `
+                <div>
+                    <label class="qf-lab" for="qf-topic">WHAT IS IT ABOUT? *</label>
+                    <select id="qf-topic" class="qf-in" form="qf-noform">
+                        <option value="">Select...</option>
+                        ${renderSelectOptions(['Collaboration', 'Career guidance', 'Something else'], state.otherTopic)}
+                    </select>
+                    <div class="qf-err" id="qf-topic-err" style="display:none">This field is required.</div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-help">HOW CAN WE HELP? *</label>
+                    <textarea id="qf-help" class="qf-in" form="qf-noform" placeholder="Tell us what you have in mind…">${escapeHtml(state.otherHelp)}</textarea>
+                    <div class="qf-err" id="qf-help-err" style="display:none">This field is required.</div>
+                </div>
+            `;
+        }
+
+        const todayStr = getTodayString();
+
+        return `
+            <h2 class="qf-h" tabindex="-1">Your details</h2>
+            <p class="qf-sub">${escapeHtml(cfg.name)}</p>
+
+            <div class="qf-row">
+                <div>
+                    <label class="qf-lab" for="qf-name">FULL NAME *</label>
+                    <input type="text" id="qf-name" class="qf-in" placeholder="Dr. Jane Doe" form="qf-noform" value="${escapeHtml(state.name)}">
+                    <div class="qf-err" id="qf-name-err" style="display:none">This field is required.</div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-email">EMAIL ADDRESS *</label>
+                    <input type="email" id="qf-email" class="qf-in" placeholder="jane@institute.edu" form="qf-noform" value="${escapeHtml(state.email)}">
+                    <div class="qf-err" id="qf-email-err" style="display:none">Enter a valid email address.</div>
+                </div>
+            </div>
+
+            <div class="qf-row">
+                <div>
+                    <label class="qf-lab" for="qf-phone">PHONE / WHATSAPP *</label>
+                    <input type="tel" id="qf-phone" class="qf-in" placeholder="+91 98765 43210" form="qf-noform" value="${escapeHtml(state.phone)}">
+                    <div class="qf-err" id="qf-phone-err" style="display:none">This field is required.</div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-org">ORGANIZATION / INSTITUTION *</label>
+                    <input type="text" id="qf-org" class="qf-in" placeholder="University of Genomics" form="qf-noform" value="${escapeHtml(state.org)}">
+                    <div class="qf-err" id="qf-org-err" style="display:none">This field is required.</div>
+                </div>
+            </div>
+
+            ${customFieldsHtml}
+
+            <div class="qf-sec">When can we talk?</div>
+
+            <div class="qf-row">
+                <div>
+                    <label class="qf-lab" for="qf-date">PREFERRED DATE${reqStar}</label>
+                    <input type="date" id="qf-date" class="qf-in" min="${todayStr}" form="qf-noform" value="${escapeHtml(state.prefDate)}">
+                    <div class="qf-err" id="qf-date-err" style="display:none">This field is required.</div>
+                </div>
+                <div>
+                    <label class="qf-lab" for="qf-date-alt">ALTERNATIVE DATE</label>
+                    <input type="date" id="qf-date-alt" class="qf-in" min="${todayStr}" form="qf-noform" value="${escapeHtml(state.altDate)}">
+                </div>
+            </div>
+
+            <div>
+                <label class="qf-lab" for="qf-time">PREFERRED TIME${reqStar}</label>
+                <select id="qf-time" class="qf-in" form="qf-noform">
+                    <option value="">Select...</option>
+                    ${renderSelectOptions([
+                        'Morning, 9 am to 12 pm IST',
+                        'Afternoon, 12 pm to 4 pm IST',
+                        'Evening, 4 pm to 8 pm IST'
+                    ], state.prefTime)}
+                </select>
+                <div class="qf-err" id="qf-time-err" style="display:none">This field is required.</div>
+            </div>
+
+            <div class="qf-tz">
+                Your time zone: ${escapeHtml(detectedTimeZone)} (detected). Times above are in India time (IST). We will confirm your call by email.
+            </div>
+
+            <label class="qf-check" for="qf-consent">
+                <input type="checkbox" id="qf-consent" form="qf-noform" ${state.consent ? 'checked' : ''}>
+                <span>I agree to the processing of my details according to the <a href="privacy.html" class="inline-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+            </label>
+            <div class="qf-err" id="qf-consent-err" style="display:none">Please tick to continue.</div>
+
+            <div class="qf-actions">
+                <button type="submit" class="qf-btn" id="qf-btn-submit">Submit Inquiry</button>
+                <button type="button" class="qf-btn-2" id="qf-btn-step3-back">Back</button>
+            </div>
+        `;
+    }
+
+    function renderSelectOptions(list, selectedVal) {
+        return list.map(item => {
+            const isSel = selectedVal === item ? ' selected' : '';
+            return `<option value="${escapeHtml(item)}"${isSel}>${escapeHtml(item)}</option>`;
+        }).join('');
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function bindEvents(container) {
+        // Option selection in Step 1
+        const radioInputs = container.querySelectorAll('input[name="qf-need"]');
+        radioInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                state.need = input.value;
+                container.querySelectorAll('.qf-opt').forEach(l => l.classList.remove('is-sel'));
+                input.closest('.qf-opt').classList.add('is-sel');
+                hideError('qf-need-err');
+            });
+        });
+
+        // Step 1 Continue
+        const btnStep1 = container.querySelector('#qf-btn-step1');
+        if (btnStep1) {
+            btnStep1.addEventListener('click', () => {
+                if (!state.need) {
+                    showError('qf-need-err');
+                    return;
+                }
+                state.step = 2;
+                render(container);
+            });
+        }
+
+        // Step 2 Continue & Back
+        const btnStep2 = container.querySelector('#qf-btn-step2');
+        if (btnStep2) {
+            btnStep2.addEventListener('click', () => {
+                let hasErr = false;
+                if (state.need === 'workshop') {
+                    const sel = container.querySelector('#qf-workshop-sel');
+                    if (!sel || !sel.value) {
+                        showError('qf-workshop-err', sel);
+                        hasErr = true;
+                    } else {
+                        state.workshop = sel.value;
+                        hideError('qf-workshop-err', sel);
+                    }
+                }
+
+                const chk = container.querySelector('#qf-fee-agree');
+                if (!chk || !chk.checked) {
+                    showError('qf-fee-err');
+                    hasErr = true;
+                } else {
+                    state.feeAgree = true;
+                    hideError('qf-fee-err');
+                }
+
+                if (hasErr) return;
+
+                state.step = 3;
+                render(container);
+            });
+        }
+
+        const btnStep2Back = container.querySelector('#qf-btn-step2-back');
+        if (btnStep2Back) {
+            btnStep2Back.addEventListener('click', () => {
+                saveStep2Inputs(container);
+                state.step = 1;
+                render(container);
+            });
+        }
+
+        // Step 3 Back
+        const btnStep3Back = container.querySelector('#qf-btn-step3-back');
+        if (btnStep3Back) {
+            btnStep3Back.addEventListener('click', () => {
+                saveStep3Inputs(container);
+                const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
+                state.step = isShortFlow ? 1 : 2;
+                render(container);
+            });
+        }
+
+        // Enter key inside single-line inputs
+        container.querySelectorAll('input:not([type="checkbox"]):not([type="radio"])').forEach(input => {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (state.step === 1) {
+                        const b = container.querySelector('#qf-btn-step1');
+                        if (b) b.click();
+                    } else if (state.step === 2 && state.need !== 'data-analysis' && state.need !== 'other') {
+                        const b = container.querySelector('#qf-btn-step2');
+                        if (b) b.click();
+                    } else {
+                        const b = container.querySelector('#qf-btn-submit');
+                        if (b) b.click();
+                    }
+                }
+            });
+        });
+    }
+
+    function saveStep2Inputs(container) {
+        const sel = container.querySelector('#qf-workshop-sel');
+        if (sel) state.workshop = sel.value;
+        const chk = container.querySelector('#qf-fee-agree');
+        if (chk) state.feeAgree = chk.checked;
+    }
+
+    function saveStep3Inputs(container) {
+        const getVal = id => {
+            const el = container.querySelector('#' + id);
+            return el ? el.value : '';
+        };
+        state.name = getVal('qf-name');
+        state.email = getVal('qf-email');
+        state.phone = getVal('qf-phone');
+        state.org = getVal('qf-org');
+        state.level = getVal('qf-level');
+        state.programming = getVal('qf-prog');
+        state.hours = getVal('qf-hours');
+        state.dataType = getVal('qf-datatype');
+        state.samples = getVal('qf-samples');
+        state.organism = getVal('qf-organism');
+        state.budget = getVal('qf-budget');
+        state.question = getVal('qf-question');
+        state.learnGoal = getVal('qf-learn');
+        state.researchArea = getVal('qf-area');
+        state.anythingElse = getVal('qf-anything');
+        state.otherTopic = getVal('qf-topic');
+        state.otherHelp = getVal('qf-help');
+        state.prefDate = getVal('qf-date');
+        state.altDate = getVal('qf-date-alt');
+        state.prefTime = getVal('qf-time');
+        const consentEl = container.querySelector('#qf-consent');
+        state.consent = consentEl ? consentEl.checked : false;
+    }
+
+    function showError(errId, inputEl) {
+        const err = document.getElementById(errId);
+        if (err) err.style.display = 'block';
+        if (inputEl) inputEl.classList.add('is-bad');
+    }
+
+    function hideError(errId, inputEl) {
+        const err = document.getElementById(errId);
+        if (err) err.style.display = 'none';
+        if (inputEl) inputEl.classList.remove('is-bad');
+    }
+
+    function validateStep3(container) {
+        saveStep3Inputs(container);
+        let firstBad = null;
+        let valid = true;
+
+        function mark(fieldId, errId, condition) {
+            const el = container.querySelector('#' + fieldId);
+            if (!condition) {
+                showError(errId, el);
+                valid = false;
+                if (!firstBad && el) firstBad = el;
+            } else {
+                hideError(errId, el);
+            }
+        }
+
+        mark('qf-name', 'qf-name-err', state.name.trim().length > 0);
+        
+        // Email validation
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        mark('qf-email', 'qf-email-err', emailRe.test(state.email.trim()));
+
+        mark('qf-phone', 'qf-phone-err', state.phone.trim().length > 0);
+        mark('qf-org', 'qf-org-err', state.org.trim().length > 0);
+
+        if (state.need === 'workshop') {
+            mark('qf-level', 'qf-level-err', state.level.length > 0);
+            mark('qf-prog', 'qf-prog-err', state.programming.length > 0);
+        } else if (state.need === 'training') {
+            mark('qf-level', 'qf-level-err', state.level.length > 0);
+            mark('qf-prog', 'qf-prog-err', state.programming.length > 0);
+            mark('qf-learn', 'qf-learn-err', state.learnGoal.trim().length > 0);
+        } else if (state.need === 'research-training') {
+            mark('qf-level', 'qf-level-err', state.level.length > 0);
+            mark('qf-prog', 'qf-prog-err', state.programming.length > 0);
+            mark('qf-hours', 'qf-hours-err', state.hours.length > 0);
+        } else if (state.need === 'data-analysis') {
+            mark('qf-datatype', 'qf-datatype-err', state.dataType.length > 0);
+            const num = parseInt(state.samples, 10);
+            mark('qf-samples', 'qf-samples-err', !isNaN(num) && num >= 1);
+            mark('qf-organism', 'qf-organism-err', state.organism.trim().length > 0);
+            mark('qf-question', 'qf-question-err', state.question.trim().length > 0);
+        } else if (state.need === 'other') {
+            mark('qf-topic', 'qf-topic-err', state.otherTopic.length > 0);
+            mark('qf-help', 'qf-help-err', state.otherHelp.trim().length > 0);
+        }
+
+        // Meeting fields: required for non-other
+        if (state.need !== 'other') {
+            mark('qf-date', 'qf-date-err', state.prefDate.length > 0);
+            mark('qf-time', 'qf-time-err', state.prefTime.length > 0);
+        }
+
+        // Consent
+        const consentEl = container.querySelector('#qf-consent');
+        if (!state.consent) {
+            showError('qf-consent-err');
+            valid = false;
+            if (!firstBad && consentEl) firstBad = consentEl;
+        } else {
+            hideError('qf-consent-err');
+        }
+
+        if (!valid && firstBad) {
+            firstBad.focus();
+        }
+        return valid;
+    }
+
+    function mapToLegacy(form) {
+        const legacyName = form.querySelector('input[name="name"]');
+        const legacyEmail = form.querySelector('input[name="email"]');
+        const legacyPhone = form.querySelector('input[name="phone"]');
+        const legacyOrg = form.querySelector('input[name="organization"]');
+        const legacyService = form.querySelector('select[name="service"]');
+        const legacyMessage = form.querySelector('textarea[name="message"]');
+        const legacyConsent = form.querySelector('input[name="consent"]');
+
+        if (legacyName) legacyName.value = state.name.trim();
+        if (legacyEmail) legacyEmail.value = state.email.trim();
+        if (legacyPhone) legacyPhone.value = state.phone.trim();
+        if (legacyOrg) legacyOrg.value = state.org.trim();
+        if (legacyConsent) legacyConsent.checked = true;
+
+        // Map service value
+        if (legacyService) {
+            let targetVal = 'other';
+            if (state.need === 'workshop') {
+                targetVal = state.workshop || 'workshop';
+            } else if (state.need === 'training') {
+                targetVal = 'internship';
+            } else if (state.need === 'research-training') {
+                targetVal = 'internship';
+            } else if (state.need === 'data-analysis') {
+                const dt = state.dataType;
+                if (['Bulk RNA-seq', 'Single-cell RNA-seq', 'Spatial transcriptomics'].includes(dt)) {
+                    targetVal = 'rna';
+                } else if (['ATAC-seq / ChIP-seq', 'DNA methylation'].includes(dt)) {
+                    targetVal = 'epi';
+                } else if (dt === 'WGS') {
+                    targetVal = 'wgs';
+                } else if (dt === 'WES') {
+                    targetVal = 'wes';
+                } else if (dt === 'Metagenomics') {
+                    targetVal = 'meta';
+                } else {
+                    targetVal = 'other';
+                }
+            } else if (state.need === 'other') {
+                if (state.otherTopic === 'Collaboration') {
+                    targetVal = 'college';
+                } else if (state.otherTopic === 'Career guidance') {
+                    targetVal = 'career';
+                } else {
+                    targetVal = 'other';
+                }
+            }
+
+            // Set select value
+            for (let i = 0; i < legacyService.options.length; i++) {
+                const opt = legacyService.options[i];
+                if (opt.value === targetVal || opt.text === targetVal) {
+                    legacyService.selectedIndex = i;
+                    legacyService.value = opt.value;
+                    break;
+                }
+            }
+        }
+
+        // Map message textarea
+        const cardName = NEED_CONFIG[state.need] ? NEED_CONFIG[state.need].name : state.need;
+        const lines = [];
+        lines.push(`Request: ${cardName}`);
+
+        if (state.need === 'workshop' && state.workshop) {
+            lines.push(`Selected workshop: ${state.workshop}`);
+        }
+        if (state.level) lines.push(`Current level: ${state.level}`);
+        if (state.programming) lines.push(`Programming experience: ${state.programming}`);
+        if (state.hours) lines.push(`Hours per week: ${state.hours}`);
+        if (state.dataType) lines.push(`Data type: ${state.dataType}`);
+        if (state.samples) lines.push(`Number of samples: ${state.samples}`);
+        if (state.organism) lines.push(`Organism: ${state.organism}`);
+        if (state.budget) lines.push(`Budget: ${state.budget}`);
+
+        if (state.need === 'research-training' && state.researchArea) {
+            lines.push(`Research area / Topic: ${state.researchArea.trim()}`);
+        } else if (state.need === 'other' && state.otherTopic) {
+            lines.push(`Topic: ${state.otherTopic}`);
+        }
+
+        let freeMsg = '';
+        if (state.need === 'workshop') freeMsg = state.anythingElse;
+        else if (state.need === 'training') freeMsg = state.learnGoal;
+        else if (state.need === 'research-training') freeMsg = state.researchArea;
+        else if (state.need === 'data-analysis') freeMsg = state.question;
+        else if (state.need === 'other') freeMsg = state.otherHelp;
+
+        if (freeMsg && freeMsg.trim()) {
+            lines.push(`Message: ${freeMsg.trim()}`);
+        }
+
+        if (['workshop', 'training', 'research-training'].includes(state.need) && state.feeAgree) {
+            lines.push(`Fee understood: Yes, confirmed by the visitor`);
+        }
+
+        if (state.prefDate) lines.push(`Preferred date: ${state.prefDate}`);
+        if (state.altDate) lines.push(`Alternative date: ${state.altDate}`);
+        if (state.prefTime) lines.push(`Preferred time: ${state.prefTime}`);
+        if (detectedTimeZone) lines.push(`Visitor time zone: ${detectedTimeZone}`);
+
+        if (legacyMessage) {
+            legacyMessage.value = lines.join('\n');
+        }
+    }
+
+    function setupBookingObserver(form, container) {
+        const statusMsg = document.getElementById('form-status');
+        if (!statusMsg) return;
+
+        let bookingInserted = false;
+
+        function checkSuccess() {
+            const hasSuccess = statusMsg.classList.contains('success') ||
+                               statusMsg.textContent.includes('Thank you') ||
+                               statusMsg.textContent.includes('enquiry has been submitted');
+            if (hasSuccess) {
+                container.style.display = 'none';
+
+                if (!bookingInserted && BOOKING_URL && BOOKING_URL.startsWith('https://')) {
+                    bookingInserted = true;
+                    let targetUrl = BOOKING_URL;
+                    if (BOOKING_PREFILL) {
+                        const nameParam = encodeURIComponent(state.name.trim());
+                        const emailParam = encodeURIComponent(state.email.trim());
+                        const joiner = targetUrl.includes('?') ? '&' : '?';
+                        targetUrl = `${targetUrl}${joiner}name=${nameParam}&email=${emailParam}`;
+                    }
+
+                    const bookingCard = document.createElement('div');
+                    bookingCard.className = 'qf-fee qf-book';
+                    bookingCard.innerHTML = `
+                        <h2 class="qf-h">Book your first call</h2>
+                        <p>Choose a time that suits you for a short first call with our team.</p>
+                        <a href="${escapeHtml(targetUrl)}" class="qf-btn" target="_blank" rel="noopener noreferrer">Choose a time</a>
+                        <div class="qf-note">Opens our scheduling page in a new tab.</div>
+                    `;
+                    statusMsg.parentNode.insertBefore(bookingCard, statusMsg.nextSibling);
+                }
+            }
+        }
+
+        const observer = new MutationObserver(() => {
+            checkSuccess();
+        });
+
+        observer.observe(statusMsg, {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+    }
+
+    function init() {
+        const form = document.getElementById('quote-form');
+        const flowContainer = document.getElementById('qf-flow');
+        if (!form || !flowContainer) return;
+
+        // 1. Mark JS mode on root
+        document.documentElement.classList.add('qf-js');
+
+        // 2. Remove required attributes from legacy controls
+        form.querySelectorAll('.qf-legacy [required]').forEach(el => {
+            el.removeAttribute('required');
+        });
+
+        // 3. Unhide flow container
+        flowContainer.removeAttribute('hidden');
+
+        // 4. Initialize options and check prefill
+        initLegacyOptions(form);
+        checkPrefill(form);
+
+        // 5. Initial render
+        render(flowContainer);
+
+        // 6. Submit interceptor (Capture phase)
+        form.addEventListener('submit', function (e) {
+            // Only validate flow when flow is active/visible
+            if (flowContainer.style.display === 'none') {
+                return;
+            }
+
+            const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
+            const targetSubmitStep = isShortFlow ? 2 : 3;
+
+            if (state.step !== targetSubmitStep) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return;
+            }
+
+            const isValid = validateStep3(flowContainer);
+            if (!isValid) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return;
+            }
+
+            // Map values to legacy controls so existing handler can serialize them
+            mapToLegacy(form);
+        }, true);
+
+        // 7. Setup Booking Observer on #form-status
+        setupBookingObserver(form, flowContainer);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();

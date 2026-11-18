@@ -37,8 +37,8 @@
 
     <meta name="view-transition" content="same-origin">
     <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style.css?v=20261117">
-    <link rel="stylesheet" href="pages.css?v=20261117">
+    <link rel="stylesheet" href="style.css?v=20261119">
+    <link rel="stylesheet" href="pages.css?v=20261119">
     <link rel="preload" as="image" href="bg/inner-desktop.webp" media="(min-width: 901px)">
     <link rel="preload" as="image" href="bg/inner-mobile.webp" media="(max-width: 900px)">
 
@@ -172,34 +172,6 @@
 
         <div class="quote-layout">
             <div class="info-card">
-                <h2>What to include</h2>
-                <ul class="checklist">
-                    <li>
-                        <span class="checklist-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span>Your research goal</span>
-                    </li>
-                    <li>
-                        <span class="checklist-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span>Sample type and number</span>
-                    </li>
-                    <li>
-                        <span class="checklist-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span>Sequencing platform, if known</span>
-                    </li>
-                    <li>
-                        <span class="checklist-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span>The output you need</span>
-                    </li>
-                </ul>
-
                 <div class="quote-contact-direct">
                     <p style="margin: 0 0 6px 0;">Prefer email? <a href="mailto:explore@xenoibiotech.com">explore@xenoibiotech.com</a></p>
                     <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.7);">We will reply to your enquiry by email.</p>
@@ -211,94 +183,97 @@
 
             <div class="form-card">
                 <form class="quote-form" id="quote-form" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="83b890af-9310-441b-961b-6ab63e376501">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full name <span aria-hidden="true">*</span></label>
-                            <input type="text" id="name" name="name" class="form-control" required aria-required="true" placeholder="Dr. Jane Doe" maxlength="100" autocomplete="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address <span aria-hidden="true">*</span></label>
-                            <input type="email" id="email" name="email" class="form-control" required aria-required="true" placeholder="jane@institute.edu" maxlength="120" autocomplete="email">
-                        </div>
-                    </div>
-
-                                        <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" autocomplete="tel">
-                    </div>
-                    <div class="form-group">
-                        <label for="organization">Organization / Institution <span aria-hidden="true">*</span></label>
-                        <input type="text" id="organization" name="organization" class="form-control" required aria-required="true" placeholder="University of Genomics" maxlength="150" autocomplete="organization">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="service">Service Type <span aria-hidden="true">*</span></label>
-                        <select id="service" name="service" class="form-control" required aria-required="true">
-                            <option value="" disabled selected>Select an option...</option>
-                            <optgroup label="Services">
-                                <option value="wgs">Whole-Genome Sequencing (WGS)</option>
-                                <option value="wes">Whole-Exome Sequencing (WES)</option>
-                                <option value="rna">Transcriptomics (RNA-Seq)</option>
-                                <option value="meta">Metagenomics</option>
-                                <option value="epi">Epigenomics</option>
-                                <option value="pipeline">Custom Pipeline Development</option>
-                                <option value="consulting">Bioinformatics Consulting</option>
-                            </optgroup>
-                            <optgroup label="Workshops (online, 30 days)">
-                                <option value="workshop">Bioinformatics Workshop / Training</option>
-                                <option value="Workshop: RNA-Seq (reference-based)">Workshop: RNA-Seq (reference-based)</option>
-                                <option value="Workshop: RNA-Seq (de novo)">Workshop: RNA-Seq (de novo)</option>
-                                <option value="Workshop: Single-cell RNA-Seq">Workshop: Single-cell RNA-Seq</option>
-                                <option value="Workshop: lncRNA-Seq">Workshop: lncRNA-Seq</option>
-                                <option value="Workshop: miRNA-Seq">Workshop: miRNA-Seq</option>
-                                <option value="Workshop: PSI-Seq (alternative splicing)">Workshop: PSI-Seq (alternative splicing)</option>
-                                <option value="Workshop: Spatial Transcriptomics">Workshop: Spatial Transcriptomics</option>
-                                <option value="Workshop: ChIP-Seq">Workshop: ChIP-Seq</option>
-                                <option value="Workshop: SNAP-ChIP (spike-in calibrated)">Workshop: SNAP-ChIP (spike-in calibrated)</option>
-                                <option value="Workshop: ATAC-Seq">Workshop: ATAC-Seq</option>
-                                <option value="Workshop: Single-cell ATAC-Seq">Workshop: Single-cell ATAC-Seq</option>
-                                <option value="Workshop: Methyl-Seq (DNA methylation)">Workshop: Methyl-Seq (DNA methylation)</option>
-                                <option value="Workshop: DNA-Seq (variant analysis)">Workshop: DNA-Seq (variant analysis)</option>
-                                <option value="Workshop: RAD-Seq">Workshop: RAD-Seq</option>
-                                <option value="Workshop: Whole-Genome de novo Assembly">Workshop: Whole-Genome de novo Assembly</option>
-                                <option value="Workshop: Targeted Metagenomics (16S / ITS)">Workshop: Targeted Metagenomics (16S / ITS)</option>
-                                <option value="Workshop: Whole-Genome (Shotgun) Metagenomics">Workshop: Whole-Genome (Shotgun) Metagenomics</option>
-                                <option value="Workshop: Microarray Data Analysis">Workshop: Microarray Data Analysis</option>
-                            </optgroup>
-                            <optgroup label="Internships">
-                                <option value="internship">Internship</option>
-                                <option value="Customised internship">Customised internship</option>
-                            </optgroup>
-                            <optgroup label="Other">
-                                <option value="career">Career guidance</option>
-                                <option value="college">Collaboration</option>
-                                <option value="other">Other</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="details">Project Details &amp; Data Volume <span aria-hidden="true">*</span></label>
-                        <textarea id="details" name="message" class="form-control" required aria-required="true" placeholder="Briefly describe your research goals, sample size, and expected data output (e.g., 50 samples, 30x coverage WGS)." maxlength="3000"></textarea>
-                    </div>
-
-                    <div class="form-group-checkbox">
-                        <label class="checkbox-label" for="consent">
-                            <input type="checkbox" id="consent" name="consent" required>
-                            <span>I agree to the processing of my details according to the <a href="privacy.html" class="inline-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-outline" id="submit-btn">
-                        Submit Inquiry
-                        <span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </button>
-                    <!-- OWNER-TODO: confirm reply timeframe: <p class="form-reply-note">We reply within 24 working hours.</p> -->
-
+                    <div class="qf-flow" id="qf-flow" hidden></div>
                     <p id="form-status" role="status" aria-live="polite" class="form-status-msg"></p>
+
+                    <div class="qf-legacy">
+                        <input type="hidden" name="access_key" value="83b890af-9310-441b-961b-6ab63e376501">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full name <span aria-hidden="true">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control" required aria-required="true" placeholder="Dr. Jane Doe" maxlength="100" autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address <span aria-hidden="true">*</span></label>
+                                <input type="email" id="email" name="email" class="form-control" required aria-required="true" placeholder="jane@institute.edu" maxlength="120" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <label for="organization">Organization / Institution <span aria-hidden="true">*</span></label>
+                            <input type="text" id="organization" name="organization" class="form-control" required aria-required="true" placeholder="University of Genomics" maxlength="150" autocomplete="organization">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Type <span aria-hidden="true">*</span></label>
+                            <select id="service" name="service" class="form-control" required aria-required="true">
+                                <option value="" disabled selected>Select an option...</option>
+                                <optgroup label="Services">
+                                    <option value="wgs">Whole-Genome Sequencing (WGS)</option>
+                                    <option value="wes">Whole-Exome Sequencing (WES)</option>
+                                    <option value="rna">Transcriptomics (RNA-Seq)</option>
+                                    <option value="meta">Metagenomics</option>
+                                    <option value="epi">Epigenomics</option>
+                                    <option value="pipeline">Custom Pipeline Development</option>
+                                    <option value="consulting">Bioinformatics Consulting</option>
+                                </optgroup>
+                                <optgroup label="Workshops (online, 30 days)">
+                                    <option value="workshop">Bioinformatics Workshop / Training</option>
+                                    <option value="Workshop: RNA-Seq (reference-based)">Workshop: RNA-Seq (reference-based)</option>
+                                    <option value="Workshop: RNA-Seq (de novo)">Workshop: RNA-Seq (de novo)</option>
+                                    <option value="Workshop: Single-cell RNA-Seq">Workshop: Single-cell RNA-Seq</option>
+                                    <option value="Workshop: lncRNA-Seq">Workshop: lncRNA-Seq</option>
+                                    <option value="Workshop: miRNA-Seq">Workshop: miRNA-Seq</option>
+                                    <option value="Workshop: PSI-Seq (alternative splicing)">Workshop: PSI-Seq (alternative splicing)</option>
+                                    <option value="Workshop: Spatial Transcriptomics">Workshop: Spatial Transcriptomics</option>
+                                    <option value="Workshop: ChIP-Seq">Workshop: ChIP-Seq</option>
+                                    <option value="Workshop: SNAP-ChIP (spike-in calibrated)">Workshop: SNAP-ChIP (spike-in calibrated)</option>
+                                    <option value="Workshop: ATAC-Seq">Workshop: ATAC-Seq</option>
+                                    <option value="Workshop: Single-cell ATAC-Seq">Workshop: Single-cell ATAC-Seq</option>
+                                    <option value="Workshop: Methyl-Seq (DNA methylation)">Workshop: Methyl-Seq (DNA methylation)</option>
+                                    <option value="Workshop: DNA-Seq (variant analysis)">Workshop: DNA-Seq (variant analysis)</option>
+                                    <option value="Workshop: RAD-Seq">Workshop: RAD-Seq</option>
+                                    <option value="Workshop: Whole-Genome de novo Assembly">Workshop: Whole-Genome de novo Assembly</option>
+                                    <option value="Workshop: Targeted Metagenomics (16S / ITS)">Workshop: Targeted Metagenomics (16S / ITS)</option>
+                                    <option value="Workshop: Whole-Genome (Shotgun) Metagenomics">Workshop: Whole-Genome (Shotgun) Metagenomics</option>
+                                    <option value="Workshop: Microarray Data Analysis">Workshop: Microarray Data Analysis</option>
+                                </optgroup>
+                                <optgroup label="Internships">
+                                    <option value="internship">Internship</option>
+                                    <option value="Customised internship">Customised internship</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="career">Career guidance</option>
+                                    <option value="college">Collaboration</option>
+                                    <option value="other">Other</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="details">Project Details &amp; Data Volume <span aria-hidden="true">*</span></label>
+                            <textarea id="details" name="message" class="form-control" required aria-required="true" placeholder="Briefly describe your research goals, sample size, and expected data output (e.g., 50 samples, 30x coverage WGS)." maxlength="3000"></textarea>
+                        </div>
+
+                        <div class="form-group-checkbox">
+                            <label class="checkbox-label" for="consent">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <span>I agree to the processing of my details according to the <a href="privacy.html" class="inline-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline" id="submit-btn">
+                            Submit Inquiry
+                            <span class="btn-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </button>
+                        <!-- OWNER-TODO: confirm reply timeframe: <p class="form-reply-note">We reply within 24 working hours.</p> -->
+                    </div>
                 </form>
             </div>
         </div>
@@ -390,5 +365,6 @@
     <script src="ui.js?v=20261111"></script>
     <script src="form.js?v=20261111"></script>
     <script src="enquiry-prefill.js?v=20261111" defer></script>
+    <script src="quote-flow.js?v=20261119" defer></script>
 </body>
 </html>
