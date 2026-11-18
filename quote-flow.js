@@ -7,11 +7,11 @@ const BOOKING_PREFILL = false;
     const NEED_CONFIG = {
         'workshop': {
             name: 'Workshop',
-            sub: '30-day online, hands-on NGS workshop',
+            sub: '18 hands-on workshops',
             totalSteps: 3
         },
         'training': {
-            name: 'Training',
+            name: 'Internship/Training',
             sub: 'Mentored, hands-on training in bioinformatics',
             totalSteps: 3
         },
@@ -216,12 +216,12 @@ const BOOKING_PREFILL = false;
                 <label class="qf-opt ${state.need === 'workshop' ? 'is-sel' : ''}">
                     <input type="radio" name="qf-need" value="workshop" form="qf-noform" ${state.need === 'workshop' ? 'checked' : ''}>
                     <strong>Workshop</strong>
-                    <span>30-day online, hands-on NGS workshop</span>
+                    <span>18 hands-on workshops</span>
                 </label>
 
                 <label class="qf-opt ${state.need === 'training' ? 'is-sel' : ''}">
                     <input type="radio" name="qf-need" value="training" form="qf-noform" ${state.need === 'training' ? 'checked' : ''}>
-                    <strong>Training</strong>
+                    <strong>Internship/Training</strong>
                     <span>Mentored, hands-on training in bioinformatics</span>
                 </label>
 
