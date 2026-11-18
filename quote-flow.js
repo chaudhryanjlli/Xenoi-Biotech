@@ -272,23 +272,18 @@ const BOOKING_PREFILL = false;
 
                 <div class="qf-fee">
                     <div class="qf-price">₹5,999<small>per workshop</small></div>
-                    <p>Payment is not taken here. Our team will confirm the fee and payment details with you after the first call.</p>
                 </div>
             `;
         } else if (state.need === 'training') {
             middleHtml = `
                 <div class="qf-fee">
                     <div class="qf-feehead">Fee-based programme</div>
-                    <p>Our team will share the fee with you after the first call. Payment is not taken here.</p>
-                    <p>We do not offer stipends or unpaid positions.</p>
                 </div>
             `;
         } else if (state.need === 'research-training') {
             middleHtml = `
                 <div class="qf-fee">
                     <div class="qf-price">₹10,000<small>per month</small></div>
-                    <p>Payment is not taken here. Our team will confirm the fee and payment details with you after the first call.</p>
-                    <p>We do not offer stipends or unpaid positions.</p>
                 </div>
             `;
         }
