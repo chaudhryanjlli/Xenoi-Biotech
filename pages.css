@@ -2043,6 +2043,11 @@ body.inner .quote-contact-direct {
     line-height: 1.6;
 }
 
+body.inner .quote-layout .info-card .quote-contact-direct {
+    border-top: none;
+    padding-top: 0;
+}
+
 body.inner .quote-contact-direct a {
     color: var(--accent-color, #32e5a6);
     text-decoration: none;

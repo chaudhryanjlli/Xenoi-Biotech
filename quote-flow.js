@@ -1,34 +1,286 @@
 const BOOKING_URL = "";
 const BOOKING_PREFILL = false;
 
+/* Workshop payment URLs
+   Leave PAYMENT_URL empty ("") to keep the original behaviour (3-step enquiry form submitting to Web3Forms).
+   When PAYMENT_URL starts with https://, clicking "Continue to payment" on the workshop fee box navigates
+   to this URL with the workshop name in the query parameter named below.
+   PAYMENT_URL_INTL is a map from workshop slug (e.g. "rna-seq-reference", "atac-seq", or "default")
+   to the PayGlocal payment link for attendees outside India. If empty, all visitors use PAYMENT_URL. */
+const PAYMENT_URL = "https://pages.razorpay.com/pl_U4QgQ6vQVhkEs3/view";
+const PAYMENT_WORKSHOP_PARAM = "workshop_name";
+const PAYMENT_URL_INTL = {};
+const PAYMENT_INTL_WORKSHOP_PARAM = "";
+const PAYMENT_INTL_FEE_TEXT = "";
+
 (function () {
     'use strict';
+
+    const COUNTRIES = [
+        { code: "AF", name: "Afghanistan" },
+        { code: "AL", name: "Albania" },
+        { code: "DZ", name: "Algeria" },
+        { code: "AD", name: "Andorra" },
+        { code: "AO", name: "Angola" },
+        { code: "AG", name: "Antigua and Barbuda" },
+        { code: "AR", name: "Argentina" },
+        { code: "AM", name: "Armenia" },
+        { code: "AU", name: "Australia" },
+        { code: "AT", name: "Austria" },
+        { code: "AZ", name: "Azerbaijan" },
+        { code: "BS", name: "Bahamas" },
+        { code: "BH", name: "Bahrain" },
+        { code: "BD", name: "Bangladesh" },
+        { code: "BB", name: "Barbados" },
+        { code: "BY", name: "Belarus" },
+        { code: "BE", name: "Belgium" },
+        { code: "BZ", name: "Belize" },
+        { code: "BJ", name: "Benin" },
+        { code: "BT", name: "Bhutan" },
+        { code: "BO", name: "Bolivia" },
+        { code: "BA", name: "Bosnia and Herzegovina" },
+        { code: "BW", name: "Botswana" },
+        { code: "BR", name: "Brazil" },
+        { code: "BN", name: "Brunei" },
+        { code: "BG", name: "Bulgaria" },
+        { code: "BF", name: "Burkina Faso" },
+        { code: "BI", name: "Burundi" },
+        { code: "CV", name: "Cabo Verde" },
+        { code: "KH", name: "Cambodia" },
+        { code: "CM", name: "Cameroon" },
+        { code: "CA", name: "Canada" },
+        { code: "CF", name: "Central African Republic" },
+        { code: "TD", name: "Chad" },
+        { code: "CL", name: "Chile" },
+        { code: "CN", name: "China" },
+        { code: "CO", name: "Colombia" },
+        { code: "KM", name: "Comoros" },
+        { code: "CG", name: "Congo" },
+        { code: "CR", name: "Costa Rica" },
+        { code: "HR", name: "Croatia" },
+        { code: "CU", name: "Cuba" },
+        { code: "CY", name: "Cyprus" },
+        { code: "CZ", name: "Czech Republic" },
+        { code: "CD", name: "Democratic Republic of the Congo" },
+        { code: "DK", name: "Denmark" },
+        { code: "DJ", name: "Djibouti" },
+        { code: "DM", name: "Dominica" },
+        { code: "DO", name: "Dominican Republic" },
+        { code: "EC", name: "Ecuador" },
+        { code: "EG", name: "Egypt" },
+        { code: "SV", name: "El Salvador" },
+        { code: "GQ", name: "Equatorial Guinea" },
+        { code: "ER", name: "Eritrea" },
+        { code: "EE", name: "Estonia" },
+        { code: "SZ", name: "Eswatini" },
+        { code: "ET", name: "Ethiopia" },
+        { code: "FJ", name: "Fiji" },
+        { code: "FI", name: "Finland" },
+        { code: "FR", name: "France" },
+        { code: "GA", name: "Gabon" },
+        { code: "GM", name: "Gambia" },
+        { code: "GE", name: "Georgia" },
+        { code: "DE", name: "Germany" },
+        { code: "GH", name: "Ghana" },
+        { code: "GR", name: "Greece" },
+        { code: "GD", name: "Grenada" },
+        { code: "GT", name: "Guatemala" },
+        { code: "GN", name: "Guinea" },
+        { code: "GW", name: "Guinea-Bissau" },
+        { code: "GY", name: "Guyana" },
+        { code: "HT", name: "Haiti" },
+        { code: "HN", name: "Honduras" },
+        { code: "HU", name: "Hungary" },
+        { code: "IS", name: "Iceland" },
+        { code: "ID", name: "Indonesia" },
+        { code: "IR", name: "Iran" },
+        { code: "IQ", name: "Iraq" },
+        { code: "IE", name: "Ireland" },
+        { code: "IL", name: "Israel" },
+        { code: "IT", name: "Italy" },
+        { code: "CI", name: "Ivory Coast" },
+        { code: "JM", name: "Jamaica" },
+        { code: "JP", name: "Japan" },
+        { code: "JO", name: "Jordan" },
+        { code: "KZ", name: "Kazakhstan" },
+        { code: "KE", name: "Kenya" },
+        { code: "KI", name: "Kiribati" },
+        { code: "KW", name: "Kuwait" },
+        { code: "KG", name: "Kyrgyzstan" },
+        { code: "LA", name: "Laos" },
+        { code: "LV", name: "Latvia" },
+        { code: "LB", name: "Lebanon" },
+        { code: "LS", name: "Lesotho" },
+        { code: "LR", name: "Liberia" },
+        { code: "LY", name: "Libya" },
+        { code: "LI", name: "Liechtenstein" },
+        { code: "LT", name: "Lithuania" },
+        { code: "LU", name: "Luxembourg" },
+        { code: "MG", name: "Madagascar" },
+        { code: "MW", name: "Malawi" },
+        { code: "MY", name: "Malaysia" },
+        { code: "MV", name: "Maldives" },
+        { code: "ML", name: "Mali" },
+        { code: "MT", name: "Malta" },
+        { code: "MH", name: "Marshall Islands" },
+        { code: "MR", name: "Mauritania" },
+        { code: "MU", name: "Mauritius" },
+        { code: "MX", name: "Mexico" },
+        { code: "FM", name: "Micronesia" },
+        { code: "MD", name: "Moldova" },
+        { code: "MC", name: "Monaco" },
+        { code: "MN", name: "Mongolia" },
+        { code: "ME", name: "Montenegro" },
+        { code: "MA", name: "Morocco" },
+        { code: "MZ", name: "Mozambique" },
+        { code: "MM", name: "Myanmar" },
+        { code: "NA", name: "Namibia" },
+        { code: "NR", name: "Nauru" },
+        { code: "NP", name: "Nepal" },
+        { code: "NL", name: "Netherlands" },
+        { code: "NZ", name: "New Zealand" },
+        { code: "NI", name: "Nicaragua" },
+        { code: "NE", name: "Niger" },
+        { code: "NG", name: "Nigeria" },
+        { code: "KP", name: "North Korea" },
+        { code: "MK", name: "North Macedonia" },
+        { code: "NO", name: "Norway" },
+        { code: "OM", name: "Oman" },
+        { code: "PK", name: "Pakistan" },
+        { code: "PW", name: "Palau" },
+        { code: "PS", name: "Palestine" },
+        { code: "PA", name: "Panama" },
+        { code: "PG", name: "Papua New Guinea" },
+        { code: "PY", name: "Paraguay" },
+        { code: "PE", name: "Peru" },
+        { code: "PH", name: "Philippines" },
+        { code: "PL", name: "Poland" },
+        { code: "PT", name: "Portugal" },
+        { code: "QA", name: "Qatar" },
+        { code: "RO", name: "Romania" },
+        { code: "RU", name: "Russia" },
+        { code: "RW", name: "Rwanda" },
+        { code: "KN", name: "Saint Kitts and Nevis" },
+        { code: "LC", name: "Saint Lucia" },
+        { code: "VC", name: "Saint Vincent and the Grenadines" },
+        { code: "WS", name: "Samoa" },
+        { code: "SM", name: "San Marino" },
+        { code: "ST", name: "Sao Tome and Principe" },
+        { code: "SA", name: "Saudi Arabia" },
+        { code: "SN", name: "Senegal" },
+        { code: "RS", name: "Serbia" },
+        { code: "SC", name: "Seychelles" },
+        { code: "SL", name: "Sierra Leone" },
+        { code: "SG", name: "Singapore" },
+        { code: "SK", name: "Slovakia" },
+        { code: "SI", name: "Slovenia" },
+        { code: "SB", name: "Solomon Islands" },
+        { code: "SO", name: "Somalia" },
+        { code: "ZA", name: "South Africa" },
+        { code: "KR", name: "South Korea" },
+        { code: "SS", name: "South Sudan" },
+        { code: "ES", name: "Spain" },
+        { code: "LK", name: "Sri Lanka" },
+        { code: "SD", name: "Sudan" },
+        { code: "SR", name: "Suriname" },
+        { code: "SE", name: "Sweden" },
+        { code: "CH", name: "Switzerland" },
+        { code: "SY", name: "Syria" },
+        { code: "TW", name: "Taiwan" },
+        { code: "TJ", name: "Tajikistan" },
+        { code: "TZ", name: "Tanzania" },
+        { code: "TH", name: "Thailand" },
+        { code: "TL", name: "Timor-Leste" },
+        { code: "TG", name: "Togo" },
+        { code: "TO", name: "Tonga" },
+        { code: "TT", name: "Trinidad and Tobago" },
+        { code: "TN", name: "Tunisia" },
+        { code: "TR", name: "Turkey" },
+        { code: "TM", name: "Turkmenistan" },
+        { code: "TV", name: "Tuvalu" },
+        { code: "UG", name: "Uganda" },
+        { code: "UA", name: "Ukraine" },
+        { code: "AE", name: "United Arab Emirates" },
+        { code: "GB", name: "United Kingdom" },
+        { code: "US", name: "United States" },
+        { code: "UY", name: "Uruguay" },
+        { code: "UZ", name: "Uzbekistan" },
+        { code: "VU", name: "Vanuatu" },
+        { code: "VA", name: "Vatican City" },
+        { code: "VE", name: "Venezuela" },
+        { code: "VN", name: "Vietnam" },
+        { code: "YE", name: "Yemen" },
+        { code: "ZM", name: "Zambia" },
+        { code: "ZW", name: "Zimbabwe" }
+    ];
+
+    const WORKSHOP_SLUGS = {
+        'Workshop: RNA-Seq (reference-based)': 'rna-seq-reference',
+        'Workshop: RNA-Seq (de novo)': 'rna-seq-de-novo',
+        'Workshop: Single-cell RNA-Seq': 'single-cell-rna-seq',
+        'Workshop: lncRNA-Seq': 'lncrna-seq',
+        'Workshop: miRNA-Seq': 'mirna-seq',
+        'Workshop: PSI-Seq (alternative splicing)': 'psi-seq',
+        'Workshop: Spatial Transcriptomics': 'spatial-transcriptomics',
+        'Workshop: ChIP-Seq': 'chip-seq',
+        'Workshop: SNAP-ChIP (spike-in calibrated)': 'snap-chip',
+        'Workshop: ATAC-Seq': 'atac-seq',
+        'Workshop: Single-cell ATAC-Seq': 'single-cell-atac-seq',
+        'Workshop: Methyl-Seq (DNA methylation)': 'methyl-seq',
+        'Workshop: DNA-Seq (variant analysis)': 'dna-seq',
+        'Workshop: RAD-Seq': 'rad-seq',
+        'Workshop: Whole-Genome de novo Assembly': 'genome-assembly',
+        'Workshop: Targeted Metagenomics (16S / ITS)': 'targeted-metagenomics',
+        'Workshop: Whole-Genome (Shotgun) Metagenomics': 'shotgun-metagenomics',
+        'Workshop: Microarray Data Analysis': 'microarray'
+    };
+
+    function getWorkshopSlug(workshopText) {
+        if (!workshopText) return '';
+        if (WORKSHOP_SLUGS[workshopText]) return WORKSHOP_SLUGS[workshopText];
+        for (const [k, v] of Object.entries(WORKSHOP_SLUGS)) {
+            if (workshopText.includes(v) || k.toLowerCase() === workshopText.toLowerCase()) return v;
+        }
+        return workshopText.toLowerCase().replace(/^workshop:\s*/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+
+    function isPaymentActive() {
+        return Boolean(PAYMENT_URL && PAYMENT_URL.startsWith('https://'));
+    }
+
+    function isIntlPaymentAvailable() {
+        if (!isPaymentActive()) return false;
+        if (!PAYMENT_URL_INTL || typeof PAYMENT_URL_INTL !== 'object') return false;
+        return Object.values(PAYMENT_URL_INTL).some(val => typeof val === 'string' && val.startsWith('https://'));
+    }
+
+    function getCountryName(code) {
+        if (!code) return '';
+        if (code === 'IN') return 'India';
+        const found = COUNTRIES.find(c => c.code === code);
+        return found ? found.name : code;
+    }
 
     const NEED_CONFIG = {
         'workshop': {
             name: 'Workshop',
-            sub: '18 hands-on workshops',
-            totalSteps: 3
+            sub: '30-day online workshop'
         },
         'training': {
             name: 'Internship/Training',
-            sub: 'Mentored, hands-on training in bioinformatics',
-            totalSteps: 3
+            sub: 'Mentored, hands-on training in bioinformatics'
         },
         'research-training': {
             name: 'Research Training',
-            sub: '6 months, mentored, a research paper we submit to a journal',
-            totalSteps: 3
+            sub: '6 months, mentored, a research paper we submit to a journal'
         },
         'data-analysis': {
             name: 'Data analysis',
-            sub: 'We analyse your sequencing or array data',
-            totalSteps: 2
+            sub: 'We analyse your sequencing or array data'
         },
         'other': {
             name: 'Other',
-            sub: 'Collaboration, career guidance or a different question',
-            totalSteps: 2
+            sub: 'Collaboration, career guidance or a different question'
         }
     };
 
@@ -37,6 +289,7 @@ const BOOKING_PREFILL = false;
         step: 1,
         // Step 2 values
         workshop: '',
+        country: '',
         feeAgree: false,
         // Step 3 values
         name: '',
@@ -64,10 +317,22 @@ const BOOKING_PREFILL = false;
 
     let workshopOptions = [];
     let detectedTimeZone = 'UTC';
+    let isIndianTimeZone = false;
     try {
         detectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Calcutta';
     } catch (e) {
         detectedTimeZone = 'Asia/Calcutta';
+    }
+    isIndianTimeZone = (detectedTimeZone === 'Asia/Calcutta' || detectedTimeZone === 'Asia/Kolkata');
+
+    function getTotalSteps() {
+        if (state.need === 'workshop') {
+            return isPaymentActive() ? 2 : 3;
+        }
+        if (state.need === 'data-analysis' || state.need === 'other') {
+            return 2;
+        }
+        return 3;
     }
 
     function getTodayString() {
@@ -175,8 +440,8 @@ const BOOKING_PREFILL = false;
     }
 
     function render(container) {
-        const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
-        const totalSteps = isShortFlow ? 2 : 3;
+        const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
+        const totalSteps = getTotalSteps();
         const currentStep = state.step;
 
         let content = '';
@@ -185,8 +450,10 @@ const BOOKING_PREFILL = false;
             content = renderStep1();
         } else if (currentStep === 2 && !isShortFlow) {
             content = renderStep2();
+        } else if (currentStep === 2 && state.need === 'workshop' && isPaymentActive()) {
+            content = renderStep2();
         } else {
-            // Step 3 for 3-step flows, or Step 2 for 2-step flows
+            // Step 3 for 3-step flows, or Step 2 for 2-step flows (data-analysis / other)
             content = renderStep3(isShortFlow ? 2 : 3, totalSteps);
         }
 
@@ -216,7 +483,7 @@ const BOOKING_PREFILL = false;
                 <label class="qf-opt ${state.need === 'workshop' ? 'is-sel' : ''}">
                     <input type="radio" name="qf-need" value="workshop" form="qf-noform" ${state.need === 'workshop' ? 'checked' : ''}>
                     <strong>Workshop</strong>
-                    <span>18 hands-on workshops</span>
+                    <span>30-day online workshop</span>
                 </label>
 
                 <label class="qf-opt ${state.need === 'training' ? 'is-sel' : ''}">
@@ -252,9 +519,36 @@ const BOOKING_PREFILL = false;
         `;
     }
 
+    function renderCountryOptions(selectedCode) {
+        return COUNTRIES.map(c => {
+            const isSel = selectedCode === c.code ? ' selected' : '';
+            return `<option value="${c.code}"${isSel}>${escapeHtml(c.name)}</option>`;
+        }).join('');
+    }
+
+    function renderWorkshopFeeBox() {
+        let priceHtml = '₹5,999<small>per workshop</small>';
+        let noteHtml = '';
+        if (isIntlPaymentAvailable() && state.country && state.country !== 'IN') {
+            if (PAYMENT_INTL_FEE_TEXT) {
+                priceHtml = escapeHtml(PAYMENT_INTL_FEE_TEXT);
+                noteHtml = '<p class="qf-note" style="margin-top:6px;">you pay in your own currency</p>';
+            } else {
+                noteHtml = '<p class="qf-note" style="margin-top:6px;">Shown in your own currency at checkout.</p>';
+            }
+        }
+        return `
+            <div class="qf-fee" id="qf-workshop-fee-box">
+                <div class="qf-price">${priceHtml}</div>
+                ${noteHtml}
+            </div>
+        `;
+    }
+
     function renderStep2() {
         const cfg = NEED_CONFIG[state.need] || { name: 'Programme' };
         let middleHtml = '';
+        const isWorkshopPayment = (state.need === 'workshop' && isPaymentActive());
 
         if (state.need === 'workshop') {
             let optionsHtml = '<option value="">Select a workshop...</option>';
@@ -263,6 +557,22 @@ const BOOKING_PREFILL = false;
                 optionsHtml += `<option value="${escapeHtml(opt.value)}"${sel}>${escapeHtml(opt.text)}</option>`;
             });
 
+            let countryHtml = '';
+            if (isIntlPaymentAvailable()) {
+                const countryNoteText = state.country ? `Paying from: ${escapeHtml(getCountryName(state.country))}` : '';
+                countryHtml = `
+                    <label class="qf-lab" for="qf-country">Which country are you paying from? *</label>
+                    <select id="qf-country" class="qf-in" form="qf-noform">
+                        <option value="">Select your country…</option>
+                        <option value="IN"${state.country === 'IN' ? ' selected' : ''}>India</option>
+                        ${renderCountryOptions(state.country)}
+                    </select>
+                    <div class="qf-err" id="qf-country-err" style="display:none">Please select your country.</div>
+                    <div class="qf-tz" id="qf-country-note"${state.country ? '' : ' style="display:none"'}>${countryNoteText}</div>
+                    <div class="qf-err" id="qf-intl-err" style="display:none">For payments from outside India, please write to <a href="mailto:explore@xenoibiotech.com" class="inline-link">explore@xenoibiotech.com</a>.</div>
+                `;
+            }
+
             middleHtml = `
                 <label class="qf-lab" for="qf-workshop-sel">WHICH WORKSHOP *</label>
                 <select id="qf-workshop-sel" class="qf-in" form="qf-noform">
@@ -270,9 +580,8 @@ const BOOKING_PREFILL = false;
                 </select>
                 <div class="qf-err" id="qf-workshop-err" style="display:none">Please select a workshop.</div>
 
-                <div class="qf-fee">
-                    <div class="qf-price">₹5,999<small>per workshop</small></div>
-                </div>
+                ${renderWorkshopFeeBox()}
+                ${countryHtml}
             `;
         } else if (state.need === 'training') {
             middleHtml = `
@@ -288,6 +597,11 @@ const BOOKING_PREFILL = false;
             `;
         }
 
+        const primaryBtnText = isWorkshopPayment ? 'Continue to payment' : 'Continue';
+        const paymentNoteHtml = isWorkshopPayment ? `
+            <div class="qf-note">You will enter your details on our payment page. Workshop details will be shared by email within 72 hours of your payment.</div>
+        ` : '';
+
         return `
             <h2 class="qf-h" tabindex="-1">Before you continue</h2>
             <p class="qf-sub">${escapeHtml(cfg.name)}</p>
@@ -301,9 +615,10 @@ const BOOKING_PREFILL = false;
             <div class="qf-err" id="qf-fee-err" style="display:none">Please confirm to continue.</div>
 
             <div class="qf-actions">
-                <button type="button" class="qf-btn" id="qf-btn-step2">Continue</button>
+                <button type="button" class="qf-btn" id="qf-btn-step2">${primaryBtnText}</button>
                 <button type="button" class="qf-btn-2" id="qf-btn-step2-back">Back</button>
             </div>
+            ${paymentNoteHtml}
         `;
     }
 
@@ -385,20 +700,17 @@ const BOOKING_PREFILL = false;
                         <div class="qf-err" id="qf-prog-err" style="display:none">This field is required.</div>
                     </div>
                 </div>
-                <div class="qf-row">
-                    <div>
-                        <label class="qf-lab" for="qf-hours">HOURS PER WEEK YOU CAN GIVE *</label>
-                        <select id="qf-hours" class="qf-in" form="qf-noform">
-                            <option value="">Select...</option>
-                            ${renderSelectOptions(['Under 5', '5 to 10', 'More than 10'], state.hours)}
-                        </select>
-                        <div class="qf-err" id="qf-hours-err" style="display:none">This field is required.</div>
-                    </div>
-                    <div></div>
+                <div>
+                    <label class="qf-lab" for="qf-hours">HOW MANY HOURS PER WEEK CAN YOU DEDICATE? *</label>
+                    <select id="qf-hours" class="qf-in" form="qf-noform">
+                        <option value="">Select...</option>
+                        ${renderSelectOptions(['5-10 hours', '10-20 hours', '20+ hours (full-time)'], state.hours)}
+                    </select>
+                    <div class="qf-err" id="qf-hours-err" style="display:none">This field is required.</div>
                 </div>
                 <div>
-                    <label class="qf-lab" for="qf-area">RESEARCH AREA OF INTEREST</label>
-                    <textarea id="qf-area" class="qf-in" form="qf-noform" placeholder="Cancer genomics, metagenomics, plant genetics, transcriptomics, etc.">${escapeHtml(state.researchArea)}</textarea>
+                    <label class="qf-lab" for="qf-area">RESEARCH AREA OR TOPIC OF INTEREST (OPTIONAL)</label>
+                    <textarea id="qf-area" class="qf-in" form="qf-noform" placeholder="E.g. Cancer genomics, RNA biology, antimicrobial resistance, specific organisms...">${escapeHtml(state.researchArea)}</textarea>
                 </div>
             `;
         } else if (state.need === 'data-analysis') {
@@ -409,9 +721,15 @@ const BOOKING_PREFILL = false;
                         <select id="qf-datatype" class="qf-in" form="qf-noform">
                             <option value="">Select...</option>
                             ${renderSelectOptions([
-                                'Bulk RNA-seq', 'Single-cell RNA-seq', 'Spatial transcriptomics',
-                                'ATAC-seq / ChIP-seq', 'DNA methylation', 'WGS', 'WES',
-                                'Metagenomics', 'Microarray', 'Other / not sure'
+                                'Bulk RNA-seq',
+                                'Single-cell RNA-seq',
+                                'Spatial transcriptomics',
+                                'WGS',
+                                'WES',
+                                'ATAC-seq / ChIP-seq',
+                                'Metagenomics',
+                                'DNA methylation',
+                                'Other'
                             ], state.dataType)}
                         </select>
                         <div class="qf-err" id="qf-datatype-err" style="display:none">This field is required.</div>
@@ -419,7 +737,7 @@ const BOOKING_PREFILL = false;
                     <div>
                         <label class="qf-lab" for="qf-samples">NUMBER OF SAMPLES *</label>
                         <input type="number" id="qf-samples" class="qf-in" min="1" placeholder="e.g. 12" form="qf-noform" value="${escapeHtml(state.samples)}">
-                        <div class="qf-err" id="qf-samples-err" style="display:none">Enter at least 1.</div>
+                        <div class="qf-err" id="qf-samples-err" style="display:none">Please enter at least 1 sample.</div>
                     </div>
                 </div>
                 <div class="qf-row">
@@ -431,24 +749,26 @@ const BOOKING_PREFILL = false;
                     <div>
                         <label class="qf-lab" for="qf-budget">BUDGET IN MIND (OPTIONAL)</label>
                         <select id="qf-budget" class="qf-in" form="qf-noform">
-                            <option value="">Select...</option>
                             ${renderSelectOptions([
-                                'Not sure, send a quote', 'Under ₹10,000', '₹10,000 to ₹50,000',
-                                '₹50,000 to ₹1,00,000', 'More than ₹1,00,000'
-                            ], state.budget)}
+                                'Not sure, send a quote',
+                                'Under ₹50,000',
+                                '₹50,000 - ₹1,50,000',
+                                '₹1,50,000 - ₹3,00,000',
+                                '₹3,00,000+'
+                            ], state.budget || 'Not sure, send a quote')}
                         </select>
                     </div>
                 </div>
                 <div>
                     <label class="qf-lab" for="qf-question">WHAT QUESTION DO YOU WANT ANSWERED? *</label>
-                    <textarea id="qf-question" class="qf-in" form="qf-noform" placeholder="Describe your project in a few lines…">${escapeHtml(state.question)}</textarea>
+                    <textarea id="qf-question" class="qf-in" form="qf-noform" placeholder="Describe your project in a few lines...">${escapeHtml(state.question)}</textarea>
                     <div class="qf-err" id="qf-question-err" style="display:none">This field is required.</div>
                 </div>
             `;
         } else if (state.need === 'other') {
             customFieldsHtml = `
                 <div>
-                    <label class="qf-lab" for="qf-topic">WHAT IS IT ABOUT? *</label>
+                    <label class="qf-lab" for="qf-topic">WHAT IS THIS ABOUT? *</label>
                     <select id="qf-topic" class="qf-in" form="qf-noform">
                         <option value="">Select...</option>
                         ${renderSelectOptions(['Collaboration', 'Career guidance', 'Something else'], state.otherTopic)}
@@ -457,7 +777,7 @@ const BOOKING_PREFILL = false;
                 </div>
                 <div>
                     <label class="qf-lab" for="qf-help">HOW CAN WE HELP? *</label>
-                    <textarea id="qf-help" class="qf-in" form="qf-noform" placeholder="Tell us what you have in mind…">${escapeHtml(state.otherHelp)}</textarea>
+                    <textarea id="qf-help" class="qf-in" form="qf-noform" placeholder="Tell us more about your query...">${escapeHtml(state.otherHelp)}</textarea>
                     <div class="qf-err" id="qf-help-err" style="display:none">This field is required.</div>
                 </div>
             `;
@@ -478,7 +798,7 @@ const BOOKING_PREFILL = false;
                 <div>
                     <label class="qf-lab" for="qf-email">EMAIL ADDRESS *</label>
                     <input type="email" id="qf-email" class="qf-in" placeholder="jane@institute.edu" form="qf-noform" value="${escapeHtml(state.email)}">
-                    <div class="qf-err" id="qf-email-err" style="display:none">Enter a valid email address.</div>
+                    <div class="qf-err" id="qf-email-err" style="display:none">Please enter a valid email address.</div>
                 </div>
             </div>
 
@@ -566,6 +886,12 @@ const BOOKING_PREFILL = false;
                 container.querySelectorAll('.qf-opt').forEach(l => l.classList.remove('is-sel'));
                 input.closest('.qf-opt').classList.add('is-sel');
                 hideError('qf-need-err');
+
+                // Update steps indicator immediately on need change
+                const stepsEl = container.querySelector('.qf-steps');
+                if (stepsEl) {
+                    stepsEl.outerHTML = renderStepsIndicator(state.step, getTotalSteps());
+                }
             });
         });
 
@@ -582,19 +908,61 @@ const BOOKING_PREFILL = false;
             });
         }
 
+        // Step 2 country change listener
+        const countrySel = container.querySelector('#qf-country');
+        if (countrySel) {
+            countrySel.addEventListener('change', () => {
+                state.country = countrySel.value;
+                hideError('qf-country-err', countrySel);
+                hideError('qf-intl-err');
+
+                const noteEl = container.querySelector('#qf-country-note');
+                if (noteEl) {
+                    const countryName = getCountryName(state.country);
+                    if (countryName) {
+                        noteEl.textContent = `Paying from: ${countryName}`;
+                        noteEl.style.display = 'block';
+                    } else {
+                        noteEl.textContent = '';
+                        noteEl.style.display = 'none';
+                    }
+                }
+
+                const feeBox = container.querySelector('#qf-workshop-fee-box');
+                if (feeBox) {
+                    feeBox.outerHTML = renderWorkshopFeeBox();
+                }
+            });
+        }
+
         // Step 2 Continue & Back
         const btnStep2 = container.querySelector('#qf-btn-step2');
         if (btnStep2) {
             btnStep2.addEventListener('click', () => {
                 let hasErr = false;
+                const isWorkshopPayment = (state.need === 'workshop' && isPaymentActive());
+
                 if (state.need === 'workshop') {
                     const sel = container.querySelector('#qf-workshop-sel');
                     if (!sel || !sel.value) {
                         showError('qf-workshop-err', sel);
                         hasErr = true;
+                        if (sel) sel.focus();
                     } else {
                         state.workshop = sel.value;
                         hideError('qf-workshop-err', sel);
+                    }
+
+                    if (isIntlPaymentAvailable()) {
+                        const cSel = container.querySelector('#qf-country');
+                        if (!cSel || !cSel.value) {
+                            showError('qf-country-err', cSel);
+                            if (!hasErr && cSel) cSel.focus();
+                            hasErr = true;
+                        } else {
+                            state.country = cSel.value;
+                            hideError('qf-country-err', cSel);
+                        }
                     }
                 }
 
@@ -608,6 +976,39 @@ const BOOKING_PREFILL = false;
                 }
 
                 if (hasErr) return;
+
+                if (isWorkshopPayment) {
+                    const sel = container.querySelector('#qf-workshop-sel');
+                    const selectedOptionText = (sel && sel.options[sel.selectedIndex]) ? sel.options[sel.selectedIndex].text : state.workshop;
+
+                    if (!isIntlPaymentAvailable() || state.country === 'IN') {
+                        let targetUrl = PAYMENT_URL;
+                        if (PAYMENT_WORKSHOP_PARAM) {
+                            const param = encodeURIComponent(PAYMENT_WORKSHOP_PARAM);
+                            const val = encodeURIComponent(selectedOptionText);
+                            const joiner = targetUrl.includes('?') ? '&' : '?';
+                            targetUrl = `${targetUrl}${joiner}${param}=${val}`;
+                        }
+                        window.location.href = targetUrl;
+                        return;
+                    } else {
+                        const slug = getWorkshopSlug(selectedOptionText);
+                        let intlUrl = (PAYMENT_URL_INTL && PAYMENT_URL_INTL[slug]) ? PAYMENT_URL_INTL[slug] : (PAYMENT_URL_INTL && PAYMENT_URL_INTL['default'] ? PAYMENT_URL_INTL['default'] : '');
+                        if (!intlUrl || !intlUrl.startsWith('https://')) {
+                            showError('qf-intl-err');
+                            return;
+                        }
+                        let targetUrl = intlUrl;
+                        if (PAYMENT_INTL_WORKSHOP_PARAM) {
+                            const param = encodeURIComponent(PAYMENT_INTL_WORKSHOP_PARAM);
+                            const val = encodeURIComponent(selectedOptionText);
+                            const joiner = targetUrl.includes('?') ? '&' : '?';
+                            targetUrl = `${targetUrl}${joiner}${param}=${val}`;
+                        }
+                        window.location.href = targetUrl;
+                        return;
+                    }
+                }
 
                 state.step = 3;
                 render(container);
@@ -628,7 +1029,7 @@ const BOOKING_PREFILL = false;
         if (btnStep3Back) {
             btnStep3Back.addEventListener('click', () => {
                 saveStep3Inputs(container);
-                const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
+                const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
                 state.step = isShortFlow ? 1 : 2;
                 render(container);
             });
@@ -657,6 +1058,8 @@ const BOOKING_PREFILL = false;
     function saveStep2Inputs(container) {
         const sel = container.querySelector('#qf-workshop-sel');
         if (sel) state.workshop = sel.value;
+        const cSel = container.querySelector('#qf-country');
+        if (cSel) state.country = cSel.value;
         const chk = container.querySelector('#qf-fee-agree');
         if (chk) state.feeAgree = chk.checked;
     }
@@ -931,6 +1334,13 @@ const BOOKING_PREFILL = false;
         const flowContainer = document.getElementById('qf-flow');
         if (!form || !flowContainer) return;
 
+        // Default country based on timezone if detected
+        if (isIndianTimeZone) {
+            state.country = 'IN';
+        } else {
+            state.country = '';
+        }
+
         // 1. Mark JS mode on root
         document.documentElement.classList.add('qf-js');
 
@@ -956,7 +1366,7 @@ const BOOKING_PREFILL = false;
                 return;
             }
 
-            const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
+            const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
             const targetSubmitStep = isShortFlow ? 2 : 3;
 
             if (state.step !== targetSubmitStep) {
