@@ -244,14 +244,52 @@ const PAYMENT_INTL_FEE_TEXT = "";
         return workshopText.toLowerCase().replace(/^workshop:\s*/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     }
 
+    function getWorkshopLabel(workshopValOrSlug) {
+        if (!workshopValOrSlug) return '';
+        const found = workshopOptions.find(o => o.value === workshopValOrSlug || o.text === workshopValOrSlug);
+        if (found && found.text) return found.text;
+
+        const slugLower = workshopValOrSlug.toLowerCase().trim();
+        for (const [label, slug] of Object.entries(WORKSHOP_SLUGS)) {
+            if (slug.toLowerCase() === slugLower || label.toLowerCase() === slugLower) {
+                return label;
+            }
+        }
+        for (const [label, slug] of Object.entries(WORKSHOP_SLUGS)) {
+            if (slug.includes(slugLower) || slugLower.includes(slug)) {
+                return label;
+            }
+        }
+        return workshopValOrSlug;
+    }
+
     function isPaymentActive() {
         return Boolean(PAYMENT_URL && PAYMENT_URL.startsWith('https://'));
     }
 
-    function isIntlPaymentAvailable() {
+    function getWorkshopIntlUrl(workshopText) {
+        if (!PAYMENT_URL_INTL || typeof PAYMENT_URL_INTL !== 'object') return '';
+        const slug = getWorkshopSlug(workshopText);
+        let intlUrl = (slug && PAYMENT_URL_INTL[slug]) ? PAYMENT_URL_INTL[slug] : (PAYMENT_URL_INTL['default'] || '');
+        if (typeof intlUrl === 'string' && intlUrl.startsWith('https://')) {
+            return intlUrl;
+        }
+        return '';
+    }
+
+    function isWorkshopPaymentPath() {
+        if (state.need !== 'workshop') return false;
         if (!isPaymentActive()) return false;
-        if (!PAYMENT_URL_INTL || typeof PAYMENT_URL_INTL !== 'object') return false;
-        return Object.values(PAYMENT_URL_INTL).some(val => typeof val === 'string' && val.startsWith('https://'));
+        if (state.country === 'IN') return true;
+        if (state.country && state.country !== 'IN') {
+            return Boolean(getWorkshopIntlUrl(state.workshop));
+        }
+        if (!state.country) {
+            if (isIndianTimeZone) return true;
+            if (getWorkshopIntlUrl(state.workshop)) return true;
+            return false;
+        }
+        return false;
     }
 
     function getCountryName(code) {
@@ -327,7 +365,8 @@ const PAYMENT_INTL_FEE_TEXT = "";
 
     function getTotalSteps() {
         if (state.need === 'workshop') {
-            return isPaymentActive() ? 2 : 3;
+            if (!isPaymentActive()) return 3;
+            return isWorkshopPaymentPath() ? 2 : 3;
         }
         if (state.need === 'data-analysis' || state.need === 'other') {
             return 2;
@@ -365,10 +404,12 @@ const PAYMENT_INTL_FEE_TEXT = "";
         if (workshopSlug) {
             state.need = 'workshop';
             state.step = 2;
-            const slugLower = workshopSlug.toLowerCase().trim();
-            const matched = workshopOptions.find(o => o.text.toLowerCase().includes(slugLower) || o.value.toLowerCase().includes(slugLower));
+            const label = getWorkshopLabel(workshopSlug);
+            const matched = workshopOptions.find(o => o.value === label || o.text === label);
             if (matched) {
                 state.workshop = matched.value;
+            } else if (label) {
+                state.workshop = label;
             }
             return true;
         }
@@ -440,7 +481,6 @@ const PAYMENT_INTL_FEE_TEXT = "";
     }
 
     function render(container) {
-        const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
         const totalSteps = getTotalSteps();
         const currentStep = state.step;
 
@@ -448,13 +488,11 @@ const PAYMENT_INTL_FEE_TEXT = "";
 
         if (currentStep === 1) {
             content = renderStep1();
-        } else if (currentStep === 2 && !isShortFlow) {
-            content = renderStep2();
-        } else if (currentStep === 2 && state.need === 'workshop' && isPaymentActive()) {
+        } else if (currentStep === 2 && (state.need === 'workshop' || state.need === 'training' || state.need === 'research-training')) {
             content = renderStep2();
         } else {
             // Step 3 for 3-step flows, or Step 2 for 2-step flows (data-analysis / other)
-            content = renderStep3(isShortFlow ? 2 : 3, totalSteps);
+            content = renderStep3(currentStep, totalSteps);
         }
 
         container.innerHTML = `
@@ -527,20 +565,36 @@ const PAYMENT_INTL_FEE_TEXT = "";
     }
 
     function renderWorkshopFeeBox() {
-        let priceHtml = '₹5,999<small>per workshop</small>';
-        let noteHtml = '';
-        if (isIntlPaymentAvailable() && state.country && state.country !== 'IN') {
+        if (!isPaymentActive() || state.country === 'IN' || (!state.country && isIndianTimeZone)) {
+            return `
+                <div class="qf-fee" id="qf-workshop-fee-box">
+                    <div class="qf-price">₹5,999<small>per workshop</small></div>
+                </div>
+            `;
+        }
+
+        const intlUrl = getWorkshopIntlUrl(state.workshop);
+        if (intlUrl) {
+            let priceHtml = '₹5,999<small>per workshop</small>';
+            let noteHtml = '';
             if (PAYMENT_INTL_FEE_TEXT) {
                 priceHtml = escapeHtml(PAYMENT_INTL_FEE_TEXT);
                 noteHtml = '<p class="qf-note" style="margin-top:6px;">you pay in your own currency</p>';
             } else {
                 noteHtml = '<p class="qf-note" style="margin-top:6px;">Shown in your own currency at checkout.</p>';
             }
+            return `
+                <div class="qf-fee" id="qf-workshop-fee-box">
+                    <div class="qf-price">${priceHtml}</div>
+                    ${noteHtml}
+                </div>
+            `;
         }
+
         return `
             <div class="qf-fee" id="qf-workshop-fee-box">
-                <div class="qf-price">${priceHtml}</div>
-                ${noteHtml}
+                <div class="qf-feehead">Fee-based programme</div>
+                <p style="margin: 8px 0 0; color: var(--qf-mut); font-size: 14px; line-height: 1.55;">Our team will share the fee in your currency after your enquiry.</p>
             </div>
         `;
     }
@@ -548,17 +602,10 @@ const PAYMENT_INTL_FEE_TEXT = "";
     function renderStep2() {
         const cfg = NEED_CONFIG[state.need] || { name: 'Programme' };
         let middleHtml = '';
-        const isWorkshopPayment = (state.need === 'workshop' && isPaymentActive());
 
         if (state.need === 'workshop') {
-            let optionsHtml = '<option value="">Select a workshop...</option>';
-            workshopOptions.forEach(opt => {
-                const sel = state.workshop === opt.value ? ' selected' : '';
-                optionsHtml += `<option value="${escapeHtml(opt.value)}"${sel}>${escapeHtml(opt.text)}</option>`;
-            });
-
             let countryHtml = '';
-            if (isIntlPaymentAvailable()) {
+            if (isPaymentActive()) {
                 const countryNoteText = state.country ? `Paying from: ${escapeHtml(getCountryName(state.country))}` : '';
                 countryHtml = `
                     <label class="qf-lab" for="qf-country">Which country are you paying from? *</label>
@@ -569,11 +616,19 @@ const PAYMENT_INTL_FEE_TEXT = "";
                     </select>
                     <div class="qf-err" id="qf-country-err" style="display:none">Please select your country.</div>
                     <div class="qf-tz" id="qf-country-note"${state.country ? '' : ' style="display:none"'}>${countryNoteText}</div>
-                    <div class="qf-err" id="qf-intl-err" style="display:none">For payments from outside India, please write to <a href="mailto:explore@xenoibiotech.com" class="inline-link">explore@xenoibiotech.com</a>.</div>
                 `;
             }
 
+            let optionsHtml = '<option value="">Select a workshop...</option>';
+            const currentSelectedLabel = getWorkshopLabel(state.workshop);
+            workshopOptions.forEach(opt => {
+                const sel = (state.workshop === opt.value || state.workshop === opt.text || currentSelectedLabel === opt.text) ? ' selected' : '';
+                optionsHtml += `<option value="${escapeHtml(opt.value)}"${sel}>${escapeHtml(opt.text)}</option>`;
+            });
+
             middleHtml = `
+                ${countryHtml}
+
                 <label class="qf-lab" for="qf-workshop-sel">WHICH WORKSHOP *</label>
                 <select id="qf-workshop-sel" class="qf-in" form="qf-noform">
                     ${optionsHtml}
@@ -581,7 +636,6 @@ const PAYMENT_INTL_FEE_TEXT = "";
                 <div class="qf-err" id="qf-workshop-err" style="display:none">Please select a workshop.</div>
 
                 ${renderWorkshopFeeBox()}
-                ${countryHtml}
             `;
         } else if (state.need === 'training') {
             middleHtml = `
@@ -597,10 +651,7 @@ const PAYMENT_INTL_FEE_TEXT = "";
             `;
         }
 
-        const primaryBtnText = isWorkshopPayment ? 'Continue to payment' : 'Continue';
-        const paymentNoteHtml = isWorkshopPayment ? `
-            <div class="qf-note">You will enter your details on our payment page. Workshop details will be shared by email within 72 hours of your payment.</div>
-        ` : '';
+        const primaryBtnText = (state.need === 'workshop' && isWorkshopPaymentPath()) ? 'Continue to payment' : 'Continue';
 
         return `
             <h2 class="qf-h" tabindex="-1">Before you continue</h2>
@@ -618,7 +669,6 @@ const PAYMENT_INTL_FEE_TEXT = "";
                 <button type="button" class="qf-btn" id="qf-btn-step2">${primaryBtnText}</button>
                 <button type="button" class="qf-btn-2" id="qf-btn-step2-back">Back</button>
             </div>
-            ${paymentNoteHtml}
         `;
     }
 
@@ -877,6 +927,37 @@ const PAYMENT_INTL_FEE_TEXT = "";
             .replace(/"/g, '&quot;');
     }
 
+    function updateStep2WorkshopState(container) {
+        if (state.need !== 'workshop') return;
+
+        const noteEl = container.querySelector('#qf-country-note');
+        if (noteEl) {
+            const countryName = getCountryName(state.country);
+            if (countryName) {
+                noteEl.textContent = `Paying from: ${countryName}`;
+                noteEl.style.display = 'block';
+            } else {
+                noteEl.textContent = '';
+                noteEl.style.display = 'none';
+            }
+        }
+
+        const feeBox = container.querySelector('#qf-workshop-fee-box');
+        if (feeBox) {
+            feeBox.outerHTML = renderWorkshopFeeBox();
+        }
+
+        const btnStep2 = container.querySelector('#qf-btn-step2');
+        if (btnStep2) {
+            btnStep2.textContent = isWorkshopPaymentPath() ? 'Continue to payment' : 'Continue';
+        }
+
+        const stepsEl = container.querySelector('.qf-steps');
+        if (stepsEl) {
+            stepsEl.outerHTML = renderStepsIndicator(state.step, getTotalSteps());
+        }
+    }
+
     function bindEvents(container) {
         // Option selection in Step 1
         const radioInputs = container.querySelectorAll('input[name="qf-need"]');
@@ -914,24 +995,17 @@ const PAYMENT_INTL_FEE_TEXT = "";
             countrySel.addEventListener('change', () => {
                 state.country = countrySel.value;
                 hideError('qf-country-err', countrySel);
-                hideError('qf-intl-err');
+                updateStep2WorkshopState(container);
+            });
+        }
 
-                const noteEl = container.querySelector('#qf-country-note');
-                if (noteEl) {
-                    const countryName = getCountryName(state.country);
-                    if (countryName) {
-                        noteEl.textContent = `Paying from: ${countryName}`;
-                        noteEl.style.display = 'block';
-                    } else {
-                        noteEl.textContent = '';
-                        noteEl.style.display = 'none';
-                    }
-                }
-
-                const feeBox = container.querySelector('#qf-workshop-fee-box');
-                if (feeBox) {
-                    feeBox.outerHTML = renderWorkshopFeeBox();
-                }
+        // Step 2 workshop select change listener
+        const workshopSel = container.querySelector('#qf-workshop-sel');
+        if (workshopSel) {
+            workshopSel.addEventListener('change', () => {
+                state.workshop = workshopSel.value;
+                hideError('qf-workshop-err', workshopSel);
+                updateStep2WorkshopState(container);
             });
         }
 
@@ -940,29 +1014,28 @@ const PAYMENT_INTL_FEE_TEXT = "";
         if (btnStep2) {
             btnStep2.addEventListener('click', () => {
                 let hasErr = false;
-                const isWorkshopPayment = (state.need === 'workshop' && isPaymentActive());
 
                 if (state.need === 'workshop') {
-                    const sel = container.querySelector('#qf-workshop-sel');
-                    if (!sel || !sel.value) {
-                        showError('qf-workshop-err', sel);
-                        hasErr = true;
-                        if (sel) sel.focus();
-                    } else {
-                        state.workshop = sel.value;
-                        hideError('qf-workshop-err', sel);
-                    }
-
-                    if (isIntlPaymentAvailable()) {
+                    if (isPaymentActive()) {
                         const cSel = container.querySelector('#qf-country');
                         if (!cSel || !cSel.value) {
                             showError('qf-country-err', cSel);
-                            if (!hasErr && cSel) cSel.focus();
                             hasErr = true;
+                            if (cSel) cSel.focus();
                         } else {
                             state.country = cSel.value;
                             hideError('qf-country-err', cSel);
                         }
+                    }
+
+                    const sel = container.querySelector('#qf-workshop-sel');
+                    if (!sel || !sel.value) {
+                        showError('qf-workshop-err', sel);
+                        if (!hasErr && sel) sel.focus();
+                        hasErr = true;
+                    } else {
+                        state.workshop = sel.value;
+                        hideError('qf-workshop-err', sel);
                     }
                 }
 
@@ -977,37 +1050,46 @@ const PAYMENT_INTL_FEE_TEXT = "";
 
                 if (hasErr) return;
 
-                if (isWorkshopPayment) {
+                if (state.need === 'workshop' && isPaymentActive()) {
                     const sel = container.querySelector('#qf-workshop-sel');
-                    const selectedOptionText = (sel && sel.options[sel.selectedIndex]) ? sel.options[sel.selectedIndex].text : state.workshop;
+                    let chosenLabel = '';
+                    if (sel && sel.selectedIndex >= 0 && sel.options[sel.selectedIndex] && sel.value) {
+                        chosenLabel = sel.options[sel.selectedIndex].text;
+                    } else if (state.workshop) {
+                        chosenLabel = getWorkshopLabel(state.workshop);
+                    }
 
-                    if (!isIntlPaymentAvailable() || state.country === 'IN') {
+                    // 2a. India: Razorpay
+                    if (state.country === 'IN') {
                         let targetUrl = PAYMENT_URL;
                         if (PAYMENT_WORKSHOP_PARAM) {
                             const param = encodeURIComponent(PAYMENT_WORKSHOP_PARAM);
-                            const val = encodeURIComponent(selectedOptionText);
-                            const joiner = targetUrl.includes('?') ? '&' : '?';
-                            targetUrl = `${targetUrl}${joiner}${param}=${val}`;
-                        }
-                        window.location.href = targetUrl;
-                        return;
-                    } else {
-                        const slug = getWorkshopSlug(selectedOptionText);
-                        let intlUrl = (PAYMENT_URL_INTL && PAYMENT_URL_INTL[slug]) ? PAYMENT_URL_INTL[slug] : (PAYMENT_URL_INTL && PAYMENT_URL_INTL['default'] ? PAYMENT_URL_INTL['default'] : '');
-                        if (!intlUrl || !intlUrl.startsWith('https://')) {
-                            showError('qf-intl-err');
-                            return;
-                        }
-                        let targetUrl = intlUrl;
-                        if (PAYMENT_INTL_WORKSHOP_PARAM) {
-                            const param = encodeURIComponent(PAYMENT_INTL_WORKSHOP_PARAM);
-                            const val = encodeURIComponent(selectedOptionText);
+                            const val = encodeURIComponent(chosenLabel);
                             const joiner = targetUrl.includes('?') ? '&' : '?';
                             targetUrl = `${targetUrl}${joiner}${param}=${val}`;
                         }
                         window.location.href = targetUrl;
                         return;
                     }
+
+                    // 2b. Another country with PayGlocal link
+                    const intlUrl = getWorkshopIntlUrl(chosenLabel);
+                    if (intlUrl) {
+                        let targetUrl = intlUrl;
+                        if (PAYMENT_INTL_WORKSHOP_PARAM) {
+                            const param = encodeURIComponent(PAYMENT_INTL_WORKSHOP_PARAM);
+                            const val = encodeURIComponent(chosenLabel);
+                            const joiner = targetUrl.includes('?') ? '&' : '?';
+                            targetUrl = `${targetUrl}${joiner}${param}=${val}`;
+                        }
+                        window.location.href = targetUrl;
+                        return;
+                    }
+
+                    // 2c. Another country and no PayGlocal link: enquiry details on Step 3
+                    state.step = 3;
+                    render(container);
+                    return;
                 }
 
                 state.step = 3;
@@ -1029,7 +1111,7 @@ const PAYMENT_INTL_FEE_TEXT = "";
         if (btnStep3Back) {
             btnStep3Back.addEventListener('click', () => {
                 saveStep3Inputs(container);
-                const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
+                const isShortFlow = (state.need === 'data-analysis' || state.need === 'other');
                 state.step = isShortFlow ? 1 : 2;
                 render(container);
             });
@@ -1056,10 +1138,10 @@ const PAYMENT_INTL_FEE_TEXT = "";
     }
 
     function saveStep2Inputs(container) {
-        const sel = container.querySelector('#qf-workshop-sel');
-        if (sel) state.workshop = sel.value;
         const cSel = container.querySelector('#qf-country');
         if (cSel) state.country = cSel.value;
+        const sel = container.querySelector('#qf-workshop-sel');
+        if (sel) state.workshop = sel.value;
         const chk = container.querySelector('#qf-fee-agree');
         if (chk) state.feeAgree = chk.checked;
     }
@@ -1239,6 +1321,13 @@ const PAYMENT_INTL_FEE_TEXT = "";
         const lines = [];
         lines.push(`Request: ${cardName}`);
 
+        if (state.country) {
+            const countryName = getCountryName(state.country);
+            if (countryName) {
+                lines.push(`Country: ${countryName}`);
+            }
+        }
+
         if (state.need === 'workshop' && state.workshop) {
             lines.push(`Selected workshop: ${state.workshop}`);
         }
@@ -1256,15 +1345,15 @@ const PAYMENT_INTL_FEE_TEXT = "";
             lines.push(`Topic: ${state.otherTopic}`);
         }
 
-        let freeMsg = '';
-        if (state.need === 'workshop') freeMsg = state.anythingElse;
-        else if (state.need === 'training') freeMsg = state.learnGoal;
-        else if (state.need === 'research-training') freeMsg = state.researchArea;
-        else if (state.need === 'data-analysis') freeMsg = state.question;
-        else if (state.need === 'other') freeMsg = state.otherHelp;
+        let customMsg = '';
+        if (state.need === 'workshop') customMsg = state.anythingElse;
+        else if (state.need === 'training') customMsg = state.learnGoal;
+        else if (state.need === 'research-training') customMsg = state.researchArea;
+        else if (state.need === 'data-analysis') customMsg = state.question;
+        else if (state.need === 'other') customMsg = state.otherHelp;
 
-        if (freeMsg && freeMsg.trim()) {
-            lines.push(`Message: ${freeMsg.trim()}`);
+        if (customMsg && customMsg.trim()) {
+            lines.push(`Message: ${customMsg.trim()}`);
         }
 
         if (['workshop', 'training', 'research-training'].includes(state.need) && state.feeAgree) {
@@ -1366,8 +1455,7 @@ const PAYMENT_INTL_FEE_TEXT = "";
                 return;
             }
 
-            const isShortFlow = (state.need === 'data-analysis' || state.need === 'other' || (state.need === 'workshop' && isPaymentActive()));
-            const targetSubmitStep = isShortFlow ? 2 : 3;
+            const targetSubmitStep = getTotalSteps();
 
             if (state.step !== targetSubmitStep) {
                 e.preventDefault();
